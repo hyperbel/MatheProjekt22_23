@@ -1,19 +1,27 @@
-#  numpy, matplotlib, math, sympy, random, time, glob, queue, collections, threading, re , tk
-from tkinter import *
+# numpy, matplotlib, math, sympy, random, time, glob, queue, collections,
+# threading, re , tk
+from tkinter import Tk, Menu
 import windows as wins
+
 
 def main():
     root = Tk()
 
-    get_menu(root)
+    menu = get_menu(root)
+    root.config(menu=menu)
     root.title("Mathe-Funktionen-Rechner 2022/23")
     root.geometry("350x345")
     root.mainloop()
 
+
 def get_menu(root):
-    _menu = Menu(root)
-    _menu.add_command(label="Linear", command=wins.open_linear_window(root))
-    root.config(menu=_menu)
+    _menu = Menu(root, tearoff=0)
+    funktionen_menu = Menu(_menu, tearoff=0)
+    funktionen_menu.add_command(label="Linear",
+                                command=wins.open_linear_window(root))
+    _menu.add_cascade(label="Funktionen", menu=funktionen_menu)
+    return _menu
+
 
 if __name__ == "__main__":
     main()
