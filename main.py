@@ -15,11 +15,15 @@ def main():
 
 
 def get_menu(root):
+    # main menu item
     _menu = Menu(root, tearoff=0)
+    # submenu fuer funktionen erstellen
     funktionen_menu = Menu(_menu, tearoff=0)
-    funktionen_menu.add_command(label="Linear",
-                                command=wins.open_linear_window(root))
+    # adding submenu
     _menu.add_cascade(label="Funktionen", menu=funktionen_menu)
+    # submenu item "lineare funktionen"
+    funktionen_menu.add_command(label="Linear",
+                                command=wins.open_linear_window)
     return _menu
 
 
