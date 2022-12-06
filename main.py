@@ -1,6 +1,6 @@
 #  numpy, matplotlib, math, sympy, random, time, glob, queue, collections, threading, re , tk
 from tkinter import *
-import funktionen as fun
+import windows as wins
 
 def main():
     root = Tk()
@@ -12,7 +12,7 @@ def main():
 
 def get_menu(root):
     _menu = Menu(root)
-    _menu.add_command(label="Linear", command=fun.open_linear_window(root))
+    _menu.add_command(label="Linear", command=wins.open_linear_window(root))
     root.config(menu=_menu)
 
 if __name__ == "__main__":
