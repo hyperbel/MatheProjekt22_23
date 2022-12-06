@@ -1,4 +1,4 @@
-#  numpy, matplotlib, math, sympy, random, time, glob, queuem, collections, threadding, re , tk 
+#  numpy, matplotlib, math, sympy, random, time, glob, queue, collections, threading, re , tk
 from tkinter import *
 
 fenster1 = Tk()
