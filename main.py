@@ -14,16 +14,15 @@ def main():
     root.mainloop()
 
 
+# generiert main menu fuer das root win
 def get_menu(root):
-    # main menu item
     _menu = Menu(root, tearoff=0)
-    # submenu fuer funktionen erstellen
     funktionen_menu = Menu(_menu, tearoff=0)
-    # adding submenu
     _menu.add_cascade(label="Funktionen", menu=funktionen_menu)
-    # submenu item "lineare funktionen"
     funktionen_menu.add_command(label="Linear",
                                 command=wins.open_linear_window)
+    funktionen_menu.add_command(label="Quadratisch",
+                                command=wins.open_quadratisch_window)
     return _menu
 
 
