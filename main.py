@@ -26,17 +26,15 @@ def get_menu(root):
                                 command=wins.open_quadratisch_window)
     _menu.add_cascade(label="Funktionen", menu=funktionen_menu)
     account_menu.add_command(label="Login/logout",
-				 command=wins.open_linear_window)
+                             command=wins.open_linear_window)
     account_menu.add_command(label="Verlauf",
-                                 command=wins.open_linear_window)
+                             command=wins.open_linear_window)
     _menu.add_cascade(label="Account", menu=account_menu)
     hilfe_menu.add_command(label="hilfe",
                                  command=wins.open_linear_window)
     _menu.add_cascade(label="Hilfe", menu=hilfe_menu)
     hilfe_menu.add_command(label="über",
                                  command=wins.open_linear_window)
-
-
 
     return _menu
 
