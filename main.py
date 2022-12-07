@@ -1,17 +1,35 @@
 # numpy, matplotlib, math, sympy, random, time, glob, queue, collections,
 # threading, re , tk
-from tkinter import Tk, Menu
+from tkinter import Tk, Menu, Entry, Label, Button
 import windows as wins
+import utils
 
 
 def main():
-    root = Tk()
 
-    menu = get_menu(root)
-    root.config(menu=menu)
-    root.title("Mathe-Funktionen-Rechner 2022/23")
-    root.geometry("350x345")
-    root.mainloop()
+    login_win = Tk()
+
+    Label(login_win, text="Username:").pack()
+    username_entry = Entry(login_win, width=20)
+    username_entry.pack()
+    utils.global_dict["username_entry"] = username_entry
+
+    Label(login_win, text="Password:").pack()
+    password_entry = Entry(login_win, show="*", width=20)
+    password_entry.pack()
+    utils.global_dict["password_entry"] = password_entry
+
+    Button(login_win, text="Login", command=utils.eval_user_and_pw).pack()
+
+    login_win.mainloop()
+
+    # root = Tk()
+
+    # menu = get_menu(root)
+    # root.config(menu=menu)
+    # root.title("Mathe-Funktionen-Rechner 2022/23")
+    # root.geometry("350x345")
+    # root.mainloop()
 
 
 # generiert main menu fuer das root win
