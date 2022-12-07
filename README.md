@@ -6,7 +6,7 @@ Mathe Abschluss schulprojekt in Python, zur Berechnung von Mathe Formeln
 * Repo runterladen
 * Ordner mit einer IDE öffnen 
 * Main.py ausführen
-* 
+
 ### Linux
 * `git clone https://github.com/hyperbel/MatheProjekt22_23`
 * `cd MatheProjekt22_23`
