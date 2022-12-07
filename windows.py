@@ -3,7 +3,7 @@ import utils
 
 # rechner fuer lineare funktionen
 def open_linear_window():
-    win = utils.base_tk(name="Lineare Funktionen Rechner")
+    win = utils.base_Tk(name="Lineare Funktionen Rechner")
     win.mainloop()
 
 
