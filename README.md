@@ -16,4 +16,4 @@ Mathe Abschluss schulprojekt in Python, zur Berechnung von Mathe Formeln
 ## Zeitstrahl
 * 24.11.2022: Beginn des Projekts
 * 06.12.2022: Fenster erstellt und erste Menü Punkte erstellt
-* 07.12.2022:
+* 07.12.2022: Login Fenster erstellt
