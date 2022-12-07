@@ -20,19 +20,19 @@ def get_menu(root):
     funktionen_menu = Menu(_menu, tearoff=0)
     account_menu = Menu(_menu, tearoff=0)
     hilfe_menu = Menu(_menu, tearoff=0)
-    _menu.add_cascade(label="Funktionen", menu=funktionen_menu)
-    _menu.add_cascade(label="Account", menu=account_menu)
-    _menu.add_cascade(label="Hilfe", menu=hilfe_menu)
     funktionen_menu.add_command(label="Linear",
                                 command=wins.open_linear_window)
     funktionen_menu.add_command(label="Quadratisch",
                                 command=wins.open_quadratisch_window)
+    _menu.add_cascade(label="Funktionen", menu=funktionen_menu)
     account_menu.add_command(label="Login/logout",
 				 command=wins.open_linear_window)
     account_menu.add_command(label="Verlauf",
                                  command=wins.open_linear_window)
+    _menu.add_cascade(label="Account", menu=account_menu)
     hilfe_menu.add_command(label="hilfe",
                                  command=wins.open_linear_window)
+    _menu.add_cascade(label="Hilfe", menu=hilfe_menu)
     hilfe_menu.add_command(label="über",
                                  command=wins.open_linear_window)
 
