@@ -41,13 +41,13 @@ def get_menu(root):
     funktionen_menu.add_command(label="Quadratisch",
                                 command=wins.open_quadratisch_window)
     funktionen_menu.add_command(label="Ganzrationale Funktionen",
-                                command=wins.open_Ganzrazio_window)
+                                command=wins.open_Ganzrazionale_window)
     funktionen_menu.add_command(label="Trigonometrische",
-                                command=wins.open_Trigonometr_window)
+                                command=wins.open_Trigonometrische_window)
     funktionen_menu.add_command(label="Exponential",
                                 command=wins.open_Exponential_window)
     funktionen_menu.add_command(label="Differenzial",
-                                command=wins.open_defferenz_window)
+                                command=wins.open_defferenzial_window)
     funktionen_menu.add_command(label="Kurvendiskusion",
                                 command=wins.open_Kurvendiskussion_window)
     funktionen_menu.add_command(label="Integralrechnung",

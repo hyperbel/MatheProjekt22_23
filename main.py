@@ -4,6 +4,7 @@ from tkinter import Tk, Label, Entry, Button
 import utils
 from database import create_db
 
+
 def main():
     login_win = Tk()
 
