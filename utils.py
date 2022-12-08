@@ -40,18 +40,30 @@ def get_menu(root):
                                 command=wins.open_linear_window)
     funktionen_menu.add_command(label="Quadratisch",
                                 command=wins.open_quadratisch_window)
+    funktionen_menu.add_command(label="Ganzrationale Funktionen",
+                                command=wins.open_Ganzrazio_window)
+    funktionen_menu.add_command(label="Trigonometrische",
+                                command=wins.open_Trigonometr_window)
+    funktionen_menu.add_command(label="Exponential",
+                                command=wins.open_Exponential_window)
+    funktionen_menu.add_command(label="Differenzial",
+                                command=wins.open_defferenz_window)
+    funktionen_menu.add_command(label="Kurvendiskusion",
+                                command=wins.open_Kurvendiskussion_window)
+    funktionen_menu.add_command(label="Integralrechnung",
+                                command=wins.open_Integralrechnung_window)
     _menu.add_cascade(label="Funktionen", menu=funktionen_menu)
 
-    account_menu.add_command(label="Login/logout",
+    account_menu.add_command(label="Logout",
                              command=wins.open_linear_window)
     account_menu.add_command(label="Verlauf",
-                             command=wins.open_linear_window)
+                             command=wins.open_verlauf_window)
     _menu.add_cascade(label="Account", menu=account_menu)
 
     hilfe_menu.add_command(label="hilfe",
-                                 command=wins.open_linear_window)
+                                 command=wins.open_hilfe_window)
     _menu.add_cascade(label="Hilfe", menu=hilfe_menu)
     hilfe_menu.add_command(label="über",
-                                 command=wins.open_linear_window)
+                                 command=wins.open_ueber_window)
 
     return _menu
