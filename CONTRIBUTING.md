@@ -1,0 +1,1 @@
+SQL gehört GROß geschrieben
