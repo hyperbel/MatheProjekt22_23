@@ -6,7 +6,7 @@ global_dict = {}
 
 
 # basic window config
-def base_Tk(size="200x200", name=""):
+def base_Tk(size="900x600", name=""):
     win = Tk()
     win.geometry(size)
     win.title(name)

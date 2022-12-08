@@ -18,6 +18,7 @@
 
 
 ### Fenster Größe
+* 900x600
 
 #### Funktionen Fenster
 
