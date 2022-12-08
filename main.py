@@ -2,7 +2,7 @@
 # threading, re , tk
 from tkinter import Tk, Label, Entry, Button
 import utils
-
+from database import create_db
 
 def main():
     login_win = Tk()
@@ -24,4 +24,5 @@ def main():
 
 
 if __name__ == "__main__":
+    create_db()
     main()
