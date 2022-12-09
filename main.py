@@ -3,6 +3,17 @@
 from tkinter import Tk, Label, Entry, Button
 import utils
 from database import create_db
+import windows as wins
+
+
+def eval_user_and_pw():
+    user_name = utils.global_dict["username_entry"].get()
+    user_pass = utils.global_dict["password_entry"].get()
+    print(user_name)
+    print(user_pass)
+    if True:
+        wins.open_main_window()
+        utils.global_dict["login_win"].destroy()
 
 
 def main():
@@ -18,12 +29,12 @@ def main():
     password_entry.pack()
     utils.global_dict["password_entry"] = password_entry
 
-    Button(login_win, text="Login", command=utils.eval_user_and_pw).pack()
+    Button(login_win, text="Login", command=eval_user_and_pw).pack()
 
     utils.global_dict["login_win"] = login_win
     login_win.mainloop()
 
 
 if __name__ == "__main__":
-  #  create_db()
+    # create_db()
     main()
