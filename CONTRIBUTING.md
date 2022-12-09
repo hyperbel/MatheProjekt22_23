@@ -1,1 +1,1 @@
-SQL gehört GROß ~~klein~~ geschrieben
+SQL gehört ~~GROß~~ klein geschrieben

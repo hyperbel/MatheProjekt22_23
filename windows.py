@@ -1,12 +1,12 @@
 import utils
 from tkinter import Tk
-
+from mat
 
 # rechner fuer lineare funktionen
 def open_linear_window():
     win = utils.base_Tk(name="Lineare Funktionen Rechner")
     win.winfo_pathname
-
+    
     win.mainloop()
 
 
