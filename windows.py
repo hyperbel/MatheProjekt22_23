@@ -1,5 +1,4 @@
 import utils
-from utils import debug_log as DLOG
 from tkinter import Tk, TOP, BOTH, Menu
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -8,32 +7,26 @@ import numpy as np
 
 # rechner fuer lineare funktionen
 def open_linear_window():
-    DLOG("function called")
     win = utils.base_Tk(name="Lineare Funktionen Rechner")
 
     # figure for matplotlib to plot lines on
     fig = plt.Figure(figsize=(10, 10), dpi=100)
-    DLOG("figure created")
 
     # canvas-like thing for actually drawing
     ax = fig.add_subplot()
-    DLOG("subplot")
 
     # range of numhers, see numpy.org for doc on arange
     rg = np.arange(0, 10, 0.2)
     ax.plot(rg, rg * rg)
     ax.set_xlabel("x axis")
-    ax.set_ylable("y axis")
+    ax.set_ylabel("y axis")
 
     cv = FigureCanvasTkAgg(fig, master=win)
     cv.draw()
-    DLOG("drawn")
 
-    cv.get_tk_widget().pack(side=TOP, fill=BOTH, expant=True)
-    DLOG("packed")
+    cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
 
     win.mainloop()
-    DLOG("mainloop ended")
 
 
 # rechner fuer quadratische funktionen

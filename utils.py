@@ -1,5 +1,4 @@
 from tkinter import Tk
-from globals import Globals as G
 
 # dict fuer alle globalen werte
 global_dict = {}
@@ -17,8 +16,3 @@ def base_Tk(size="900x600", name=""):
 def global_set_user_data(user_name, user_password):
     global_dict["user_name"] = user_name
     global_dict["user_password"] = user_password
-
-
-def debug_log(item):
-    if G.debug:
-        print(item)
