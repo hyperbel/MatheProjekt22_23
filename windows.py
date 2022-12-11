@@ -31,16 +31,6 @@ def open_linear_window():
     cv = FigureCanvasTkAgg(fig, master=win)
     cv.draw()
 
-    def entry_is_float(inp):
-        import re    # only need regex here
-        # magic regex for checking if input is float type
-        if type(inp) == float:
-            return True
-        elif type(inp) != str:
-            print(type(inp))
-        res = re.match(r"(\+|\-)?\d+(,\d+)?$", inp)
-        return res is not None
-
     def linear_ausrechnen():
         # werte holen
         von = float(von_entry.get())
@@ -48,10 +38,10 @@ def open_linear_window():
         m = float(m_entry.get())
         b = float(b_entry.get())
 
-        assert entry_is_float(von)
-        assert entry_is_float(bis)
-        assert entry_is_float(m)
-        assert entry_is_float(b)
+        assert utils.entry_is_float(von)
+        assert utils.entry_is_float(bis)
+        assert utils.entry_is_float(m)
+        assert utils.entry_is_float(b)
 
         # range mit von - bis
         rg = np.arange(von, bis, 0.2)
