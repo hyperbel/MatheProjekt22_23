@@ -55,6 +55,17 @@ def open_linear_window():
 
         cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
 
+        def nst() -> float:
+            # 0 = m * x + b | -b
+            # -b = m * x    | /m
+            # -b / m = x    | zusammengefasst: -(b / m) = x
+            x = -(b/m)    #
+            return x
+
+        nst = f"N({nst()}|0)"
+        NST_label = Label(win, text=nst)
+        NST_label.pack()
+
     # use function declared earlier to compute stuff
     Button(win, command=linear_ausrechnen).pack()
     # display everything
