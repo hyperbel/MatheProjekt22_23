@@ -9,6 +9,7 @@ import numpy as np
 def open_linear_window():
     win = utils.base_Tk(name="Lineare Funktionen Rechner")
 
+    # labels und entries
     von_label = Label(win, text="anfang: ")
     von_entry = Entry(win)
     bis_label = Label(win, text="ende: ")
@@ -28,9 +29,11 @@ def open_linear_window():
     ax.set_xlabel("x axis")
     ax.set_ylabel("y axis")
 
+    # put canvas onto tk window
     cv = FigureCanvasTkAgg(fig, master=win)
     cv.draw()
 
+    # function in function to be used on button click
     def linear_ausrechnen():
         # werte holen
         von = float(von_entry.get())
@@ -38,6 +41,7 @@ def open_linear_window():
         m = float(m_entry.get())
         b = float(b_entry.get())
 
+        # checken ob werte floats sind
         assert utils.entry_is_float(von)
         assert utils.entry_is_float(bis)
         assert utils.entry_is_float(m)
@@ -51,7 +55,9 @@ def open_linear_window():
 
         cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
 
+    # use function declared earlier to compute stuff
     Button(win, command=linear_ausrechnen).pack()
+    # display everything
     von_label.pack()
     von_entry.pack()
     bis_label.pack()
