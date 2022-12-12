@@ -62,9 +62,15 @@ def open_linear_window():
             x = -(b/m)    #
             return x
 
+        # nullstelle anzeigen
         nst = f"N({nst()}|0)"
         NST_label = Label(win, text=nst)
         NST_label.pack()
+
+        # y-achsen-abschnitt ist einfach b weil x = null macht y = m * 0 + b, also 0 + b = b
+        yaa = f"{b}"
+        YAA_label = Label(win, text=yaa)
+        YAA_label.pack()
 
     # use function declared earlier to compute stuff
     Button(win, command=linear_ausrechnen).pack()
