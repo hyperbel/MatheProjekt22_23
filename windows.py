@@ -1,5 +1,6 @@
 import utils
-from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button
+from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button, NW, SW
+from tkinter import BOTTOM
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
@@ -65,24 +66,26 @@ def open_linear_window():
         # nullstelle anzeigen
         nst = f"N({nst()}|0)"
         NST_label = Label(win, text=nst)
-        NST_label.pack()
+        NST_label.pack(side=BOTTOM, anchor=SW)
 
         # y-achsen-abschnitt ist einfach b weil x = null macht y = m * 0 + b, also 0 + b = b
         yaa = f"Y-Achsenabschnitt: {b}"
         YAA_label = Label(win, text=yaa)
-        YAA_label.pack()
+        YAA_label.pack(side=BOTTOM, anchor=SW)
+
+    # display everything
+    von_label.pack(side=TOP, anchor=NW)
+    von_entry.pack(side=TOP, anchor=NW)
+    bis_label.pack(side=TOP, anchor=NW)
+    bis_entry.pack(side=TOP, anchor=NW)
+    m_label.pack(side=TOP, anchor=NW)
+    m_entry.pack(side=TOP, anchor=NW)
+    b_label.pack(side=TOP, anchor=NW)
+    b_entry.pack(side=TOP, anchor=NW)
 
     # use function declared earlier to compute stuff
-    Button(win, command=linear_ausrechnen).pack()
-    # display everything
-    von_label.pack()
-    von_entry.pack()
-    bis_label.pack()
-    bis_entry.pack()
-    m_label.pack()
-    m_entry.pack()
-    b_label.pack()
-    b_entry.pack()
+    Button(win, command=linear_ausrechnen, text="Anzeigen").pack(side=TOP,
+                                                                 anchor=NW)
 
     win.mainloop()
 
