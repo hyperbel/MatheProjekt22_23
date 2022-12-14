@@ -6,14 +6,6 @@ from database import create_db
 import windows as wins
 
 
-def eval_user_and_pw():
-    user_name = utils.global_dict["username_entry"].get()
-    user_pass = utils.global_dict["password_entry"].get()
-    print(user_name)
-    print(user_pass)
-    if True:
-        wins.open_main_window()
-        utils.global_dict["login_win"].destroy()
 
 
 def main():
@@ -22,14 +14,24 @@ def main():
     Label(login_win, text="Username:").pack()
     username_entry = Entry(login_win, width=20)
     username_entry.pack()
-    utils.global_dict["username_entry"] = username_entry
 
     Label(login_win, text="Password:").pack()
     password_entry = Entry(login_win, show="*", width=20)
     password_entry.pack()
-    utils.global_dict["password_entry"] = password_entry
+
+    def eval_user_and_pw():
+        username_entry.get()
+        password_entry.get()
+        print(user_name)
+        print(user_pass)
+        if True:
+            wins.open_main_window()
+            login_win.destroy()
+
+
 
     Button(login_win, text="Login", command=eval_user_and_pw).pack()
+    Button(login_win, text="signup instead?", command=).pack()
 
     utils.global_dict["login_win"] = login_win
     login_win.mainloop()
