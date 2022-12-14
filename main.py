@@ -20,19 +20,29 @@ def main():
         username_entry.get()
         password_entry.get()
         if True:
-            wins.open_main_window()
             login_win.destroy()
+            wins.open_main_window()
 
     def get_signup_win():
         signup_win = Tk()
 
-        Label(signup_win, text="Username:")
+        Label(signup_win, text="Username:").pack()
         name_entry = Entry(signup_win, width=20)
         name_entry.pack()
 
-        Label(signup_win, text="Password:")
+        Label(signup_win, text="Password:").pack()
         pass_entry = Entry(signup_win, show="*", width=20)
         pass_entry.pack()
+
+        Label(signup_win, text="Confirm Password:").pack()
+        confirm_entry = Entry(signup_win, show="*", width=20)
+        confirm_entry.pack()
+
+        def do_singup():
+            signup_win.destroy()
+            wins.open_main_window()
+
+        Button(signup_win, text="Signup", command=do_singup)
 
         login_win.destroy()
         signup_win.mainloop()
