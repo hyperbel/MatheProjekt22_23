@@ -102,6 +102,88 @@ def open_linear_window():
 # rechner fuer quadratische funktionen
 def open_quadratisch_window():
     win = utils.base_Tk(name="Quadratische Funktionen Rechner")
+
+    x_a_l = Label(win, text="x-Achsenname")
+    x_a_e = Entry(win)
+    y_a_l = Label(win, text="y-Achsenname")
+    y_a_e = Entry(win)
+    von_l = Label(win, text="von: ")
+    von_e = Entry(win)
+    bis_l = Label(win, text="bis: ")
+    bis_e = Entry(win)
+    a_l = Label(win, text="a: ")
+    a_e = Entry(win)
+    b_l = Label(win, text="b: ")
+    b_e = Entry(win)
+    c_l = Label(win, text="c: ")
+    c_e = Entry(win)
+
+    fig = plt.Figure(figsize=(10, 10), dpi=100)
+
+    ax = fig.add_subplot()
+
+    cv = FigureCanvasTkAgg(fig, master=win)
+    cv.draw()
+
+    def quad_berechnen():
+        # werte holen
+        von = float(von_e.get())
+        bis = float(bis_e.get())
+        a = float(a_e.get())
+        b = float(b_e.get())
+        c = float(c_e.get())
+
+        # range mit von - bis
+        rg = np.arange(von, bis, 0.2)
+
+        # setze namen der achsen
+        ax.set_xlabel(x_a_e.get())
+        ax.set_ylabel(y_a_e.get())
+
+        import math
+        # lineare funktion plotten
+        y = math.pow(a * rg, 2) + (b * rg) + c
+        ax.plot(rg, (a * math.pow(rg, 2)) + (b * rg) + c)
+
+        cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+
+        def nst() -> float:
+            # 0 = m * x + b | -b
+            # -b = m * x    | /m
+            # -b / m = x    | zusammengefasst: -(b / m) = x
+            x = -(b/m)
+            return x
+
+        # nullstelle anzeigen
+        nst = f"N({nst()}|0)"
+        NST_label = Label(win, text=nst)
+        NST_label.pack(side=BOTTOM, anchor=SW)
+
+        # y-achsen-abschnitt ist einfach b weil x = null macht y = m * 0 + b, also 0 + b = b
+        yaa = f"Y-Achsenabschnitt: {b}"
+        YAA_label = Label(win, text=yaa)
+        YAA_label.pack(side=BOTTOM, anchor=SW)
+    
+    Button(win, text="ausrechnen", command=quad_berechnen).pack()
+
+    x_a_l.pack(side=TOP, anchor=NW)
+    x_a_e.pack(side=TOP, anchor=NW)
+    y_a_l.pack(side=TOP, anchor=NW)
+    y_a_e.pack(side=TOP, anchor=NW)
+    von_l.pack(side=TOP, anchor=NW)
+
+    von_e.pack(side=TOP, anchor=NW)
+    bis_l.pack(side=TOP, anchor=NW)
+    bis_e.pack(side=TOP, anchor=NW)
+    a_l.pack(side=TOP, anchor=NW)
+    a_e.pack(side=TOP, anchor=NW)    
+    b_l.pack(side=TOP, anchor=NW)
+    b_e.pack(side=TOP, anchor=NW)
+    c_l.pack(side=TOP, anchor=NW)
+    c_e.pack(side=TOP, anchor=NW)
+
+    
+
     win.mainloop()
 
 
