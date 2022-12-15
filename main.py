@@ -42,7 +42,7 @@ def main():
             signup_win.destroy()
             wins.open_main_window()
 
-        Button(signup_win, text="Signup", command=do_singup)
+        Button(signup_win, text="Signup", command=do_singup).pack()
 
         login_win.destroy()
         signup_win.mainloop()
