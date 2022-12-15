@@ -140,10 +140,11 @@ def open_quadratisch_window():
         ax.set_xlabel(x_a_e.get())
         ax.set_ylabel(y_a_e.get())
 
-        import math
         # lineare funktion plotten
-        y = math.pow(a * rg, 2) + (b * rg) + c
-        ax.plot(rg, (a * math.pow(rg, 2)) + (b * rg) + c)
+        quad_term = a * (rg ** 2)
+        line_term = b * rg
+        y = quad_term + line_term + c
+        ax.plot(rg, y)
 
         cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
 
