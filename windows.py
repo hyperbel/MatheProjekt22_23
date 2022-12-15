@@ -19,6 +19,10 @@ def open_linear_window():
     m_entry = Entry(win)
     b_label = Label(win, text="b: ")
     b_entry = Entry(win)
+    x_achse_label = Label(win, text="x-Achsenbeschriftung:")
+    x_achse_entry = Entry(win)
+    y_achse_label = Label(win, text="y-Achsenbeschriftung:")
+    y_achse_entry = Entry(win)
 
     # figure for matplotlib to plot lines on
     fig = plt.Figure(figsize=(10, 10), dpi=100)
@@ -27,9 +31,6 @@ def open_linear_window():
     ax = fig.add_subplot()
 
     # range of numhers, see numpy.org for doc on arange
-    ax.set_xlabel("x axis")
-    ax.set_ylabel("y axis")
-
     # put canvas onto tk window
     cv = FigureCanvasTkAgg(fig, master=win)
     cv.draw()
@@ -50,6 +51,10 @@ def open_linear_window():
 
         # range mit von - bis
         rg = np.arange(von, bis, 0.2)
+
+        # setze namen der achsen
+        ax.set_xlabel(x_achse_entry.get())
+        ax.set_ylabel(y_achse_entry.get())
 
         # lineare funktion plotten
         ax.plot(rg, m * rg + b)
@@ -82,6 +87,10 @@ def open_linear_window():
     m_entry.pack(side=TOP, anchor=NW)
     b_label.pack(side=TOP, anchor=NW)
     b_entry.pack(side=TOP, anchor=NW)
+    x_achse_label.pack(side=TOP, anchor=NW)
+    x_achse_entry.pack(side=TOP, anchor=NW)
+    y_achse_label.pack(side=TOP, anchor=NW)
+    y_achse_entry.pack(side=TOP, anchor=NW)
 
     # use function declared earlier to compute stuff
     Button(win, command=linear_ausrechnen, text="Anzeigen").pack(side=TOP,
