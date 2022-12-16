@@ -146,7 +146,18 @@ def open_quadratisch_window():
         y = quad_term + line_term + c
         ax.plot(rg, y)
 
+        import math
+        print(b, c)
+        x1 = -(b/2) + math.sqrt(abs(((b/2) ** 2) - c))
+        print(b, c)
+        x2 = -(b/2) - math.sqrt(abs(((b/2) ** 2) - c))
+        nst1 = f"N({x1}|0)"
+        nst2 = f"N({x2}|0)"
+        
         cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+
+        Label(win, text=nst1).pack(side=TOP, anchor=NW)
+        Label(win, text=nst2).pack(side=TOP, anchor=NW)
 
     Button(win, text="ausrechnen", command=quad_berechnen).pack()
 
