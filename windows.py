@@ -148,23 +148,6 @@ def open_quadratisch_window():
 
         cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
 
-        def nst() -> float:
-            # 0 = m * x + b | -b
-            # -b = m * x    | /m
-            # -b / m = x    | zusammengefasst: -(b / m) = x
-            x = -(b/m)
-            return x
-
-        # nullstelle anzeigen
-        nst = f"N({nst()}|0)"
-        NST_label = Label(win, text=nst)
-        NST_label.pack(side=BOTTOM, anchor=SW)
-
-        # y-achsen-abschnitt ist einfach b weil x = null macht y = m * 0 + b, also 0 + b = b
-        yaa = f"Y-Achsenabschnitt: {b}"
-        YAA_label = Label(win, text=yaa)
-        YAA_label.pack(side=BOTTOM, anchor=SW)
-    
     Button(win, text="ausrechnen", command=quad_berechnen).pack()
 
     x_a_l.pack(side=TOP, anchor=NW)
@@ -182,8 +165,6 @@ def open_quadratisch_window():
     b_e.pack(side=TOP, anchor=NW)
     c_l.pack(side=TOP, anchor=NW)
     c_e.pack(side=TOP, anchor=NW)
-
-    
 
     win.mainloop()
 
