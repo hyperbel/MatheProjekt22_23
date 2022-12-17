@@ -153,6 +153,7 @@ def open_quadratisch_window():
         nst1 = f"N({x1}|0)"
         nst2 = f"N({x2}|0)"
 
+        yaa = f"Y-Achsenabschnitt: {c}"
 
         cv = FigureCanvasTkAgg(fig, master=win)
         cv.draw()
@@ -161,6 +162,7 @@ def open_quadratisch_window():
 
         Label(win, text=nst1).pack(side=TOP, anchor=NW)
         Label(win, text=nst2).pack(side=TOP, anchor=NW)
+        Label(win, text=yaa).pack(side=TOP, anchor=NW)
 
     Button(win, text="ausrechnen", command=quad_berechnen).pack()
 
