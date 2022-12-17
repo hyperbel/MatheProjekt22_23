@@ -118,12 +118,6 @@ def open_quadratisch_window():
     c_l = Label(win, text="c: ")
     c_e = Entry(win)
 
-    fig = plt.Figure(figsize=(10, 10), dpi=100)
-
-    ax = fig.add_subplot()
-
-    cv = FigureCanvasTkAgg(fig, master=win)
-    cv.draw()
 
     def quad_berechnen():
         # werte holen
@@ -135,6 +129,11 @@ def open_quadratisch_window():
 
         # range mit von - bis
         rg = np.arange(von, bis, 0.2)
+
+
+        fig = plt.Figure(figsize=(10, 10), dpi=100)
+
+        ax = fig.add_subplot()
 
         # setze namen der achsen
         ax.set_xlabel(x_a_e.get())
@@ -153,6 +152,10 @@ def open_quadratisch_window():
         x2 = -(b/2) - math.sqrt(abs(((b/2) ** 2) - c))
         nst1 = f"N({x1}|0)"
         nst2 = f"N({x2}|0)"
+
+
+        cv = FigureCanvasTkAgg(fig, master=win)
+        cv.draw()
         
         cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
 
