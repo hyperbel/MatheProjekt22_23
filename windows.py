@@ -118,7 +118,6 @@ def open_quadratisch_window():
     c_l = Label(win, text="c: ")
     c_e = Entry(win)
 
-
     def quad_berechnen():
         # werte holen
         von = float(von_e.get())
@@ -129,7 +128,6 @@ def open_quadratisch_window():
 
         # range mit von - bis
         rg = np.arange(von, bis, 0.2)
-
 
         fig = plt.Figure(figsize=(10, 10), dpi=100)
 
@@ -157,7 +155,7 @@ def open_quadratisch_window():
 
         cv = FigureCanvasTkAgg(fig, master=win)
         cv.draw()
-        
+
         cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
 
         Label(win, text=nst1).pack(side=TOP, anchor=NW)
@@ -176,7 +174,7 @@ def open_quadratisch_window():
     bis_l.pack(side=TOP, anchor=NW)
     bis_e.pack(side=TOP, anchor=NW)
     a_l.pack(side=TOP, anchor=NW)
-    a_e.pack(side=TOP, anchor=NW)    
+    a_e.pack(side=TOP, anchor=NW)
     b_l.pack(side=TOP, anchor=NW)
     b_e.pack(side=TOP, anchor=NW)
     c_l.pack(side=TOP, anchor=NW)
