@@ -118,6 +118,8 @@ def open_quadratisch_window():
     c_l = Label(win, text="c: ")
     c_e = Entry(win)
 
+    fig = plt.Figure(figsize=(10, 20), dpi=100)
+
     def quad_berechnen():
         # werte holen
         von = float(von_e.get())
@@ -129,7 +131,7 @@ def open_quadratisch_window():
         # range mit von - bis
         rg = np.arange(von, bis, 0.2)
 
-        fig = plt.Figure(figsize=(10, 10), dpi=100)
+        fig.clear()
 
         ax = fig.add_subplot()
 
@@ -144,9 +146,7 @@ def open_quadratisch_window():
         ax.plot(rg, y)
 
         import math
-        print(b, c)
         x1 = -(b/2) + math.sqrt(abs(((b/2) ** 2) - c))
-        print(b, c)
         x2 = -(b/2) - math.sqrt(abs(((b/2) ** 2) - c))
         nst1 = f"N({x1}|0)"
         nst2 = f"N({x2}|0)"
