@@ -203,7 +203,7 @@ def open_Ganzrazionale_window():
     def _get_help():
         _help_ = utils.base_Tk(size="100x100", name="Hilfe - Ganzrationale Funktionen")
         Label(_help, text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\nAlso x^3 + 2x^2 + 1x + 0").pack()
-        Button(_help, text="Ok" command=_help.destroy).pack()
+        Button(_help, text="Ok", command=_help.destroy).pack()
 
     def ganzrationale_berechnen():
         f = fEntry.get()
