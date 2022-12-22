@@ -1,5 +1,5 @@
 import utils
-from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button, NW, SW
+from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button, NW, SW, NO
 from tkinter import BOTTOM
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -185,6 +185,24 @@ def open_quadratisch_window():
 
 def open_Ganzrazionale_window():
     win = utils.base_Tk(name="Ganzrationale Funktionen Rechner")
+
+    Label(win, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
+    fEntry = Entry(win)
+
+    def _get_help():
+        _help_ = utils.base_Tk(size="100x100", name="Hilfe - Ganzrationale Funktionen")
+        Label(_help, text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\nAlso x^3 + 2x^2 + 1x + 0").pack()
+        Button(_help, text="Ok" command=_help.destroy).pack()
+
+    def ganzrationale_berechnen():
+        f = fEntry.get()
+        print(f)
+
+    _b = Button(win, text="Los gehts!", command=ganzrationale_berechnen)
+    helpBtn = Button(win, text="?", command=_get_help).pack(side=TOP, anchor=NO)
+    
+    fEntry.pack(side=TOP, anchor=NW)
+    _b.pack(side=TOP, anchor=NW)
     win.mainloop()
 
 
@@ -274,5 +292,4 @@ def get_menu(root):
     _menu.add_cascade(label="Hilfe", menu=hilfe_menu)
     hilfe_menu.add_command(label="über",
                                  command=open_ueber_window)
-
     return _menu
