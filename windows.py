@@ -6,6 +6,15 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
 
 
+def zoomin(position):
+	newposition = position -5
+	print("zoomin")
+
+
+def zoomout(position):
+	newposition = position + 5
+	print("zoomout")
+
 # rechner fuer lineare funktionen
 def open_linear_window():
     win = utils.base_Tk(name="Lineare Funktionen Rechner")
@@ -96,6 +105,8 @@ def open_linear_window():
     Button(win, command=linear_ausrechnen, text="Anzeigen").pack(side=TOP,
                                                                  anchor=NW)
 
+
+    
     win.mainloop()
 
 
