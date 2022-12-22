@@ -5,6 +5,7 @@ from database import create_db
 import windows as wins
 import sqlite3
 
+
 def main():
     login_win = Tk()
 
@@ -17,8 +18,7 @@ def main():
     password_entry.pack()
 
     def eval_user_and_pw():
-
-       try:
+        try:
             con = sqlite3.connect("mathe.db")
             cur = con.cursor()
             sql = f"SELECT * FROM user WHERE username = ( \'{username_entry.get()}\' AND passwort = \'{password_entry.get()}\';"
@@ -27,7 +27,7 @@ def main():
             if True:
                 login_win.destroy()
                 wins.open_main_window()
-       except:
+        except Exception:
             print("Login fehlgeschlagen")
 
     def get_signup_win():
@@ -45,9 +45,6 @@ def main():
         Label(signup_win, text="Confirm Password:").pack()
         confirm_entry = Entry(signup_win, show="*", width=20)
         confirm_entry.pack()
-
-
-
 
         def do_singup():
 
@@ -74,6 +71,6 @@ def main():
 if __name__ == "__main__":
     try:
         create_db()
-    except:
-         print("Datenbank gibt es schon")
+    except Exception:
+        print("Datenbank gibt es schon")
     main()
