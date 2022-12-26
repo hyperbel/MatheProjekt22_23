@@ -1,5 +1,5 @@
 import utils
-from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button, NW, SW, NO
+from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button, NW, SW, NE
 from tkinter import BOTTOM
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -210,7 +210,7 @@ def open_ganzrazionale_window():
         print(f)
 
     _b = Button(win, text="Los gehts!", command=ganzrationale_berechnen)
-    helpBtn = Button(win, text="?", command=_get_help).pack(side=TOP, anchor=NO)
+    Button(win, text="?", command=_get_help).pack(side=TOP, anchor=NE)
     
     fEntry.pack(side=TOP, anchor=NW)
     _b.pack(side=TOP, anchor=NW)
