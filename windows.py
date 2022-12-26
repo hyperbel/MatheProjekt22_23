@@ -279,17 +279,17 @@ def get_menu(root):
     funktionen_menu.add_command(label="Quadratisch",
                                 command=open_quadratisch_window)
     funktionen_menu.add_command(label="Ganzrationale Funktionen",
-                                command=open_Ganzrazionale_window)
+                                command=open_ganzrazionale_window)
     funktionen_menu.add_command(label="Trigonometrische",
-                                command=open_Trigonometrische_window)
+                                command=open_trigonometrische_window)
     funktionen_menu.add_command(label="Exponential",
-                                command=open_Exponential_window)
+                                command=open_exponential_window)
     funktionen_menu.add_command(label="Differenzial",
                                 command=open_defferenzial_window)
     funktionen_menu.add_command(label="Kurvendiskusion",
-                                command=open_Kurvendiskussion_window)
+                                command=open_kurvendiskussion_window)
     funktionen_menu.add_command(label="Integralrechnung",
-                                command=open_Integralrechnung_window)
+                                command=open_integralrechnung_window)
     _menu.add_cascade(label="Funktionen", menu=funktionen_menu)
 
     account_menu.add_command(label="Logout",
