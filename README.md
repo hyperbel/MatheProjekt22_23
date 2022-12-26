@@ -13,6 +13,13 @@ Mathe Abschluss schulprojekt in Python, zur Berechnung von Mathe Formeln
 *  `pip install requirements.txt`
 *  `python3 main.py`
 
+### Nix Shell
+* `git clone https://github.com/hyperbel/MatheProjekt22_23`
+* `cd MatheProjekt22_23`
+* `export NIXPKGS_ALLOW_INSECURE=1` for xpdf
+* `nix-shell`
+* `python main.py`
+ 
 ## Zeitstrahl
 * 24.11.2022: Beginn des Projekts
 * 06.12.2022: Fenster erstellt und erste Menü Punkte erstellt
