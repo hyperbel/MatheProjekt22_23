@@ -201,12 +201,20 @@ def open_ganzrazionale_window():
     fEntry = Entry(win)
 
     def _get_help():
-        _help = utils.base_Tk(size="100x100", name="Hilfe - Ganzrationale Funktionen")
+        _help = utils.base_Tk(size="100x500", name="Hilfe - Ganzrationale Funktionen")
         Label(_help, text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\nAlso x^3 + 2x^2 + 1x + 0").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
 
+
     def ganzrationale_berechnen():
-        f = fEntry.get()
+        def __clean_str_of_char(inp: str, ch) -> str:
+            import pdb; pdb.set_trace()
+            outp = ""
+            for i in range(len(inp)):
+                if inp[i] != ch: outp += inp[i]
+            return outp
+
+        f = __clean_str_of_char(fEntry.get(), " ")
         print(f)
 
     _b = Button(win, text="Los gehts!", command=ganzrationale_berechnen)
