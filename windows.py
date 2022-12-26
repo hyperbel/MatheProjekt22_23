@@ -194,7 +194,7 @@ def open_quadratisch_window():
     win.mainloop()
 
 
-def open_Ganzrazionale_window():
+def open_ganzrazionale_window():
     win = utils.base_Tk(name="Ganzrationale Funktionen Rechner")
 
     Label(win, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
@@ -217,12 +217,12 @@ def open_Ganzrazionale_window():
     win.mainloop()
 
 
-def open_Trigonometrische_window():
+def open_trigonometrische_window():
     win = utils.base_Tk(name="Trigonometrische Funktionen Rechner")
     win.mainloop()
 
 
-def open_Exponential_window():
+def open_exponential_window():
     win = utils.base_Tk(name="Exponential Funktionen Rechner")
     win.mainloop()
 
@@ -232,12 +232,12 @@ def open_defferenzial_window():
     win.mainloop()
 
 
-def open_Kurvendiskussion_window():
+def open_kurvendiskussion_window():
     win = utils.base_Tk(name="Kurvendiskussion")
     win.mainloop()
 
 
-def open_Integralrechnung_window():
+def open_integralrechnung_window():
     win = utils.base_Tk(name="Integralrechnung")
     win.mainloop()
 
