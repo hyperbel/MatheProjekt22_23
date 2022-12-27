@@ -213,20 +213,23 @@ def open_ganzrazionale_window():
                 if inp[i] != ch: outp += inp[i]
             return outp
 
-        def get_zahlen(inp: str): list:
+        def get_zahlen(inp: str) -> list:
             import re
             def get_stat():
                 # "\+|\-[0-9]*$" <- regex fuer letzte zahl, also statischer(?) term
                 reg = r"\+|\-[0-9]*$"
                 matches = re.find(reg, inp)
+                print(matches)
             def get_line():
                 # (\+|\-)[0-9]x <- regex fuer lineare terme, das letzte der liste nehmen, da es auch "3x^8" matchen wuerde. der letzte term ist ja der lineare
                 reg = r"(\+|\-)[0-9]x"
                 matches = re.find(reg, inp)
+                print(matches)
             def get_rest():
                 # (^|(\+|\-))[0-9]x\^[0-9] <- andere, hier einfach mit nem for-loop
                 reg = r"(^|(\+|\-))[0-9]x\^[0-9]"
                 matches = re.find(reg, inp)
+                print(matches)
 
         f = __clean_str_of_char(fEntry.get(), " ")
         zahlen = get_zahlen(f)
