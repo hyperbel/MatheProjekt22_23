@@ -207,7 +207,7 @@ def open_ganzrazionale_window():
 
     def ganzrationale_berechnen():
         def __clean_str_of_char(inp: str, ch) -> str:
-            import pdb; pdb.set_trace()
+            # import pdb; pdb.set_trace()
             outp = ""
             for i in range(len(inp)):
                 if inp[i] != ch: outp += inp[i]
@@ -218,22 +218,27 @@ def open_ganzrazionale_window():
             def get_stat():
                 # "\+|\-[0-9]*$" <- regex fuer letzte zahl, also statischer(?) term
                 reg = r"\+|\-[0-9]*$"
-                matches = re.find(reg, inp)
-                print(matches)
+                matches = re.findall(reg, inp)
+                # assert len(matches) == 1
+                return matches #.pop() # last item of list with pop()
             def get_line():
                 # (\+|\-)[0-9]x <- regex fuer lineare terme, das letzte der liste nehmen, da es auch "3x^8" matchen wuerde. der letzte term ist ja der lineare
                 reg = r"(\+|\-)[0-9]x"
-                matches = re.find(reg, inp)
-                print(matches)
+                matches = re.findall(reg, inp)
+                # assert len(matches) == 1
+                return matches.pop() # last item of list with pop()
             def get_rest():
                 # (^|(\+|\-))[0-9]x\^[0-9] <- andere, hier einfach mit nem for-loop
                 reg = r"(^|(\+|\-))[0-9]x\^[0-9]"
-                matches = re.find(reg, inp)
+                matches = re.findall(reg, inp)
                 print(matches)
 
+            return [get_stat(), get_line(), get_rest()]
+
         f = __clean_str_of_char(fEntry.get(), " ")
-        zahlen = get_zahlen(f)
         print(f)
+        zahlen = get_zahlen(f)
+        print(zahlen)
 
     _b = Button(win, text="Los gehts!", command=ganzrationale_berechnen)
     Button(win, text="?", command=_get_help).pack(side=TOP, anchor=NE)
