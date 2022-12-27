@@ -214,14 +214,22 @@ def open_ganzrazionale_window():
             return outp
 
         def get_zahlen(inp: str): list:
-            # "\+|\-[0-9]*$" <- regex fuer letzte zahl, also statischer(?) term
-            stat = 
-            # (\+|\-)[0-9]x <- regex fuer lineare terme, das letzte der liste nehmen, da es auch "3x^8" matchen wuerde. der letzte term ist ja der lineare
-            line = 
-            # (^|(\+|\-))[0-9]x\^[0-9] <- andere, hier einfach mit nem for-loop
-
+            import re
+            def get_stat():
+                # "\+|\-[0-9]*$" <- regex fuer letzte zahl, also statischer(?) term
+                reg = r"\+|\-[0-9]*$"
+                matches = re.find(reg, inp)
+            def get_line():
+                # (\+|\-)[0-9]x <- regex fuer lineare terme, das letzte der liste nehmen, da es auch "3x^8" matchen wuerde. der letzte term ist ja der lineare
+                reg = r"(\+|\-)[0-9]x"
+                matches = re.find(reg, inp)
+            def get_rest():
+                # (^|(\+|\-))[0-9]x\^[0-9] <- andere, hier einfach mit nem for-loop
+                reg = r"(^|(\+|\-))[0-9]x\^[0-9]"
+                matches = re.find(reg, inp)
 
         f = __clean_str_of_char(fEntry.get(), " ")
+        zahlen = get_zahlen(f)
         print(f)
 
     _b = Button(win, text="Los gehts!", command=ganzrationale_berechnen)
