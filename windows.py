@@ -205,7 +205,6 @@ def open_ganzrazionale_window():
         Label(_help, text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\nAlso x^3 + 2x^2 + 1x + 0").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
 
-
     def ganzrationale_berechnen():
         def __clean_str_of_char(inp: str, ch) -> str:
             import pdb; pdb.set_trace()
@@ -213,6 +212,14 @@ def open_ganzrazionale_window():
             for i in range(len(inp)):
                 if inp[i] != ch: outp += inp[i]
             return outp
+
+        def get_zahlen(inp: str): list:
+            # "\+|\-[0-9]*$" <- regex fuer letzte zahl, also statischer(?) term
+            stat = 
+            # (\+|\-)[0-9]x <- regex fuer lineare terme, das letzte der liste nehmen, da es auch "3x^8" matchen wuerde. der letzte term ist ja der lineare
+            line = 
+            # (^|(\+|\-))[0-9]x\^[0-9] <- andere, hier einfach mit nem for-loop
+
 
         f = __clean_str_of_char(fEntry.get(), " ")
         print(f)
