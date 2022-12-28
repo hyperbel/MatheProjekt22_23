@@ -220,11 +220,13 @@ def open_ganzrazionale_window():
                 reg = r"\+|\-[0-9]*$"
                 matches = re.findall(reg, inp)
                 # assert len(matches) == 1
-                return matches #.pop() # last item of list with pop()
+                print(matches)
+                return matches.pop() # last item of list with pop()
             def get_line():
                 # (\+|\-)[0-9]x <- regex fuer lineare terme, das letzte der liste nehmen, da es auch "3x^8" matchen wuerde. der letzte term ist ja der lineare
                 reg = r"(\+|\-)[0-9]x"
                 matches = re.findall(reg, inp)
+                print(matches)
                 # assert len(matches) == 1
                 return matches.pop() # last item of list with pop()
             def get_rest():
@@ -232,6 +234,7 @@ def open_ganzrazionale_window():
                 reg = r"(^|(\+|\-))[0-9]x\^[0-9]"
                 matches = re.findall(reg, inp)
                 print(matches)
+                return matches
 
             return [get_stat(), get_line(), get_rest()]
 
