@@ -12,7 +12,6 @@ pkgs.mkShell {
     pkgs.vim
     pkgs.sqlite
     pkgs.tmux
-    pkgs.xpdf
     pkgs.ganttproject-bin
   ];
 }

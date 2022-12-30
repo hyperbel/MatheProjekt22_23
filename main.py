@@ -21,7 +21,9 @@ def main():
         try:
             con = sqlite3.connect("mathe.db")
             cur = con.cursor()
-            sql = f"SELECT * FROM user WHERE username = ( \'{username_entry.get()}\' AND passwort = \'{password_entry.get()}\';"
+            uname = username_entry.get()
+            passw = password_entry.get()
+            sql = f"SELECT * FROM user WHERE username = '{uname}' AND passwort = '{passw}';"
             cur.execute(sql)
             con.commit()
             if True:
