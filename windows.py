@@ -221,21 +221,23 @@ def open_ganzrazionale_window():
                 matches = re.findall(reg, inp)
                 # assert len(matches) == 1
                 m = matches.pop()
-                return m # last item of list with pop()
-            def get_line():
+                return m # without last item of list with pop()
+            def get_line(): # TODO: regex oder so funktioniert nicht
                 # regex fuer lineare terme, das letzte der liste nehmen, da es auch "3x^8" matchen wuerde. der letzte term ist ja der lineare
                 reg = r"\+|\-[0-9]x+"
                 matches = re.findall(reg, inp)
-                matches.pop() we dont want the last item, but the second last, so we pop here
                 m = matches.pop()
                 print(m)
                 return m # last item of list with pop()
             def get_rest():
-                # (^|(\+|\-))[0-9]x\^[0-9] <- andere, hier einfach mit nem for-loop
-                reg = r"(^|(\+|\-))[0-9]x\^[0-9]"
-                matches = re.findall(reg, inp)
-                print(matches)
-                return matches
+                # wir brauchen 2, weil das oder ding (|) nicht funktioniert lol
+                posreg = r"\+[1-9]x\^[1-9]" # fuers matchen von positiven
+                negreg = r"\-[1-9]x\^[1-9]" # fuers matchen von negativen
+                posmatches = re.findall(posreg, inp)
+                negmatches = re.findall(negreg, inp)
+                print(posmatches)
+                print(negmatches)
+                return posmatches + negmatches
 
             return [get_stat(), get_line(), get_rest()]
 
