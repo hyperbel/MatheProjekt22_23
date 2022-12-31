@@ -223,9 +223,10 @@ def open_ganzrazionale_window():
                 m = matches.pop()
                 return m # last item of list with pop()
             def get_line():
-                # (\+|\-)[1-9]*x <- regex fuer lineare terme, das letzte der liste nehmen, da es auch "3x^8" matchen wuerde. der letzte term ist ja der lineare
-                reg = r"(\+|\-)[1-9]*x"
+                # regex fuer lineare terme, das letzte der liste nehmen, da es auch "3x^8" matchen wuerde. der letzte term ist ja der lineare
+                reg = r"\+|\-[0-9]x+"
                 matches = re.findall(reg, inp)
+                matches.pop() we dont want the last item, but the second last, so we pop here
                 m = matches.pop()
                 print(m)
                 return m # last item of list with pop()
