@@ -6,6 +6,14 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
 
 
+# basic window config
+def base_Tk(size="900x600", name=""):
+    win = Tk()
+    win.geometry(size)
+    win.title(name)
+    return win
+
+
 def zoomin(position):
 	newposition = position -5
 	print("zoomin")
@@ -14,6 +22,7 @@ def zoomin(position):
 def zoomout(position):
 	newposition = position + 5
 	print("zoomout")
+
 
 # rechner fuer lineare funktionen
 def open_linear_window():

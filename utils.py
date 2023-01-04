@@ -4,12 +4,6 @@ from tkinter import Tk
 global_dict = {}
 
 
-# basic window config
-def base_Tk(size="900x600", name=""):
-    win = Tk()
-    win.geometry(size)
-    win.title(name)
-    return win
 
 
 # setzt globale werte, fuer mehr info schau in globals.py
