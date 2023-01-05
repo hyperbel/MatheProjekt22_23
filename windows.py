@@ -6,6 +6,18 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
 
 
+# checks if input (usally from entry) is of type float
+def entry_is_float(inp):
+    import re    # only need regex here
+    # magic regex for checking if input is float type
+    if type(inp) == float:
+        return True
+    elif type(inp) != str:
+        print(type(inp))
+    res = re.match(r"(\+|\-)?\d+(,\d+)?$", inp)
+    return res is not None
+
+
 # basic window config
 def base_Tk(size="900x600", name=""):
     win = Tk()
