@@ -4,8 +4,6 @@ from tkinter import Tk
 global_dict = {}
 
 
-
-
 # setzt globale werte, fuer mehr info schau in globals.py
 def global_set_user_data(user_name, user_password):
     global_dict["user_name"] = user_name
