@@ -1,4 +1,3 @@
-import utils
 from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button, NW, SW, NE
 from tkinter import BOTTOM
 import matplotlib.pyplot as plt
@@ -38,7 +37,7 @@ def zoomout(position):
 
 # rechner fuer lineare funktionen
 def open_linear_window():
-    win = utils.base_Tk(name="Lineare Funktionen Rechner")
+    win = base_Tk(name="Lineare Funktionen Rechner")
 
     # labels und entries
     von_label = Label(win, text="anfang: ")
@@ -74,10 +73,10 @@ def open_linear_window():
         b = float(b_entry.get())
 
         # checken ob werte floats sind
-        assert utils.entry_is_float(von)
-        assert utils.entry_is_float(bis)
-        assert utils.entry_is_float(m)
-        assert utils.entry_is_float(b)
+        assert entry_is_float(von)
+        assert entry_is_float(bis)
+        assert entry_is_float(m)
+        assert entry_is_float(b)
 
         # range mit von - bis
         rg = np.arange(von, bis, 0.2)
@@ -133,7 +132,7 @@ def open_linear_window():
 
 # rechner fuer quadratische funktionen
 def open_quadratisch_window():
-    win = utils.base_Tk(name="Quadratische Funktionen Rechner")
+    win = base_Tk(name="Quadratische Funktionen Rechner")
 
     x_a_l = Label(win, text="x-Achsenname")
     x_a_e = Entry(win)
@@ -216,13 +215,13 @@ def open_quadratisch_window():
 
 
 def open_ganzrazionale_window():
-    win = utils.base_Tk(name="Ganzrationale Funktionen Rechner")
+    win = base_Tk(name="Ganzrationale Funktionen Rechner")
 
     Label(win, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
     fEntry = Entry(win)
 
     def _get_help():
-        _help = utils.base_Tk(size="100x500", name="Hilfe - Ganzrationale Funktionen")
+        _help = base_Tk(size="100x500", name="Hilfe - Ganzrationale Funktionen")
         Label(_help, text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\nAlso x^3 + 2x^2 + 1x + 0").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
 
@@ -276,42 +275,42 @@ def open_ganzrazionale_window():
 
 
 def open_trigonometrische_window():
-    win = utils.base_Tk(name="Trigonometrische Funktionen Rechner")
+    win = base_Tk(name="Trigonometrische Funktionen Rechner")
     win.mainloop()
 
 
 def open_exponential_window():
-    win = utils.base_Tk(name="Exponential Funktionen Rechner")
+    win = base_Tk(name="Exponential Funktionen Rechner")
     win.mainloop()
 
 
 def open_defferenzial_window():
-    win = utils.base_Tk(name="Einstieg Diefferenzialrechnung")
+    win = base_Tk(name="Einstieg Diefferenzialrechnung")
     win.mainloop()
 
 
 def open_kurvendiskussion_window():
-    win = utils.base_Tk(name="Kurvendiskussion")
+    win = base_Tk(name="Kurvendiskussion")
     win.mainloop()
 
 
 def open_integralrechnung_window():
-    win = utils.base_Tk(name="Integralrechnung")
+    win = base_Tk(name="Integralrechnung")
     win.mainloop()
 
 
 def open_hilfe_window():
-    win = utils.base_Tk(name="hilfe")
+    win = base_Tk(name="hilfe")
     win.mainloop()
 
 
 def open_ueber_window():
-    win = utils.base_Tk(name="über")
+    win = base_Tk(name="über")
     win.mainloop()
 
 
 def open_verlauf_window():
-    win = utils.base_Tk(name="verlauf")
+    win = base_Tk(name="verlauf")
     win.mainloop()
 
 
