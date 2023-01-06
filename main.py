@@ -66,7 +66,6 @@ def main():
     Button(login_win, text="Login", command=eval_user_and_pw).pack()
     Button(login_win, text="signup instead?", command=get_signup_win).pack()
 
-    # utils.global_dict["login_win"] = login_win
     login_win.mainloop()
 
 
