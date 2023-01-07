@@ -6,7 +6,7 @@ test = Button(root, text="test")
 
 def motion(ev):
     const_Y = root.winfo_height() / 2 # center of y axis
-    x = ev.x
+    x = root.winfo_width() - ev.x
     test.place(x=x, y=const_Y)
 
 
