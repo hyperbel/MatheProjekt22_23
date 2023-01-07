@@ -11,9 +11,8 @@ class MainWin(Tk):
 
     def motion(self, ev):
         const_X = self.winfo_width() / 2 # center of x axis
-        y = self.last_y + ev.y
+        self.last_y = self.last_y + ev.y
         self.test.place(x=const_X, y=self.last_y)
-        self.last_y += ev.y
 
 
 win = MainWin()
