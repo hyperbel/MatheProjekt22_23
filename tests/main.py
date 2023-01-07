@@ -9,5 +9,5 @@ def motion(ev):
     test.place(x=x, y=y)
 
 
-root.bind('<Motion>', motion)
+root.bind('<B1-Motion>', motion)
 root.mainloop()
