@@ -5,15 +5,16 @@ class MainWin(Tk):
         super().__init__()
 
         self.test = Button(self, text="test")
-        self.last_x = self.winfo_width() 
+        self.last_y = self.winfo_width() 
         self.bind('<B1-Motion>', self.motion)
 
 
     def motion(self, ev):
-        const_Y = self.winfo_height() / 2 # center of y axis
-        x = self.last_x + ev.x
-        self.test.place(x=x, y=const_Y)
-        last_x = ev.x
+        const_X = self.winfo_width() / 2 # center of x axis
+        y = self.last_y + ev.y
+        self.test.place(x=const_X, y=self.last_y)
+        self.last_y += ev.y
+
 
 win = MainWin()
 win.mainloop()
