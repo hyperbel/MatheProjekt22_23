@@ -1,14 +1,19 @@
 from tkinter import Tk, Button
 
-root = Tk()
+class MainWin(Tk):
+    def __init__(self):
+        super().__init__()
 
-test = Button(root, text="test")
-
-def motion(ev):
-    const_Y = root.winfo_height() / 2 # center of y axis
-    x = root.winfo_width() - ev.x
-    test.place(x=x, y=const_Y)
+        self.test = Button(self, text="test")
+        self.last_x = self.winfo_width() 
+        self.bind('<B1-Motion>', self.motion)
 
 
-root.bind('<B1-Motion>', motion)
-root.mainloop()
+    def motion(self, ev):
+        const_Y = self.winfo_height() / 2 # center of y axis
+        x = self.last_x + ev.x
+        self.test.place(x=x, y=const_Y)
+        last_x = ev.x
+
+win = MainWin()
+win.mainloop()
