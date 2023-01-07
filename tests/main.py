@@ -5,8 +5,9 @@ root = Tk()
 test = Button(root, text="test")
 
 def motion(ev):
-    x, y = ev.x, ev.y
-    test.place(x=x, y=y)
+    const_Y = root.winfo_height() / 2 # center of y axis
+    x = ev.x
+    test.place(x=x, y=const_Y)
 
 
 root.bind('<B1-Motion>', motion)
