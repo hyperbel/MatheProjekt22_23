@@ -28,3 +28,4 @@ Mathe Abschluss schulprojekt in Python, zur Berechnung von Mathe Formeln
 * 10.12.2022: Malt jetzt Lineare funktionen"
 * 12.12.2022: Y-achsen-Abschnitt von linearen funktionen
 * 14.12.2022: Signup Fenster, logik fehlt noch
+* 08.01.2022: test datei erstellt oder so
