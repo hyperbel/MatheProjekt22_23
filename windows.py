@@ -37,6 +37,12 @@ def zoomout(position):
 
 # rechner fuer lineare funktionen
 def open_linear_window():
+    def _get_linea_help():
+        _help = base_Tk(size="800x500", name="Hilfe - quadratische Funktionen")
+        Label(_help,
+              text="Lineare Funktionen sind Funktionen die als Funktionsterm ein Plynom des ersten Grades  besitzen.").pack()
+        Button(_help, text="Ok", command=_help.destroy).pack()
+
     win = base_Tk(name="Lineare Funktionen Rechner")
 
     # labels und entries
@@ -124,6 +130,7 @@ def open_linear_window():
     # use function declared earlier to compute stuff
     Button(win, command=linear_ausrechnen, text="Anzeigen").pack(side=TOP,
                                                                  anchor=NW)
+    Button(win, text="?", command=_get_linea_help).pack(side=TOP, anchor=NE)
 
 
     
@@ -132,6 +139,11 @@ def open_linear_window():
 
 # rechner fuer quadratische funktionen
 def open_quadratisch_window():
+    def _get_quad_help():
+        _help = base_Tk(size="800x500", name="Hilfe - quadratische Funktionen")
+        Label(_help,
+              text="Quadratische Funktionen sind Funktionen die als Funktionsterm ein Plynom vom Grad 3 besitzen.").pack()
+        Button(_help, text="Ok", command=_help.destroy).pack()
     win = base_Tk(name="Quadratische Funktionen Rechner")
 
     x_a_l = Label(win, text="x-Achsenname")
@@ -194,6 +206,7 @@ def open_quadratisch_window():
         Label(win, text=yaa).pack(side=TOP, anchor=NW)
 
     Button(win, text="ausrechnen", command=quad_berechnen).pack()
+    Button(win, text="?", command=_get_quad_help).pack(side=TOP, anchor=NE)
 
     x_a_l.pack(side=TOP, anchor=NW)
     x_a_e.pack(side=TOP, anchor=NW)
