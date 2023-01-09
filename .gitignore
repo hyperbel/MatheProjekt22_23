@@ -130,3 +130,6 @@ dmypy.json
 
 # nix shell result
 result
+
+# pycharm generated test main file
+test_main.py
