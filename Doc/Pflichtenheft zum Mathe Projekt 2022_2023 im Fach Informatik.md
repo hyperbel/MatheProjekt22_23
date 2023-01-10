@@ -1,5 +1,5 @@
 # Pflichtenheft zum Mathe Projekt 2022/2023 im Fach Informatik
-### Von Thomas Zimmer & Finn Lasse Scholze
+### Von Personen
 
 ## Zielbestimmung
 * Es soll eine Datenbank zum Speichern von usern da sein
@@ -15,7 +15,7 @@
 
 
 ## Produktübersicht
-* Diese Software wird von Thomas Zimmer & Finn Lasse Scholze erstellt
+* Diese Software wird von Personen erstellt
 * Die Software Besitzt eine Oberfläche, auf der der User Funktionen ausrechnen kann, und diese dann Grafisch angezeigt bekommt. Mit informationen über diese 
 
 ## Funktionen
