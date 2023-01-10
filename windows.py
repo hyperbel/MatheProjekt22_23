@@ -332,7 +332,7 @@ def open_exponential_window():
         # checken ob werte floats sind
         assert entry_is_float(von)
         assert entry_is_float(bis)
-        assert entry_is_float(m)
+        assert entry_is_float(a)
         # assert entry_is_float(x)
 
         # range mit von - bis
