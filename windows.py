@@ -303,8 +303,8 @@ def open_exponential_window():
     bis_entry = Entry(win)
     m_label = Label(win, text="a: ")
     m_entry = Entry(win)
-    x_label = Label(win, text="x: ")
-    x_entry = Entry(win)
+    # x_label = Label(win, text="x: ")
+    # x_entry = Entry(win)
     x_achse_label = Label(win, text="x-Achsenbeschriftung:")
     x_achse_entry = Entry(win)
     y_achse_label = Label(win, text="y-Achsenbeschriftung:")
@@ -327,13 +327,13 @@ def open_exponential_window():
         von = float(von_entry.get())
         bis = float(bis_entry.get())
         m = float(m_entry.get())
-        x = float(x_entry.get())
+        # x = float(x_entry.get())
 
         # checken ob werte floats sind
         assert entry_is_float(von)
         assert entry_is_float(bis)
         assert entry_is_float(m)
-        assert entry_is_float(x)
+        # assert entry_is_float(x)
 
         # range mit von - bis
         rg = np.arange(von, bis, 0.2)
@@ -343,7 +343,7 @@ def open_exponential_window():
         ax.set_ylabel(y_achse_entry.get())
 
         # lineare funktion plotten
-        ax.plot(rg, m * rg + b)
+        ax.plot(rg, a ** rg)
 
         cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
 
@@ -357,8 +357,8 @@ def open_exponential_window():
     bis_entry.pack(side=TOP, anchor=NW)
     m_label.pack(side=TOP, anchor=NW)
     m_entry.pack(side=TOP, anchor=NW)
-    x_label.pack(side=TOP, anchor=NW)
-    x_entry.pack(side=TOP, anchor=NW)
+    # x_label.pack(side=TOP, anchor=NW)
+    # x_entry.pack(side=TOP, anchor=NW)
     x_achse_label.pack(side=TOP, anchor=NW)
     x_achse_entry.pack(side=TOP, anchor=NW)
     y_achse_label.pack(side=TOP, anchor=NW)
