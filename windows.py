@@ -301,8 +301,8 @@ def open_exponential_window():
     von_entry = Entry(win)
     bis_label = Label(win, text="ende: ")
     bis_entry = Entry(win)
-    m_label = Label(win, text="a: ")
-    m_entry = Entry(win)
+    a_label = Label(win, text="a: ")
+    a_entry = Entry(win)
     # x_label = Label(win, text="x: ")
     # x_entry = Entry(win)
     x_achse_label = Label(win, text="x-Achsenbeschriftung:")
@@ -326,7 +326,7 @@ def open_exponential_window():
         # werte holen
         von = float(von_entry.get())
         bis = float(bis_entry.get())
-        m = float(m_entry.get())
+        a = float(a_entry.get())
         # x = float(x_entry.get())
 
         # checken ob werte floats sind
@@ -355,8 +355,8 @@ def open_exponential_window():
     von_entry.pack(side=TOP, anchor=NW)
     bis_label.pack(side=TOP, anchor=NW)
     bis_entry.pack(side=TOP, anchor=NW)
-    m_label.pack(side=TOP, anchor=NW)
-    m_entry.pack(side=TOP, anchor=NW)
+    a_label.pack(side=TOP, anchor=NW)
+    a_entry.pack(side=TOP, anchor=NW)
     # x_label.pack(side=TOP, anchor=NW)
     # x_entry.pack(side=TOP, anchor=NW)
     x_achse_label.pack(side=TOP, anchor=NW)
