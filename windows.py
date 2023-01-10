@@ -342,6 +342,7 @@ def open_exponential_window():
         ax.set_xlabel(x_achse_entry.get())
         ax.set_ylabel(y_achse_entry.get())
 
+        import math
         # lineare funktion plotten
         ax.plot(rg, a ** rg)
 
