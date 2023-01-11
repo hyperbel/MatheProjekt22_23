@@ -233,12 +233,12 @@ def open_ganzrazionale_window() -> None:
     Label(win, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
     fEntry = Entry(win)
 
-    def _get_help():
+    def _get_help() -> None:
         _help = base_Tk(size="100x500", name="Hilfe - Ganzrationale Funktionen")
         Label(_help, text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\nAlso x^3 + 2x^2 + 1x + 0").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
 
-    def ganzrationale_berechnen():
+    def ganzrationale_berechnen() -> None:
         def __clean_str_of_char(inp: str, ch) -> str:
             # import pdb; pdb.set_trace()
             outp = ""
@@ -248,21 +248,21 @@ def open_ganzrazionale_window() -> None:
 
         def get_zahlen(inp: str) -> list:
             import re
-            def get_stat():
+            def get_stat() -> list:
                 # "\+|\-[0-9]*$" <- regex fuer letzte zahl, also statischer(?) term
                 reg = r"\+|\-[0-9]*$"
                 matches = re.findall(reg, inp)
                 # assert len(matches) == 1
                 m = matches.pop()
                 return m # without last item of list with pop()
-            def get_line(): # TODO: regex oder so funktioniert nicht
+            def get_line() -> List: # TODO: regex oder so funktioniert nicht
                 # regex fuer lineare terme, das letzte der liste nehmen, da es auch "3x^8" matchen wuerde. der letzte term ist ja der lineare
                 reg = r"\+|\-[0-9]x+"
                 matches = re.findall(reg, inp)
                 m = matches.pop()
                 print(m)
                 return m # last item of list with pop()
-            def get_rest():
+            def get_rest() -> List:
                 # wir brauchen 2, weil das oder ding (|) nicht funktioniert lol
                 posreg = r"\+[1-9]x\^[1-9]" # fuers matchen von positiven
                 negreg = r"\-[1-9]x\^[1-9]" # fuers matchen von negativen
@@ -287,13 +287,13 @@ def open_ganzrazionale_window() -> None:
     win.mainloop()
 
 
-def open_trigonometrische_window():
+def open_trigonometrische_window() -> None:
     win = base_Tk(name="Trigonometrische Funktionen Rechner")
     win.mainloop()
 
 
 # f(x) = a ^ x
-def open_exponential_window():
+def open_exponential_window() -> None:
     win = base_Tk(name="Exponential Funktionen Rechner")
 
     # labels und entries
@@ -322,7 +322,7 @@ def open_exponential_window():
     cv.draw()
 
     # function in function to be used on button click
-    def exponential_ausrechnen():
+    def exponential_ausrechnen() -> None:
         # werte holen
         von = float(von_entry.get())
         bis = float(bis_entry.get())
@@ -348,7 +348,7 @@ def open_exponential_window():
 
         cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
 
-    def exponential_help():
+    def exponential_help() -> None:
         pass
 
     # display everything
@@ -373,37 +373,37 @@ def open_exponential_window():
     win.mainloop()
 
 
-def open_defferenzial_window():
+def open_defferenzial_window() -> None:
     win = base_Tk(name="Einstieg Diefferenzialrechnung")
     win.mainloop()
 
 
-def open_kurvendiskussion_window():
+def open_kurvendiskussion_window() -> None:
     win = base_Tk(name="Kurvendiskussion")
     win.mainloop()
 
 
-def open_integralrechnung_window():
+def open_integralrechnung_window() -> None:
     win = base_Tk(name="Integralrechnung")
     win.mainloop()
 
 
-def open_hilfe_window():
+def open_hilfe_window() -> None:
     win = base_Tk(name="hilfe")
     win.mainloop()
 
 
-def open_ueber_window():
+def open_ueber_window() -> None:
     win = base_Tk(name="über")
     win.mainloop()
 
 
-def open_verlauf_window():
+def open_verlauf_window() -> None:
     win = base_Tk(name="verlauf")
     win.mainloop()
 
 
-def open_main_window():
+def open_main_window() -> None:
     root = Tk()
 
     menu = get_menu(root)
