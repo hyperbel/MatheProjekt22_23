@@ -414,7 +414,7 @@ def open_main_window() -> None:
 
 
 # generiert main menu fuer das root win
-def get_menu(root):
+def get_menu(root) -> Menu:
     _menu = Menu(root, tearoff=0)
     funktionen_menu = Menu(_menu, tearoff=0)
     account_menu = Menu(_menu, tearoff=0)
