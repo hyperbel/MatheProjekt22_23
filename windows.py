@@ -18,7 +18,7 @@ def entry_is_float(inp):
 
 
 # basic window config
-def base_Tk(size="900x600", name=""):
+def base_Tk(size="900x600", name="") -> Tk:
     win = Tk()
     win.geometry(size)
     win.title(name)
@@ -36,8 +36,8 @@ def zoomout(position):
 
 
 # rechner fuer lineare funktionen
-def open_linear_window():
-    def _get_linea_help():
+def open_linear_window() -> null:
+    def _get_linea_help() -> null:
         _help = base_Tk(size="800x500", name="Hilfe - quadratische Funktionen")
         Label(_help,
               text="Lineare Funktionen sind Funktionen die als Funktionsterm ein Plynom des ersten Grades  besitzen.").pack()
@@ -71,7 +71,7 @@ def open_linear_window():
     cv.draw()
 
     # function in function to be used on button click
-    def linear_ausrechnen():
+    def linear_ausrechnen() -> null:
         # werte holen
         von = float(von_entry.get())
         bis = float(bis_entry.get())
@@ -138,8 +138,8 @@ def open_linear_window():
 
 
 # rechner fuer quadratische funktionen
-def open_quadratisch_window():
-    def _get_quad_help():
+def open_quadratisch_window() -> null:
+    def _get_quad_help() -> null:
         _help = base_Tk(size="800x500", name="Hilfe - quadratische Funktionen")
         Label(_help,
               text="Quadratische Funktionen sind Funktionen die als Funktionsterm ein Plynom vom Grad 3 besitzen.").pack()
