@@ -36,8 +36,8 @@ def zoomout(position):
 
 
 # rechner fuer lineare funktionen
-def open_linear_window() -> null:
-    def _get_linea_help() -> null:
+def open_linear_window() -> None:
+    def _get_linea_help() -> None:
         _help = base_Tk(size="800x500", name="Hilfe - quadratische Funktionen")
         Label(_help,
               text="Lineare Funktionen sind Funktionen die als Funktionsterm ein Plynom des ersten Grades  besitzen.").pack()
@@ -71,7 +71,7 @@ def open_linear_window() -> null:
     cv.draw()
 
     # function in function to be used on button click
-    def linear_ausrechnen() -> null:
+    def linear_ausrechnen() -> None:
         # werte holen
         von = float(von_entry.get())
         bis = float(bis_entry.get())
@@ -103,12 +103,12 @@ def open_linear_window() -> null:
             x = -(b/m)    #
             return x
 
-        # nullstelle anzeigen
+        # Nonestelle anzeigen
         nst = f"N({nst()}|0)"
         NST_label = Label(win, text=nst)
         NST_label.pack(side=BOTTOM, anchor=SW)
 
-        # y-achsen-abschnitt ist einfach b weil x = null macht y = m * 0 + b, also 0 + b = b
+        # y-achsen-abschnitt ist einfach b weil x = None macht y = m * 0 + b, also 0 + b = b
         yaa = f"Y-Achsenabschnitt: {b}"
         YAA_label = Label(win, text=yaa)
         YAA_label.pack(side=BOTTOM, anchor=SW)
@@ -138,8 +138,8 @@ def open_linear_window() -> null:
 
 
 # rechner fuer quadratische funktionen
-def open_quadratisch_window() -> null:
-    def _get_quad_help() -> null:
+def open_quadratisch_window() -> None:
+    def _get_quad_help() -> None:
         _help = base_Tk(size="800x500", name="Hilfe - quadratische Funktionen")
         Label(_help,
               text="Quadratische Funktionen sind Funktionen die als Funktionsterm ein Plynom vom Grad 3 besitzen.").pack()
@@ -163,7 +163,7 @@ def open_quadratisch_window() -> null:
 
     fig = plt.Figure(figsize=(10, 20), dpi=100)
 
-    def quad_berechnen():
+    def quad_berechnen() -> None:
         # werte holen
         von = float(von_e.get())
         bis = float(bis_e.get())
@@ -227,7 +227,7 @@ def open_quadratisch_window() -> null:
     win.mainloop()
 
 
-def open_ganzrazionale_window():
+def open_ganzrazionale_window() -> None:
     win = base_Tk(name="Ganzrationale Funktionen Rechner")
 
     Label(win, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
