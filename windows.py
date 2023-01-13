@@ -323,6 +323,7 @@ def open_exponential_window() -> None:
 
     # function in function to be used on button click
     def exponential_ausrechnen() -> None:
+        import math
         # werte holen
         von = float(von_entry.get())
         bis = float(bis_entry.get())
@@ -342,7 +343,6 @@ def open_exponential_window() -> None:
         ax.set_xlabel(x_achse_entry.get())
         ax.set_ylabel(y_achse_entry.get())
 
-        import math
         # lineare funktion plotten
         ax.plot(rg, a ** rg)
 
