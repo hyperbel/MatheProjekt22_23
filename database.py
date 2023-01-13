@@ -1,4 +1,4 @@
-import os, sys, sqlite3
+import sqlite3
 
 
 def create_db():
