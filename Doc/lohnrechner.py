@@ -38,7 +38,7 @@ print ("Netto Gehalt Ohne Soli mit Kirche: " + srSMK + " €")
 
 ohneSoliOhneKirche == flostart - kirchensteuer - Lohnsteuer - Krank - Arbeitslos - Rent
 rundeohneSoliOhneKirche = round(ohneSoliOhneKirche)
-srSOK = str(rundeohneSoliIOhneKirche)
+srSOK = str(rundeohneSoliOhneKirche)
 print ("Netto Gehalt Ohne Soli und Ohne Kirche: " + srSOK + " €")
 
 
