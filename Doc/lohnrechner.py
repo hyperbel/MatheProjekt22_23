@@ -31,12 +31,12 @@ rundeOhne = round(ohne)
 strohne = str(rundeOhne)
 print ("Netto Gehalt ohne Kirchensteuer: " + strohne + " €")
 
-ohneSoliMitKirche == flostart - kirchensteuer - Lohnsteuer - Krank - Arbeitslos - Rent
+ohneSoliMitKirche = flostart - kirchensteuer - Lohnsteuer - Krank - Arbeitslos - Rent
 rundeohneSoliMitKirche = round(ohneSoliMitKirche)
 srSMK = str(rundeohneSoliMitKirche)
 print ("Netto Gehalt Ohne Soli mit Kirche: " + srSMK + " €")
 
-ohneSoliOhneKirche == flostart - kirchensteuer - Lohnsteuer - Krank - Arbeitslos - Rent
+ohneSoliOhneKirche = flostart - kirchensteuer - Lohnsteuer - Krank - Arbeitslos - Rent
 rundeohneSoliOhneKirche = round(ohneSoliOhneKirche)
 srSOK = str(rundeohneSoliOhneKirche)
 print ("Netto Gehalt Ohne Soli und Ohne Kirche: " + srSOK + " €")
