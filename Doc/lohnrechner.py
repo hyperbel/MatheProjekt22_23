@@ -4,22 +4,17 @@ def prozentsatz(wert):
     return wert / 100 
 kirchensteuer = flostart * prozentsatz(8)
 strkirch = str(kirchensteuer)
-print ("Kirchensteuer: " + strkirch + " €")
 Soli = flostart * prozentsatz(5)
 strsoli = str(Soli)
-print ("Solidaritätsbeitrag: " + strsoli + " €")
 Lohnsteuer = flostart * prozentsatz(30)
 strLohn = str(Lohnsteuer)
-print ("Lohnsteuer: " + strLohn + " €")
 Krank = flostart * prozentsatz(7.3)
 strkra = str(Krank)
-print ("Krankenkassenbeitrag: " + strkra + " €")
 Arbeitslos = flostart * prozentsatz(1.25)
 strArb = str(Arbeitslos)
-print ("Arbeitslosenversicherung: " + strArb + " €")
 Rent = flostart * prozentsatz(9.3)
 strRent = str(Rent)
-print ("Rentenversicherung: " + strRent + " € ")
+print ("Rentenversicherung: " + strRent + " € " + " Arbeitslosenversicherung: " + strArb + " €" + " Krankenkassenbeitrag: " + strkra + " €" + " Lohnsteuer: " + strLohn + " €" + " Solidaritätsbeitrag: " + strsoli + " €" + " Kirchensteuer: " + strkirch + " €")
 
 mit = flostart - Soli - kirchensteuer - Lohnsteuer - Krank - Arbeitslos - Rent
 rundeMit = round(mit)
