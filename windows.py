@@ -246,10 +246,20 @@ def open_ganzrazionale_window() -> None:
                 if inp[i] != ch: outp += inp[i]
             return outp
 
+        # gibt term aus, vorzeichen gehören zu den darauf folgenden termen
         def get_zahlen(inp: str) -> list:
             import re
-            terme = re.findall(r"[+-]?\d*x?\^?\d*", inp)
+            # regex magic for finding terms
+            dirty_terme = re.findall(r"[+-]?\d*x?\^?\d*", inp)
+
+            terme = [t for t in dirty_terme if t is not '']
             return terme
+        
+        input_str = __clean_str_of_char(fEntry.get(), '')
+        terme = get_zahlen(input_str)
+        print(terme)
+
+        
 
     _b = Button(win, text="Los gehts!", command=ganzrationale_berechnen)
     Button(win, text="?", command=_get_help).pack(side=TOP, anchor=NE)
