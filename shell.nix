@@ -10,6 +10,7 @@ pkgs.mkShell {
     ]))
 
     pkgs.vim
+    pkgs.helix
     pkgs.sqlite
     pkgs.tmux
     pkgs.ganttproject-bin
