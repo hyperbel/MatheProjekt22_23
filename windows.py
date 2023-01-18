@@ -228,6 +228,24 @@ def open_quadratisch_window() -> None:
 
 
 def open_ganzrazionale_window() -> None:
+    import re
+    class Ganzrationale_funktion():
+        def __init__(self, stat, lin, quad, rest):
+            self.statischer = float(stat)
+            self.linearer = lin
+            self.quadratischer = quad
+            self.restliche = rest
+            self.basis = 0
+            self.exponent = 0
+
+        def paar_trennen(string) -> (float, float):
+            # regex magie
+            found = re.findall(r"[+-]?x\^?", string)
+            if not found:
+                return float(string), 1
+            return 0,0
+
+            
     win = base_Tk(name="Ganzrationale Funktionen Rechner")
 
     Label(win, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
@@ -240,7 +258,6 @@ def open_ganzrazionale_window() -> None:
 
     def ganzrationale_berechnen() -> None:
         def __clean_str_of_char(inp: str, ch) -> str:
-            # import pdb; pdb.set_trace()
             outp = ""
             for i in range(len(inp)):
                 if inp[i] != ch: outp += inp[i]
@@ -248,18 +265,14 @@ def open_ganzrazionale_window() -> None:
 
         # gibt term aus, vorzeichen gehören zu den darauf folgenden termen
         def get_zahlen(inp: str) -> list:
-            import re
             # regex magic for finding terms
             dirty_terme = re.findall(r"[+-]?\d*x?\^?\d*", inp)
 
-            terme = [t for t in dirty_terme if t is not '']
+            terme = [t for t in dirty_terme if t != '']
             return terme
         
         input_str = __clean_str_of_char(fEntry.get(), '')
         terme = get_zahlen(input_str)
-        print(terme)
-
-        
 
     _b = Button(win, text="Los gehts!", command=ganzrationale_berechnen)
     Button(win, text="?", command=_get_help).pack(side=TOP, anchor=NE)
