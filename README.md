@@ -31,3 +31,4 @@ Mathe Abschluss schulprojekt in Python, zur Berechnung von Mathe Formeln
 * 08.01.2022: test datei erstellt oder so
 * 10.01.2022: anfang exponentiale funktionen
 * 11.01.2022: Typ Annotationen in windows.py
+* 18.01.2022: Ganzrationale Funktionen Klasse und regex
