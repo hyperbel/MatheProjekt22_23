@@ -11,4 +11,9 @@ def create_db():
 	      "passwort TEXT);"
 	cur.execute(sql)
 	con.commit()
+	sql = "CREATE TABLE funktionen (" \
+	      "funktion TEXT, "	\
+	      "userid INTEGER);"
+	cur.execute(sql)
+	con.commit()
 	con.close()

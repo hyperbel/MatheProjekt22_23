@@ -45,9 +45,9 @@ def main():
                     uname = username_entry.get()
                     passw = password_entry.get()
                     sql = f"SELECT * FROM user WHERE username = '{uname}' AND passwort = '{passw}';"
-                    cur.execute(sql)
+                    userpw = cur.execute(sql).fetchall()
                     con.commit()
-                    if True:
+                    if not userpw == " ":
                         login_win.destroy()
                         wins.open_main_window()
         except Exception:
