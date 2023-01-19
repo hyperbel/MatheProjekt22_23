@@ -228,24 +228,6 @@ def open_quadratisch_window() -> None:
 
 
 def open_ganzrazionale_window() -> None:
-    import re
-    class Ganzrationale_funktion():
-        def __init__(self, stat, lin, quad, rest):
-            self.statischer = float(stat)
-            self.linearer = lin
-            self.quadratischer = quad
-            self.restliche = rest
-            self.basis = 0
-            self.exponent = 0
-
-        def paar_trennen(string) -> (float, float):
-            # regex magie
-            found = re.findall(r"[+-]?x\^?", string)
-            if not found:
-                return float(string), 1
-            return 0,0
-
-            
     win = base_Tk(name="Ganzrationale Funktionen Rechner")
 
     Label(win, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
