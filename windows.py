@@ -279,18 +279,17 @@ def open_ganzrazionale_window() -> None:
 
             return ys
 
-        # plottet ganzrationale funktion
-        def plot_ganzrationale_funktion(func) -> None:
-            plt.figure(figsize=(12, 8))
-            x = np.linspace(-100, 100, 100)
-            print(x)
-            y = func(x)
-            print(y)
-            plt.plot(x, y, '-', color='pink')
-            plt.show()
-            plt.close()
+        fig = plt.Figure(figsize=(10, 20), dpi=100)
+        rg = np.arange(-100, 200, 0.2)
+        ax = fig.add_subplot()
+        ax.set_xlabel("x")
+        ax.set_ylabel("y")
+        ax.plot(rg, basis_exponent_paare[0][0] * (rg ** basis_exponent_paare[0][1]))
 
-        plot_ganzrationale_funktion(ganzrationale_funktion)
+        cv = FigureCanvasTkAgg(fig, master=win)
+        cv.draw()
+
+        cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
 
 
     _b = Button(win, text="Los gehts!", command=ganzrationale_berechnen)
