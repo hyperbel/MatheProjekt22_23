@@ -255,9 +255,43 @@ def open_ganzrazionale_window() -> None:
                 return (int(term[:-1]), 1)
             # sonst ist es ein term mit exponent
             else:
-
                 # returnt basis und exponent
                 return (int(term[:term.index('x')]), int(term[term.index('^')+1:]))
+        
+        # gibt term aus, vorzeichen gehören zu den darauf folgenden termen
+        def get_zahlen(inp: str) -> list:
+            # regex magic for finding terms
+            dirty_terme = re.findall(r"[+-]?\d*x?\^?\d*", inp)
+
+            terme = [t for t in dirty_terme if t != '']
+            return terme
+
+        input_str = __clean_str_of_char(fEntry.get(), '')
+        terme = get_zahlen(input_str)
+        basis_exponent_paare = [get_term(t) for t in terme]
+
+        # funktion welche ganzrationale funktionen berechnet
+        def ganzrationale_funktion(x: float) -> float:
+            ys = []
+            for b, e in basis_exponent_paare:
+                # appendiere die berechneten werte
+                ys.append(b * (x ** e))
+
+            return ys
+
+        # plottet ganzrationale funktion
+        def plot_ganzrationale_funktion(func) -> None:
+            plt.figure(figsize=(12, 8))
+            x = np.linspace(-100, 100, 100)
+            print(x)
+            y = func(x)
+            print(y)
+            plt.plot(x, y, '-', color='pink')
+            plt.show()
+            plt.close()
+
+        plot_ganzrationale_funktion(ganzrationale_funktion)
+
 
     _b = Button(win, text="Los gehts!", command=ganzrationale_berechnen)
     Button(win, text="?", command=_get_help).pack(side=TOP, anchor=NE)
