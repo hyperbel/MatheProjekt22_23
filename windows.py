@@ -3,11 +3,11 @@ from tkinter import BOTTOM
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
+import re
 
 
 # checks if input (usally from entry) is of type float
 def entry_is_float(inp):
-    import re    # only need regex here
     # magic regex for checking if input is float type
     if type(inp) == float:
         return True
@@ -245,16 +245,19 @@ def open_ganzrazionale_window() -> None:
                 if inp[i] != ch: outp += inp[i]
             return outp
 
-        # gibt term aus, vorzeichen gehören zu den darauf folgenden termen
-        def get_zahlen(inp: str) -> list:
-            # regex magic for finding terms
-            dirty_terme = re.findall(r"[+-]?\d*x?\^?\d*", inp)
+        # werte holen
+        def get_term(term: str) -> tuple:
+            # wenn kein x vorhanden ist, dann ist es ein konstanter term
+            if 'x' not in term:
+                return (int(term), 0)
+            # wenn kein exponent vorhanden ist, dann ist es ein linearer term
+            elif '^' not in term:
+                return (int(term[:-1]), 1)
+            # sonst ist es ein term mit exponent
+            else:
 
-            terme = [t for t in dirty_terme if t != '']
-            return terme
-        
-        input_str = __clean_str_of_char(fEntry.get(), '')
-        terme = get_zahlen(input_str)
+                # returnt basis und exponent
+                return (int(term[:term.index('x')]), int(term[term.index('^')+1:]))
 
     _b = Button(win, text="Los gehts!", command=ganzrationale_berechnen)
     Button(win, text="?", command=_get_help).pack(side=TOP, anchor=NE)
