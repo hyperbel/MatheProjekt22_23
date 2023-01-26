@@ -5,9 +5,12 @@ import numpy as np
 
 # enum for window types
 class WindowType:
-    Main = 1
-    Exponential = 2
     Other = -1
+    Main = 1
+    Linear = 2
+    Exponential = 3
+    Quadratisch = 4
+    Ganzrational = 5
 
 
 # create a window class
@@ -28,11 +31,15 @@ class Window(tk.Tk):
         self.frame = tk.Frame(self)
         self.plot_function = None
 
-        # create button to get exponential functions
-        self.button = tk.Button(self.frame, text="Exponentielle Funktionen",
-                                command=self.get_expon_win)
-        # pack the items
-        self.button.pack()
+        if self.window_type == WindowType.Main:
+            # create button to get exponential functions
+            self.button = tk.Button(self.frame,
+                                    text="Exponentielle Funktionen",
+                                    command=self.get_expon_win)
+            # pack the items
+
+            self.button.pack()
+
         self.frame.pack()
 
     # seperate run method
