@@ -5,7 +5,6 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
 import re
 
-
 # checks if input (usally from entry) is of type float
 def entry_is_float(inp):
     # magic regex for checking if input is float type
@@ -276,6 +275,8 @@ def open_ganzrazionale_window() -> None:
             for b, e in basis_exponent_paare:
                 # appendiere die berechneten werte
                 ys.append(b * (x ** e))
+                # print out the value
+
 
             return ys
 
