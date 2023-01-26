@@ -87,7 +87,8 @@ class ExponentialFunktionenWindow(Window):
         # show the plot
         plt.show()
 
-class LinearFunktionenWindow(Window):
+
+class LineareFunktionenWindow(Window):
     # initialize thw window
     def __init__(self, plot_function):
         super().__init__("Lineare Funktionen", "400x400",
@@ -108,6 +109,7 @@ class LinearFunktionenWindow(Window):
         ax.plot(x, y)
         # show the plot
         plt.show()
+
 
 class QuadratischeFunktionenWindow(Window):
     # initialize thw window
