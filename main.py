@@ -7,25 +7,21 @@ import sqlite3
 
 
 def callback(input):
-    if input == 0:
+    if input:
         print(input + "if1")
-        return False
-
-    elif input == " ":
-        print(input + "elif")
-        return False
-
+        return True
+    
     else:
         print(input + "else")
-        return True
+        return False
 def callback_signup(passwd1, passwd2):
     if passwd1 == passwd2:
         print(input + "if1")
-        return True
+        return False
 
     else:
         print(input + "else")
-        return False
+        return True
 def main():
     login_win = Tk()
 
