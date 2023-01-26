@@ -67,7 +67,7 @@ def main():
         def do_singup():
 
             if username_entry.get()  or username_entry.get()  and password_entry.get():
-                if pass_entry_signup.get() == confirm_entry.get():
+                if callback_signup(pass_entry_signup.pack(), confirm_entry.pack()):
                     con = sqlite3.connect("mathe.db")
                     cur = con.cursor()
                     sql = f"INSERT INTO user VALUES( \'{name_entry_siqnup.get()}\', \'{pass_entry_signup.get()}\');"
