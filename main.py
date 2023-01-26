@@ -35,7 +35,7 @@ def main():
 
     def eval_user_and_pw():
         try:
-             if   not username_entry.get() == " " or username_entry.get() == 0 and password_entry.get() == " ":
+             if  username_entry.get() or username_entry.get() and password_entry.get():
                     con = sqlite3.connect("mathe.db")
                     cur = con.cursor()
                     uname = username_entry.get()
@@ -66,7 +66,7 @@ def main():
         confirm_entry.pack()
         def do_singup():
 
-            if not username_entry.get() == " " or username_entry.get() == 0 and password_entry.get() == " ":
+            if username_entry.get()  or username_entry.get()  and password_entry.get():
                 if pass_entry_signup.get() == confirm_entry.get():
                     con = sqlite3.connect("mathe.db")
                     cur = con.cursor()
