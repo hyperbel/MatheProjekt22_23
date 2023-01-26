@@ -72,17 +72,29 @@ class ExponentialFunktionenWindow(Window):
         self.window_type = WindowType.Exponential
         self.plot_function = plot_function
 
-    # create a plot
-    def plot(self):
-        # create a figure
-        fig = plt.figure()
-        # create a subplot
-        ax = fig.add_subplot(111)
-        # create a range
-        x = np.arange(0, 10, 100)
-        # create a function
-        y = np.exp(x)
-        # plot the function
-        ax.plot(x, y)
-        # show the plot
-        plt.show()
+
+class LineareFunktionenWindow(Window):
+    # initialize thw window
+    def __init__(self, plot_function):
+        super().__init__("Lineare Funktionen", "400x400",
+                         WindowType.Linear)
+        self.window_type = WindowType.Linear
+        self.plot_function = plot_function
+
+
+class QuadratischeFunktionenWindow(Window):
+    # initialize thw window
+    def __init__(self, plot_function):
+        super().__init__("Quadratische Funktionen", "400x400",
+                         WindowType.Quadratisch)
+        self.window_type = WindowType.Quadratisch
+        self.plot_function = plot_function
+
+
+class GanzrationaleFunktionenWindow(Window):
+    # initialize thw window
+    def __init__(self, plot_function):
+        super().__init__("Ganzrationale Funktionen", "400x400",
+                         WindowType.Ganzrational)
+        self.window_type = WindowType.Ganzrational
+        self.plot_function = plot_function
