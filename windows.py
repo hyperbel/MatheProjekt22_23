@@ -25,16 +25,6 @@ def base_Tk(size="900x600", name="") -> Tk:
     return win
 
 
-def zoomin(position):
-	newposition = position -5
-	print("zoomin")
-
-
-def zoomout(position):
-	newposition = position + 5
-	print("zoomout")
-
-
 # rechner fuer lineare funktionen
 def open_linear_window() -> None:
     def _get_linea_help() -> None:
@@ -112,6 +102,14 @@ def open_linear_window() -> None:
         yaa = f"Y-Achsenabschnitt: {b}"
         YAA_label = Label(win, text=yaa)
         YAA_label.pack(side=BOTTOM, anchor=SW)
+    def zoomin(position):
+        newposition = position -5
+        print("zoomin")
+
+
+    def zoomout(position):
+        newposition = position + 5
+        print("zoomout")
 
     # display everything
     von_label.pack(side=TOP, anchor=NW)
@@ -131,6 +129,8 @@ def open_linear_window() -> None:
     Button(win, command=linear_ausrechnen, text="Anzeigen").pack(side=TOP,
                                                                  anchor=NW)
     Button(win, text="?", command=_get_linea_help).pack(side=TOP, anchor=NE)
+    Button(win, text="+", command=zoomin(3)).pack(side=TOP, anchor=NE)
+    Button(win, text="-", command=zoomout(3)).pack(side=TOP, anchor=NE)
 
 
     
