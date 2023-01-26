@@ -6,3 +6,5 @@ def extract_terms(equation):
 
 equation = "3x^4-4x^3+4x-5"
 print(extract_terms(equation))
+
+# class 
