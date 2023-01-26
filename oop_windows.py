@@ -35,10 +35,7 @@ class Window(tk.Tk):
             # create button to get exponential functions
             self.button = tk.Button(self.frame,
                                     text="Exponentielle Funktionen",
-                                    command=self.get_expon_win)
-            # pack the items
-
-            self.button.pack()
+                                    command=self.get_expon_win).pack()
 
         self.frame.pack()
 
@@ -58,10 +55,6 @@ class Window(tk.Tk):
     # method to set window type enum
     def set_window_type(self, win_type: WindowType):
         self.window_type = win_type
-
-    # set function to plot
-    def set_plot_function(self, func):
-        self.plot_function = func
 
 
 class ExponentialFunktionenWindow(Window):
@@ -96,19 +89,40 @@ class LineareFunktionenWindow(Window):
         self.window_type = WindowType.Linear
         self.plot_function = plot_function
 
-    # create a plot
-    def plot(self):
-        # create a figure
-        fig = plt.figure()
-        # create a subplot
-        ax = fig.add_subplot(111)
-        # create a range
-        x = np.arange(0, 10, 100)
-        # create a function
-        # plot the function
-        ax.plot(x, y)
-        # show the plot
-        plt.show()
+        self.widgets()
+        self.pack()
+
+    def widgets(self):
+        # labels und entries
+        self.von_label = tk.Label(self.frame, text="Von:")
+        self.von_entry = tk.Entry(self.frame)
+        self.bis_label = tk.Label(self.frame, text="Bis:")
+        self.bis_entry = tk.Entry(self.frame)
+        self.m_label = tk.Label(self.frame, text="Steigung:")
+        self.m_entry = tk.Entry(self.frame)
+        self.b_label = tk.Label(self.frame, text="y-Achsenabschnitt:")
+        self.b_entry = tk.Entry(self.frame)
+        self.x_achse_label = tk.Label(self.frame, text="x-Achse:")
+        self.x_achse_entry = tk.Entry(self.frame)
+        self.y_achse_label = tk.Label(self.frame, text="y-Achse:")
+        self.y_achse_entry = tk.Entry(self.frame)
+
+
+    def pack(self):
+        # items packen
+        self.von_label.pack()
+        self.von_entry.pack()
+        self.bis_label.pack()
+        self.bis_entry.pack()
+        self.m_label.pack()
+        self.m_entry.pack()
+        self.b_label.pack()
+        self.b_entry.pack()
+        self.x_achse_label.pack()
+        self.x_achse_entry.pack()
+        self.y_achse_label.pack()
+        self.y_achse_entry.pack()
+
 
 
 class QuadratischeFunktionenWindow(Window):
