@@ -1,18 +1,15 @@
-from tkinter import Tk, Button, Label, Entry
-import sqlite3
-import wins
+import windows as win
 
 
+<<<<<<< HEAD
 def callback(input):
     if input:
         print(input + "if1")
         return True
-
+    
     else:
         print(input + "else")
         return False
-
-
 def callback_signup(passwd1, passwd2):
     if passwd1 == passwd2:
         print(input + "if1")
@@ -21,8 +18,6 @@ def callback_signup(passwd1, passwd2):
     else:
         print(input + "else")
         return False
-
-
 def main():
     login_win = Tk()
 
@@ -36,17 +31,17 @@ def main():
 
     def eval_user_and_pw():
         try:
-            if username_entry.get() or username_entry.get() and password_entry.get():
-                con = sqlite3.connect("mathe.db")
-                cur = con.cursor()
-                uname = username_entry.get()
-                passw = password_entry.get()
-                sql = f"SELECT * FROM user WHERE username = '{uname}' AND passwort = '{passw}';"
-                userpw = cur.execute(sql).fetchall()
-                con.commit()
-                if not userpw == " ":
-                    login_win.destroy()
-                    wins.open_main_window()
+             if  username_entry.get() or username_entry.get() and password_entry.get():
+                    con = sqlite3.connect("mathe.db")
+                    cur = con.cursor()
+                    uname = username_entry.get()
+                    passw = password_entry.get()
+                    sql = f"SELECT * FROM user WHERE username = '{uname}' AND passwort = '{passw}';"
+                    userpw = cur.execute(sql).fetchall()
+                    con.commit()
+                    if not userpw == " ":
+                        login_win.destroy()
+                        wins.open_main_window()
         except Exception:
             print("Login fehlgeschlagen")
 
@@ -65,12 +60,10 @@ def main():
         Label(signup_win, text="Confirm Password:").pack()
         confirm_entry = Entry(signup_win, show="*", width=20)
         confirm_entry.pack()
-
         def do_singup():
 
-            if username_entry.get() or username_entry.get() and password_entry.get():
-                if callback_signup(pass_entry_signup.pack(),
-                                   confirm_entry.pack()):
+            if username_entry.get()  or username_entry.get()  and password_entry.get():
+                if callback_signup(pass_entry_signup.pack(), confirm_entry.pack()):
                     con = sqlite3.connect("mathe.db")
                     cur = con.cursor()
                     sql = f"INSERT INTO user VALUES( \'{name_entry_siqnup.get()}\', \'{pass_entry_signup.get()}\');"
@@ -82,13 +75,20 @@ def main():
 
         Button(signup_win, text="Signup", command=do_singup).pack()
 
-        # login_win.destroy()
+        #login_win.destroy()
         signup_win.mainloop()
 
     Button(login_win, text="Login", command=eval_user_and_pw).pack()
     Button(login_win, text="signup instead?", command=get_signup_win).pack()
 
     login_win.mainloop()
+=======
+# create a main function
+def main():
+    # create a window
+    mainWindow = win.Window("Main Fenster", "400x400", win.WindowType.Main)
+    mainWindow.run()
+>>>>>>> oop
 
 
 # call main function
