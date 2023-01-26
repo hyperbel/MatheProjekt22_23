@@ -1,13 +1,7 @@
-import os, sys, sqlite3
+import sqlite3
 
 
 def create_db():
-	# Prüfen ob Datenbank schon da ist
-	"""
-	if os.path.exists("mathe.db"):
-		print("Datei bereits vorhanden")
-		sys.exit(0)
-	"""
 	con = sqlite3.connect("mathe.db")
 	cur = con.cursor()
 	
@@ -15,6 +9,11 @@ def create_db():
 	sql = "CREATE TABLE user (" \
 	      "username TEXT, "  \
 	      "passwort TEXT);"
+	cur.execute(sql)
+	con.commit()
+	sql = "CREATE TABLE funktionen (" \
+	      "funktion TEXT, "	\
+	      "userid INTEGER);"
 	cur.execute(sql)
 	con.commit()
 	con.close()

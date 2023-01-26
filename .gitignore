@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# nix shell result
+result
+result-*
+
+# pycharm generated test main file
+test_main.py

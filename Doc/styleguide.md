@@ -1,4 +1,4 @@
- 	# Styleguide für das Mathe Projekt
+# Styleguide für das Mathe Projekt
 
 ### Farben
 * Rot = #bf3b32
@@ -16,33 +16,17 @@
 
 #### Button Farben
 
-
-
-
 ### Schrift
+
 ####  Art
 
 #### Größe
-
-
 
 ### Fenster Größe
 * 900x600
 
 #### Funktionen Fenster
 
-
 ##### Normales Fenster
 
-
-
 ### Dialog Fenster
-
-
-
-
-
-
-
-
-
