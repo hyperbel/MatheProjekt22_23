@@ -2,16 +2,20 @@ import tkinter as tk
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 # enum for window types
 class WindowType:
     Main = 1
     Exponential = 2
     Other = -1
 
+
 # create a window class
 class Window(tk.Tk):
+
     # initialize the window
-    def __init__(self, name: str, size: str, win_type: WindowType = WindowType.Other):
+    def __init__(self, name: str, size: str, win_type:
+                 WindowType = WindowType.Other):
         # call the super class
         super().__init__()
         # set window type
@@ -25,11 +29,11 @@ class Window(tk.Tk):
         self.plot_function = None
 
         # create button to get exponential functions
-        self.button = tk.Button(self.frame, text="Exponentielle Funktionen", command=self.get_expon_win)
-        # pack the items 
+        self.button = tk.Button(self.frame, text="Exponentielle Funktionen",
+                                command=self.get_expon_win)
+        # pack the items
         self.button.pack()
         self.frame.pack()
-
 
     # seperate run method
     def run(self):
@@ -55,15 +59,11 @@ class Window(tk.Tk):
 
 class ExponentialFunktionenWindow(Window):
     # initialize thw window
-    def __init__(self):
-        super().__init__("Exponentielle Funktionen", "400x400", WindowType.Exponential)
-        self.window_type = WindowType.Exponential
-
     def __init__(self, plot_function):
-        super().__init__("Exponentielle Funktionen", "400x400", WindowType.Exponential)
+        super().__init__("Exponentielle Funktionen", "400x400",
+                         WindowType.Exponential)
         self.window_type = WindowType.Exponential
         self.plot_function = plot_function
-    
 
     # create a plot
     def plot(self):
