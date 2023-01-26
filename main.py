@@ -17,11 +17,11 @@ def callback(input):
 def callback_signup(passwd1, passwd2):
     if passwd1 == passwd2:
         print(input + "if1")
-        return False
+        return True
 
     else:
         print(input + "else")
-        return True
+        return False
 def main():
     login_win = Tk()
 
