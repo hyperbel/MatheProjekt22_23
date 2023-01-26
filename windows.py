@@ -1,5 +1,6 @@
 import tkinter as tk
 import matplotlib.pyplot as plt
+import numpy as np
 
 # enum for window types
 class WindowType:
@@ -21,6 +22,7 @@ class Window(tk.Tk):
         self.geometry(size)
         # create a frame
         self.frame = tk.Frame(self)
+        self.plot_function = None
 
         # create button to get exponential functions
         self.button = tk.Button(self.frame, text="Exponentielle Funktionen", command=self.get_expon_win)
@@ -35,27 +37,32 @@ class Window(tk.Tk):
 
     # exponential window method
     def get_expon_win(self):
+        # exponential function
+
         # create a window
-        expon_win = ExponentialFunktionenWindow()
+        expon_win = ExponentialFunktionenWindow(np.exp)
         # run the window
         expon_win.run()
 
     # method to set window type enum
-    def set_window_type(self, win_type: string):
-        # match the given string to window type with switch case
-        match win_type:
-            case "main":
-                self.window_type = WindowType.Main
-            case "expon":
-                self.window_type = WindowType.Exponential
-            case _:
-                self.window_type = WindowType.Other
+    def set_window_type(self, win_type: WindowType):
+        self.window_type = win_type
+
+    # set function to plot
+    def set_plot_function(self, func):
+        self.plot_function = func
 
 
 class ExponentialFunktionenWindow(Window):
     # initialize thw window
     def __init__(self):
         super().__init__("Exponentielle Funktionen", "400x400", WindowType.Exponential)
+        self.window_type = WindowType.Exponential
+
+    def __init__(self, plot_function):
+        super().__init__("Exponentielle Funktionen", "400x400", WindowType.Exponential)
+        self.window_type = WindowType.Exponential
+        self.plot_function = plot_function
     
 
     # create a plot
@@ -72,4 +79,3 @@ class ExponentialFunktionenWindow(Window):
         ax.plot(x, y)
         # show the plot
         plt.show()
-
