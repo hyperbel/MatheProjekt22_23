@@ -1,28 +1,75 @@
 import tkinter as tk
+import matplotlib.pyplot as plt
+
+# enum for window types
+class WindowType:
+    Main = 1
+    Exponential = 2
+    Other = -1
 
 # create a window class
 class Window(tk.Tk):
     # initialize the window
-    def __init__(self, name: str, size: str):
+    def __init__(self, name: str, size: str, win_type: WindowType = WindowType.Other):
         # call the super class
         super().__init__()
+        # set window type
+        self.window_type = win_type
         # set title
         self.title(name)
         # set size
         self.geometry(size)
         # create a frame
         self.frame = tk.Frame(self)
-        # pack the frame
+
+        # create button to get exponential functions
+        self.button = tk.Button(self.frame, text="Exponentielle Funktionen", command=self.get_expon_win)
+        # pack the items 
+        self.button.pack()
         self.frame.pack()
 
+
     # seperate run method
-    def run():
+    def run(self):
         self.mainloop()
+
+    # exponential window method
+    def get_expon_win(self):
+        # create a window
+        expon_win = ExponentialFunktionenWindow()
+        # run the window
+        expon_win.run()
+
+    # method to set window type enum
+    def set_window_type(self, win_type: string):
+        # match the given string to window type with switch case
+        match win_type:
+            case "main":
+                self.window_type = WindowType.Main
+            case "expon":
+                self.window_type = WindowType.Exponential
+            case _:
+                self.window_type = WindowType.Other
 
 
 class ExponentialFunktionenWindow(Window):
     # initialize thw window
     def __init__(self):
-        super().__init("Exponentielle Funktionen", "400x400")
+        super().__init__("Exponentielle Funktionen", "400x400", WindowType.Exponential)
+    
 
+    # create a plot
+    def plot(self):
+        # create a figure
+        fig = plt.figure()
+        # create a subplot
+        ax = fig.add_subplot(111)
+        # create a range
+        x = np.arange(0, 10, 100)
+        # create a function
+        y = np.exp(x)
+        # plot the function
+        ax.plot(x, y)
+        # show the plot
+        plt.show()
 
