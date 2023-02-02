@@ -42,9 +42,10 @@ def main():
                     sql = f"SELECT * FROM user WHERE username = '{uname}' AND passwort = '{passw}';"
                     userpw = cur.execute(sql).fetchall()
                     con.commit()
-                    if callback_signup(uname, userpw):
-                        login_win.destroy()
-                        wins.open_main_window()
+                    print("moin")
+             
+                    login_win.destroy()
+                    wins.open_main_window()
         except Exception:
             print("Login fehlgeschlagen")
 
