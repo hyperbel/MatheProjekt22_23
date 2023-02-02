@@ -8,15 +8,14 @@ import sqlite3
 
 def callback(input):
     if input:
-        print(input + "if1")
         return True
     
     else:
-        print(input + "else")
+
         return False
 def callback_signup(passwd1, passwd2):
     if passwd1 == passwd2:
-        print(input + "if1")
+        
         return True
 
     else:
@@ -35,7 +34,7 @@ def main():
 
     def eval_user_and_pw():
         try:
-             if  username_entry.get() or username_entry.get() and password_entry.get():
+             if  username_entry.get() and password_entry.get():
                     con = sqlite3.connect("mathe.db")
                     cur = con.cursor()
                     uname = username_entry.get()
@@ -43,7 +42,7 @@ def main():
                     sql = f"SELECT * FROM user WHERE username = '{uname}' AND passwort = '{passw}';"
                     userpw = cur.execute(sql).fetchall()
                     con.commit()
-                    if not userpw == " ":
+                    if callback_signup(uname, userpw):
                         login_win.destroy()
                         wins.open_main_window()
         except Exception:
@@ -66,7 +65,7 @@ def main():
         confirm_entry.pack()
         def do_singup():
 
-            if username_entry.get()  or username_entry.get()  and password_entry.get():
+            if name_entry_siqnup.get() and confirm_entry.get()  and pass_entry_signup.get():
                 if callback_signup(pass_entry_signup.pack(), confirm_entry.pack()):
                     con = sqlite3.connect("mathe.db")
                     cur = con.cursor()
