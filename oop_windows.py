@@ -21,23 +21,83 @@ class Window(tk.Tk):
                  WindowType = WindowType.Other):
         # call the super class
         super().__init__()
+        self._title = name
+        self._geometry = size
         # set window type
-        self.window_type = win_type
-        # set title
-        self.title(name)
-        # set size
-        self.geometry(size)
+        self._window_type = win_type
         # create a frame
-        self.frame = tk.Frame(self)
-        self.plot_function = None
+        self._frame = tk.Frame(self)
+        self._plot_function = None
 
-        if self.window_type == WindowType.Main:
+        if self._window_type == WindowType.Main:
             # create button to get exponential functions
-            self.button = tk.Button(self.frame,
+            self._button = tk.Button(self.frame,
                                     text="Exponentielle Funktionen",
                                     command=self.get_expon_win).pack()
 
         self.frame.pack()
+
+    @property
+    def window_type(self):
+        return self._window_type
+
+    @property
+    def title(self):
+        return self._title
+
+    @property
+    def geometry(self):
+        return self._geometry
+
+    @property
+    def frame(self):
+        return self._frame
+
+    @property
+    def plot_function(self):
+        return self._plot_function
+
+
+
+    @window_type.setter
+    def window_type(self, win_type: WindowType):
+        self._window_type = win_type
+
+    @title.setter
+    def title(self, name: str):
+        self.title(name)
+
+    @geometry.setter
+    def geometry(self, size: str):
+        self.geometry(size)
+
+    @frame.setter
+    def frame(self, frame: tk.Frame):
+        self._frame = frame
+
+    @plot_function.setter
+    def plot_function(self, plot_function):
+        self._plot_function = plot_function
+
+    @window_type.deleter
+    def window_type(self):
+        del self._window_type
+
+    @title.deleter
+    def title(self):
+        del self._title
+
+    @geometry.deleter
+    def geometry(self):
+        del self._geometry
+
+    @frame.deleter
+    def frame(self):
+        del self._frame
+
+    @plot_function.deleter
+    def plot_function(self):
+        del self._plot_function
 
     # seperate run method
     def run(self):
@@ -52,12 +112,18 @@ class Window(tk.Tk):
         # run the window
         expon_win.run()
 
-    # method to set window type enum
-    def set_window_type(self, win_type: WindowType):
+
+class FunktionenWindow(Window):
+    def __init__(self, name: str, size: str, win_type:
+                 WindowType = WindowType.Other):
+        super().__init__(name, size, win_type)
         self.window_type = win_type
 
+    def plot(self):
+        pass
 
-class ExponentialFunktionenWindow(Window):
+
+class ExponentialFunktionenWindow(FunktionenWindow):
     # initialize thw window
     def __init__(self, plot_function):
         super().__init__("Exponentielle Funktionen", "400x400",
@@ -81,7 +147,7 @@ class ExponentialFunktionenWindow(Window):
         plt.show()
 
 
-class LineareFunktionenWindow(Window):
+class LineareFunktionenWindow(FunktionenWindow):
     # initialize thw window
     def __init__(self, plot_function):
         super().__init__("Lineare Funktionen", "400x400",
@@ -125,7 +191,7 @@ class LineareFunktionenWindow(Window):
 
 
 
-class QuadratischeFunktionenWindow(Window):
+class QuadratischeFunktionenWindow(FunktionenWindow):
     # initialize thw window
     def __init__(self, plot_function):
         super().__init__("Quadratische Funktionen", "400x400",
@@ -148,7 +214,7 @@ class QuadratischeFunktionenWindow(Window):
         plt.show()
 
 
-class GanzrationaleFunktionenWindow(Window):
+class GanzrationaleFunktionenWindow(FunktionenWindow):
     # initialize thw window
     def __init__(self, plot_function):
         super().__init__("Ganzrationale Funktionen", "400x400",
@@ -166,6 +232,6 @@ class GanzrationaleFunktionenWindow(Window):
         x = np.arange(0, 10, 100)
         # create a function
         # plot the function
-        ax.plot(x, y)
+        # ax.plot(x, y)
         # show the plot
         plt.show()
