@@ -1,5 +1,6 @@
 """ This module contains the window classes for the GUI """
 import tkinter as tk
+from tkinter import ttk
 from enum import Enum
 import matplotlib.pyplot as plt
 import numpy as np
@@ -23,7 +24,11 @@ class Window(tk.Tk):
         """ initialize the window """
         # call the super class
         super().__init__()
+        # set ttk theme
+        ttk.Style().theme_use("classic")
+        # set window title
         self._title = name
+        # set window size
         self._geometry = size
         # set window type
         self._window_type = win_type

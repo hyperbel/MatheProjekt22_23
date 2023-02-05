@@ -1,6 +1,5 @@
 """ object oriented way of main.py """
 import oop_windows as win
-
 def main():
     """ entry point of the program """
     main_window = win.Window("Main Fenster", "400x400", win.WindowType.MAIN)
