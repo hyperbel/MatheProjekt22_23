@@ -17,7 +17,6 @@ class WindowType(Enum):
 
 class Window(tk.Tk):
     """ basic window class """
-
     # initialize the window
     def __init__(self, name: str, size: str, win_type:
                  WindowType = WindowType.OTHER):
@@ -214,14 +213,17 @@ class QuadratischeFunktionenWindow(FunktionenWindow):
         self.plot_function = plot_function
 
     # create a plot
-    def plot(self):
+    def plot(self, a, b, c):
+        def f(x):
+            """ function to plot (y = ax^2 + bx + c) """
+            return np.array([a * i_x ** 2 + b * i_x + c for i_x in x])
         # create a figure
         fig = plt.figure()
         # create a subplot
         figure_ax = fig.add_subplot(111)
         # create a range
         f_x = np.arange(0, 10, 100)
-        res_y = []
+        res_y = f(f_x)
         # plot the function
         figure_ax.plot(f_x, res_y)
         # show the plot
