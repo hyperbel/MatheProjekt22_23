@@ -35,6 +35,12 @@ class Window(tk.Tk):
             # create button to get exponential functions
             tk.Button(self.frame, text="Exponentielle Funktionen",
                                     command=self.get_expon_win).pack()
+            tk.Button(self.frame, text="Lineare Funktionen",
+                                    command=self.get_linear_win).pack()
+            tk.Button(self.frame, text="Quadratische Funktionen",
+                                    command=self.get_quadratisch_win).pack()
+            tk.Button(self.frame, text="Ganzrationale Funktionen",
+                                    command=self.get_ganzrational_win).pack()
 
         self.frame.pack()
 
@@ -123,12 +129,32 @@ class Window(tk.Tk):
     # exponential window method
     def get_expon_win(self):
         """ gets exponential window """
-        # exponential function
 
         # create a window
         expon_win = ExponentialFunktionenWindow(np.exp)
         # run the window
         expon_win.run()
+
+    def get_linear_win(self):
+        """ gets linear window """
+        # create a window
+        linear_win = LineareFunktionenWindow(np.exp)
+        # run the window
+        linear_win.run()
+
+    def get_quadratisch_win(self):
+        """ gets quadratic window """
+        # create a window
+        quadratic_win = QuadratischeFunktionenWindow(np.exp)
+        # run the window
+        quadratic_win.run()
+
+    def get_ganzrational_win(self):
+        """ gets rational window """
+        # create a window
+        rational_win = GanzrationaleFunktionenWindow(np.exp)
+        # run the window
+        rational_win.run()
 
 
 class FunktionenWindow(Window):
@@ -139,8 +165,6 @@ class FunktionenWindow(Window):
         super().__init__(name, size, win_type)
         self.window_type = win_type
 
-    def plot(self):
-        """ plot function thats gets overwritten """
 
 class ExponentialFunktionenWindow(FunktionenWindow):
     """ window for exponential functions """
@@ -152,6 +176,7 @@ class ExponentialFunktionenWindow(FunktionenWindow):
 
     # create a plot
     def plot(self):
+        """ plot the function """
         # create a figure
         fig = plt.figure()
         # create a subplot
@@ -213,17 +238,18 @@ class QuadratischeFunktionenWindow(FunktionenWindow):
         self.plot_function = plot_function
 
     # create a plot
-    def plot(self, a, b, c):
-        def f(x):
+    def plot(self, a_var, b_var, c_var):
+        """ plot the function """
+        def function_f(x_var):
             """ function to plot (y = ax^2 + bx + c) """
-            return np.array([a * i_x ** 2 + b * i_x + c for i_x in x])
+            return np.array([a_var * i_x ** 2 + b_var * i_x + c_var for i_x in x_var])
         # create a figure
         fig = plt.figure()
         # create a subplot
         figure_ax = fig.add_subplot(111)
         # create a range
         f_x = np.arange(0, 10, 100)
-        res_y = f(f_x)
+        res_y = function_f(f_x)
         # plot the function
         figure_ax.plot(f_x, res_y)
         # show the plot
