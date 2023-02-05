@@ -5,7 +5,9 @@ import sqlite3
 
 
 def callback(input_str):
-    """ callback used to check if the user has entered a username and password. """
+    """
+    callback used to check if the user has entered a username and password.
+    """
     if input_str:
         print(input_str + "if1")
         return True
@@ -38,12 +40,15 @@ def main():
 
     def eval_user_and_pw():
         try:
-            if username_entry.get() or username_entry.get() and password_entry.get():
+            if username_entry.get() and password_entry.get():
                 con = sqlite3.connect("mathe.db")
                 cur = con.cursor()
                 uname = username_entry.get()
                 passw = password_entry.get()
-                sql = f"SELECT * FROM user WHERE username = '{uname}' AND passwort = '{passw}';"
+                sql = f"""SELECT *
+                          FROM user
+                          WHERE username = '{uname}'
+                          AND passwort = '{passw}';"""
                 userpw = cur.execute(sql).fetchall()
                 con.commit()
                 if not userpw == " ":
@@ -70,8 +75,7 @@ def main():
         confirm_entry.pack()
 
         def do_singup():
-
-            if username_entry.get() or username_entry.get() and password_entry.get():
+            if username_entry.get() and password_entry.get():
                 if callback_signup(pass_entry_signup.pack(),
                                    confirm_entry.pack()):
                     con = sqlite3.connect("mathe.db")

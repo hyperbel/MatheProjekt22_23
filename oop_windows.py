@@ -39,13 +39,13 @@ class Window(tk.Tk):
         if self._window_type == WindowType.MAIN:
             # create button to get exponential functions
             tk.Button(self.frame, text="Exponentielle Funktionen",
-                                    command=self.get_expon_win).pack()
+                      command=self.get_expon_win).pack()
             tk.Button(self.frame, text="Lineare Funktionen",
-                                    command=self.get_linear_win).pack()
+                      command=self.get_linear_win).pack()
             tk.Button(self.frame, text="Quadratische Funktionen",
-                                    command=self.get_quadratisch_win).pack()
+                      command=self.get_quadratisch_win).pack()
             tk.Button(self.frame, text="Ganzrationale Funktionen",
-                                    command=self.get_ganzrational_win).pack()
+                      command=self.get_ganzrational_win).pack()
 
         self.frame.pack()
 
@@ -73,8 +73,6 @@ class Window(tk.Tk):
     def plot_function(self):
         """ getter for plot function """
         return self._plot_function
-
-
 
     @window_type.setter
     def window_type(self, win_type: WindowType):
@@ -216,7 +214,6 @@ class LineareFunktionenWindow(FunktionenWindow):
         self.x_achse_entry = tk.Entry(self.frame)
         self.y_achse_entry = tk.Entry(self.frame)
 
-
     def pack(self):
         """ items packen """
         tk.Label(self.frame, text="Von:").pack()
@@ -233,7 +230,6 @@ class LineareFunktionenWindow(FunktionenWindow):
         self.y_achse_entry.pack()
 
 
-
 class QuadratischeFunktionenWindow(FunktionenWindow):
     """ fenster für quadratische funktionen """
     def __init__(self, plot_function):
@@ -247,7 +243,8 @@ class QuadratischeFunktionenWindow(FunktionenWindow):
         """ plot the function """
         def function_f(x_var):
             """ function to plot (y = ax^2 + bx + c) """
-            return np.array([a_var * i_x ** 2 + b_var * i_x + c_var for i_x in x_var])
+            return np.array([a_var * i_x ** 2 + b_var * i_x + c_var
+                            for i_x in x_var])
         # create a figure
         fig = plt.figure()
         # create a subplot
