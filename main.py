@@ -49,8 +49,8 @@ def main():
                 if not userpw == " ":
                     login_win.destroy()
                     # wins.open_main_window()
-        except Exception:
-            print("Login fehlgeschlagen")
+        except sqlite3.Error as exception_e:
+            print("Login fehlgeschlagen: " + str(exception_e))
 
     def get_signup_win():
         """ executes when user wants to sign up. """
