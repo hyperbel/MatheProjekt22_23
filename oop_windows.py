@@ -78,7 +78,7 @@ class Window(tk.Tk):
     @geometry.setter
     def geometry(self, size: str):
         """ setter for geometry """
-        self.geometry(size)
+        self._geometry = size
 
     @frame.setter
     def frame(self, frame: tk.Frame):
