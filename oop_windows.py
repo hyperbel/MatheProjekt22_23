@@ -137,6 +137,7 @@ class Window(tk.Tk):
         expon_win = ExponentialFunktionenWindow(np.exp)
         # run the window
         expon_win.run()
+        self.destroy()
 
     def get_linear_win(self):
         """ gets linear window """
@@ -144,6 +145,7 @@ class Window(tk.Tk):
         linear_win = LineareFunktionenWindow(np.exp)
         # run the window
         linear_win.run()
+        self.destroy()
 
     def get_quadratisch_win(self):
         """ gets quadratic window """
@@ -151,6 +153,7 @@ class Window(tk.Tk):
         quadratic_win = QuadratischeFunktionenWindow(np.exp)
         # run the window
         quadratic_win.run()
+        self.destroy()
 
     def get_ganzrational_win(self):
         """ gets rational window """
@@ -158,6 +161,7 @@ class Window(tk.Tk):
         rational_win = GanzrationaleFunktionenWindow(np.exp)
         # run the window
         rational_win.run()
+        self.destroy()
 
 
 class FunktionenWindow(Window):
