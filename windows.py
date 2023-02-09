@@ -60,6 +60,8 @@ def open_linear_window() -> None:
     cv = FigureCanvasTkAgg(fig, master=win)
     cv.draw()
 
+    
+
     # function in function to be used on button click
     def linear_ausrechnen() -> None:
         # werte holen
@@ -74,6 +76,7 @@ def open_linear_window() -> None:
         assert entry_is_float(m)
         assert entry_is_float(b)
 
+    
         # range mit von - bis
         rg = np.arange(von, bis, 0.2)
 
@@ -102,14 +105,19 @@ def open_linear_window() -> None:
         yaa = f"Y-Achsenabschnitt: {b}"
         YAA_label = Label(win, text=yaa)
         YAA_label.pack(side=BOTTOM, anchor=SW)
-    def zoomin(position):
-        newposition = position -5
-        print("zoomin")
+    def zoomin(position, m ,b):
+                rg = position -5
+                print("zoomin")
+                ax.plot(rg, m * rg + b)
+
+            
 
 
-    def zoomout(position):
-        newposition = position + 5
-        print("zoomout")
+    def zoomout(position, m,b):
+                rg = position + 5
+                print("zoomout")
+                ax.plot(rg, m * rg + b)
+
 
     # display everything
     von_label.pack(side=TOP, anchor=NW)
@@ -129,8 +137,8 @@ def open_linear_window() -> None:
     Button(win, command=linear_ausrechnen, text="Anzeigen").pack(side=TOP,
                                                                  anchor=NW)
     Button(win, text="?", command=_get_linea_help).pack(side=TOP, anchor=NE)
-    Button(win, text="+", command=zoomin(3)).pack(side=TOP, anchor=NE)
-    Button(win, text="-", command=zoomout(3)).pack(side=TOP, anchor=NE)
+    Button(win, text="+", command=zoomin(3,2,2)).pack(side=TOP, anchor=NE)
+    Button(win, text="-", command=zoomout(3,2,2)).pack(side=TOP, anchor=NE)
 
 
     
