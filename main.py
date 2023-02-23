@@ -1,33 +1,32 @@
-""" This is the main file of the project. """
-from tkinter import Tk, Button, Label, Entry
+# numpy, matplotlib, math, sympy, random, time, glob, queue, collections,
+# threading, re , tk
+from tkinter import Tk, Label, Entry, Button
+from database import create_db
+import windows as wins
 import sqlite3
-# import oop_windows as wins
 
 
-def callback(input_str):
-    """
-    callback used to check if the user has entered a username and password.
-    """
-    if input_str:
-        print(input_str + "if1")
+def callback(input):
+    if input == 0:
+        print(input + "if1")
+        return False
+
+    elif input == " ":
+        print(input + "elif")
+        return False
+
+    else:
+        print(input + "else")
         return True
-
-    print(input_str + "else")
-    return False
-
-
 def callback_signup(passwd1, passwd2):
-    """ callback used when user signs up. """
     if passwd1 == passwd2:
-        print("if1")
+        print(input + "if1")
         return True
 
-    print("else")
-    return False
-
-
+    else:
+        print(input + "else")
+        return False
 def main():
-    """ entry point of the program. """
     login_win = Tk()
 
     Label(login_win, text="Username:").pack()
@@ -40,25 +39,21 @@ def main():
 
     def eval_user_and_pw():
         try:
-            if username_entry.get() and password_entry.get():
-                con = sqlite3.connect("mathe.db")
-                cur = con.cursor()
-                uname = username_entry.get()
-                passw = password_entry.get()
-                sql = f"""SELECT *
-                          FROM user
-                          WHERE username = '{uname}'
-                          AND passwort = '{passw}';"""
-                userpw = cur.execute(sql).fetchall()
-                con.commit()
-                if not userpw == " ":
-                    login_win.destroy()
-                    # wins.open_main_window()
-        except sqlite3.Error as exception_e:
-            print("Login fehlgeschlagen: " + str(exception_e))
+             if   not username_entry.get() == " " or username_entry.get() == 0 and password_entry.get() == " ":
+                    con = sqlite3.connect("mathe.db")
+                    cur = con.cursor()
+                    uname = username_entry.get()
+                    passw = password_entry.get()
+                    sql = f"SELECT * FROM user WHERE username = '{uname}' AND passwort = '{passw}';"
+                    userpw = cur.execute(sql).fetchall()
+                    con.commit()
+                    if not userpw == " ":
+                        login_win.destroy()
+                        wins.open_main_window()
+        except Exception:
+            print("Login fehlgeschlagen")
 
     def get_signup_win():
-        """ executes when user wants to sign up. """
 
         signup_win = Tk()
 
@@ -73,25 +68,22 @@ def main():
         Label(signup_win, text="Confirm Password:").pack()
         confirm_entry = Entry(signup_win, show="*", width=20)
         confirm_entry.pack()
-
         def do_singup():
-            if username_entry.get() and password_entry.get():
-                if callback_signup(pass_entry_signup.pack(),
-                                   confirm_entry.pack()):
+
+            if not username_entry.get() == " " or username_entry.get() == 0 and password_entry.get() == " ":
+                if pass_entry_signup.get() == confirm_entry.get():
                     con = sqlite3.connect("mathe.db")
                     cur = con.cursor()
-                    sql = f"""INSERT INTO user
-                              VALUES( \'{name_entry_siqnup.get()}\',
-                                      \'{pass_entry_signup.get()}\');"""
+                    sql = f"INSERT INTO user VALUES( \'{name_entry_siqnup.get()}\', \'{pass_entry_signup.get()}\');"
                     cur.execute(sql)
                     con.commit()
                     signup_win.destroy()
                     login_win.destroy()
-                    # wins.open_main_window()
+                    wins.open_main_window()
 
         Button(signup_win, text="Signup", command=do_singup).pack()
 
-        # login_win.destroy()
+        #login_win.destroy()
         signup_win.mainloop()
 
     Button(login_win, text="Login", command=eval_user_and_pw).pack()
@@ -100,6 +92,9 @@ def main():
     login_win.mainloop()
 
 
-# call main function
 if __name__ == "__main__":
+    try:
+        create_db()
+    except Exception:
+        print("Datenbank gibt es schon")
     main()
