@@ -231,18 +231,37 @@ def open_ganzrazionale_window() -> None:
 
     Label(win, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
     fEntry = Entry(win)
+    # labels & entries for bounds of x and y axis
+    Label(win, text="x von, bis: ").pack(side=TOP, anchor=NW)
+    x_von_bisEntry = Entry(win)
+    x_von_bisEntry.pack(side=TOP, anchor=NW)
+    Label(win, text="y von, bis: ").pack(side=TOP, anchor=NW)
+    y_von_bisEntry = Entry(win)
+    y_von_bisEntry.pack(side=TOP, anchor=NW)
+
+    def x_von_bis() -> tuple:
+        von_bis = __clean_str_of_char(x_von_bisEntry.get(), " ")
+        von_bis = von_bis.split(",")
+        return float(von_bis[0]), float(von_bis[1])
+
+    def y_von_bis() -> tuple:
+        von_bis = __clean_str_of_char(y_von_bisEntry.get(), " ")
+        von_bis = von_bis.split(",")
+        return float(von_bis[0]), float(von_bis[1])
+        
 
     def _get_help() -> None:
         _help = base_Tk(size="100x500", name="Hilfe - Ganzrationale Funktionen")
         Label(_help, text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\nAlso x^3 + 2x^2 + 1x + 0").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
 
+    def __clean_str_of_char(inp: str, ch) -> str:
+        outp = ""
+        for i in range(len(inp)):
+            if inp[i] != ch: outp += inp[i]
+        return outp
+
     def ganzrationale_berechnen() -> None:
-        def __clean_str_of_char(inp: str, ch) -> str:
-            outp = ""
-            for i in range(len(inp)):
-                if inp[i] != ch: outp += inp[i]
-            return outp
 
         # werte holen
         def get_term(term: str) -> tuple:
@@ -265,26 +284,24 @@ def open_ganzrazionale_window() -> None:
             terme = [t for t in dirty_terme if t != '']
             return terme
 
+        
         input_str = __clean_str_of_char(fEntry.get(), '')
         terme = get_zahlen(input_str)
         basis_exponent_paare = [get_term(t) for t in terme]
 
         # funktion welche ganzrationale funktionen berechnet
-        def ganzrationale_funktion(x: float) -> float:
-            ys = []
-            for b, e in basis_exponent_paare:
-                # appendiere die berechneten werte
-                ys.append(b * (x ** e))
-                # print out the value
-
-
-            return ys
 
         fig = plt.Figure(figsize=(10, 20), dpi=100)
         rg = np.arange(-100, 200, 0.2)
         ax = fig.add_subplot()
         ax.set_xlabel("x")
         ax.set_ylabel("y")
+        ax.set_title("Ganzrationale Funktion")
+        x_von, x_bis = x_von_bis()
+        ax.set_xlim(x_von, x_bis)
+        y_von, y_bis = y_von_bis()
+        ax.set_ylim(y_von, y_bis)
+
         ax.plot(rg, basis_exponent_paare[0][0] * (rg ** basis_exponent_paare[0][1]))
 
         cv = FigureCanvasTkAgg(fig, master=win)
