@@ -424,6 +424,12 @@ def open_verlauf_window() -> None:
     win.mainloop()
 
 
+def open_logout_window() -> None:
+    win = base_Tk(name="logout")
+    quit()
+    win.mainloop()
+
+
 def open_main_window() -> None:
     root = Tk()
 
@@ -460,7 +466,7 @@ def get_menu(root) -> Menu:
     _menu.add_cascade(label="Funktionen", menu=funktionen_menu)
 
     account_menu.add_command(label="Logout",
-                             command=open_linear_window)
+                             command=open_logout_window)
     account_menu.add_command(label="Verlauf",
                              command=open_verlauf_window)
     _menu.add_cascade(label="Account", menu=account_menu)
@@ -469,5 +475,7 @@ def get_menu(root) -> Menu:
                                  command=open_hilfe_window)
     _menu.add_cascade(label="Hilfe", menu=hilfe_menu)
     hilfe_menu.add_command(label="über",
+                                 command=open_ueber_window)
+    hilfe_menu.add_command(label="logout",
                                  command=open_ueber_window)
     return _menu
