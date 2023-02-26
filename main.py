@@ -7,20 +7,15 @@ import sqlite3
 
 
 def callback(input):
-    if input:
-        return True
-    
-    else:
+    return True if input else False
 
-        return False
 def callback_signup(passwd1, passwd2):
     if passwd1 == passwd2:
-        
         return True
 
     else:
-        print(input + "else")
         return False
+
 def main():
     login_win = Tk()
 
@@ -68,6 +63,7 @@ def main():
 
             if name_entry_siqnup.get() and confirm_entry.get()  and pass_entry_signup.get():
                 if callback_signup(pass_entry_signup.pack(), confirm_entry.pack()):
+                    # if pass_entry_signup.get() == confirm_entry.get():
                     con = sqlite3.connect("mathe.db")
                     cur = con.cursor()
                     sql = f"INSERT INTO user VALUES( \'{name_entry_siqnup.get()}\', \'{pass_entry_signup.get()}\');"
