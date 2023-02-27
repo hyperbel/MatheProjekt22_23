@@ -33,3 +33,4 @@ Mathe Abschluss schulprojekt in Python, zur Berechnung von Mathe Formeln
 * 11.01.2023: Typ Annotationen in windows.py
 * 18.01.2023: Ganzrationale Funktionen Klasse und regex
 * 25.01.2023: Ganzrationale Funktionen werden aufgemalt, ist aber falsch
+* 27.02.2023: Funktionsterm ist vom user eingebbar, fenster mit den Funktionen wurden gemerged
