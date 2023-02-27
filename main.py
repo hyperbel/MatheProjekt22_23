@@ -1,32 +1,63 @@
-# numpy, matplotlib, math, sympy, random, time, glob, queue, collections,
-# threading, re , tk
+"""
+Main datei im Projekt, was für das öffnen der anderen Fenster verantwortlich ist.
+"""
+import sqlite3
 from tkinter import Tk, Label, Entry, Button
 from database import create_db
 import windows as wins
-import sqlite3
 
 
 def callback(_input):
-    if input == 0:
+    """
+    Validiert input
+    """
+    if _input == 0:
         print(_input + "if1")
         return False
-
-    elif input == " ":
+    if _input == " ":
         print(_input + "elif")
         return False
 
-    else:
-        print(_input + "else")
-        return True
+    print(_input + "else")
+    return True
+
+
 def callback_signup(passwd1, passwd2):
+    """
+    Validiert input für signup
+    """
     if passwd1 == passwd2:
         print(passwd1 + "if1")
         return True
 
-    else:
-        print(passwd1 + "else")
-        return False
+    print(passwd1 + "else")
+    return False
+
+def eval_user_and_pw(username: str, password: str, win_to_destroy) -> bool:
+    try:
+        # guards for empty inputs
+        if username == " " :
+            raise Exception("Username is empty")
+        if username == 0:
+            raise Exception("Username is empty")
+        if password == " ":
+            raise Exception("Password is empty")
+
+        con = sqlite3.connect("mathe.db")
+        cur = con.cursor()
+        sql = f"SELECT * FROM user WHERE username = '{username}' AND passwort = '{password}';"
+        userpw = cur.execute(sql).fetchall()
+        con.commit()
+        if not userpw == " ":
+            win_to_destroy.destroy()
+            wins.open_main_window()
+    except Exception as error:
+        print(f"Login fehlgeschlagen: {error}")
+
+    return True
+
 def main():
+    """ was soll ich hier überhaupt schreiben? """
     login_win = Tk()
 
     Label(login_win, text="Username:").pack()
@@ -37,21 +68,6 @@ def main():
     password_entry = Entry(login_win, show="*", width=20)
     password_entry.pack()
 
-    def eval_user_and_pw():
-        try:
-             if   not username_entry.get() == " " or username_entry.get() == 0 and password_entry.get() == " ":
-                    con = sqlite3.connect("mathe.db")
-                    cur = con.cursor()
-                    uname = username_entry.get()
-                    passw = password_entry.get()
-                    sql = f"SELECT * FROM user WHERE username = '{uname}' AND passwort = '{passw}';"
-                    userpw = cur.execute(sql).fetchall()
-                    con.commit()
-                    if not userpw == " ":
-                        login_win.destroy()
-                        wins.open_main_window()
-        except Exception:
-            print("Login fehlgeschlagen")
 
     def get_signup_win():
 
@@ -69,24 +85,35 @@ def main():
         confirm_entry = Entry(signup_win, show="*", width=20)
         confirm_entry.pack()
         def do_singup():
+            # guards for empty inputs
+            if username_entry.get() == " ":
+                raise Exception("Username is empty")
+            if username_entry.get() == 0:
+                raise Exception("Username is empty")
+            if password_entry.get() == " ":
+                raise Exception("Password is empty")
 
-            if not username_entry.get() == " " or username_entry.get() == 0 and password_entry.get() == " ":
-                if pass_entry_signup.get() == confirm_entry.get():
-                    con = sqlite3.connect("mathe.db")
-                    cur = con.cursor()
-                    sql = f"INSERT INTO user VALUES( \'{name_entry_siqnup.get()}\', \'{pass_entry_signup.get()}\');"
-                    cur.execute(sql)
-                    con.commit()
-                    signup_win.destroy()
-                    login_win.destroy()
-                    wins.open_main_window()
+            if pass_entry_signup.get() == confirm_entry.get():
+                con = sqlite3.connect("mathe.db")
+                cur = con.cursor()
+                sql = f"INSERT INTO user\
+                        VALUES( \'{name_entry_siqnup.get()}\', \'{pass_entry_signup.get()}\');"
+                cur.execute(sql)
+                con.commit()
+                signup_win.destroy()
+                login_win.destroy()
+                wins.open_main_window()
 
         Button(signup_win, text="Signup", command=do_singup).pack()
 
-        #login_win.destroy()
         signup_win.mainloop()
 
-    Button(login_win, text="Login", command=eval_user_and_pw).pack()
+    Button(login_win,
+           text="Login",
+           command=lambda: eval_user_and_pw(username=username_entry.get(),
+                                            password=password_entry.get(),
+                                            win_to_destroy=login_win)
+           ).pack()
     Button(login_win, text="signup instead?", command=get_signup_win).pack()
 
     login_win.mainloop()

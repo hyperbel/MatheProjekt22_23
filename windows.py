@@ -1,21 +1,28 @@
+""" Fenster für die GUI """
+import re
 from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button, NW, NE
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
-import re
 
 # checks if input (usally from entry) is of type float
 def entry_is_float(inp):
+    """
+    Schaut, ob der gegebene input in einen float umgewandelt werden kann
+    """
     # magic regex for checking if input is float type
-    if type(inp) == float:
+    if isinstance(inp, float):
         return True
-    elif type(inp) != str:
+
+    if not isinstance(inp, str):
         print(type(inp))
+
     res = re.match(r"(\+|\-)?\d+(,\d+)?$", inp)
     return res is not None
 
 # basic window config
-def base_Tk(size="900x600", name="") -> Tk:
+def base_tk(size="900x600", name="") -> Tk:
+    """ basis window config """
     win = Tk()
     win.geometry(size)
     win.title(name)
@@ -23,52 +30,62 @@ def base_Tk(size="900x600", name="") -> Tk:
 
 
 def zoomin(position):
-	newposition = position -5
-	print("zoomin")
+    """ zoomt rein, muss noch implementiert werden """
+    newposition = position -5
+    print("zoomin")
 
 
 def zoomout(position):
-	newposition = position + 5
-	print("zoomout")
+    """ zoomt raus, muss noch implementiert werden """
+    newposition = position + 5
+    print("zoomout")
 
 
 def term_eingeben_window() -> None:
-    win = base_Tk(name="Term/e eingeben")
+    """ Fenster, wo die user ihre funktion eingeben können """
+    win = base_tk(name="Term/e eingeben")
 
     Label(win, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
-    fEntry = Entry(win)
+    f_entry = Entry(win)
     # labels & entries for bounds of x and y axis
     Label(win, text="x von, bis: ").pack(side=TOP, anchor=NW)
-    x_von_bisEntry = Entry(win)
-    x_von_bisEntry.pack(side=TOP, anchor=NW)
+    x_von_bis_entry = Entry(win)
+    x_von_bis_entry.pack(side=TOP, anchor=NW)
     Label(win, text="y von, bis: ").pack(side=TOP, anchor=NW)
-    y_von_bisEntry = Entry(win)
-    y_von_bisEntry.pack(side=TOP, anchor=NW)
+    y_von_bis_entry = Entry(win)
+    y_von_bis_entry.pack(side=TOP, anchor=NW)
 
 
     def von_bis(get_from: str) -> tuple[float,float]:
+        """
+        holt von und bis werde aus einem string, also hier aus den entries
+        """
         input_bereinigt = leerzeichen_raus_machen(get_from)
         von, bis = input_bereinigt.split(",")
         return float(von), float(bis)
 
 
     def _get_help() -> None:
-        _help = base_Tk(size="100x500", name="Hilfe - Funktionen")
-        Label(_help, text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\nAlso z.B.: 1x^3 + 2x^2 + 1x + 0\nWenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!").pack()
+        """ ruft das hilfefenster auf """
+        _help = base_tk(size="100x500", name="Hilfe - Funktionen")
+        Label(_help,
+        text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\n\
+                Also z.B.: 1x^3 + 2x^2 + 1x + 0\n\
+                Wenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
 
     def leerzeichen_raus_machen(inp: str) -> str:
+        """ entfernt alle leerzeichen aus einem string """
         outp = ""
-        for i in range(len(inp)):
-            if inp[i] != " ": outp += inp[i]
+        # enumeriert über input mit (index, wert)
+        for _, character in enumerate(inp):
+            if character != " ": outp += character
         return outp
 
     def funktion_berechnen() -> None:
+        """ holt werte und berechnet die funktion """
         # werte holen
         def get_term(term: str) -> tuple:
-            # wenn ein x vorne ist, muss es mal 1 multipliziert werden, damit der code unten funktioniert
-            if term[0] == 'x':
-                term = '1' + term
             # wenn kein x vorhanden ist, dann ist es ein konstanter term
             if 'x' not in term:
                 return (int(term), 0)
@@ -79,9 +96,10 @@ def term_eingeben_window() -> None:
             else:
                 # returnt basis und exponent
                 return (int(term[:term.index('x')]), int(term[term.index('^')+1:]))
-        
+
         # gibt term aus, vorzeichen gehören zu den darauf folgenden termen
         def get_zahlen(inp: str) -> list:
+            """ holt wichtige zahlen aus dem string """
             # regex magie um alle zahlen zu finden
             dirty_terme = re.findall(r"[+-]?\d*x?\^?\d*", inp)
 
@@ -90,14 +108,15 @@ def term_eingeben_window() -> None:
             return terme
 
         def array_von_leeren_strings_befreien(arr: str) -> str:
+            """ entfernt alle leeren strings aus einem array """
             output_string = ""
             # schaut durch alle items im array und filtert alle leeren strings raus
             for a in arr:
                 if a != '': output_string += a
             return output_string
-        
+
         # holt input und bereinigt ihn
-        input_str = array_von_leeren_strings_befreien(fEntry.get())
+        input_str = array_von_leeren_strings_befreien(f_entry.get())
         terme = get_zahlen(input_str)
         basis_exponent_paare = [get_term(t) for t in terme]
 
@@ -107,22 +126,21 @@ def term_eingeben_window() -> None:
         ax = fig.add_subplot()
         ax.set_xlabel("x")
         ax.set_ylabel("y")
-        ax.set_title("Ganzrationale Funktion")
-        x_von, x_bis = von_bis(x_von_bisEntry.get())
+        ax.set_title("Funktionsgraph")
+        x_von, x_bis = von_bis(x_von_bis_entry.get())
         ax.set_xlim(x_von, x_bis)
-        y_von, y_bis = von_bis(y_von_bisEntry.get())
+        y_von, y_bis = von_bis(y_von_bis_entry.get())
         ax.set_ylim(y_von, y_bis)
 
-        # funktion die aus den basis_exponen_paare und einem input einen numpy array berechnet
+        # berechnet das richtig dismal lol. ich bin so dumm
         def f(x: float) -> float:
-            print(x)
+            """ berechnet die funktion """
             y = 0
             for b, e in basis_exponent_paare:
                 y += b * (x ** e)
             return y
 
         ax.plot(rg, f(rg))
-        #ax.plot(rg, basis_exponent_paare[0][0] * (rg ** basis_exponent_paare[0][1]))
 
         cv = FigureCanvasTkAgg(fig, master=win)
         cv.draw()
@@ -132,19 +150,21 @@ def term_eingeben_window() -> None:
 
     _b = Button(win, text="Los gehts!", command=funktion_berechnen)
     Button(win, text="?", command=_get_help).pack(side=TOP, anchor=NE)
-    
-    fEntry.pack(side=TOP, anchor=NW)
+
+    f_entry.pack(side=TOP, anchor=NW)
     _b.pack(side=TOP, anchor=NW)
     win.mainloop()
 
 
 def open_trigonometrische_window() -> None:
-    win = base_Tk(name="Trigonometrische Funktionen Rechner")
+    """ Fenster für trigonometrische funktionen """
+    win = base_tk(name="Trigonometrische Funktionen Rechner")
     win.mainloop()
 
 
 def open_exponential_window() -> None:
-    win = base_Tk(name="Exponential Funktionen Rechner")
+    """ Fenster für exponentielle funktionen """
+    win = base_tk(name="Exponential Funktionen Rechner")
 
     # labels und entries
     von_label = Label(win, text="anfang: ")
@@ -173,7 +193,7 @@ def open_exponential_window() -> None:
 
     # function in function to be used on button click
     def exponential_ausrechnen() -> None:
-        import math
+        """ berechnet die funktion """
         # werte holen
         von = float(von_entry.get())
         bis = float(bis_entry.get())
@@ -224,31 +244,37 @@ def open_exponential_window() -> None:
 
 
 def open_defferenzial_window() -> None:
-    win = base_Tk(name="Einstieg Diefferenzialrechnung")
+    """ Fenster für defferenzial funktionen """
+    win = base_tk(name="Einstieg Diefferenzialrechnung")
     win.mainloop()
 
 
 def open_integralrechnung_window() -> None:
-    win = base_Tk(name="Integralrechnung")
+    """ Fenster für integralrechnung funktionen """
+    win = base_tk(name="Integralrechnung")
     win.mainloop()
 
 
 def open_hilfe_window() -> None:
-    win = base_Tk(name="hilfe")
+    """ Fenster für Hilfe zum Programm """
+    win = base_tk(name="hilfe")
     win.mainloop()
 
 
 def open_ueber_window() -> None:
-    win = base_Tk(name="über")
+    """ Fenster für Informationen über das Programm """
+    win = base_tk(name="über")
     win.mainloop()
 
 
 def open_verlauf_window() -> None:
-    win = base_Tk(name="verlauf")
+    """ Fenster für den Verlauf """
+    win = base_tk(name="verlauf")
     win.mainloop()
 
 
 def open_main_window() -> None:
+    """ Hauptfenster """
     root = Tk()
 
     menu = get_menu(root)
@@ -260,6 +286,7 @@ def open_main_window() -> None:
 
 # generiert main menu fuer das root win
 def get_menu(root) -> Menu:
+    """ generiert main menu für das root win """
     _menu = Menu(root, tearoff=0)
     funktionen_menu = Menu(_menu, tearoff=0)
     account_menu = Menu(_menu, tearoff=0)
@@ -278,7 +305,7 @@ def get_menu(root) -> Menu:
     _menu.add_cascade(label="Funktionen", menu=funktionen_menu)
 
     account_menu.add_command(label="Logout",
-                             command=lambda: root.destroy())
+                             command=root.destroy)
     account_menu.add_command(label="Verlauf",
                              command=open_verlauf_window)
     _menu.add_cascade(label="Account", menu=account_menu)
