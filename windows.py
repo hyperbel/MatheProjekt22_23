@@ -15,7 +15,6 @@ def entry_is_float(inp):
     res = re.match(r"(\+|\-)?\d+(,\d+)?$", inp)
     return res is not None
 
-
 # basic window config
 def base_Tk(size="900x600", name="") -> Tk:
     win = Tk()
@@ -252,7 +251,7 @@ def open_ganzrazionale_window() -> None:
 
     def _get_help() -> None:
         _help = base_Tk(size="100x500", name="Hilfe - Ganzrationale Funktionen")
-        Label(_help, text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\nAlso x^3 + 2x^2 + 1x + 0").pack()
+        Label(_help, text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\nAlso 1x^3 + 2x^2 + 1x + 0\nWenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
 
     def __clean_str_of_char(inp: str, ch) -> str:
