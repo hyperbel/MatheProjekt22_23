@@ -1,5 +1,4 @@
-from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button, NW, SW, NE
-from tkinter import BOTTOM
+from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button, NW, NE
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
@@ -32,6 +31,7 @@ def zoomout(position):
 	newposition = position + 5
 	print("zoomout")
 
+
 def term_eingeben_window() -> None:
     win = base_Tk(name="Term/e eingeben")
 
@@ -45,32 +45,30 @@ def term_eingeben_window() -> None:
     y_von_bisEntry = Entry(win)
     y_von_bisEntry.pack(side=TOP, anchor=NW)
 
-    def x_von_bis() -> tuple:
-        von_bis = __clean_str_of_char(x_von_bisEntry.get(), " ")
-        von_bis = von_bis.split(",")
-        return float(von_bis[0]), float(von_bis[1])
 
-    def y_von_bis() -> tuple:
-        von_bis = __clean_str_of_char(y_von_bisEntry.get(), " ")
-        von_bis = von_bis.split(",")
-        return float(von_bis[0]), float(von_bis[1])
-        
+    def von_bis(get_from: str) -> tuple[float,float]:
+        input_bereinigt = leerzeichen_raus_machen(get_from)
+        von, bis = input_bereinigt.split(",")
+        return float(von), float(bis)
+
 
     def _get_help() -> None:
         _help = base_Tk(size="100x500", name="Hilfe - Funktionen")
         Label(_help, text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\nAlso z.B.: 1x^3 + 2x^2 + 1x + 0\nWenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
 
-    def __clean_str_of_char(inp: str, ch) -> str:
+    def leerzeichen_raus_machen(inp: str) -> str:
         outp = ""
         for i in range(len(inp)):
-            if inp[i] != ch: outp += inp[i]
+            if inp[i] != " ": outp += inp[i]
         return outp
 
     def funktion_berechnen() -> None:
-
         # werte holen
         def get_term(term: str) -> tuple:
+            # wenn ein x vorne ist, muss es mal 1 multipliziert werden, damit der code unten funktioniert
+            if term[0] == 'x':
+                term = '1' + term
             # wenn kein x vorhanden ist, dann ist es ein konstanter term
             if 'x' not in term:
                 return (int(term), 0)
@@ -84,31 +82,47 @@ def term_eingeben_window() -> None:
         
         # gibt term aus, vorzeichen gehören zu den darauf folgenden termen
         def get_zahlen(inp: str) -> list:
-            # regex magic for finding terms
+            # regex magie um alle zahlen zu finden
             dirty_terme = re.findall(r"[+-]?\d*x?\^?\d*", inp)
 
+            # entfernt alle leeren strings
             terme = [t for t in dirty_terme if t != '']
             return terme
 
+        def array_von_leeren_strings_befreien(arr: str) -> str:
+            output_string = ""
+            # schaut durch alle items im array und filtert alle leeren strings raus
+            for a in arr:
+                if a != '': output_string += a
+            return output_string
         
-        input_str = __clean_str_of_char(fEntry.get(), '')
+        # holt input und bereinigt ihn
+        input_str = array_von_leeren_strings_befreien(fEntry.get())
         terme = get_zahlen(input_str)
         basis_exponent_paare = [get_term(t) for t in terme]
 
-        # funktion welche ganzrationale funktionen berechnet
-
+        # erstellt plot
         fig = plt.Figure(figsize=(10, 20), dpi=100)
         rg = np.arange(-100, 200, 0.2)
         ax = fig.add_subplot()
         ax.set_xlabel("x")
         ax.set_ylabel("y")
         ax.set_title("Ganzrationale Funktion")
-        x_von, x_bis = x_von_bis()
+        x_von, x_bis = von_bis(x_von_bisEntry.get())
         ax.set_xlim(x_von, x_bis)
-        y_von, y_bis = y_von_bis()
+        y_von, y_bis = von_bis(y_von_bisEntry.get())
         ax.set_ylim(y_von, y_bis)
 
-        ax.plot(rg, basis_exponent_paare[0][0] * (rg ** basis_exponent_paare[0][1]))
+        # funktion die aus den basis_exponen_paare und einem input einen numpy array berechnet
+        def f(x: float) -> float:
+            print(x)
+            y = 0
+            for b, e in basis_exponent_paare:
+                y += b * (x ** e)
+            return y
+
+        ax.plot(rg, f(rg))
+        #ax.plot(rg, basis_exponent_paare[0][0] * (rg ** basis_exponent_paare[0][1]))
 
         cv = FigureCanvasTkAgg(fig, master=win)
         cv.draw()
@@ -129,7 +143,6 @@ def open_trigonometrische_window() -> None:
     win.mainloop()
 
 
-# f(x) = a ^ x
 def open_exponential_window() -> None:
     win = base_Tk(name="Exponential Funktionen Rechner")
 
