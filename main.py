@@ -6,25 +6,25 @@ import windows as wins
 import sqlite3
 
 
-def callback(input):
+def callback(_input):
     if input == 0:
-        print(input + "if1")
+        print(_input + "if1")
         return False
 
     elif input == " ":
-        print(input + "elif")
+        print(_input + "elif")
         return False
 
     else:
-        print(input + "else")
+        print(_input + "else")
         return True
 def callback_signup(passwd1, passwd2):
     if passwd1 == passwd2:
-        print(input + "if1")
+        print(passwd1 + "if1")
         return True
 
     else:
-        print(input + "else")
+        print(passwd1 + "else")
         return False
 def main():
     login_win = Tk()
