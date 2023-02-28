@@ -1,4 +1,6 @@
-""" Fenster für die GUI """
+""" 
+Fenster für die GUI 
+"""
 import re
 from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button, NW, NE
 import matplotlib.pyplot as plt
