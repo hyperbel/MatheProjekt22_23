@@ -67,7 +67,7 @@ def term_eingeben_window() -> None:
 
     def _get_help() -> None:
         """ ruft das hilfefenster auf """
-        _help = base_tk(size="100x500", name="Hilfe - Funktionen")
+        _help = base_tk(size="800x500", name="Hilfe - Funktionen")
         Label(_help,
         text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\n\
                 Also z.B.: 1x^3 + 2x^2 + 1x + 0\n\
@@ -140,7 +140,9 @@ def term_eingeben_window() -> None:
                 y += b * (x ** e)
             return y
 
-        ax.plot(rg, f(rg))
+        ax.plot(rg, f(rg), label="linie")
+        # setzt eine Legende in die obere rechte Ecke
+        ax.legend(loc="upper right")
 
         cv = FigureCanvasTkAgg(fig, master=win)
         cv.draw()
