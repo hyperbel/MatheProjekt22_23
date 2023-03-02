@@ -1,4 +1,4 @@
-""" 
+"""@package windows 
 Fenster für die GUI 
 """
 import re
@@ -11,6 +11,10 @@ import numpy as np
 def entry_is_float(inp):
     """
     Schaut, ob der gegebene input in einen float umgewandelt werden kann
+    Parameters:
+    inp: Die Variable, bei der geschaut werden soll, ob es ein float ist.
+    Returns:
+    True, wenn es ein float ist, sonst False.
     """
     # magic regex for checking if input is float type
     if isinstance(inp, float):
