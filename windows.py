@@ -27,7 +27,15 @@ def entry_is_float(inp):
 
 # basic window config
 def base_tk(size="900x600", name="") -> Tk:
-    """ basis window config """
+    """basis window config 
+    :param size: Größe des Fensters
+    :type size: str
+    :param name: Name des Fensters
+    :type name: str
+
+    :return: das Fenster
+    :rtype: Tk
+    """
     win = Tk()
     win.geometry(size)
     win.title(name)
@@ -47,7 +55,10 @@ def zoomout(position):
 
 
 def term_eingeben_window() -> None:
-    """ Fenster, wo die user ihre funktion eingeben können """
+    """
+    Fenster, wo die user ihre funktion eingeben können
+    :return: None
+    """
     win = base_tk(name="Term/e eingeben")
 
     Label(win, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
