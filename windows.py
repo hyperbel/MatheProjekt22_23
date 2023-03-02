@@ -10,12 +10,10 @@ import sqlite3
 
 # checks if input (usally from entry) is of type float
 def entry_is_float(inp):
-    """
-    Schaut, ob der gegebene input in einen float umgewandelt werden kann
-    Parameters:
-    inp: Die Variable, bei der geschaut werden soll, ob es ein float ist.
-    Returns:
-    True, wenn es ein float ist, sonst False.
+    """Schaut, ob der gegebene input in einen float umgewandelt werden kann
+    :param inp: der input, der geprüft werden soll
+    :return: True, wenn der input in einen float umgewandelt werden kann, sonst False
+    :rtype: bool
     """
     # magic regex for checking if input is float type
     if isinstance(inp, float):
