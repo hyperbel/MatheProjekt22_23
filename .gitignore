@@ -134,3 +134,6 @@ result-*
 
 # pycharm generated test main file
 test_main.py
+
+
+*.db
