@@ -49,6 +49,7 @@ def term_eingeben_window() -> None:
 
     Label(win, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
     f_entry = Entry(win)
+    f_entry.pack(side=TOP, anchor=NW)
     # labels & entries for bounds of x and y axis
     Label(win, text="x von, bis: ").pack(side=TOP, anchor=NW)
     x_von_bis_entry = Entry(win)
@@ -56,37 +57,6 @@ def term_eingeben_window() -> None:
     Label(win, text="y von, bis: ").pack(side=TOP, anchor=NW)
     y_von_bis_entry = Entry(win)
     y_von_bis_entry.pack(side=TOP, anchor=NW)
-
-    # führe eine kurvendiskussion durch
-    def kurvendiskussion() -> None:
-        """ führt eine kurvendiskussion durch """
-        # holt werte aus den entries
-        x_von, x_bis = von_bis(x_von_bis_entry.get())
-        y_von, y_bis = von_bis(y_von_bis_entry.get())
-        # erstellt plot
-        fig = plt.Figure(figsize=(10, 20), dpi=100)
-        ax = fig.add_subplot(111)
-        ax.grid()
-        ax.set_xlim(x_von, x_bis)
-        ax.set_ylim(y_von, y_bis)
-        # holt input und bereinigt ihn
-        input_str = leerzeichen_raus_machen(f_entry.get())
-        terme = get_zahlen(input_str)
-        basis_exponent_paare = [get_term(t) for t in terme]
-        # erstellt plot
-        x = np.linspace(x_von, x_bis, 1000)
-        y = 0
-        for basis, exponent in basis_exponent_paare:
-            y += basis * (x ** exponent)
-        ax.plot(x, y)
-        # erstellt canvas
-        canvas = FigureCanvasTkAgg(fig, master=win)
-        canvas.draw()
-        canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
-        # erstellt toolbar
-        toolbar = NavigationToolbar2Tk(canvas, win)
-        toolbar.update()
-        canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
 
     def von_bis(get_from: str) -> tuple[float,float]:
         """
@@ -185,7 +155,6 @@ def term_eingeben_window() -> None:
     _b = Button(win, text="Los gehts!", command=funktion_berechnen)
     Button(win, text="?", command=_get_help).pack(side=TOP, anchor=NE)
 
-    f_entry.pack(side=TOP, anchor=NW)
     _b.pack(side=TOP, anchor=NW)
     win.mainloop()
 
