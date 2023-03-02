@@ -6,6 +6,7 @@ from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button, NW, NE
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
+import sqlite3
 
 # checks if input (usally from entry) is of type float
 def entry_is_float(inp):
@@ -277,6 +278,12 @@ def open_ueber_window() -> None:
 def open_verlauf_window() -> None:
     """ Fenster für den Verlauf """
     win = base_tk(name="verlauf")
+    con = sqlite3.connect("mathe.db")
+    cur = con.cursor()
+    userid=1
+    sql = f"SELECT funktion from funktionen WHERE userid=\'{userid}\';"
+    ergebnis = cur.execute(sql).fetchall()
+    print (ergebnis)
     win.mainloop()
 
 
