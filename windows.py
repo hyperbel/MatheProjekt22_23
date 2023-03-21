@@ -72,9 +72,13 @@ def term_eingeben_window() -> None:
     y_von_bis_entry = Entry(win)
     y_von_bis_entry.pack(side=TOP, anchor=NW)
 
-    def von_bis(get_from: str) -> tuple[float,float]:
+    def von_bis(get_from: str) -> tuple[float, float]:
         """
-        holt von und bis werde aus einem string, also hier aus den entries
+        Holt von und bis werde aus einem string (von, bis)
+        :param get_from: der string, aus dem die limits geholt werden sollen
+        :type get_from: str
+        :return: die Werte aus dem String
+        :rtype: tuple[float, float]
         """
         input_bereinigt = leerzeichen_raus_machen(get_from)
         von, bis = input_bereinigt.split(",")
@@ -104,14 +108,14 @@ def term_eingeben_window() -> None:
         def get_term(term: str) -> tuple:
             # wenn kein x vorhanden ist, dann ist es ein konstanter term
             if 'x' not in term:
-                return (int(term), 0)
+                return int(term), 0
             # wenn kein exponent vorhanden ist, dann ist es ein linearer term
             elif '^' not in term:
-                return (int(term[:-1]), 1)
+                return int(term[:-1]), 1
             # sonst ist es ein term mit exponent
             else:
-                # returnt basis und exponent
-                return (int(term[:term.index('x')]), int(term[term.index('^')+1:]))
+                # returned basis und exponent
+                return int(term[:term.index('x')]), int(term[term.index('^')+1:])
 
         # gibt term aus, vorzeichen gehören zu den darauf folgenden termen
         def get_zahlen(inp: str) -> list:
@@ -131,10 +135,18 @@ def term_eingeben_window() -> None:
                 if a != '': output_string += a
             return output_string
 
+        def ableitungs_generator(basis: list[tuple[float, float]]) -> list[tuple[float, float]]:
+            ableitung = []
+            for basis, exp in basis:
+                ableitung.append(basis * exp, exp - 1)
+            return ableitung
+
         # holt input und bereinigt ihn
         input_str = array_von_leeren_strings_befreien(f_entry.get())
         terme = get_zahlen(input_str)
         basis_exponent_paare = [get_term(t) for t in terme]
+
+
 
         # erstellt plot
         fig = plt.Figure(figsize=(10, 20), dpi=100)
