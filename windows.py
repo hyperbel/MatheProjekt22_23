@@ -2,7 +2,7 @@
 Fenster für die GUI 
 """
 import re
-from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button, NW, NE, Listbox, LEFT, END, Scrollbar, RIGHT
+from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button, NW, NE, Listbox, LEFT, END, Scrollbar, RIGHT, Frame
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
@@ -425,15 +425,23 @@ def open_main_window() -> None:
     root.config(menu=menu)
     root.title("Mathe-Funktionen-Rechner 2022/23")
     root.geometry("350x345")
-    # add Listbox to root
-    listbox = Listbox(root, width=20, height=100)
+    
+    # create frame for listbox and scrollbar
+    frame = Frame(root)
+
+    listbox = Listbox(frame, width=20, height=100)
     listbox.pack(side=LEFT, fill=BOTH, expand=False)
+
+    scrollbar = Scrollbar(frame)
+    scrollbar.pack(side=RIGHT, fill=BOTH)
+
+    frame.pack(side=LEFT, fill=BOTH, expand=False)
+
+    # add Listbox to root
     # add random items to listbox
     for i in range(100):
         listbox.insert(END, f"item {i}")
     # add scrollbar to root
-    scrollbar = Scrollbar(root)
-    scrollbar.pack(side=RIGHT, fill=BOTH)
     # add scrollbar to listbox
     listbox.config(yscrollcommand=scrollbar.set)
     scrollbar.config(command=listbox.yview)
