@@ -206,6 +206,88 @@ def term_eingeben_window() -> None:
 def open_trigonometrische_window() -> None:
     """ Fenster für trigonometrische funktionen """
     win = base_tk(name="Trigonometrische Funktionen Rechner")
+
+    # labels und entries
+    von_label =  Label(win, text="Von: ")
+    von_entry = Entry(win)
+    bis_label = Label(win, text="Bis: ")
+    bis_entry = Entry(win)
+    a_label = Label(win, text="a: ")
+    a_entry = Entry(win)
+    x_label = Label(win, text="x: ")
+    x_entry = Entry(win)
+    x_achse_label = Label(win, text="x-Achsenbeschriftung:")
+    x_achse_entry = Entry(win)
+    y_achse_label = Label(win, text="y-Achsenbeschriftung:")
+    y_achse_entry = Entry(win)
+
+    # figure for matplotlib to plot lines on
+    fig = plt.Figure(figsize=(10, 10), dpi=100)
+
+    # canvas-like thing for actually drawing
+    ax = fig.add_subplot()
+
+    # range of numhers, see numpy.org for doc on arange
+    # put canvas onto tk window
+    cv = FigureCanvasTkAgg(fig, master=win)
+    cv.draw()
+
+    def trigonometrische_ausrechnen():
+        def grad_in_bogen(Awert):
+            return (Awert / 180) * math.pi
+
+        def bogen_in_grad(Xwert):
+            return (x / math.pi ) * 180
+
+        von = float(von_entry.get())
+        bis = float(bis_entry.get())
+        a = float(a_entry.get())
+
+         # checken ob werte floats sind
+        assert entry_is_float(von)
+        assert entry_is_float(bis)
+        assert entry_is_float(a)
+        # assert entry_is_float(x)
+
+        x = np.arange(0,4*np.pi,0.1)   # start,stop,step
+        y = np.sin(x)
+
+         # range mit von - bis
+        rg = np.arange(von, bis, 0.2)
+
+        # setze namen der achsen
+        ax.set_xlabel(x_achse_entry.get())
+        ax.set_ylabel(y_achse_entry.get())
+
+        plt.plot(x,y)
+        cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+
+
+        print("lol")
+
+
+    def trigonometische_help() -> None:
+        pass
+
+      # display everything
+    von_label.pack(side=TOP, anchor=NW)
+    von_entry.pack(side=TOP, anchor=NW)
+    bis_label.pack(side=TOP, anchor=NW)
+    bis_entry.pack(side=TOP, anchor=NW)
+    a_label.pack(side=TOP, anchor=NW)
+    a_entry.pack(side=TOP, anchor=NW)
+    x_label.pack(side=TOP, anchor=NW)
+    x_entry.pack(side=TOP, anchor=NW)
+    x_achse_label.pack(side=TOP, anchor=NW)
+    x_achse_entry.pack(side=TOP, anchor=NW)
+    y_achse_label.pack(side=TOP, anchor=NW)
+    y_achse_entry.pack(side=TOP, anchor=NW)
+
+    # use function declared earlier to compute stuff
+    Button(win, command=trigonometrische_ausrechnen, text="Anzeigen").pack(side=TOP,
+                                                                 anchor=NW)
+    Button(win, text="?", command=trigonometische_help).pack(side=TOP, anchor=NE)
+
     win.mainloop()
 
 
