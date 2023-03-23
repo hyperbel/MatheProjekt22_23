@@ -1,6 +1,7 @@
 """
 Main datei im Projekt, was für das öffnen der anderen Fenster verantwortlich ist.
 """
+import time
 import sqlite3
 from tkinter import Tk, Label, Entry, Button
 from database import create_db
@@ -34,6 +35,17 @@ def callback_signup(passwd1, passwd2):
     return False
 
 def eval_user_and_pw(username: str, password: str, win_to_destroy) -> bool:
+    """ Validiert input für login
+    :param username: Username
+    :type username: str
+    :param password: Passwort
+    :type password: str
+    :param win_to_destroy: Fenster das geschlossen werden soll
+    :type win_to_destroy: Tk
+
+    :return: True wenn erfolgreich
+    :rtype: bool
+    """
     try:
         # guards for empty inputs
         if username == " " :
@@ -66,7 +78,6 @@ def main():
 
     splash.eval('tk::PlaceWindow . center')
     splash.update()
-    import time
     time.sleep(2)
     splash.destroy()
 

@@ -1,12 +1,13 @@
-"""@package windows 
-Fenster für die GUI 
+"""@package windows
+Fenster für die GUI
 """
 import re
-from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button, NW, NE, Listbox, LEFT, END, Scrollbar, RIGHT, Frame
+import sqlite3
+from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button
+from tkinter import NW, NE, Listbox, LEFT, END, Scrollbar, RIGHT, Frame
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
-import sqlite3
 
 # checks if input (usally from entry) is of type float
 def entry_is_float(inp):
@@ -27,7 +28,7 @@ def entry_is_float(inp):
 
 # basic window config
 def base_tk(size="900x600", name="") -> Tk:
-    """basis window config 
+    """basis window config
     :param size: Größe des Fensters
     :type size: str
     :param name: Name des Fensters
@@ -52,16 +53,6 @@ def zoomout(position):
     """ zoomt raus, muss noch implementiert werden """
     newposition = position + 5
     print("zoomout")
-
-
-def term_eingeben_window() -> None:
-    """
-    Fenster, wo die user ihre funktion eingeben können
-    :return: None
-    """
-    win = base_tk(name="Term/e eingeben")
-
-
 
 def open_trigonometrische_window() -> None:
     """ Fenster für trigonometrische funktionen """
@@ -89,8 +80,8 @@ def open_trigonometrische_window() -> None:
 
     # range of numhers, see numpy.org for doc on arange
     # put canvas onto tk window
-    cv = FigureCanvasTkAgg(fig, master=win)
-    cv.draw()
+    canvas = FigureCanvasTkAgg(fig, master=win)
+    canvas.draw()
 
     def trigonometrische_ausrechnen():
         def grad_in_bogen(Awert):
@@ -113,14 +104,14 @@ def open_trigonometrische_window() -> None:
         y = np.sin(x)
 
          # range mit von - bis
-        rg = np.arange(von, bis, 0.2)
+        x_werte = np.arange(von, bis, 0.2)
 
         # setze namen der achsen
         ax.set_xlabel(x_achse_entry.get())
         ax.set_ylabel(y_achse_entry.get())
 
         plt.plot(x,y)
-        cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+        canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
 
 
         print("lol")
@@ -177,8 +168,8 @@ def open_exponential_window() -> None:
 
     # range of numhers, see numpy.org for doc on arange
     # put canvas onto tk window
-    cv = FigureCanvasTkAgg(fig, master=win)
-    cv.draw()
+    canvas = FigureCanvasTkAgg(fig, master=win)
+    canvas.draw()
 
     # function in function to be used on button click
     def exponential_ausrechnen() -> None:
@@ -196,16 +187,16 @@ def open_exponential_window() -> None:
         # assert entry_is_float(x)
 
         # range mit von - bis
-        rg = np.arange(von, bis, 0.2)
+        x_werte = np.arange(von, bis, 0.2)
 
         # setze namen der achsen
         ax.set_xlabel(x_achse_entry.get())
         ax.set_ylabel(y_achse_entry.get())
 
         # lineare funktion plotten
-        ax.plot(rg, a ** rg)
+        ax.plot(x_werte, a ** x_werte)
 
-        cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+        canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
 
     def exponential_help() -> None:
         pass
@@ -239,7 +230,9 @@ def open_integralrechnung_window() -> None:
 def open_hilfe_window() -> None:
     """ Fenster für Hilfe zum Programm """
     win = base_tk(name="hilfe")
-    hilfe_label =  Label(win, text="Wenn du etwas nicht verstehst, dann bekommst du bei jedem Fenster individuell Hilfe")
+    hilfe_label =  Label(win,
+                         text="Wenn du etwas nicht verstehst,\
+                               dann bekommst du bei jedem Fenster individuell Hilfe")
     hilfe_label.pack(side=TOP, anchor=NW)
     win.mainloop()
 
@@ -248,7 +241,9 @@ def open_ueber_window() -> None:
     """ Fenster für Informationen über das Programm """
     win = base_tk(name="über")
     hilfe_label =  Label(win, text="Diese Software wurde für den Informatik Untericht entwickelt")
-    hilfe2_label =  Label(win, text="Ziel ist es das der User Mathematische Funktionen ausgerechnet und erklärt bekommt")
+    hilfe2_label =  Label(win,
+                          text="Ziel ist es das der User Mathematische Funktionen\
+                                ausgerechnet und erklärt bekommt")
     hilfe3_label =  Label(win, text="Version: 0.1")
     hilfe4_label =  Label(win, text="Lizenz: GPL_2.0")
     hilfe5_label =  Label(win, text="Autor:Loste Kinder ")
@@ -276,6 +271,76 @@ def get_verlauf(userid):
     win.mainloop()
 
 
+def leerzeichen_raus_machen(inp: str) -> str:
+    """ entfernt alle leerzeichen aus einem string """
+    outp = ""
+    # enumeriert über input mit (index, wert)
+    for _, character in enumerate(inp):
+        if character != " ": outp += character
+    return outp
+
+
+def get_term(term: str) -> tuple:
+    # wenn kein x vorhanden ist, dann ist es ein konstanter term
+    if 'x' not in term:
+        return int(term), 0
+    # wenn kein exponent vorhanden ist, dann ist es ein linearer term
+    elif '^' not in term:
+        return int(term[:-1]), 1
+    # sonst ist es ein term mit exponent
+    else:
+        # returned basis und exponent
+        return int(term[:term.index('x')]), int(term[term.index('^')+1:])
+
+
+def array_von_leeren_strings_befreien(arr: str) -> str:
+    """entfernt alle leeren strings aus einem array """
+    output_string = ""
+    # schaut durch alle items im array und filtert alle leeren strings raus
+    for a in arr:
+        if a != '': output_string += a
+    return output_string
+
+
+def von_bis(get_from: str) -> tuple[float, float]:
+    """
+    Holt von und bis werde aus einem string (von, bis)
+    :param get_from: der string, aus dem die limits geholt werden sollen
+    :type get_from: str
+    :return: die Werte aus dem String
+    :rtype: tuple[float, float]
+    """
+    input_bereinigt = leerzeichen_raus_machen(get_from)
+    von, bis = input_bereinigt.split(",")
+    return float(von), float(bis)
+
+
+def ableitungs_generator(basis: list[tuple[float, float]]) -> list[tuple[float, float]]:
+    ableitung = []
+    for b, exp in basis:
+        ableitung.append((b * exp, exp - 1))
+    return ableitung
+
+
+def verlauf_generator(parent):
+    frame = Frame(parent)
+    listbox = Listbox(frame, width=20, height=100)
+    listbox.pack(side=LEFT, fill=BOTH, expand=False)
+
+    # add random items to listbox
+    for i in range(100):
+        listbox.insert(END, f"item {i}")
+
+    scrollbar = Scrollbar(frame)
+
+    listbox.config(yscrollcommand=scrollbar.set)
+    scrollbar.config(command=listbox.yview)
+
+    scrollbar.pack(side=RIGHT, fill=BOTH)
+
+    return frame
+
+
 def open_main_window() -> None:
     """ Hauptfenster """
 
@@ -285,17 +350,8 @@ def open_main_window() -> None:
     root.config(menu=menu)
     root.title("Mathe-Funktionen-Rechner 2022/23")
     root.geometry("350x345")
-    
-    # create frame for listbox and scrollbar
-    scrollbar_frame = Frame(root)
 
-    listbox = Listbox(scrollbar_frame, width=20, height=100)
-    listbox.pack(side=LEFT, fill=BOTH, expand=False)
-
-    scrollbar = Scrollbar(scrollbar_frame)
-    scrollbar.pack(side=RIGHT, fill=BOTH)
-
-    scrollbar_frame.pack(side=LEFT, fill=BOTH, expand=False)
+    verlauf_generator(root).pack(side=LEFT, fill=BOTH, expand=False)
 
     terme_eingeben_frame = Frame(root)
 
@@ -310,18 +366,6 @@ def open_main_window() -> None:
     y_von_bis_entry = Entry(terme_eingeben_frame)
     y_von_bis_entry.pack(side=TOP, anchor=NW)
 
-    def von_bis(get_from: str) -> tuple[float, float]:
-        """
-        Holt von und bis werde aus einem string (von, bis)
-        :param get_from: der string, aus dem die limits geholt werden sollen
-        :type get_from: str
-        :return: die Werte aus dem String
-        :rtype: tuple[float, float]
-        """
-        input_bereinigt = leerzeichen_raus_machen(get_from)
-        von, bis = input_bereinigt.split(",")
-        return float(von), float(bis)
-
 
     def _get_help() -> None:
         """ ruft das hilfefenster auf """
@@ -332,29 +376,10 @@ def open_main_window() -> None:
                 Wenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
 
-    def leerzeichen_raus_machen(inp: str) -> str:
-        """ entfernt alle leerzeichen aus einem string """
-        outp = ""
-        # enumeriert über input mit (index, wert)
-        for _, character in enumerate(inp):
-            if character != " ": outp += character
-        return outp
 
     def funktion_berechnen() -> None:
         """ holt werte und berechnet die funktion """
         # werte holen
-        def get_term(term: str) -> tuple:
-            # wenn kein x vorhanden ist, dann ist es ein konstanter term
-            if 'x' not in term:
-                return int(term), 0
-            # wenn kein exponent vorhanden ist, dann ist es ein linearer term
-            elif '^' not in term:
-                return int(term[:-1]), 1
-            # sonst ist es ein term mit exponent
-            else:
-                # returned basis und exponent
-                return int(term[:term.index('x')]), int(term[term.index('^')+1:])
-
         # gibt term aus, vorzeichen gehören zu den darauf folgenden termen
         def get_zahlen(inp: str) -> list:
             """ holt wichtige zahlen aus dem string """
@@ -365,19 +390,6 @@ def open_main_window() -> None:
             terme = [t for t in dirty_terme if t != '']
             return terme
 
-        def array_von_leeren_strings_befreien(arr: str) -> str:
-            """ entfernt alle leeren strings aus einem array """
-            output_string = ""
-            # schaut durch alle items im array und filtert alle leeren strings raus
-            for a in arr:
-                if a != '': output_string += a
-            return output_string
-
-        def ableitungs_generator(basis: list[tuple[float, float]]) -> list[tuple[float, float]]:
-            ableitung = []
-            for basis, exp in basis:
-                ableitung.append(basis * exp, exp - 1)
-            return ableitung
 
         # holt input und bereinigt ihn
         input_str = array_von_leeren_strings_befreien(f_entry.get())
@@ -388,7 +400,7 @@ def open_main_window() -> None:
 
         # erstellt plot
         fig = plt.Figure(figsize=(10, 20), dpi=100)
-        rg = np.arange(-100, 200, 0.2)
+        x_werte = np.arange(-100, 200, 0.2)
         ax = fig.add_subplot()
         ax.set_xlabel("x")
         ax.set_ylabel("y")
@@ -409,30 +421,29 @@ def open_main_window() -> None:
 
 
         # berechnet das richtig dismal lol. ich bin so dumm
-        def f(x: float) -> float:
+        def funktion(x_wert: float) -> float:
             """ berechnet die funktion """
-            y = 0
-            for b, e in basis_exponent_paare:
-                y += b * (x ** e)
-            return y
+            y_wert = 0
+            for basis, exponent in basis_exponent_paare:
+                y_wert += basis * (x_wert ** exponent)
+            return y_wert
 
-        ax.plot(rg, f(rg), label="linie")
+        ax.plot(x_werte, funktion(x_werte), label="linie")
         # setzt eine Legende in die obere rechte Ecke
         ax.legend(loc="upper right")
 
-        cv = FigureCanvasTkAgg(fig, master=terme_eingeben_frame)
-        cv.draw()
+        canvas = FigureCanvasTkAgg(fig, master=terme_eingeben_frame)
+        canvas.draw()
 
         def kurvendiskussion():
-            def ableitungs_generator(string: str):
-
-                pass
             pass
 
 
-        kurvendiskussion_button = Button(terme_eingeben_frame, text="Kurvendiskussion", command=kurvendiskussion)
+        kurvendiskussion_button = Button(terme_eingeben_frame,
+                                         text="Kurvendiskussion",
+                                         command=kurvendiskussion)
         kurvendiskussion_button.pack(side=TOP, anchor=NW)
-        cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+        canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
 
     _b = Button(terme_eingeben_frame, text="Los gehts!", command=funktion_berechnen)
     Button(terme_eingeben_frame, text="?", command=_get_help).pack(side=TOP, anchor=NE)
@@ -443,13 +454,6 @@ def open_main_window() -> None:
 
 
     # add Listbox to root
-    # add random items to listbox
-    for i in range(100):
-        listbox.insert(END, f"item {i}")
-    # add scrollbar to root
-    # add scrollbar to listbox
-    listbox.config(yscrollcommand=scrollbar.set)
-    scrollbar.config(command=listbox.yview)
 
 
     root.mainloop()
@@ -463,14 +467,10 @@ def get_menu(root) -> Menu:
     account_menu = Menu(_menu, tearoff=0)
     hilfe_menu = Menu(_menu, tearoff=0)
 
-    funktionen_menu.add_command(label="Term/e eingeben",
-                                command=term_eingeben_window)
     funktionen_menu.add_command(label="Trigonometrische",
                                 command=open_trigonometrische_window)
     funktionen_menu.add_command(label="Exponential",
                                 command=open_exponential_window)
-    """funktionen_menu.add_command(label="Differenzial",
-                                command=open_defferenzial_window)"""
     # Differenzial Rechnen = Ableitungen, deshalb wir dies in dem anderen Fenster sein
     funktionen_menu.add_command(label="Integralrechnung",
                                 command=open_integralrechnung_window)
@@ -478,8 +478,6 @@ def get_menu(root) -> Menu:
 
     account_menu.add_command(label="Logout",
                              command=root.destroy)
-    """account_menu.add_command(label="Verlauf",
-                             command=open_verlauf_window)"""
     _menu.add_cascade(label="Account", menu=account_menu)
 
     hilfe_menu.add_command(label="hilfe",
