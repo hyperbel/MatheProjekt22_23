@@ -379,12 +379,28 @@ def open_integralrechnung_window() -> None:
 def open_hilfe_window() -> None:
     """ Fenster für Hilfe zum Programm """
     win = base_tk(name="hilfe")
+    hilfe_label =  Label(win, text="Wenn du etwas nicht verstehst, dann bekommst du bei jedem Fenster individuell Hilfe")
+    hilfe_label.pack(side=TOP, anchor=NW)
     win.mainloop()
 
 
 def open_ueber_window() -> None:
     """ Fenster für Informationen über das Programm """
     win = base_tk(name="über")
+    hilfe_label =  Label(win, text="Diese Software wurde für den Informatik Untericht entwickelt")
+    hilfe2_label =  Label(win, text="Ziel ist es das der User Mathematische Funktionen ausgerechnet und erklärt bekommt")
+    hilfe3_label =  Label(win, text="Version: 0.1")
+    hilfe4_label =  Label(win, text="Lizenz: GPL_2.0")
+    hilfe5_label =  Label(win, text="Autor:Loste Kinder ")
+    hilfe6_label =  Label(win, text="Copyright: 2023")
+    hilfe7_label =  Label(win, text="Link: https://github.com/hyperbel/MatheProjekt22_23")
+    hilfe_label.pack(side=TOP, anchor=NW)
+    hilfe2_label.pack(side=TOP, anchor=NW)
+    hilfe3_label.pack(side=TOP, anchor=NW)
+    hilfe4_label.pack(side=TOP, anchor=NW)
+    hilfe5_label.pack(side=TOP, anchor=NW)
+    hilfe6_label.pack(side=TOP, anchor=NW)
+    hilfe7_label.pack(side=TOP, anchor=NW)
     win.mainloop()
 
 
