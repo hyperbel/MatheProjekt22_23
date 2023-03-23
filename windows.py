@@ -404,7 +404,7 @@ def open_ueber_window() -> None:
     win.mainloop()
 
 
-def open_verlauf_window() -> None:
+def get_verlauf(userid):
     """ Fenster für den Verlauf """
     win = base_tk(name="verlauf")
     con = sqlite3.connect("mathe.db")
