@@ -160,6 +160,13 @@ def term_eingeben_window() -> None:
         y_von, y_bis = von_bis(y_von_bis_entry.get())
         ax.set_ylim(y_von, y_bis)
         ax.grid()
+        ax.spines.left.set_position('zero')
+        ax.spines.right.set_color('none')
+        ax.spines.bottom.set_position('zero')
+        ax.spines.top.set_color('none')
+        ax.yaxis.set_ticks_position('left')
+        ax.xaxis.set_ticks_position('bottom')
+
 
         # berechnet das richtig dismal lol. ich bin so dumm
         def f(x: float) -> float:
