@@ -2,7 +2,7 @@
 Fenster für die GUI 
 """
 import re
-from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button, NW, NE
+from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button, NW, NE, Listbox, LEFT, END, Scrollbar, RIGHT
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
@@ -167,6 +167,8 @@ def term_eingeben_window() -> None:
         ax.yaxis.set_ticks_position('left')
         ax.xaxis.set_ticks_position('bottom')
 
+        ax.scatter(0, 0, color="purple", label="Nullpunkt")
+
 
         # berechnet das richtig dismal lol. ich bin so dumm
         def f(x: float) -> float:
@@ -184,7 +186,8 @@ def term_eingeben_window() -> None:
         cv.draw()
 
         def kurvendiskussion():
-            def ableitungs_generator():
+            def ableitungs_generator(string: str):
+
                 pass
             pass
 
@@ -272,8 +275,6 @@ def open_exponential_window() -> None:
     bis_entry.pack(side=TOP, anchor=NW)
     a_label.pack(side=TOP, anchor=NW)
     a_entry.pack(side=TOP, anchor=NW)
-    # x_label.pack(side=TOP, anchor=NW)
-    # x_entry.pack(side=TOP, anchor=NW)
     x_achse_label.pack(side=TOP, anchor=NW)
     x_achse_entry.pack(side=TOP, anchor=NW)
     y_achse_label.pack(side=TOP, anchor=NW)
@@ -325,12 +326,27 @@ def open_verlauf_window() -> None:
 
 def open_main_window() -> None:
     """ Hauptfenster """
+
     root = Tk()
 
     menu = get_menu(root)
     root.config(menu=menu)
     root.title("Mathe-Funktionen-Rechner 2022/23")
     root.geometry("350x345")
+    # add Listbox to root
+    listbox = Listbox(root, width=20, height=100)
+    listbox.pack(side=LEFT, fill=BOTH, expand=False)
+    # add random items to listbox
+    for i in range(100):
+        listbox.insert(END, f"item {i}")
+    # add scrollbar to root
+    scrollbar = Scrollbar(root)
+    scrollbar.pack(side=RIGHT, fill=BOTH)
+    # add scrollbar to listbox
+    listbox.config(yscrollcommand=scrollbar.set)
+    scrollbar.config(command=listbox.yview)
+
+
     root.mainloop()
 
 

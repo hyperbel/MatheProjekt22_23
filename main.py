@@ -58,6 +58,16 @@ def eval_user_and_pw(username: str, password: str, win_to_destroy) -> bool:
 
 def main():
     """ was soll ich hier überhaupt schreiben? """
+    splash = Tk()
+    splash.overrideredirect(1)
+    splash.geometry("500x100")
+    Label(splash, text="Mathe-Funktionen-Rechner 2022/23", font=("Arial", 20)).pack()
+    splash.eval('tk::PlaceWindow . center')
+    splash.update()
+    import time
+    time.sleep(2)
+    splash.destroy()
+
     login_win = Tk()
 
     Label(login_win, text="Username:").pack()
