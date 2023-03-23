@@ -147,18 +147,13 @@ def open_exponential_window() -> None:
     """ Fenster für exponentielle funktionen """
     win = base_tk(name="Exponential Funktionen Rechner")
 
-    # labels und entries
-    von_label = Label(win, text="anfang: ")
+    # entries
     von_entry = Entry(win)
-    bis_label = Label(win, text="ende: ")
     bis_entry = Entry(win)
-    a_label = Label(win, text="a: ")
     a_entry = Entry(win)
     # x_label = Label(win, text="x: ")
     # x_entry = Entry(win)
-    x_achse_label = Label(win, text="x-Achsenbeschriftung:")
     x_achse_entry = Entry(win)
-    y_achse_label = Label(win, text="y-Achsenbeschriftung:")
     y_achse_entry = Entry(win)
 
     # figure for matplotlib to plot lines on
@@ -203,15 +198,15 @@ def open_exponential_window() -> None:
         pass
 
     # display everything
-    von_label.pack(side=TOP, anchor=NW)
+    Label(win, text="anfang: ").pack(side=TOP, anchor=NW)
     von_entry.pack(side=TOP, anchor=NW)
-    bis_label.pack(side=TOP, anchor=NW)
+    Label(win, text="ende: ").pack(side=TOP, anchor=NW)
     bis_entry.pack(side=TOP, anchor=NW)
-    a_label.pack(side=TOP, anchor=NW)
+    Label(win, text="a: ").pack(side=TOP, anchor=NW)
     a_entry.pack(side=TOP, anchor=NW)
-    x_achse_label.pack(side=TOP, anchor=NW)
+    Label(win, text="x-Achsenbeschriftung:").pack(side=TOP, anchor=NW)
     x_achse_entry.pack(side=TOP, anchor=NW)
-    y_achse_label.pack(side=TOP, anchor=NW)
+    Label(win, text="y-Achsenbeschriftung:").pack(side=TOP, anchor=NW)
     y_achse_entry.pack(side=TOP, anchor=NW)
 
     # use function declared earlier to compute stuff
@@ -361,6 +356,27 @@ def verlauf_generator(parent) -> Frame:
     return frame
 
 
+def get_zahlen(inp: str) -> list:
+    """ holt wichtige zahlen aus dem string
+    :param inp: string mit allen zahlen
+    :type inp: str
+    :return: liste mit allen zahlen
+    :rtype: list
+    """
+    # regex magie um alle zahlen zu finden
+    dirty_terme = re.findall(r"[+-]?\d*x?\^?\d*", inp)
+
+    # entfernt alle leeren strings
+    terme = [t for t in dirty_terme if t != '']
+    return terme
+
+
+def basis_exponent_paare_holen(inp: str) -> list[tuple[float, float]]:
+    input_str = array_von_leeren_strings_befreien(inp)
+    terme = get_zahlen(input_str)
+    return [get_term(t) for t in terme]
+
+
 def open_main_window() -> None:
     """ Hauptfenster """
 
@@ -399,24 +415,9 @@ def open_main_window() -> None:
 
     def funktion_berechnen() -> None:
         """ holt werte und berechnet die funktion """
-        # werte holen
-        # gibt term aus, vorzeichen gehören zu den darauf folgenden termen
-        def get_zahlen(inp: str) -> list:
-            """ holt wichtige zahlen aus dem string """
-            # regex magie um alle zahlen zu finden
-            dirty_terme = re.findall(r"[+-]?\d*x?\^?\d*", inp)
-
-            # entfernt alle leeren strings
-            terme = [t for t in dirty_terme if t != '']
-            return terme
-
 
         # holt input und bereinigt ihn
-        input_str = array_von_leeren_strings_befreien(f_entry.get())
-        terme = get_zahlen(input_str)
-        basis_exponent_paare = [get_term(t) for t in terme]
-
-
+        basis_exponent_paare = basis_exponent_paare_holen(f_entry.get())
 
         # erstellt plot
         fig = plt.Figure(figsize=(10, 20), dpi=100)
@@ -471,9 +472,6 @@ def open_main_window() -> None:
     _b.pack(side=TOP, anchor=NW)
 
     terme_eingeben_frame.pack(side=LEFT, fill=BOTH, expand=True)
-
-
-    # add Listbox to root
 
 
     root.mainloop()
