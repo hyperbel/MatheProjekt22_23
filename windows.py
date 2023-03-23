@@ -159,6 +159,7 @@ def term_eingeben_window() -> None:
         ax.set_xlim(x_von, x_bis)
         y_von, y_bis = von_bis(y_von_bis_entry.get())
         ax.set_ylim(y_von, y_bis)
+        ax.grid()
 
         # berechnet das richtig dismal lol. ich bin so dumm
         def f(x: float) -> float:
@@ -176,6 +177,8 @@ def term_eingeben_window() -> None:
         cv.draw()
 
         def kurvendiskussion():
+            def ableitungs_generator():
+                pass
             pass
 
 
