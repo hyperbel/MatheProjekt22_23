@@ -3,6 +3,7 @@ Fenster für die GUI
 """
 import re
 import sqlite3
+import math
 from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button
 from tkinter import NW, NE, Listbox, LEFT, END, Scrollbar, RIGHT, Frame
 import matplotlib.pyplot as plt
@@ -84,11 +85,11 @@ def open_trigonometrische_window() -> None:
     canvas.draw()
 
     def trigonometrische_ausrechnen():
-        def grad_in_bogen(Awert):
-            return (Awert / 180) * math.pi
+        def grad_in_bogen(a_wert):
+            return (a_wert / 180) * math.pi
 
-        def bogen_in_grad(Xwert):
-            return (x / math.pi ) * 180
+        def bogen_in_grad(x_wert):
+            return (x_wert / math.pi ) * 180
 
         von = float(von_entry.get())
         bis = float(bis_entry.get())
@@ -276,21 +277,27 @@ def leerzeichen_raus_machen(inp: str) -> str:
     outp = ""
     # enumeriert über input mit (index, wert)
     for _, character in enumerate(inp):
-        if character != " ": outp += character
+        if character != " ":
+            outp += character
     return outp
 
 
 def get_term(term: str) -> tuple:
+    """ gibt einen term als tuple zurück (koeffizient, exponent)
+    :param term: term als string
+    :type term: str
+    :return: tuple mit koeffizient und exponent
+    :rtype: tuple
+    """
+
     # wenn kein x vorhanden ist, dann ist es ein konstanter term
     if 'x' not in term:
         return int(term), 0
     # wenn kein exponent vorhanden ist, dann ist es ein linearer term
-    elif '^' not in term:
+    if '^' not in term:
         return int(term[:-1]), 1
     # sonst ist es ein term mit exponent
-    else:
-        # returned basis und exponent
-        return int(term[:term.index('x')]), int(term[term.index('^')+1:])
+    return int(term[:term.index('x')]), int(term[term.index('^')+1:])
 
 
 def array_von_leeren_strings_befreien(arr: str) -> str:
@@ -298,7 +305,8 @@ def array_von_leeren_strings_befreien(arr: str) -> str:
     output_string = ""
     # schaut durch alle items im array und filtert alle leeren strings raus
     for a in arr:
-        if a != '': output_string += a
+        if a != '':
+            output_string += a
     return output_string
 
 
@@ -316,13 +324,25 @@ def von_bis(get_from: str) -> tuple[float, float]:
 
 
 def ableitungs_generator(basis: list[tuple[float, float]]) -> list[tuple[float, float]]:
+    """generiert die ableitung einer funktion
+    :param basis: basis der funktion
+    :type basis: list[tuple[float, float]]
+    :return: ableitung der funktion
+    :rtype: list[tuple[float, float]]
+    """
     ableitung = []
     for b, exp in basis:
         ableitung.append((b * exp, exp - 1))
     return ableitung
 
 
-def verlauf_generator(parent):
+def verlauf_generator(parent) -> Frame:
+    """generiert frame mit verlauf
+    :param parent: parent widget
+    :type parent: tkinter widget
+    :return: frame mit verlauf
+    :rtype: Frame
+    """
     frame = Frame(parent)
     listbox = Listbox(frame, width=20, height=100)
     listbox.pack(side=LEFT, fill=BOTH, expand=False)
