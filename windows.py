@@ -175,8 +175,13 @@ def term_eingeben_window() -> None:
         cv = FigureCanvasTkAgg(fig, master=win)
         cv.draw()
 
-        cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+        def kurvendiskussion():
+            pass
 
+
+        kurvendiskussion_button = Button(win, text="Kurvendiskussion", command=kurvendiskussion)
+        kurvendiskussion_button.pack(side=TOP, anchor=NW)
+        cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
 
     _b = Button(win, text="Los gehts!", command=funktion_berechnen)
     Button(win, text="?", command=_get_help).pack(side=TOP, anchor=NE)
