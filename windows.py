@@ -61,146 +61,6 @@ def term_eingeben_window() -> None:
     """
     win = base_tk(name="Term/e eingeben")
 
-    Label(win, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
-    f_entry = Entry(win)
-    f_entry.pack(side=TOP, anchor=NW)
-    # labels & entries for bounds of x and y axis
-    Label(win, text="x von, bis: ").pack(side=TOP, anchor=NW)
-    x_von_bis_entry = Entry(win)
-    x_von_bis_entry.pack(side=TOP, anchor=NW)
-    Label(win, text="y von, bis: ").pack(side=TOP, anchor=NW)
-    y_von_bis_entry = Entry(win)
-    y_von_bis_entry.pack(side=TOP, anchor=NW)
-
-    def von_bis(get_from: str) -> tuple[float, float]:
-        """
-        Holt von und bis werde aus einem string (von, bis)
-        :param get_from: der string, aus dem die limits geholt werden sollen
-        :type get_from: str
-        :return: die Werte aus dem String
-        :rtype: tuple[float, float]
-        """
-        input_bereinigt = leerzeichen_raus_machen(get_from)
-        von, bis = input_bereinigt.split(",")
-        return float(von), float(bis)
-
-
-    def _get_help() -> None:
-        """ ruft das hilfefenster auf """
-        _help = base_tk(size="800x500", name="Hilfe - Funktionen")
-        Label(_help,
-        text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\n\
-                Also z.B.: 1x^3 + 2x^2 + 1x + 0\n\
-                Wenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!").pack()
-        Button(_help, text="Ok", command=_help.destroy).pack()
-
-    def leerzeichen_raus_machen(inp: str) -> str:
-        """ entfernt alle leerzeichen aus einem string """
-        outp = ""
-        # enumeriert über input mit (index, wert)
-        for _, character in enumerate(inp):
-            if character != " ": outp += character
-        return outp
-
-    def funktion_berechnen() -> None:
-        """ holt werte und berechnet die funktion """
-        # werte holen
-        def get_term(term: str) -> tuple:
-            # wenn kein x vorhanden ist, dann ist es ein konstanter term
-            if 'x' not in term:
-                return int(term), 0
-            # wenn kein exponent vorhanden ist, dann ist es ein linearer term
-            elif '^' not in term:
-                return int(term[:-1]), 1
-            # sonst ist es ein term mit exponent
-            else:
-                # returned basis und exponent
-                return int(term[:term.index('x')]), int(term[term.index('^')+1:])
-
-        # gibt term aus, vorzeichen gehören zu den darauf folgenden termen
-        def get_zahlen(inp: str) -> list:
-            """ holt wichtige zahlen aus dem string """
-            # regex magie um alle zahlen zu finden
-            dirty_terme = re.findall(r"[+-]?\d*x?\^?\d*", inp)
-
-            # entfernt alle leeren strings
-            terme = [t for t in dirty_terme if t != '']
-            return terme
-
-        def array_von_leeren_strings_befreien(arr: str) -> str:
-            """ entfernt alle leeren strings aus einem array """
-            output_string = ""
-            # schaut durch alle items im array und filtert alle leeren strings raus
-            for a in arr:
-                if a != '': output_string += a
-            return output_string
-
-        def ableitungs_generator(basis: list[tuple[float, float]]) -> list[tuple[float, float]]:
-            ableitung = []
-            for basis, exp in basis:
-                ableitung.append(basis * exp, exp - 1)
-            return ableitung
-
-        # holt input und bereinigt ihn
-        input_str = array_von_leeren_strings_befreien(f_entry.get())
-        terme = get_zahlen(input_str)
-        basis_exponent_paare = [get_term(t) for t in terme]
-
-
-
-        # erstellt plot
-        fig = plt.Figure(figsize=(10, 20), dpi=100)
-        rg = np.arange(-100, 200, 0.2)
-        ax = fig.add_subplot()
-        ax.set_xlabel("x")
-        ax.set_ylabel("y")
-        ax.set_title("Funktionsgraph")
-        x_von, x_bis = von_bis(x_von_bis_entry.get())
-        ax.set_xlim(x_von, x_bis)
-        y_von, y_bis = von_bis(y_von_bis_entry.get())
-        ax.set_ylim(y_von, y_bis)
-        ax.grid()
-        ax.spines.left.set_position('zero')
-        ax.spines.right.set_color('none')
-        ax.spines.bottom.set_position('zero')
-        ax.spines.top.set_color('none')
-        ax.yaxis.set_ticks_position('left')
-        ax.xaxis.set_ticks_position('bottom')
-
-        ax.scatter(0, 0, color="purple", label="Nullpunkt")
-
-
-        # berechnet das richtig dismal lol. ich bin so dumm
-        def f(x: float) -> float:
-            """ berechnet die funktion """
-            y = 0
-            for b, e in basis_exponent_paare:
-                y += b * (x ** e)
-            return y
-
-        ax.plot(rg, f(rg), label="linie")
-        # setzt eine Legende in die obere rechte Ecke
-        ax.legend(loc="upper right")
-
-        cv = FigureCanvasTkAgg(fig, master=win)
-        cv.draw()
-
-        def kurvendiskussion():
-            def ableitungs_generator(string: str):
-
-                pass
-            pass
-
-
-        kurvendiskussion_button = Button(win, text="Kurvendiskussion", command=kurvendiskussion)
-        kurvendiskussion_button.pack(side=TOP, anchor=NW)
-        cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
-
-    _b = Button(win, text="Los gehts!", command=funktion_berechnen)
-    Button(win, text="?", command=_get_help).pack(side=TOP, anchor=NE)
-
-    _b.pack(side=TOP, anchor=NW)
-    win.mainloop()
 
 
 def open_trigonometrische_window() -> None:
@@ -427,15 +287,160 @@ def open_main_window() -> None:
     root.geometry("350x345")
     
     # create frame for listbox and scrollbar
-    frame = Frame(root)
+    scrollbar_frame = Frame(root)
 
-    listbox = Listbox(frame, width=20, height=100)
+    listbox = Listbox(scrollbar_frame, width=20, height=100)
     listbox.pack(side=LEFT, fill=BOTH, expand=False)
 
-    scrollbar = Scrollbar(frame)
+    scrollbar = Scrollbar(scrollbar_frame)
     scrollbar.pack(side=RIGHT, fill=BOTH)
 
-    frame.pack(side=LEFT, fill=BOTH, expand=False)
+    scrollbar_frame.pack(side=LEFT, fill=BOTH, expand=False)
+
+    terme_eingeben_frame = Frame(root)
+
+    Label(terme_eingeben_frame, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
+    f_entry = Entry()
+    f_entry.pack(side=TOP, anchor=NW)
+    # labels & entries for bounds of x and y axis
+    Label(terme_eingeben_frame, text="x von, bis: ").pack(side=TOP, anchor=NW)
+    x_von_bis_entry = Entry(terme_eingeben_frame)
+    x_von_bis_entry.pack(side=TOP, anchor=NW)
+    Label(terme_eingeben_frame, text="y von, bis: ").pack(side=TOP, anchor=NW)
+    y_von_bis_entry = Entry(terme_eingeben_frame)
+    y_von_bis_entry.pack(side=TOP, anchor=NW)
+
+    def von_bis(get_from: str) -> tuple[float, float]:
+        """
+        Holt von und bis werde aus einem string (von, bis)
+        :param get_from: der string, aus dem die limits geholt werden sollen
+        :type get_from: str
+        :return: die Werte aus dem String
+        :rtype: tuple[float, float]
+        """
+        input_bereinigt = leerzeichen_raus_machen(get_from)
+        von, bis = input_bereinigt.split(",")
+        return float(von), float(bis)
+
+
+    def _get_help() -> None:
+        """ ruft das hilfefenster auf """
+        _help = base_tk(size="800x500", name="Hilfe - Funktionen")
+        Label(_help,
+        text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\n\
+                Also z.B.: 1x^3 + 2x^2 + 1x + 0\n\
+                Wenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!").pack()
+        Button(_help, text="Ok", command=_help.destroy).pack()
+
+    def leerzeichen_raus_machen(inp: str) -> str:
+        """ entfernt alle leerzeichen aus einem string """
+        outp = ""
+        # enumeriert über input mit (index, wert)
+        for _, character in enumerate(inp):
+            if character != " ": outp += character
+        return outp
+
+    def funktion_berechnen() -> None:
+        """ holt werte und berechnet die funktion """
+        # werte holen
+        def get_term(term: str) -> tuple:
+            # wenn kein x vorhanden ist, dann ist es ein konstanter term
+            if 'x' not in term:
+                return int(term), 0
+            # wenn kein exponent vorhanden ist, dann ist es ein linearer term
+            elif '^' not in term:
+                return int(term[:-1]), 1
+            # sonst ist es ein term mit exponent
+            else:
+                # returned basis und exponent
+                return int(term[:term.index('x')]), int(term[term.index('^')+1:])
+
+        # gibt term aus, vorzeichen gehören zu den darauf folgenden termen
+        def get_zahlen(inp: str) -> list:
+            """ holt wichtige zahlen aus dem string """
+            # regex magie um alle zahlen zu finden
+            dirty_terme = re.findall(r"[+-]?\d*x?\^?\d*", inp)
+
+            # entfernt alle leeren strings
+            terme = [t for t in dirty_terme if t != '']
+            return terme
+
+        def array_von_leeren_strings_befreien(arr: str) -> str:
+            """ entfernt alle leeren strings aus einem array """
+            output_string = ""
+            # schaut durch alle items im array und filtert alle leeren strings raus
+            for a in arr:
+                if a != '': output_string += a
+            return output_string
+
+        def ableitungs_generator(basis: list[tuple[float, float]]) -> list[tuple[float, float]]:
+            ableitung = []
+            for basis, exp in basis:
+                ableitung.append(basis * exp, exp - 1)
+            return ableitung
+
+        # holt input und bereinigt ihn
+        input_str = array_von_leeren_strings_befreien(f_entry.get())
+        terme = get_zahlen(input_str)
+        basis_exponent_paare = [get_term(t) for t in terme]
+
+
+
+        # erstellt plot
+        fig = plt.Figure(figsize=(10, 20), dpi=100)
+        rg = np.arange(-100, 200, 0.2)
+        ax = fig.add_subplot()
+        ax.set_xlabel("x")
+        ax.set_ylabel("y")
+        ax.set_title("Funktionsgraph")
+        x_von, x_bis = von_bis(x_von_bis_entry.get())
+        ax.set_xlim(x_von, x_bis)
+        y_von, y_bis = von_bis(y_von_bis_entry.get())
+        ax.set_ylim(y_von, y_bis)
+        ax.grid()
+        ax.spines.left.set_position('zero')
+        ax.spines.right.set_color('none')
+        ax.spines.bottom.set_position('zero')
+        ax.spines.top.set_color('none')
+        ax.yaxis.set_ticks_position('left')
+        ax.xaxis.set_ticks_position('bottom')
+
+        ax.scatter(0, 0, color="purple", label="Nullpunkt")
+
+
+        # berechnet das richtig dismal lol. ich bin so dumm
+        def f(x: float) -> float:
+            """ berechnet die funktion """
+            y = 0
+            for b, e in basis_exponent_paare:
+                y += b * (x ** e)
+            return y
+
+        ax.plot(rg, f(rg), label="linie")
+        # setzt eine Legende in die obere rechte Ecke
+        ax.legend(loc="upper right")
+
+        cv = FigureCanvasTkAgg(fig, master=terme_eingeben_frame)
+        cv.draw()
+
+        def kurvendiskussion():
+            def ableitungs_generator(string: str):
+
+                pass
+            pass
+
+
+        kurvendiskussion_button = Button(terme_eingeben_frame, text="Kurvendiskussion", command=kurvendiskussion)
+        kurvendiskussion_button.pack(side=TOP, anchor=NW)
+        cv.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+
+    _b = Button(terme_eingeben_frame, text="Los gehts!", command=funktion_berechnen)
+    Button(terme_eingeben_frame, text="?", command=_get_help).pack(side=TOP, anchor=NE)
+
+    _b.pack(side=TOP, anchor=NW)
+
+    terme_eingeben_frame.pack(side=LEFT, fill=BOTH, expand=True)
+
 
     # add Listbox to root
     # add random items to listbox
