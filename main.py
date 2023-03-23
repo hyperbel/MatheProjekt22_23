@@ -62,6 +62,8 @@ def main():
     splash.overrideredirect(1)
     splash.geometry("500x100")
     Label(splash, text="Mathe-Funktionen-Rechner 2022/23", font=("Arial", 20)).pack()
+    Label(splash, text="Thomas & Finn", font=("Arial", 15)).pack()
+
     splash.eval('tk::PlaceWindow . center')
     splash.update()
     import time

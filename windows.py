@@ -370,12 +370,6 @@ def open_exponential_window() -> None:
     win.mainloop()
 
 
-def open_defferenzial_window() -> None:
-    """ Fenster für defferenzial funktionen """
-    win = base_tk(name="Einstieg Diefferenzialrechnung")
-    win.mainloop()
-
-
 def open_integralrechnung_window() -> None:
     """ Fenster für integralrechnung funktionen """
     win = base_tk(name="Integralrechnung")
@@ -446,16 +440,17 @@ def get_menu(root) -> Menu:
                                 command=open_trigonometrische_window)
     funktionen_menu.add_command(label="Exponential",
                                 command=open_exponential_window)
-    funktionen_menu.add_command(label="Differenzial",
-                                command=open_defferenzial_window)
+    """funktionen_menu.add_command(label="Differenzial",
+                                command=open_defferenzial_window)"""
+    # Differenzial Rechnen = Ableitungen, deshalb wir dies in dem anderen Fenster sein
     funktionen_menu.add_command(label="Integralrechnung",
                                 command=open_integralrechnung_window)
     _menu.add_cascade(label="Funktionen", menu=funktionen_menu)
 
     account_menu.add_command(label="Logout",
                              command=root.destroy)
-    account_menu.add_command(label="Verlauf",
-                             command=open_verlauf_window)
+    """account_menu.add_command(label="Verlauf",
+                             command=open_verlauf_window)"""
     _menu.add_cascade(label="Account", menu=account_menu)
 
     hilfe_menu.add_command(label="hilfe",
