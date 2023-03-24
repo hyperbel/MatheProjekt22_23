@@ -9,7 +9,23 @@ from database import create_db
 
 def open_main_win():
     """wrapper for opening the main window"""
+    # creates loading window
+    load = Tk()
+    load.overrideredirect(1)
+    load.geometry("100x100")
+    load.eval('tk::PlaceWindow . center')
+
+    # insert loading.gif into loading window
+    img = PhotoImage(file="loading.gif")
+    canvas = Canvas(load, width=100, height=100)
+    canvas.pack()
+    canvas.create_image(0, 0, anchor=NW, image=img)
+
+    load.update()
+    # as soon as this shit is imported, destroy loading screen
     import windows as wins
+    load.destroy()
+    # and last but not least, open the main window
     wins.open_main_window()
 
 
@@ -88,7 +104,8 @@ def create_splash():
 
     splash.eval('tk::PlaceWindow . center')
     splash.update()
-    splash.after(2000, splash.destroy)
+    time.sleep(2)
+    splash.destroy()
 
 
 def main():
