@@ -1,14 +1,19 @@
 """
 Main datei im Projekt, was für das öffnen der anderen Fenster verantwortlich ist.
 """
-import pdb
 import time
 import sqlite3
 from tkinter import Tk, Label, Entry, Button, PhotoImage, Canvas, NW
 from database import create_db
 
+def import_wins():
+    global test_func
+    import windows as wins
+    test_func = wins.open_main_window
+
+"""
 def open_main_win():
-    """wrapper for opening the main window"""
+    wrapper for opening the main window
     # creates loading window
     load = Tk()
     load.overrideredirect(1)
@@ -23,10 +28,10 @@ def open_main_win():
 
     load.update()
     # as soon as this shit is imported, destroy loading screen
-    import windows as wins
     load.destroy()
     # and last but not least, open the main window
-    wins.open_main_window()
+    open_main_win()
+    """
 
 
 def callback(_input):
@@ -83,7 +88,7 @@ def eval_user_and_pw(username: str, password: str, win_to_destroy) -> bool:
         con.commit()
         if not userpw == " ":
             win_to_destroy.destroy()
-            open_main_win()
+            test_func()
     except Exception as error:
         print(f"Login fehlgeschlagen: {error}")
 
@@ -104,7 +109,7 @@ def create_splash():
 
     splash.eval('tk::PlaceWindow . center')
     splash.update()
-    time.sleep(2)
+    import_wins()
     splash.destroy()
 
 
@@ -157,7 +162,7 @@ def main():
                 con.commit()
                 signup_win.destroy()
                 login_win.destroy()
-                open_main_win()
+                test_func()
 
         Button(signup_win, text="Signup", command=do_singup).pack()
 
