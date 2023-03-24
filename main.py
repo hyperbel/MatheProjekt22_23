@@ -1,11 +1,32 @@
 """
 Main datei im Projekt, was für das öffnen der anderen Fenster verantwortlich ist.
 """
+import pdb
 import time
 import sqlite3
 from tkinter import Tk, Label, Entry, Button, PhotoImage, Canvas, NW
 from database import create_db
-import windows as wins
+
+def open_main_win():
+    """wrapper for opening the main window"""
+    # creates loading window
+    load = Tk()
+    load.overrideredirect(1)
+    load.geometry("100x100")
+    load.eval('tk::PlaceWindow . center')
+
+    # insert loading.gif into loading window
+    img = PhotoImage(file="loading.gif")
+    canvas = Canvas(load, width=100, height=100)
+    canvas.pack()
+    canvas.create_image(0, 0, anchor=NW, image=img)
+
+    load.update()
+    # as soon as this shit is imported, destroy loading screen
+    import windows as wins
+    load.destroy()
+    # and last but not least, open the main window
+    wins.open_main_window()
 
 
 def callback(_input):
@@ -62,7 +83,7 @@ def eval_user_and_pw(username: str, password: str, win_to_destroy) -> bool:
         con.commit()
         if not userpw == " ":
             win_to_destroy.destroy()
-            wins.open_main_window()
+            open_main_win()
     except Exception as error:
         print(f"Login fehlgeschlagen: {error}")
 
@@ -136,7 +157,7 @@ def main():
                 con.commit()
                 signup_win.destroy()
                 login_win.destroy()
-                wins.open_main_window()
+                open_main_win()
 
         Button(signup_win, text="Signup", command=do_singup).pack()
 
