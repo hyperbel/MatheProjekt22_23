@@ -68,8 +68,7 @@ def eval_user_and_pw(username: str, password: str, win_to_destroy) -> bool:
 
     return True
 
-def main():
-    """ was soll ich hier überhaupt schreiben? """
+def create_splash():
     splash = Tk()
 
     img = PhotoImage(file="bild3.png")
@@ -86,6 +85,12 @@ def main():
     splash.update()
     time.sleep(2)
     splash.destroy()
+
+
+def main():
+    """ was soll ich hier überhaupt schreiben? """
+
+    create_splash()
 
     login_win = Tk()
 
