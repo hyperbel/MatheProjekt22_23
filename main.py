@@ -3,7 +3,7 @@ Main datei im Projekt, was für das öffnen der anderen Fenster verantwortlich i
 """
 import time
 import sqlite3
-from tkinter import Tk, Label, Entry, Button
+from tkinter import Tk, Label, Entry, Button, PhotoImage, Canvas, NW
 from database import create_db
 import windows as wins
 
@@ -71,8 +71,14 @@ def eval_user_and_pw(username: str, password: str, win_to_destroy) -> bool:
 def main():
     """ was soll ich hier überhaupt schreiben? """
     splash = Tk()
+
+    img = PhotoImage(file="splash.png")
+    canvas = Canvas(splash, width=700, height=300)
+    canvas.pack()
+    canvas.create_image(0, 0, anchor=NW, image=img)
+    canvas.create_text(350, 150, text="Mathe-Funktionen-Rechner 2022/23", font=("Arial", 20))
     splash.overrideredirect(1)
-    splash.geometry("500x100")
+    splash.geometry("700x300")
     Label(splash, text="Mathe-Funktionen-Rechner 2022/23", font=("Arial", 20)).pack()
     Label(splash, text="Thomas & Finn", font=("Arial", 15)).pack()
 
