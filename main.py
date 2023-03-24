@@ -72,11 +72,11 @@ def main():
     """ was soll ich hier überhaupt schreiben? """
     splash = Tk()
 
-    img = PhotoImage(file="splash.png")
+    img = PhotoImage(file="bild3.png")
     canvas = Canvas(splash, width=700, height=300)
     canvas.pack()
     canvas.create_image(0, 0, anchor=NW, image=img)
-    canvas.create_text(350, 150, text="Mathe-Funktionen-Rechner 2022/23", font=("Arial", 20))
+    canvas.create_text(350, 150, text="Mathe-Funktionen-Rechner 2022/23", font=("Arial", 28),fill="blue")
     splash.overrideredirect(1)
     splash.geometry("700x300")
     Label(splash, text="Mathe-Funktionen-Rechner 2022/23", font=("Arial", 20)).pack()

@@ -256,15 +256,20 @@ def open_ueber_window() -> None:
 
 
 def get_verlauf(userid):
-    """ Fenster für den Verlauf """
-    win = base_tk(name="verlauf")
     con = sqlite3.connect("mathe.db")
     cur = con.cursor()
     userid=1
     sql = f"SELECT funktion from funktionen WHERE userid=\'{userid}\';"
     ergebnis = cur.execute(sql).fetchall()
     print (ergebnis)
-    win.mainloop()
+    return ergebnis
+
+
+def save_function(funktion, userid):
+    con = sqlite3.Connection("mathe.db")
+    cur = con.cursor()
+    sql = f"INSERT INTO funktionen VALUES('\{funktion}\','\{userid}\');"
+    print("f")
 
 
 def leerzeichen_raus_machen(inp: str) -> str:
@@ -342,9 +347,8 @@ def verlauf_generator(parent) -> Frame:
     listbox = Listbox(frame, width=20, height=100)
     listbox.pack(side=LEFT, fill=BOTH, expand=False)
 
-    # add random items to listbox
-    for i in range(100):
-        listbox.insert(END, f"item {i}")
+    listbox.insert(END, get_verlauf(1))
+    
 
     scrollbar = Scrollbar(frame)
 
