@@ -389,7 +389,7 @@ def open_main_window() -> None:
     menu = get_menu(root)
     root.config(menu=menu)
     root.title("Mathe-Funktionen-Rechner 2022/23")
-    root.geometry("350x345")
+    root.geometry("1000x800")
 
     verlauf_generator(root).pack(side=LEFT, fill=BOTH, expand=False)
 
