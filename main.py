@@ -1,7 +1,6 @@
 """
 Main datei im Projekt, was für das öffnen der anderen Fenster verantwortlich ist.
 """
-import time
 import sqlite3
 from tkinter import Tk, Label, Entry, Button, PhotoImage, Canvas, NW
 from database import create_db

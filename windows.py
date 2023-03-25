@@ -394,9 +394,9 @@ def open_main_window() -> None:
     verlauf_generator(root).pack(side=LEFT, fill=BOTH, expand=False)
 
     terme_eingeben_frame = Frame(root)
-
     Label(terme_eingeben_frame, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
-    f_entry = Entry()
+
+    f_entry = Entry(terme_eingeben_frame)
     f_entry.pack(side=TOP, anchor=NW)
     # labels & entries for bounds of x and y axis
     Label(terme_eingeben_frame, text="x von, bis: ").pack(side=TOP, anchor=NW)
