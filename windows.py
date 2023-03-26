@@ -5,7 +5,7 @@ import re
 import sqlite3
 import math
 from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button
-from tkinter import NW, NE, Listbox, LEFT, END, Scrollbar, RIGHT, Frame
+from tkinter import NW, NE, Listbox, LEFT, END, Scrollbar, RIGHT, Frame, Radiobutton, StringVar
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
@@ -60,18 +60,18 @@ def open_trigonometrische_window() -> None:
     win = base_tk(name="Trigonometrische Funktionen Rechner")
 
     # labels und entries
-    von_label =  Label(win, text="Von: ")
-    von_entry = Entry(win)
-    bis_label = Label(win, text="Bis: ")
-    bis_entry = Entry(win)
-    a_label = Label(win, text="a: ")
-    a_entry = Entry(win)
-    x_label = Label(win, text="x: ")
-    x_entry = Entry(win)
-    x_achse_label = Label(win, text="x-Achsenbeschriftung:")
-    x_achse_entry = Entry(win)
-    y_achse_label = Label(win, text="y-Achsenbeschriftung:")
-    y_achse_entry = Entry(win)
+    amplitude_label =  Label(win, text="Amplitude:")
+    amplitude_entry = Entry(win)
+    frequenz_label = Label(win, text="Frequenz:")
+    frequenz_entry = Entry(win)
+    phase_label = Label(win, text="Phase:")
+    phase_entry = Entry(win)
+    function_type_var = StringVar(value='sin')
+    sin_radio = Radiobutton(win, text='Sinus', variable=function_type_var, value='sin')
+    cos_radio = Radiobutton(win, text='Cosinus', variable=function_type_var, value='cos')
+    tan_radio = Radiobutton(win, text='Tangens', variable=function_type_var, value='tan')
+
+
 
     # figure for matplotlib to plot lines on
     fig = plt.Figure(figsize=(10, 10), dpi=100)
@@ -85,33 +85,37 @@ def open_trigonometrische_window() -> None:
     canvas.draw()
 
     def trigonometrische_ausrechnen():
-        def grad_in_bogen(a_wert):
-            return (a_wert / 180) * math.pi
 
-        def bogen_in_grad(x_wert):
-            return (x_wert / math.pi ) * 180
-
-        von = float(von_entry.get())
-        bis = float(bis_entry.get())
-        a = float(a_entry.get())
+        amp = float(amplitude_entry.get())
+        freq = float(frequenz_entry.get())
+        phas = float(phase_entry.get())
 
          # checken ob werte floats sind
-        assert entry_is_float(von)
-        assert entry_is_float(bis)
-        assert entry_is_float(a)
+        assert entry_is_float(amp)
+        assert entry_is_float(freq)
+        assert entry_is_float(phas)
         # assert entry_is_float(x)
 
-        x = np.arange(0,4*np.pi,0.1)   # start,stop,step
-        y = np.sin(x)
+         # x-Werte des Graphen berechnen
+        x = np.linspace(0, 2*np.pi, 1000)
 
+        if function_type == 'sin':
+            y = amp * np.sin(freq * x + phas)
+            title = 'Sinusfunktion'
+        elif function_type == 'cos':
+            y = amp * np.cos(freq * x + phas)
+            title = 'Cosinusfunktion'
+        elif function_type == 'tan':
+            y = amp * np.tan(freq * x + phas)
+            title = 'Tangensfunktion'
+
+        ax.clear()
+        ax.plot(x, y)
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_title(title)
+        canvas.draw()
          # range mit von - bis
-        x_werte = np.arange(von, bis, 0.2)
-
-        # setze namen der achsen
-        ax.set_xlabel(x_achse_entry.get())
-        ax.set_ylabel(y_achse_entry.get())
-
-        plt.plot(x,y)
         canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
 
 
@@ -122,18 +126,15 @@ def open_trigonometrische_window() -> None:
         pass
 
       # display everything
-    von_label.pack(side=TOP, anchor=NW)
-    von_entry.pack(side=TOP, anchor=NW)
-    bis_label.pack(side=TOP, anchor=NW)
-    bis_entry.pack(side=TOP, anchor=NW)
-    a_label.pack(side=TOP, anchor=NW)
-    a_entry.pack(side=TOP, anchor=NW)
-    x_label.pack(side=TOP, anchor=NW)
-    x_entry.pack(side=TOP, anchor=NW)
-    x_achse_label.pack(side=TOP, anchor=NW)
-    x_achse_entry.pack(side=TOP, anchor=NW)
-    y_achse_label.pack(side=TOP, anchor=NW)
-    y_achse_entry.pack(side=TOP, anchor=NW)
+    amplitude_label.pack(side=TOP, anchor=NW)
+    amplitude_entry.pack(side=TOP, anchor=NW)
+    frequenz_label.pack(side=TOP, anchor=NW)
+    frequenz_entry.pack(side=TOP, anchor=NW)
+    phase_label.pack(side=TOP, anchor=NW)
+    phase_entry.pack(side=TOP, anchor=NW)
+    tan_radio.pack(side=TOP, anchor=NW)
+    cos_radio.pack(side=TOP, anchor=NW)
+    sin_radio.pack(side=TOP, anchor=NW)
 
     # use function declared earlier to compute stuff
     Button(win, command=trigonometrische_ausrechnen, text="Anzeigen").pack(side=TOP,
