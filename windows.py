@@ -99,13 +99,13 @@ def open_trigonometrische_window() -> None:
          # x-Werte des Graphen berechnen
         x = np.linspace(0, 2*np.pi, 1000)
 
-        if function_type == 'sin':
+        if function_type_var == 'sin':
             y = amp * np.sin(freq * x + phas)
             title = 'Sinusfunktion'
-        elif function_type == 'cos':
+        elif function_type_var == 'cos':
             y = amp * np.cos(freq * x + phas)
             title = 'Cosinusfunktion'
-        elif function_type == 'tan':
+        elif function_type_var == 'tan':
             y = amp * np.tan(freq * x + phas)
             title = 'Tangensfunktion'
 
