@@ -102,19 +102,32 @@ def open_trigonometrische_window() -> None:
         if function_type_var == 'sin':
             y = amp * np.sin(freq * x + phas)
             title = 'Sinusfunktion'
+            ax.clear()
+            ax.plot(x, y)
+            ax.set_xlabel('x')
+            ax.set_ylabel('y')
+            ax.set_title(title)
+            canvas.draw()
         elif function_type_var == 'cos':
             y = amp * np.cos(freq * x + phas)
             title = 'Cosinusfunktion'
+            ax.clear()
+            ax.plot(x, y)
+            ax.set_xlabel('x')
+            ax.set_ylabel('y')
+            ax.set_title(title)
+            canvas.draw()
         elif function_type_var == 'tan':
             y = amp * np.tan(freq * x + phas)
             title = 'Tangensfunktion'
+            ax.clear()
+            ax.plot(x, y)
+            ax.set_xlabel('x')
+            ax.set_ylabel('y')
+            ax.set_title(title)
+            canvas.draw()
 
-        ax.clear()
-        ax.plot(x, y)
-        ax.set_xlabel('x')
-        ax.set_ylabel('y')
-        ax.set_title(title)
-        canvas.draw()
+        
          # range mit von - bis
         canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
 
