@@ -99,7 +99,8 @@ def open_trigonometrische_window() -> None:
          # x-Werte des Graphen berechnen
         x = np.linspace(0, 2*np.pi, 1000)
 
-        if function_type_var == 'sin':
+        if function_type_var.get() == 'sin':
+            print("sin")
             y = amp * np.sin(freq * x + phas)
             title = 'Sinusfunktion'
             ax.clear()
@@ -108,7 +109,8 @@ def open_trigonometrische_window() -> None:
             ax.set_ylabel('y')
             ax.set_title(title)
             canvas.draw()
-        elif function_type_var == 'cos':
+        elif function_type_var.get() == 'cos':
+            print("cos")
             y = amp * np.cos(freq * x + phas)
             title = 'Cosinusfunktion'
             ax.clear()
@@ -117,7 +119,8 @@ def open_trigonometrische_window() -> None:
             ax.set_ylabel('y')
             ax.set_title(title)
             canvas.draw()
-        elif function_type_var == 'tan':
+        elif function_type_var.get() == 'tan':
+            print("tan")
             y = amp * np.tan(freq * x + phas)
             title = 'Tangensfunktion'
             ax.clear()
