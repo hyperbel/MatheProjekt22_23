@@ -1,6 +1,8 @@
 from tkinter import Tk, Frame, Label, Entry, Button, TOP, LEFT, BOTH, NW, NE, Menu
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import re
+import numpy as np
 
 # basic window config
 def base_tk(size="900x600", name="") -> Tk:
@@ -67,11 +69,11 @@ class Ganzrational(Frame):
         self.f_entry.pack(side=TOP, anchor=NW)
         # labels & entries for bounds of x and y axis
         Label(self, text="x von, bis: ").pack(side=TOP, anchor=NW)
-        x_von_bis_entry = Entry(self)
-        x_von_bis_entry.pack(side=TOP, anchor=NW)
+        self.x_von_bis_entry = Entry(self)
+        self.x_von_bis_entry.pack(side=TOP, anchor=NW)
         Label(self, text="y von, bis: ").pack(side=TOP, anchor=NW)
-        y_von_bis_entry = Entry(self)
-        y_von_bis_entry.pack(side=TOP, anchor=NW)
+        self.y_von_bis_entry = Entry(self)
+        self.y_von_bis_entry.pack(side=TOP, anchor=NW)
 
         _b = Button(self, text="Los gehts!", command=self.funktion_berechnen)
         Button(self, text="?", command=self._get_help).pack(side=TOP, anchor=NE)
@@ -102,7 +104,7 @@ class Ganzrational(Frame):
         """ holt werte und berechnet die funktion """
 
         # holt input und bereinigt ihn
-        self.basis_exponent_paare = basis_exponent_paare_holen(self.f_entry.get())
+        self.basis_exponent_paare = self.basis_exponent_paare_holen(self.f_entry.get())
 
         # erstellt plot
         fig = plt.Figure(figsize=(10, 20), dpi=100)
@@ -111,9 +113,9 @@ class Ganzrational(Frame):
         self.ax.set_xlabel("x")
         self.ax.set_ylabel("y")
         self.ax.set_title("Funktionsgraph")
-        x_von, x_bis = von_bis(x_von_bis_entry.get())
+        x_von, x_bis = self.von_bis(self.x_von_bis_entry.get())
         self.ax.set_xlim(x_von, x_bis)
-        y_von, y_bis = von_bis(y_von_bis_entry.get())
+        y_von, y_bis = self.von_bis(self.y_von_bis_entry.get())
         self.ax.set_ylim(y_von, y_bis)
         self.ax.grid()
         self.ax.spines.left.set_position('zero')
@@ -134,15 +136,83 @@ class Ganzrational(Frame):
         canvas = FigureCanvasTkAgg(fig, master=self)
         canvas.draw()
 
-        def kurvendiskussion():
-            pass
-
 
         kurvendiskussion_button = Button(self,
                                          text="Kurvendiskussion",
-                                         command=kurvendiskussion)
+                                         command=self.kurvendiskussion)
         kurvendiskussion_button.pack(side=TOP, anchor=NW)
         canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+
+    def basis_exponent_paare_holen(self, inp: str) -> list[tuple[float, float]]:
+        input_str = self.array_von_leeren_strings_befreien(inp)
+        terme = self.get_zahlen(input_str)
+        return [self.get_term(t) for t in terme]
+
+    def get_zahlen(self, inp: str) -> list:
+        """ holt wichtige zahlen aus dem string
+        :param inp: string mit allen zahlen
+        :type inp: str
+        :return: liste mit allen zahlen
+        :rtype: list
+        """
+        # regex magie um alle zahlen zu finden
+        dirty_terme = re.findall(r"[+-]?\d*x?\^?\d*", inp)
+
+        # entfernt alle leeren strings
+        terme = [t for t in dirty_terme if t != '']
+        return terme
+
+    def get_term(self, term: str) -> tuple:
+        """ gibt einen term als tuple zurück (koeffizient, exponent)
+        :param term: term als string
+        :type term: str
+        :return: tuple mit koeffizient und exponent
+        :rtype: tuple
+        """
+
+        # wenn kein x vorhanden ist, dann ist es ein konstanter term
+        if 'x' not in term:
+            return int(term), 0
+        # wenn kein exponent vorhanden ist, dann ist es ein linearer term
+        if '^' not in term:
+            return int(term[:-1]), 1
+        # sonst ist es ein term mit exponent
+        return int(term[:term.index('x')]), int(term[term.index('^')+1:])
+
+    def array_von_leeren_strings_befreien(self, arr: str) -> str:
+        """entfernt alle leeren strings aus einem array """
+        output_string = ""
+        # schaut durch alle items im array und filtert alle leeren strings raus
+        for a in arr:
+            if a != '':
+                output_string += a
+        return output_string
+
+    def leerzeichen_raus_machen(self, inp: str) -> str:
+        """ entfernt alle leerzeichen aus einem string """
+        outp = ""
+        # enumeriert über input mit (index, wert)
+        for _, character in enumerate(inp):
+            if character != " ":
+                outp += character
+        return outp
+
+    def von_bis(self, get_from: str) -> tuple[float, float]:
+        """
+        Holt von und bis werde aus einem string (von, bis)
+        :param get_from: der string, aus dem die limits geholt werden sollen
+        :type get_from: str
+        :return: die Werte aus dem String
+        :rtype: tuple[float, float]
+        """
+        input_bereinigt = self.leerzeichen_raus_machen(get_from)
+        von, bis = input_bereinigt.split(",")
+        return float(von), float(bis)
+
+
+    def kurvendiskussion(self):
+        pass
+
 
 if __name__ == "__main__":
     MainWindow().mainloop()

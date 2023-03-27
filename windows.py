@@ -328,6 +328,7 @@ def array_von_leeren_strings_befreien(arr: str) -> str:
     return output_string
 
 
+
 def von_bis(get_from: str) -> tuple[float, float]:
     """
     Holt von und bis werde aus einem string (von, bis)
@@ -339,7 +340,6 @@ def von_bis(get_from: str) -> tuple[float, float]:
     input_bereinigt = leerzeichen_raus_machen(get_from)
     von, bis = input_bereinigt.split(",")
     return float(von), float(bis)
-
 
 def ableitungs_generator(basis: list[tuple[float, float]]) -> list[tuple[float, float]]:
     """generiert die ableitung einer funktion
