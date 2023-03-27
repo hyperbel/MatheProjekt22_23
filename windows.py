@@ -27,6 +27,7 @@ def entry_is_float(inp):
     res = re.match(r"(\+|\-)?\d+(,\d+)?$", inp)
     return res is not None
 
+
 # basic window config
 def base_tk(size="900x600", name="") -> Tk:
     """basis window config
@@ -526,25 +527,4 @@ def get_menu(root) -> Menu:
                                  command=open_ueber_window)
     return _menu
 
-class MainWindow(Tk):
-    def __init__(self):
-        super().__init__()
-        self.trigonometrische_frame = Frame(self)
-        self.exponential_frame = Frame(self)
-        self.integralrechnung_frame = Frame(self)
-        self.ganzrational_frame = Frame(self)
-
-    def init_window(self):
-        self.title("Mathe Projekt 22/23")
-        self.geometry("900x600")
-        self.config(menu=get_menu(self))
-
-    def hide_frames(self) -> None
-        self.trigonometrische_frame.hide()
-        self.exponential_frame.hide()
-        self.integralrechnung_frame.hide()
-        self.ganzrational_frame.hide()
-
-    def select_ganzrational() -> None():
-        self.ganzrational_frame.show()
 
