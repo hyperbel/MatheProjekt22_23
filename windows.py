@@ -3,7 +3,6 @@ Fenster für die GUI
 """
 import re
 import sqlite3
-import math
 from tkinter import Tk, TOP, BOTH, Menu, Label, Entry, Button
 from tkinter import NW, NE, Listbox, LEFT, END, Scrollbar, RIGHT, Frame, Radiobutton, StringVar
 import matplotlib.pyplot as plt
@@ -231,6 +230,7 @@ def open_exponential_window() -> None:
     Button(win, command=exponential_ausrechnen, text="Anzeigen").pack(side=TOP,
                                                                  anchor=NW)
     Button(win, text="?", command=exponential_help).pack(side=TOP, anchor=NE)
+
 
     win.mainloop()
 
