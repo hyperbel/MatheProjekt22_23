@@ -1,8 +1,9 @@
-from tkinter import Tk, Frame, Label, Entry, Button, TOP, LEFT, BOTH, NW, NE, Menu
+from tkinter import Tk, Frame, Label, Entry, Button, TOP, LEFT, BOTH, NW, NE, Menu, Listbox, END, Scrollbar, RIGHT
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import re
 import numpy as np
+import sqlite3
 
 # basic window config
 def base_tk(size="900x600", name="") -> Tk:
@@ -28,6 +29,9 @@ class MainWindow(Tk):
 
         self.create_menu()
         self.config(menu=self.menu)
+
+        self.verlauf = Verlauf(self)
+        self.verlauf.pack(side=RIGHT, fill=BOTH, expand=True)
 
         self.selected_frame = None
 
@@ -59,6 +63,9 @@ class MainWindow(Tk):
         # hilfe_menu.add_command(label="hilfe", command=open_hilfe_window)
         #_menu.add_cascade(label="Hilfe", menu=hilfe_menu)
         # hilfe_menu.add_command(label="über", command=open_ueber_window)
+
+
+
 
 class Ganzrational(Frame):
     def __init__(self, master):
@@ -213,6 +220,34 @@ class Ganzrational(Frame):
     def kurvendiskussion(self):
         pass
 
+class Verlauf(Frame):
+    def __init__(self, master):
+        super().__init__(master)
+        self.listbox = Listbox(self, width=20, height=100)
+        self.listbox.pack(side=LEFT, fill=BOTH, expand=False)
+
+        self.listbox.insert(END, self.get_verlauf(1))
+        
+
+        self.scrollbar_init()
+
+    def get_verlauf(self, userid: int):
+        con = sqlite3.connect("mathe.db")
+        cur = con.cursor()
+        userid=1
+        sql = f"SELECT funktion from funktionen WHERE userid=\'{userid}\';"
+        ergebnis = cur.execute(sql).fetchall()
+        print (ergebnis)
+        return ergebnis
+
+    def scrollbar_init(self):
+        self.scrollbar = Scrollbar(self)
+        self.scrollbar.pack(side=RIGHT, fill=BOTH)
+
+        self.listbox.config(yscrollcommand=self.scrollbar.set)
+        self.scrollbar.config(command=self.listbox.yview)
+
+        self.scrollbar.pack(side=RIGHT, fill=BOTH)
 
 if __name__ == "__main__":
     MainWindow().mainloop()
