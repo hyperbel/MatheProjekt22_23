@@ -238,7 +238,92 @@ def open_exponential_window() -> None:
 def open_integralrechnung_window() -> None:
     """ Fenster für integralrechnung funktionen """
     win = base_tk(name="Integralrechnung")
+
+    # labels und entries
+    funktion_label =  Label(win, text="Funktion:")
+    funktion_entry = Entry(win)
+    anfangX_label = Label(win, text="Anfang von X:")
+    anfangX_entry = Entry(win)
+    endeX_label = Label(win, text="Ende von X:")
+    endeX_entry = Entry(win)  
+
+    def integral_ausrechnen():
+
+        # Hohle Werte
+        funktion_text = funktion_entry.get()
+        anfangx = float(anfangX_entry.get())
+        endex = float(endeX_entry.get())
+        y = int(y_entry.get())
+
+         # checken ob werte floats sind
+        assert entry_is_float(anfangx)
+        assert entry_is_float(endex)
+        # assert entry_is_float(x)
+
+        # hier wird durch ein bischen numpy Magie das Integral einer Funktion berechnet
+        func = lambda x: eval(funktion_text)
+
+        x = np.linspace(anfangx, endex, y)
+        y = func(x)
+        integral = np.trapz(y, x)
+
+        # Rundet das Ergebnis und gibt es in der Box aus
+        ergebnis = round(integral)
+        loesung_entry.delete(0, END)
+        loesung_entry.insert(0, str(ergebnis))
+
+
+        canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
+
+        ax.clear()
+        ax.plot(x, y)
+        ax.fill_between(x, y, 0, alpha=0.2)
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_title("Integral")
+        canvas.draw()
+
+
+    y_label = Label(win, text="Y:")
+    y_entry = Entry(win)
+    loesung_label = Label(win, text="Lösung")
+    loesung_entry = Entry(win)
+
+    # figure for matplotlib to plot lines on
+    fig = plt.Figure(figsize=(10, 10), dpi=100)
+
+    # canvas-like thing for actually drawing
+    ax = fig.add_subplot()
+
+    # range of numhers, see numpy.org for doc on arange
+    # put canvas onto tk window
+    canvas = FigureCanvasTkAgg(fig, master=win)
+    canvas.draw()
+       # range mit von - bis
+    
+    
+    def integral_help() -> None:
+        pass
+
+      # display everything
+    funktion_label.pack(side=TOP, anchor=NW)
+    funktion_entry.pack(side=TOP, anchor=NW)
+    anfangX_label.pack(side=TOP, anchor=NW)
+    anfangX_entry.pack(side=TOP, anchor=NW)
+    endeX_label.pack(side=TOP, anchor=NW)
+    endeX_entry.pack(side=TOP, anchor=NW)
+    y_label.pack(side=TOP, anchor=NW)
+    y_entry.pack(side=TOP, anchor=NW)
+    loesung_label.pack(side=TOP, anchor=NW)
+    loesung_entry.pack(side=TOP, anchor=NW)
+ 
+    # use function declared earlier to compute stuff
+    Button(win, command=integral_ausrechnen, text="Anzeigen").pack(side=TOP,
+                                                                 anchor=NW)
+    Button(win, text="?", command=integral_help).pack(side=TOP, anchor=NE)
+
     win.mainloop()
+
 
 
 def open_hilfe_window() -> None:
