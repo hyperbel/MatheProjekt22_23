@@ -1,4 +1,4 @@
-from tkinter import Tk, Frame, Label, Entry, Button, TOP, LEFT, BOTH, NW, NE, Menu, Listbox, END, Scrollbar, RIGHT
+from tkinter import Tk, Frame, Label, Entry, Button, TOP, LEFT, BOTH, NW, NE, Menu, Listbox, Scrollbar, RIGHT, END
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import re
@@ -28,15 +28,14 @@ class MainWindow(Tk):
         self.geometry("900x600")
 
         self.create_menu()
-        self.config(menu=self.menu)
+        self.config(menu=self.menu, bg="red")
 
         self.verlauf = Verlauf(self)
-        self.verlauf.pack(side=RIGHT, fill=BOTH, expand=True)
-
-        self.selected_frame = None
+        self.verlauf.pack(side=LEFT, fill=BOTH, expand=False)
 
     def select_ganzrational(self):
         self.selected_frame = Ganzrational(self)
+        self.selected_frame.pack(side=RIGHT, fill=BOTH, expand=True)
         pass
 
     # generiert main menu fuer das root win
@@ -69,7 +68,7 @@ class MainWindow(Tk):
 
 class Ganzrational(Frame):
     def __init__(self, master):
-        super().__init__(master)
+        super().__init__(master, bg="blue")
         Label(self, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
 
         self.f_entry = Entry(self)
@@ -222,12 +221,12 @@ class Ganzrational(Frame):
 
 class Verlauf(Frame):
     def __init__(self, master):
-        super().__init__(master)
+        super().__init__(master, bg="green", width=30)
+        self.verlauf = self.get_verlauf(1)
         self.listbox = Listbox(self, width=20, height=100)
+        for i in self.verlauf:
+            self.listbox.insert(END, i[0])
         self.listbox.pack(side=LEFT, fill=BOTH, expand=False)
-
-        self.listbox.insert(END, self.get_verlauf(1))
-        
 
         self.scrollbar_init()
 
@@ -237,12 +236,11 @@ class Verlauf(Frame):
         userid=1
         sql = f"SELECT funktion from funktionen WHERE userid=\'{userid}\';"
         ergebnis = cur.execute(sql).fetchall()
-        print (ergebnis)
+        print(ergebnis)
         return ergebnis
 
     def scrollbar_init(self):
-        self.scrollbar = Scrollbar(self)
-        self.scrollbar.pack(side=RIGHT, fill=BOTH)
+        self.scrollbar = Scrollbar(self, width=10)
 
         self.listbox.config(yscrollcommand=self.scrollbar.set)
         self.scrollbar.config(command=self.listbox.yview)
