@@ -543,6 +543,7 @@ def open_main_window() -> None:
         # setzt eine Legende in die obere rechte Ecke
         ax.legend(loc="upper right")
 
+        fig.set_size_inches(5,5)
         canvas = FigureCanvasTkAgg(fig, master=terme_eingeben_frame)
         canvas.draw()
 
