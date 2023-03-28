@@ -53,6 +53,7 @@ class Ganzrational(Frame):
 
         # erstellt plot
         fig = plt.Figure(figsize=(10, 20), dpi=100)
+
         x_werte = np.arange(-100, 200, 0.2)
         self.ax = fig.add_subplot()
         self.ax.set_xlabel("x")
@@ -78,6 +79,7 @@ class Ganzrational(Frame):
         # setzt eine Legende in die obere rechte Ecke
         self.ax.legend(loc="upper right")
 
+        fig.set_size_inches(5,5)
         self.canvas = FigureCanvasTkAgg(fig, master=self)
         self.canvas.draw()
 
@@ -171,6 +173,8 @@ class Exponential(Frame):
 
         # figure for matplotlib to plot lines on
         fig = plt.Figure(figsize=(10, 10), dpi=100)
+        fig.set_figheight(10)
+        fig.set_figwidth(10)
 
         # canvas-like thing for actually draselfg
         self.ax = fig.add_subplot()
