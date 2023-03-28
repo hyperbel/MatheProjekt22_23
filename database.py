@@ -7,6 +7,8 @@ def create_db():
     cur = con.cursor()
 
     # Tabelle user erstellen
+
+    # MM-DD-YYYY HH:MM
     sql = "CREATE TABLE user (" \
           "username TEXT, "  \
           "passwort TEXT);"
@@ -14,6 +16,7 @@ def create_db():
     con.commit()
     sql = "CREATE TABLE funktionen (" \
           "funktion TEXT, "	\
+          "zeit TEXT, "	\
           "userid INTEGER);"
     cur.execute(sql)
     con.commit()
