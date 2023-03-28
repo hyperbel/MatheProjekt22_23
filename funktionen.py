@@ -73,22 +73,18 @@ class Ganzrational(Frame):
 
         self.ax.scatter(0, 0, color="purple", label="Nullpunkt")
 
-
-
         self.ax.plot(x_werte, self.funktion(x_werte), label="linie")
         # setzt eine Legende in die obere rechte Ecke
         self.ax.legend(loc="upper right")
 
-        fig.set_size_inches(5,5)
         self.canvas = FigureCanvasTkAgg(fig, master=self)
         self.canvas.draw()
-
 
         kurvendiskussion_button = Button(self,
                                          text="Kurvendiskussion",
                                          command=self.kurvendiskussion)
         kurvendiskussion_button.pack(side=TOP, anchor=NW)
-        self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+        self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=False)
 
     def basis_exponent_paare_holen(self, inp: str) -> list[tuple[float, float]]:
         input_str = self.array_von_leeren_strings_befreien(inp)
@@ -173,8 +169,6 @@ class Exponential(Frame):
 
         # figure for matplotlib to plot lines on
         fig = plt.Figure(figsize=(10, 10), dpi=100)
-        fig.set_figheight(10)
-        fig.set_figwidth(10)
 
         # canvas-like thing for actually draselfg
         self.ax = fig.add_subplot()
