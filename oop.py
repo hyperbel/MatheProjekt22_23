@@ -10,7 +10,7 @@ class MainWindow(Tk):
         self.geometry("900x600")
 
         self.create_menu()
-        self.config(menu=self.menu, bg="red")
+        self.config(menu=self.menu)
 
         self.verlauf = Verlauf(self)
         self.verlauf.pack(side=LEFT, fill=BOTH, expand=False)

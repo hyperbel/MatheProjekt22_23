@@ -7,7 +7,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 class Ganzrational(Frame):
     def __init__(self, master):
-        super().__init__(master, bg="blue")
+        super().__init__(master)
         Label(self, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
 
         self.f_entry = Entry(self)
