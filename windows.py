@@ -100,20 +100,15 @@ def open_trigonometrische_window() -> None:
         x = np.linspace(0, 2*np.pi, 1000)
 
         if function_type_var.get() == 'sin':
-            print("sin")
             y = amp * np.sin(freq * x + phas)
             title = 'Sinusfunktion'
         elif function_type_var.get() == 'cos':
-            print("cos")
             y = amp * np.cos(freq * x + phas)
             title = 'Cosinusfunktion'
         elif function_type_var.get() == 'tan':
-            print("tan")
             y = amp * np.tan(freq * x + phas)
             title = 'Tangensfunktion'
          
-
-        
         ax.clear()
         ax.plot(x, y)
         ax.set_xlabel('x')
@@ -122,9 +117,6 @@ def open_trigonometrische_window() -> None:
         canvas.draw()
          # range mit von - bis
         canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
-
-
-        print("lol")
 
 
     def trigonometische_help() -> None:
