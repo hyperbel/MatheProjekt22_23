@@ -1,3 +1,6 @@
+"""@package funktionen
+hier werden die Frames fuer die Funktionen definiert
+"""
 from tkinter import Frame, Label, Entry, Button, TOP, LEFT, BOTH, NW, NE
 import utils
 import matplotlib.pyplot as plt
@@ -227,4 +230,3 @@ class Exponential(Frame):
         Button(self, command=self.exponential_ausrechnen, text="Anzeigen").pack(side=TOP,
                                                                      anchor=NW)
         Button(self, text="?", command=self.exponential_help).pack(side=TOP, anchor=NE)
-
