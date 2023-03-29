@@ -1,7 +1,7 @@
 """@package funktionen
 hier werden die Frames fuer die Funktionen definiert
 """
-from tkinter import Frame, Label, Entry, Button, TOP, LEFT, BOTH, NW, NE
+from tkinter import Frame, Label, Entry, Button, TOP, LEFT, BOTH, NW, NE, END
 import utils
 import matplotlib.pyplot as plt
 import numpy as np
@@ -180,8 +180,7 @@ class Exponential(Frame):
 
         # range of numhers, see numpy.org for doc on arange
         # put canvas onto tk selfdow
-        canvas = FigureCanvasTkAgg(fig, master=self)
-        canvas.draw()
+        self.canvas = FigureCanvasTkAgg(fig, master=self)
 
     # function in function to be used on button click
     def exponential_ausrechnen(self) -> None:
@@ -209,6 +208,7 @@ class Exponential(Frame):
         self.ax.plot(self.x_werte, a ** self.x_werte)
 
         self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+        self.canvas.draw()
 
     def exponential_help(self) -> None:
         pass
@@ -232,59 +232,65 @@ class Exponential(Frame):
         Button(self, text="?", command=self.exponential_help).pack(side=TOP, anchor=NE)
 
 
-class trigonometische(Frame()):
-    
-
-     def trigonometrische_ausrechnen():
-
-        amp = float(amplitude_entry.get())
-        freq = float(frequenz_entry.get())
-        phas = float(phase_entry.get())
-
-         # checken ob werte floats sind
-        assert entry_is_float(amp)
-        assert entry_is_float(freq)
-        assert entry_is_float(phas)
-        # assert entry_is_float(x)
-
-         # x-Werte des Graphen berechnen
-        x = np.linspace(0, 2*np.pi, 1000)
-
-        if function_type_var.get() == 'sin':
-            y = amp * np.sin(freq * x + phas)
-            title = 'Sinusfunktion'
-        elif function_type_var.get() == 'cos':
-            y = amp * np.cos(freq * x + phas)
-            title = 'Cosinusfunktion'
-        elif function_type_var.get() == 'tan':
-            y = amp * np.tan(freq * x + phas)
-            title = 'Tangensfunktion'
-         
-        ax.clear()
-        ax.plot(x, y)
-        ax.set_xlabel('x')
-        ax.set_ylabel('y')
-        ax.set_title(title)
-        canvas.draw()
-         # range mit von - bis
-        canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+class Trigonometische(Frame):
+    def __init__(self, master):
+        super().__init__(master)
+        self.von_entry = Entry(self)
+        self.bis_entry = Entry(self)
+        self.amplitude_entry = Entry(self)
+        self.frequenz_entry = Entry(self)
+        self.phase_entry = Entry(self)
+        self.x_achse_entry = Entry(self)
+        self.y_achse_entry = Entry(self)
 
 
+    def trigonometrische_ausrechnen(self):
+       self.amp = float(self.amplitude_entry.get())
+       self.freq = float(self.frequenz_entry.get())
+       self.phase = float(self.phase_entry.get())
 
-class integral(Frame()):
-    
+        # checken ob werte floats sind
+       assert utils.entry_is_float(self.amp)
+       assert utils.entry_is_float(self.freq)
+       assert utils.entry_is_float(self.phase)
+       # assert entry_is_float(x)
 
-     def integral_ausrechnen():
+        # x-Werte des Graphen berechnen
+       self.x = np.linspace(0, 2*np.pi, 1000)
 
+       if self.function_type_var.get() == 'sin':
+           self.y = self.amp * np.sin(self.freq * self.x + self.phase)
+           self.title = 'Sinusfunktion'
+       elif self.function_type_var.get() == 'cos':
+           self.y = self.amp * np.cos(self.freq * self.x + self.phase)
+           self.title = 'Cosinusfunktion'
+       elif self.function_type_var.get() == 'tan':
+           self.y = self.amp * np.tan(self.freq * self.x + self.phase)
+           self.title = 'Tangensfunktion'
+        
+       self.ax.clear()
+       self.ax.plot(self.x, self.y)
+       self.ax.set_xlabel('x')
+       self.ax.set_ylabel('y')
+       self.ax.set_title(self.title)
+       self.canvas.draw()
+        # range mit von - bis
+       self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+
+
+
+class Integral(Frame):
+
+     def integral_ausrechnen(self):
         # Hohle Werte
-        funktion_text = funktion_entry.get()
-        anfangx = float(anfangX_entry.get())
-        endex = float(endeX_entry.get())
-        y = int(y_entry.get())
+        funktion_text = self.funktion_entry.get()
+        anfangx = float(self.anfangX_entry.get())
+        endex = float(self.endeX_entry.get())
+        y = int(self.y_entry.get())
 
          # checken ob werte floats sind
-        assert entry_is_float(anfangx)
-        assert entry_is_float(endex)
+        assert utils.entry_is_float(anfangx)
+        assert utils.entry_is_float(endex)
         # assert entry_is_float(x)
 
         # hier wird durch ein bischen numpy Magie das Integral einer Funktion berechnet
@@ -300,7 +306,7 @@ class integral(Frame()):
         loesung_entry.insert(0, str(ergebnis))
 
 
-        canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
+        self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
 
         ax.clear()
         ax.plot(x, y)
@@ -308,4 +314,4 @@ class integral(Frame()):
         ax.set_xlabel('x')
         ax.set_ylabel('y')
         ax.set_title("Integral")
-        canvas.draw()
+        self.canvas.draw()
