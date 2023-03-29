@@ -230,3 +230,82 @@ class Exponential(Frame):
         Button(self, command=self.exponential_ausrechnen, text="Anzeigen").pack(side=TOP,
                                                                      anchor=NW)
         Button(self, text="?", command=self.exponential_help).pack(side=TOP, anchor=NE)
+
+
+class trigonometische(Frame()):
+    
+
+     def trigonometrische_ausrechnen():
+
+        amp = float(amplitude_entry.get())
+        freq = float(frequenz_entry.get())
+        phas = float(phase_entry.get())
+
+         # checken ob werte floats sind
+        assert entry_is_float(amp)
+        assert entry_is_float(freq)
+        assert entry_is_float(phas)
+        # assert entry_is_float(x)
+
+         # x-Werte des Graphen berechnen
+        x = np.linspace(0, 2*np.pi, 1000)
+
+        if function_type_var.get() == 'sin':
+            y = amp * np.sin(freq * x + phas)
+            title = 'Sinusfunktion'
+        elif function_type_var.get() == 'cos':
+            y = amp * np.cos(freq * x + phas)
+            title = 'Cosinusfunktion'
+        elif function_type_var.get() == 'tan':
+            y = amp * np.tan(freq * x + phas)
+            title = 'Tangensfunktion'
+         
+        ax.clear()
+        ax.plot(x, y)
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_title(title)
+        canvas.draw()
+         # range mit von - bis
+        canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+
+
+
+class integral(Frame()):
+    
+
+     def integral_ausrechnen():
+
+        # Hohle Werte
+        funktion_text = funktion_entry.get()
+        anfangx = float(anfangX_entry.get())
+        endex = float(endeX_entry.get())
+        y = int(y_entry.get())
+
+         # checken ob werte floats sind
+        assert entry_is_float(anfangx)
+        assert entry_is_float(endex)
+        # assert entry_is_float(x)
+
+        # hier wird durch ein bischen numpy Magie das Integral einer Funktion berechnet
+        func = lambda x: eval(funktion_text)
+
+        x = np.linspace(anfangx, endex, y)
+        y = func(x)
+        integral = np.trapz(y, x)
+
+        # Rundet das Ergebnis und gibt es in der Box aus
+        ergebnis = round(integral)
+        loesung_entry.delete(0, END)
+        loesung_entry.insert(0, str(ergebnis))
+
+
+        canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
+
+        ax.clear()
+        ax.plot(x, y)
+        ax.fill_between(x, y, 0, alpha=0.2)
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_title("Integral")
+        canvas.draw()
