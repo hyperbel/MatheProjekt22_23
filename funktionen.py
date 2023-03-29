@@ -1,7 +1,7 @@
 """@package funktionen
 hier werden die Frames fuer die Funktionen definiert
 """
-from tkinter import Frame, Label, Entry, Button, TOP, LEFT, BOTH, NW, NE, END
+from tkinter import Frame, Label, Entry, Button, TOP, LEFT, BOTH, NW, NE, END, RadioButton, StringVar
 import utils
 import matplotlib.pyplot as plt
 import numpy as np
@@ -232,16 +232,26 @@ class Exponential(Frame):
         Button(self, text="?", command=self.exponential_help).pack(side=TOP, anchor=NE)
 
 
-class Trigonometische(Frame):
+class Trigonometrische(Frame):
     def __init__(self, master):
         super().__init__(master)
-        self.von_entry = Entry(self)
-        self.bis_entry = Entry(self)
+
+    def create_widgets(self):
+        self.amplitude_label =  Label(self, text="Amplitude:")
         self.amplitude_entry = Entry(self)
+        self.frequenz_label = Label(self, text="Frequenz:")
         self.frequenz_entry = Entry(self)
+        self.phase_label = Label(self, text="Phase:")
         self.phase_entry = Entry(self)
-        self.x_achse_entry = Entry(self)
-        self.y_achse_entry = Entry(self)
+        self.function_type_var = StringVar(value='sin')
+
+        # figure for matplotlib to plot lines on
+        self.fig = plt.Figure(figsize=(10, 10), dpi=100)
+
+        # canvas-like thing for actually drawing
+        self.ax = self.fig.add_subplot()
+
+        self.canvas = FigureCanvasTkAgg(self.fig, master=self)
 
 
     def trigonometrische_ausrechnen(self):
@@ -276,14 +286,15 @@ class Trigonometische(Frame):
        self.canvas.draw()
         # range mit von - bis
        self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+       self.canvas.draw()
 
 
 
-class Integral(Frame):
+class Integralrechnung(Frame):
 
      def integral_ausrechnen(self):
         # Hohle Werte
-        funktion_text = self.funktion_entry.get()
+        funktion_text = self.function_entry.get()
         anfangx = float(self.anfangX_entry.get())
         endex = float(self.endeX_entry.get())
         y = int(self.y_entry.get())

@@ -31,6 +31,16 @@ class MainWindow(Tk):
         self.selected_frame = f.Exponential(self)
         self.selected_frame.pack(side=RIGHT, fill=BOTH, expand=True)
 
+    def select_trigonometrische(self):
+        self.hide_all_frames()
+        self.selected_frame = f.Trigonometrische(self)
+        self.selected_frame.pack(side=RIGHT, fill=BOTH, expand=True)
+
+    def select_integralrechnung(self):
+        self.hide_all_frames()
+        self.selected_frame = f.Integralrechnung(self)
+        self.selected_frame.pack(side=RIGHT, fill=BOTH, expand=True)
+
     # generiert main menu fuer das root win
     def create_menu(self) -> None:
         """ generiert main menu für das root win """
