@@ -8,7 +8,18 @@ import numpy as np
 import re
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-class Ganzrational(Frame):
+class FunktionFrame(Frame):
+    def __init__(self, master):
+        super().__init__(master)
+        self.master = master
+    
+    def verlauf_appendieren(self) -> None:
+        """ fuegt die funktion in den Verlauf ein 
+            soll überschrieben werden"""
+        raise NotImplementedError
+
+
+class Ganzrational(FunktionFrame):
     def __init__(self, master):
         super().__init__(master)
         Label(self, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
@@ -159,7 +170,7 @@ class Ganzrational(Frame):
     def kurvendiskussion(self):
         pass
 
-class Exponential(Frame):
+class Exponential(FunktionFrame):
     def __init__(self, master):
         super().__init__(master)
         self.von_entry = Entry(self)
@@ -232,7 +243,7 @@ class Exponential(Frame):
         Button(self, text="?", command=self.exponential_help).pack(side=TOP, anchor=NE)
 
 
-class Trigonometrische(Frame):
+class Trigonometrische(FunktionFrame):
     def __init__(self, master):
         super().__init__(master)
 
@@ -294,7 +305,7 @@ class Trigonometrische(Frame):
 
 
 
-class Integralrechnung(Frame):
+class Integralrechnung(FunktionFrame):
     def __init__(self, master):
         super().__init__(master)
         self.create_widgets()
