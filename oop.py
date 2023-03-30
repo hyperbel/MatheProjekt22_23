@@ -1,8 +1,12 @@
-import time
 from tkinter import Tk, LEFT, BOTH, Menu, RIGHT, Frame, Label, Canvas, PhotoImage, NW, Button
-import funktionen as f
 from verlauf import Verlauf
 
+def import_funktionen():
+    """ importiert funktionen.py und macht es als globale variable f verfügbar
+        das mache ich, damit das splash ding auch eine funktion hat ausser schön auszusehen"""
+    global f
+    import funktionen as _f
+    f = _f
 
 class MainWindow(Tk):
     def __init__(self):
@@ -151,7 +155,8 @@ class Splash(Tk):
         self.eval('tk::PlaceWindow . center')
         self.update()
         
-        time.sleep(duration_s)
+        import_funktionen()
+
         self.destroy()
 
 
