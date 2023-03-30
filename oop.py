@@ -1,4 +1,6 @@
-from tkinter import Tk, LEFT, BOTH, Menu, RIGHT
+import time
+from tkinter import Tk, LEFT, BOTH, Menu, RIGHT, Frame, Label, Canvas, PhotoImage, NW, Button
+
 import funktionen as f
 from verlauf import Verlauf
 
@@ -72,6 +74,88 @@ class MainWindow(Tk):
         #_menu.add_cascade(label="Hilfe", menu=hilfe_menu)
         # hilfe_menu.add_command(label="über", command=open_ueber_window)
 
+class WelcomeWizard:
+    def __init__(self, master):
+        self.master = master
+        master.title("Willkommen")
+
+        self.pages = []
+        self.current_page = 0
+
+        page1 = Frame(master)
+        label1 = Label(page1, text="Willkommen beim Mathefunktionsrechner!")
+        label1.pack()
+        self.pages.append(page1)
+
+        page2 = Frame(master)
+        label2 = Label(page2, text="Diese Software kann dir mathematische Funktionen berechnen und erklären.")
+        label2.pack()
+        self.pages.append(page2)
+
+        page3 = Frame(master)
+        label3 = Label(page3, text="Wenn du hilfe brauchst klicke einfach auf das ? im Fenster")
+        label3.pack(side="left")
+        self.finish_button = Button(page3, text="Finish", command=self.finish)
+        self.finish_button.pack(side="left")
+        self.pages.append(page3)
+
+        button_frame = Frame(master)
+        self.back_button = Button(button_frame, text="Back", command=self.back)
+        self.back_button.pack(side="left")
+        self.next_button = Button(button_frame, text="Next", command=self.next)
+        self.next_button.pack(side="left")
+
+        self.show_current_page()
+        button_frame.pack()
+
+    def show_current_page(self):
+        self.pages[self.current_page].pack()
+        if self.current_page == 0:
+            self.next_button.pack()
+        elif self.current_page == len(self.pages) - 1:
+            self.back_button.pack()
+            self.finish_button.pack(side="left")
+            self.next_button.pack_forget()
+        else:
+            self.back_button.pack()
+            self.next_button.pack()
+
+    def hide_current_page(self):
+        self.pages[self.current_page].pack_forget()
+
+    def next(self):
+        self.hide_current_page()
+        self.current_page += 1
+        self.show_current_page()
+
+    def back(self):
+        self.hide_current_page()
+        self.current_page -= 1
+        self.show_current_page()
+
+    def finish(self):
+        self.master.destroy()
+
+class Splash(Tk):
+    def __init__(self, duration_s: int = 1):
+        super().__init__()
+        img = PhotoImage(file="bild3.png")
+        canvas = Canvas(self, width=700, height=300)
+        canvas.pack()
+        canvas.create_image(0, 0, anchor=NW, image=img)
+        canvas.create_text(350, 150, text="Mathe-Funktionen-Rechner 2022/23", font=("Arial", 28),fill="blue")
+        self.overrideredirect(1)
+        self.geometry("700x300")
+        Label(self, text="Mathe-Funktionen-Rechner 2022/23", font=("Arial", 20)).pack()
+        Label(self, text="Thomas & Finn", font=("Arial", 15)).pack()
+
+        self.eval(':PlaceWindow . center')
+        self.update()
+
+        time.sleep(duration_s)
+
+
 
 if __name__ == "__main__":
+    Splash(duration_s=3).mainloop()
     MainWindow().mainloop()
