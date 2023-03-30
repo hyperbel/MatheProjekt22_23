@@ -137,7 +137,7 @@ class WelcomeWizard:
         self.master.destroy()
 
 class Splash(Tk):
-    def __init__(self, duration_s: int = 1):
+    def __init__(self, duration_s: int = 2):
         super().__init__()
         img = PhotoImage(file="bild3.png")
         canvas = Canvas(self, width=700, height=300)
@@ -151,8 +151,9 @@ class Splash(Tk):
 
         self.eval('tk::PlaceWindow . center')
         self.update()
-
+        
         time.sleep(duration_s)
+        self.destroy()
 
 
 
