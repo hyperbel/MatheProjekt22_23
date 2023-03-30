@@ -1,6 +1,5 @@
 import time
 from tkinter import Tk, LEFT, BOTH, Menu, RIGHT, Frame, Label, Canvas, PhotoImage, NW, Button
-
 import funktionen as f
 from verlauf import Verlauf
 
