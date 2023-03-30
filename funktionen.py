@@ -188,7 +188,6 @@ class Ganzrational(FunktionFrame):
                 ableitung += f"-{term[1:]}"
             else:
                 ableitung += f"+{term}"
-            #ableitung += f"{basis * exponent}x^{exponent - 1} + "
         return ableitung[:-3]
 
     def kurvendiskussion(self):
