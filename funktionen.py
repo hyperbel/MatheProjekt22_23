@@ -1,7 +1,7 @@
 """@package funktionen
 hier werden die Frames fuer die Funktionen definiert
 """
-from tkinter import Frame, Label, Entry, Button, TOP, LEFT, BOTH, NW, NE, END, Radiobutton, StringVar
+from tkinter import Frame, Label, Entry, Button, TOP, LEFT, BOTH, NW, NE, END, Radiobutton, StringVar, messagebox
 import utils
 import matplotlib.pyplot as plt
 import numpy as np
@@ -255,17 +255,21 @@ class Trigonometrische(Frame):
 
 
     def trigonometrische_ausrechnen(self):
-       self.amp = float(self.amplitude_entry.get())
-       self.freq = float(self.frequenz_entry.get())
-       self.phase = float(self.phase_entry.get())
+       try:
+            self.amp = float(self.amplitude_entry.get())
+            self.freq = float(self.frequenz_entry.get())
+            self.phase = float(self.phase_entry.get())
 
-        # checken ob werte floats sind
-       assert utils.entry_is_float(self.amp)
-       assert utils.entry_is_float(self.freq)
-       assert utils.entry_is_float(self.phase)
+                # checken ob werte floats sind
+            assert utils.entry_is_float(self.amp)
+            assert utils.entry_is_float(self.freq)
+            assert utils.entry_is_float(self.phase)
+       except:
+            error = messagebox.showerror(title="Inkorekte eingabe", message="Sie müssen richtige Werte in die Textbox eingeben, bei hilfe einfach auf das ? klicken", **options)
        # assert entry_is_float(x)
 
         # x-Werte des Graphen berechnen
+        
        self.x = np.linspace(0, 2*np.pi, 1000)
 
        if self.function_type_var.get() == 'sin':
