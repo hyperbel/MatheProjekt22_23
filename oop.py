@@ -53,6 +53,10 @@ class MainWindow(Tk):
 
         funktionen_menu.add_command(label="Exponential", command=self.select_exponential)
 
+        funktionen_menu.add_command(label="Trigonometrie", command=self.select_trigonometrische)
+
+        funktionen_menu.add_command(label="Integral", command=self.select_integralrechnung)
+
 
         self.menu.add_cascade(label="Funktionen", menu=funktionen_menu)
 
