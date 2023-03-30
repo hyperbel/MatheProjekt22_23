@@ -347,6 +347,20 @@ class Integralrechnung(FunktionFrame):
         # put canvas onto tk window
         self.canvas = FigureCanvasTkAgg(fig, master=self)
 
+        self.pack_widgets()
+
+    def pack_widgets(self) -> None:
+        self.funktion_label.pack(side=TOP, anchor=NW)
+        self.funktion_entry.pack(side=TOP, anchor=NW)
+        self.anfangX_label.pack(side=TOP, anchor=NW)
+        self.anfangX_entry.pack(side=TOP, anchor=NW)
+        self.endeX_label.pack(side=TOP, anchor=NW)
+        self.endeX_entry.pack(side=TOP, anchor=NW)
+        self.y_label.pack(side=TOP, anchor=NW)
+        self.y_entry.pack(side=TOP, anchor=NW)
+        self.loesung_label.pack(side=TOP, anchor=NW)
+        self.loesung_entry.pack(side=TOP, anchor=NW)
+
     def integral_ausrechnen(self):
         # Hohle Werte
         funktion_text = self.funktion_entry.get()
