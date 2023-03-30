@@ -1,7 +1,7 @@
 """@package funktionen
 hier werden die Frames fuer die Funktionen definiert
 """
-from tkinter import Frame, Label, Entry, Button, TOP, LEFT, BOTH, NW, NE, END, RadioButton, StringVar
+from tkinter import Frame, Label, Entry, Button, TOP, LEFT, BOTH, NW, NE, END, StringVar
 import utils
 import matplotlib.pyplot as plt
 import numpy as np
