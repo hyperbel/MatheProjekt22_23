@@ -149,7 +149,7 @@ class Splash(Tk):
         Label(self, text="Mathe-Funktionen-Rechner 2022/23", font=("Arial", 20)).pack()
         Label(self, text="Thomas & Finn", font=("Arial", 15)).pack()
 
-        self.eval(':PlaceWindow . center')
+        self.eval('tk::PlaceWindow . center')
         self.update()
 
         time.sleep(duration_s)
