@@ -18,6 +18,11 @@ class FunktionFrame(Frame):
             soll überschrieben werden"""
         raise NotImplementedError
 
+    def get_help(self) -> None:
+        """ ruft das hilfefenster auf 
+            soll überschrieben werden"""
+        raise NotImplementedError
+
 
 class Ganzrational(FunktionFrame):
     def __init__(self, master):
@@ -35,13 +40,13 @@ class Ganzrational(FunktionFrame):
         self.y_von_bis_entry.pack(side=TOP, anchor=NW)
 
         _b = Button(self, text="Los gehts!", command=self.funktion_berechnen)
-        Button(self, text="?", command=self._get_help).pack(side=TOP, anchor=NE)
+        Button(self, text="?", command=self.get_help).pack(side=TOP, anchor=NE)
 
         _b.pack(side=TOP, anchor=NW)
 
         self.pack(side=LEFT, fill=BOTH, expand=True)
 
-    def _get_help(self) -> None:
+    def get_help(self) -> None:
         """ ruft das hilfefenster auf """
         _help = utils.base_tk(size="800x500", name="Hilfe - Funktionen")
         Label(_help,
@@ -247,6 +252,8 @@ class Trigonometrische(FunktionFrame):
     def __init__(self, master):
         super().__init__(master)
 
+        self.create_widgets()
+
     def create_widgets(self):
         self.amplitude_label =  Label(self, text="Amplitude:")
         self.amplitude_entry = Entry(self)
@@ -264,6 +271,20 @@ class Trigonometrische(FunktionFrame):
 
         self.canvas = FigureCanvasTkAgg(self.fig, master=self)
 
+        Button(self, command=self.trigonometrische_ausrechnen, text="Anzeigen").pack(side=TOP,
+                                                                     anchor=NW)
+        Button(self, text="?", command=self.get_help).pack(side=TOP, anchor=NE)
+
+        self.pack_items()
+
+    def pack_items(self):
+        self.amplitude_label.pack(side=TOP, anchor=NW)
+        self.amplitude_entry.pack(side=TOP, anchor=NW)
+        self.frequenz_label.pack(side=TOP, anchor=NW)
+        self.frequenz_entry.pack(side=TOP, anchor=NW)
+        self.phase_label.pack(side=TOP, anchor=NW)
+        self.phase_entry.pack(side=TOP, anchor=NW)
+
 
     def trigonometrische_ausrechnen(self):
        try:
@@ -271,14 +292,9 @@ class Trigonometrische(FunktionFrame):
             self.freq = float(self.frequenz_entry.get())
             self.phase = float(self.phase_entry.get())
 
-                # checken ob werte floats sind
-            assert utils.entry_is_float(self.amp)
-            assert utils.entry_is_float(self.freq)
-            assert utils.entry_is_float(self.phase)
-       except:
-            error = messagebox.showerror(title="Inkorekte eingabe", message="Sie müssen richtige Werte in die Textbox eingeben, bei hilfe einfach auf das ? klicken", **options)
-       # assert entry_is_float(x)
-
+       except ValueError:
+            _ = messagebox.showerror(title="Inkorrekte eingabe", message="Sie müssen richtige Werte in die Textbox eingeben, bei hilfe einfach auf das ? klicken")
+            return
         # x-Werte des Graphen berechnen
         
        self.x = np.linspace(0, 2*np.pi, 1000)
@@ -302,7 +318,6 @@ class Trigonometrische(FunktionFrame):
         # range mit von - bis
        self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
        self.canvas.draw()
-
 
 
 class Integralrechnung(FunktionFrame):

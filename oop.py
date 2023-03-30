@@ -143,7 +143,7 @@ class Splash(Tk):
         canvas.pack()
         canvas.create_image(0, 0, anchor=NW, image=img)
         canvas.create_text(350, 150, text="Mathe-Funktionen-Rechner 2022/23", font=("Arial", 28),fill="blue")
-        self.overrideredirect(1)
+        self.overrideredirect(True)
         self.geometry("700x300")
         Label(self, text="Mathe-Funktionen-Rechner 2022/23", font=("Arial", 20)).pack()
         Label(self, text="Thomas & Finn", font=("Arial", 15)).pack()
@@ -153,7 +153,6 @@ class Splash(Tk):
         
         time.sleep(duration_s)
         self.destroy()
-
 
 
 if __name__ == "__main__":
