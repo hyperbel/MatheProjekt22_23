@@ -1,9 +1,10 @@
-from tkinter import Tk, LEFT, BOTH, Menu, RIGHT, Frame, Label, Canvas, PhotoImage, NW, Button
 from verlauf import Verlauf
+from tkinter import Tk, LEFT, BOTH, Menu, RIGHT, Frame, Label, Canvas, PhotoImage, NW, Button
 
 def import_funktionen():
     """ importiert funktionen.py und macht es als globale variable f verfügbar
-        das mache ich, damit das splash ding auch eine funktion hat ausser schön auszusehen"""
+        das mache ich, damit das splash ding auch eine funktion hat ausser schön auszusehen
+    """
     global f
     import funktionen as _f
     f = _f
@@ -54,7 +55,7 @@ class MainWindow(Tk):
         # account_menu = Menu(_menu, tearoff=0)
         # hilfe_menu = Menu(_menu, tearoff=0)
 
-        funktionen_menu.add_command(label="Ganzrational", command=self.select_ganzrational)
+        funktionen_menu.add_command(label="Term eingeben", command=self.select_ganzrational)
 
         funktionen_menu.add_command(label="Exponential", command=self.select_exponential)
 

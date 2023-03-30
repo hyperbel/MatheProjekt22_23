@@ -67,6 +67,10 @@ class Ganzrational(FunktionFrame):
     def funktion_berechnen(self) -> None:
         """ holt werte und berechnet die funktion """
 
+        # ableitung berechnen
+        self.ableitung_ergebnis = self.ableitung(self.f_entry.get())
+        print(self.ableitung_ergebnis)
+
         # holt input und bereinigt ihn
         self.basis_exponent_paare = self.basis_exponent_paare_holen(self.f_entry.get())
 
@@ -172,7 +176,24 @@ class Ganzrational(FunktionFrame):
         return float(von), float(bis)
 
 
+    def ableitung(self, inp: str) -> str:
+        """ berechnet die ableitung einer funktion """
+        basis_exponent_paare = self.basis_exponent_paare_holen(inp)
+        ableitung = ""
+        for basis, exponent in basis_exponent_paare:
+            if exponent == 0:
+                continue
+            term = f"{basis * exponent}x^{exponent - 1}"
+            if term[0] == '-':
+                ableitung += f"-{term[1:]}"
+            else:
+                ableitung += f"+{term}"
+            #ableitung += f"{basis * exponent}x^{exponent - 1} + "
+        return ableitung[:-3]
+
     def kurvendiskussion(self):
+        # nullstellen
+
         pass
 
 class Exponential(FunktionFrame):
