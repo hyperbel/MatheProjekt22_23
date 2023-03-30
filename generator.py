@@ -11,7 +11,7 @@ def insert_functions(num_functions):
         a = random.randint(-10, 10)
         b = random.randint(-10, 10)
         c = random.randint(-10, 10)
-        function = f"F(x) = {a}x^2 + {b}x + {c}"
+        function = f"{a}x^2 + {b}x + {c}"
         cur.execute("INSERT INTO funktionen VALUES (?, ?)", (function, userid))
         yield function
     
