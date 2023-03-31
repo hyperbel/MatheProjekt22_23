@@ -5,10 +5,14 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 from funktionframe import FunktionFrame
 from tkinter import Label, NW, TOP, Entry, Button, NE, LEFT, BOTH
+from verlauf import Verlauf
+from oop import MainWindow
 
 class TermEingeben(FunktionFrame):
-    def __init__(self, master):
+    def __init__(self, master, parent: MainWindow):
         super().__init__(master)
+        self.parent = parent
+
         Label(self, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
 
         self.f_entry = Entry(self)
@@ -52,7 +56,7 @@ class TermEingeben(FunktionFrame):
     def funktion_berechnen(self) -> None:
         """ holt werte und berechnet die funktion """
 
-        # ableitung berechnen
+        self.verlauf_appendieren(self.parent.get_verlauf())
 
         # holt input und bereinigt ihn
         self.basis_exponent_paare = self.basis_exponent_paare_holen(self.f_entry.get())
@@ -172,6 +176,9 @@ class TermEingeben(FunktionFrame):
             else:
                 ableitung += f"+{term}"
         return ableitung[:-3]
+
+    def verlauf_appendieren(self, verlauf: Verlauf) -> None:
+        verlauf.appendieren(self.basis_funktion())
 
     def kurvendiskussion(self):
         # nullstellen

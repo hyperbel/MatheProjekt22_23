@@ -1,10 +1,14 @@
+import sqlite3
 from tkinter import Frame, Listbox, Scrollbar, END, BOTH, LEFT, RIGHT, ttk, BOTTOM
 
-import sqlite3
 
 class Verlauf(Frame):
     def __init__(self, master):
         super().__init__(master, width=30)
+
+        self.con = sqlite3.connect("mathe.db")
+        self.cur = self.con.cursor()
+
         self.verlauf = self.get_verlauf(1)
         self.listbox = Listbox(self, width=20)
         for i in self.verlauf:
@@ -13,13 +17,11 @@ class Verlauf(Frame):
         self.scrollbar_init()
         self.delete_frame_init()
         self.listbox.pack(side=LEFT, fill=BOTH, expand=True)
+        self.userid=1
 
     def get_verlauf(self, userid: int):
-        con = sqlite3.connect("mathe.db")
-        cur = con.cursor()
-        userid=1
         sql = f"SELECT funktion from funktionen WHERE userid=\'{userid}\';"
-        ergebnis = cur.execute(sql).fetchall()
+        ergebnis = self.cur.execute(sql).fetchall()
         print(ergebnis)
         return ergebnis
 
@@ -56,3 +58,9 @@ class Verlauf(Frame):
         self.combobox_init(self.delete_frame)
         self.button_init(self.delete_frame)
         self.delete_frame.pack(side=BOTTOM, fill=BOTH)
+
+    def appendieren(self, funktion):
+        self.listbox.insert(END, funktion)
+        sql = "INSERT INTO funktionen (userid, funktion) VALUES (?, ?);"
+        self.cur.execute(sql, (self.userid, funktion))
+        self.con.commit()

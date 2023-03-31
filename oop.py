@@ -25,6 +25,9 @@ class MainWindow(Tk):
 
         self.selected_frame = None
 
+    def get_verlauf(self) -> Verlauf:
+        return self.verlauf
+
     def hide_all_frames(self):
         if self.selected_frame is not None:
             self.selected_frame.pack_forget()
@@ -43,7 +46,7 @@ class MainWindow(Tk):
         # account_menu = Menu(_menu, tearoff=0)
         # hilfe_menu = Menu(_menu, tearoff=0)
 
-        funktionen_menu.add_command(label="Term eingeben", command=lambda: self.select(f.term_eingeben.TermEingeben(self)))
+        funktionen_menu.add_command(label="Term eingeben", command=lambda: self.select(f.term_eingeben.TermEingeben(self, self)))
 
         funktionen_menu.add_command(label="Exponential", command=lambda: self.select(f.exponential.Exponential(self)))
 
