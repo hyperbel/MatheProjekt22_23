@@ -37,5 +37,5 @@ def insert_functions(num_functions):
     
     con.commit()
 
-for function in insert_functions(10):
+for function in insert_functions(1500000):
     print(function)
