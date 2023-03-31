@@ -35,7 +35,7 @@ class Verlauf(Frame):
         self.scrollbar.pack(side=RIGHT, fill=BOTH)
 
     def combobox_init(self, parent):
-        self.combobox_values = ['5 min', '10 min', '15 min', '1 std', '24 std', 'alles löschen']
+        self.combobox_values = ['5 min', '10 min', '15 min', '30 min', '1 std', '2 std', '8 std', '24 std', 'alles löschen']
         self.combobox = ttk.Combobox(parent, values=self.combobox_values)
         self.combobox.pack(side=LEFT, padx=5, pady=5)
 
