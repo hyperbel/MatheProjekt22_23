@@ -1,13 +1,11 @@
 from verlauf import Verlauf
 from tkinter import Tk, LEFT, BOTH, Menu, RIGHT, Frame, Label, Canvas, PhotoImage, NW, Button
 
-
 def import_funktionen():
     """ importiert funktionen.py und macht es als globale variable f verfügbar
         das mache ich, damit das splash ding auch eine funktion hat ausser schön auszusehen
     """
     global f
-    __all__ = ['funktionen']
     import funktionen as _f
     f = _f
 
@@ -43,13 +41,13 @@ class MainWindow(Tk):
         # account_menu = Menu(_menu, tearoff=0)
         # hilfe_menu = Menu(_menu, tearoff=0)
 
-        funktionen_menu.add_command(label="Term eingeben", command=lambda: self.select(f.term_eingeben.TermEingeben(self)))
+        funktionen_menu.add_command(label="Term eingeben", command=lambda: self.select(f.TermEingeben(self)))
 
-        funktionen_menu.add_command(label="Exponential", command=lambda: self.select(f.exponential.Exponential(self)))
+        funktionen_menu.add_command(label="Exponential", command=lambda: self.select(f.Exponential(self)))
 
-        funktionen_menu.add_command(label="Trigonometrische", command=lambda: self.select(f.trigonometrische.Trigonometrische(self)))
+        funktionen_menu.add_command(label="Trigonometrische", command=lambda: self.select(f.Trigonometrische(self)))
 
-        funktionen_menu.add_command(label="Integralrechnung", command=lambda: self.select(f.integralrechnung.Integralrechnung(self)))
+        funktionen_menu.add_command(label="Integralrechnung", command=lambda: self.select(f.Integralrechnung(self)))
 
 
         self.menu.add_cascade(label="Funktionen", menu=funktionen_menu)
