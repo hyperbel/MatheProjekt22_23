@@ -30,6 +30,8 @@ class TermEingeben(FunktionFrame):
 
         _b.pack(side=TOP, anchor=NW)
 
+        self.fig = plt.Figure(figsize=(10, 20), dpi=100)
+
         self.pack(side=LEFT, fill=BOTH, expand=True)
 
     def basis_funktion(self) -> str:
@@ -62,10 +64,11 @@ class TermEingeben(FunktionFrame):
         self.basis_exponent_paare = self.basis_exponent_paare_holen(self.f_entry.get())
 
         # erstellt plot
-        fig = plt.Figure(figsize=(10, 20), dpi=100)
+
+        self.fig.clear()
 
         x_werte = np.arange(-100, 200, 0.2)
-        self.ax = fig.add_subplot()
+        self.ax = self.fig.add_subplot()
         self.ax.set_xlabel("x")
         self.ax.set_ylabel("y")
         self.ax.set_title("Funktionsgraph")
@@ -87,7 +90,8 @@ class TermEingeben(FunktionFrame):
         # setzt eine Legende in die obere rechte Ecke
         self.ax.legend(loc="upper right")
 
-        self.canvas = FigureCanvasTkAgg(fig, master=self)
+        self.canvas.get_tk_widget().destroy() if hasattr(self, "canvas") else None
+        self.canvas = FigureCanvasTkAgg(self.fig, master=self)
         self.canvas.draw()
 
         kurvendiskussion_button = Button(self,
