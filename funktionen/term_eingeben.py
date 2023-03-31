@@ -184,9 +184,15 @@ class TermEingeben(FunktionFrame):
     def verlauf_appendieren(self, verlauf: Verlauf) -> None:
         verlauf.appendieren(self.basis_funktion())
 
+    def nullstellen(self) -> list[float]:
+        basis_exponent_paare = self.basis_exponent_paare_holen(self.basis_funktion())
+        print(basis_exponent_paare)
+
+        return [0]
+        
+
     def kurvendiskussion(self):
-        # nullstellen
-         
-        abl_1 = self.ableitung(self.basis_funktion())
+        # nullstellen (f(x) = 0)
+        nullstellen = self.nullstellen()
 
         pass
