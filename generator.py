@@ -9,114 +9,23 @@ def insert_functions(num_functions):
     
     for _ in range(num_functions):
         function = ""
-        a = random.randint(-10, 10)
-        b = random.randint(-10, 10)
-        c = random.randint(-10, 10)
-        d = random.randint(-10, 10)
+        a = random.randint(0, 10)
+        b = random.randint(0, 10)
+        c = random.randint(0, 10)
+        d = random.randint(0, 10)
         hoch = random.randint(1, 7)
         if hoch > 1:
-            if hoch == 2:
-                if b > 0:
-                    if c > 0:
-                        function = f"{a}x^{hoch}+{b}x+{c}"
-                    else:
-                        function = f"{a}x^{hoch}+{b}x{c}"
-                else:
-                    if c > 0:
-                        function = f"{a}x^{hoch}{b}x+{c}"
-                    else:
-                        function = f"{a}x^{hoch}{b}x{c}"
-            elif hoch == 3:
-                if b > 0:
-                    if c > 0:
-                        if d > 0:
-                            function = f"{a}x^{hoch}+{b}x^2+{c}x+{d}"
-                        else:
-                            function = f"{a}x^{hoch}+{b}x^2+{c}x{d}"
-                    else:
-                        function = f"{a}x^{hoch}+{b}x^2{c}x+{d}"
-                else:
-                    if c > 0:
-                        if d > 0:
-                            function = f"{a}x^{hoch}{b}x^2+{c}x+{d}"
-                        else:
-                            function = f"{a}x^{hoch}+{b}x^2+{c}x{d}"
-                    else:
-                        function = f"{a}x^{hoch}{b}x^2{c}x+{d}"
-            elif hoch == 4:
-                 hoch2 = random.randint(2, 3)
-                 if b > 0:
-                    if c > 0:
-                        if d > 0:
-                                function = f"{a}x^{hoch}+{b}x^{hoch2}+{c}x+{d}"
-                        else:
-                                function = f"{a}x^{hoch}+{b}x^{hoch2}+{c}x{d}"
-                    else:
-                            function = f"{a}x^{hoch}+{b}x^{hoch2}{c}x+{d}"
-                 else:
-                        if c > 0:
-                            if d > 0:
-                                function = f"{a}x^{hoch}{b}x^{hoch2}+{c}x+{d}"
-                            else:
-                                function = f"{a}x^{hoch}+{b}x^{hoch2}+{c}x{d}"
-                        else:
-                            function = f"{a}x^{hoch}{b}x^{hoch2}{c}x+{d}"
-            elif hoch == 5:
-                 hoch2 = random.randint(2, 4)
-                 if b > 0:
-                    if c > 0:
-                        if d > 0:
-                                function = f"{a}x^{hoch}+{b}x^{hoch2}+{c}x+{d}"
-                        else:
-                                function = f"{a}x^{hoch}+{b}x^{hoch2}+{c}x{d}"
-                    else:
-                            function = f"{a}x^{hoch}+{b}x^{hoch2}{c}x+{d}"
-                 else:
-                        if c > 0:
-                            if d > 0:
-                                function = f"{a}x^{hoch}{b}x^{hoch2}+{c}x+{d}"
-                            else:
-                                function = f"{a}x^{hoch}+{b}x^{hoch2}+{c}x{d}"
-                        else:
-                            function = f"{a}x^{hoch}{b}x^{hoch2}{c}x+{d}"
-            elif hoch == 6:
-                 hoch2 = random.randint(2, 5)
-                 if b > 0:
-                    if c > 0:
-                        if d > 0:
-                                function = f"{a}x^{hoch}+{b}x^{hoch2}+{c}x+{d}"
-                        else:
-                                function = f"{a}x^{hoch}+{b}x^{hoch2}+{c}x{d}"
-                    else:
-                            function = f"{a}x^{hoch}+{b}x^{hoch2}{c}x+{d}"
-                 else:
-                        if c > 0:
-                            if d > 0:
-                                function = f"{a}x^{hoch}{b}x^{hoch2}+{c}x+{d}"
-                            else:
-                                function = f"{a}x^{hoch}+{b}x^{hoch2}+{c}x{d}"
-                        else:
-                            function = f"{a}x^{hoch}{b}x^{hoch2}{c}x+{d}"
-            elif hoch == 7:
-                 hoch2 = random.randint(2, 6)
-                 if b > 0:
-                    if c > 0:
-                        if d > 0:
-                                function = f"{a}x^{hoch}+{b}x^{hoch2}+{c}x+{d}"
-                        else:
-                                function = f"{a}x^{hoch}+{b}x^{hoch2}+{c}x{d}"
-                    else:
-                            function = f"{a}x^{hoch}+{b}x^{hoch2}{c}x+{d}"
-                 else:
-                        if c > 0:
-                            if d > 0:
-                                function = f"{a}x^{hoch}{b}x^{hoch2}+{c}x+{d}"
-                            else:
-                                function = f"{a}x^{hoch}+{b}x^{hoch2}+{c}x{d}"
-                        else:
-                            function = f"{a}x^{hoch}{b}x^{hoch2}{c}x+{d}"
-                
-           
+            hoch2 = random.randint(2,hoch-1) if hoch > 3 else 0
+            funktion = ""
+            if d != 0:
+                funktion = f"+{d}" if d > 0 else f"-{d}"
+            if c != 0:
+                funktion = f"+{c}x{funktion}" if c > 0 else f"-{c}x{funktion}"
+            if b != 0:
+                funktion = f"+{b}x^{hoch2}{funktion}" if b > 0 else f"-{b}x^{hoch2}{funktion}"
+            if a != 0:
+                funktion = f"{a}x^{hoch}{funktion}" if a > 0 else f"-{a}x^{hoch}{funktion}"
+            function = funktion
         else:
             function = f"{a}x + {b}"
 
