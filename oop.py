@@ -1,5 +1,6 @@
+import sqlite3
 from verlauf import Verlauf
-from tkinter import Tk, LEFT, BOTH, Menu, RIGHT, Frame, Label, Canvas, PhotoImage, NW, Button
+from tkinter import Tk, LEFT, BOTH, Menu, RIGHT, Frame, Label, Canvas, PhotoImage, NW, Button, Entry, Label
 
 
 def import_funktionen():
@@ -10,6 +11,55 @@ def import_funktionen():
     __all__ = ['funktionen']
     import funktionen as _f
     f = _f
+
+class LoginWindow(Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Login")
+        self.geometry("300x200")
+
+        self.connection = sqlite3.connect("mathe.db")
+        self.cursor = self.connection.cursor()
+
+        self.create_widgets()
+
+    def create_widgets(self) -> None:
+        self.username_label = Label(self, text="Username")
+        self.username_label.pack()
+        self.username_entry = Entry(self)
+        self.username_entry.pack()
+        self.password_label = Label(self, text="Password")
+        self.password_label.pack()
+        self.password_entry = Entry(self, show="*")
+        self.password_entry.pack()
+        self.login_button = Button(self, text="Login", command=self.login)
+        self.login_button.pack()
+
+    def login(self) -> None:
+        if self.eval_logindata():
+            self.proceed()
+
+        else:
+            self.password_entry.delete(0, "end")
+            
+    def proceed(self) -> None:
+        self.destroy()
+        MainWindow().mainloop()
+
+
+    def eval_logindata(self) -> bool:
+        uname = self.username_entry.get()
+        query = f"SELECT * FROM user WHERE username = ?"
+        self.cursor.execute(query, (uname,))
+        result = self.cursor.fetchall()
+        correct = False
+        if len(result) == 0:
+            pass
+        if result[0][0] == uname:
+            if result[0][1] == self.password_entry.get():
+                correct = True
+        return correct
+
 
 class MainWindow(Tk):
     def __init__(self):
@@ -154,4 +204,4 @@ class Splash(Tk):
 
 if __name__ == "__main__":
     Splash().mainloop()
-    MainWindow().mainloop()
+    LoginWindow().mainloop()
