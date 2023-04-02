@@ -1,7 +1,8 @@
 from funktionframe import FunktionFrame
-from tkinter import Label, Entry, StringVar, TOP, NE, NW, messagebox, Button, BOTH
+from tkinter import Label, Entry, StringVar, TOP, NE, NW, messagebox, Button, BOTH, Radiobutton
 import matplotlib.pyplot as plt
 import numpy as np
+from verlauf import Verlauf
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 class Trigonometrische(FunktionFrame):
@@ -30,6 +31,11 @@ class Trigonometrische(FunktionFrame):
         Button(self, command=self.trigonometrische_ausrechnen, text="Anzeigen").pack(side=TOP,
                                                                      anchor=NW)
         Button(self, text="?", command=self.get_help).pack(side=TOP, anchor=NE)
+
+        # radio buttons for selecting function type
+        Radiobutton(self, text="Sinus", variable=self.function_type_var, value='sin').pack(side=TOP, anchor=NW)
+        Radiobutton(self, text="Cosinus", variable=self.function_type_var, value='cos').pack(side=TOP, anchor=NW)
+        Radiobutton(self, text="Tangens", variable=self.function_type_var, value='tan').pack(side=TOP, anchor=NW)
 
         self.pack_items()
 

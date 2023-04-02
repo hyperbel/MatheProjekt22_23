@@ -1,8 +1,9 @@
 from funktionframe import FunktionFrame
-from tkinter import Label, Entry, BOTH, NW, TOP, END
+from tkinter import Label, Entry, BOTH, NW, TOP, END, Button
 import utils
 import numpy as np
 import matplotlib.pyplot as plt
+from verlauf import Verlauf
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 class Integralrechnung(FunktionFrame):
@@ -23,6 +24,8 @@ class Integralrechnung(FunktionFrame):
         self.loesung_label = Label(self, text="Lösung")
         self.loesung_entry = Entry(self)
 
+        self.calculate_button = Button(self, text="anzeigen", command=self.integral_ausrechnen)
+
         fig = plt.Figure(figsize=(10, 10), dpi=100)
 
         # canvas-like thing for actually drawing
@@ -33,6 +36,7 @@ class Integralrechnung(FunktionFrame):
         self.canvas = FigureCanvasTkAgg(fig, master=self)
 
         self.pack_widgets()
+
 
     def pack_widgets(self) -> None:
         self.funktion_label.pack(side=TOP, anchor=NW)
@@ -45,6 +49,8 @@ class Integralrechnung(FunktionFrame):
         self.y_entry.pack(side=TOP, anchor=NW)
         self.loesung_label.pack(side=TOP, anchor=NW)
         self.loesung_entry.pack(side=TOP, anchor=NW)
+        self.calculate_button.pack(side=TOP, anchor=NW)
+
 
     def integral_ausrechnen(self):
         # Hohle Werte
