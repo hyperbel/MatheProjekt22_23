@@ -30,7 +30,7 @@ class TermEingeben(FunktionFrame):
 
         _b.pack(side=TOP, anchor=NW)
 
-        self.fig = plt.Figure(figsize=(10, 20), dpi=100)
+        self.fig = plt.Figure(figsize=(10, 10), dpi=100)
 
         self.pack(side=LEFT, fill=BOTH, expand=True)
 
@@ -67,7 +67,7 @@ class TermEingeben(FunktionFrame):
 
         self.fig.clear()
 
-        x_werte = np.arange(-100, 200, 0.2)
+        x_werte = np.arange(-100, 200, 0.1)
         self.ax = self.fig.add_subplot()
         self.ax.set_xlabel("x")
         self.ax.set_ylabel("y")
