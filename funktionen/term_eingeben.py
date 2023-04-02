@@ -30,9 +30,9 @@ class TermEingeben(FunktionFrame):
 
         _b.pack(side=TOP, anchor=NW)
 
-        self.fig = plt.Figure(figsize=(10, 10), dpi=100)
+        self.fig = plt.Figure(figsize=(10, 10), dpi=125)
 
-        self.pack(side=LEFT, fill=BOTH, expand=True)
+        self.pack(side=LEFT, fill=BOTH, expand=False)
 
     def basis_funktion(self) -> str:
         return self.f_entry.get()
@@ -98,7 +98,7 @@ class TermEingeben(FunktionFrame):
                                          text="Kurvendiskussion",
                                          command=self.kurvendiskussion)
         kurvendiskussion_button.pack(side=TOP, anchor=NW)
-        self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=False)
+        self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
 
     def basis_exponent_paare_holen(self, inp: str) -> list[tuple[float, float]]:
         input_str = self.array_von_leeren_strings_befreien(inp)
