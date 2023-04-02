@@ -1,4 +1,4 @@
-from funktionframe import FunktionFrame
+from functionframe import FunktionFrame
 from tkinter import Label, Entry, StringVar, TOP, NE, NW, messagebox, Button, BOTH, Radiobutton
 import matplotlib.pyplot as plt
 import numpy as np

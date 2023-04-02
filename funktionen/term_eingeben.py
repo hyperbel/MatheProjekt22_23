@@ -3,7 +3,7 @@ import utils
 import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
-from funktionframe import FunktionFrame
+from functionframe import FunktionFrame
 from tkinter import Label, NW, TOP, Entry, Button, NE, LEFT, BOTH
 from verlauf import Verlauf
 from oop import MainWindow

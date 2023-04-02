@@ -1,4 +1,4 @@
-from funktionframe import FunktionFrame
+from functionframe import FunktionFrame
 import utils
 import numpy as np
 from tkinter import Label, Entry, BOTH, NW, TOP, Button, NE
