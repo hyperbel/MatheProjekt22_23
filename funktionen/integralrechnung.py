@@ -1,5 +1,5 @@
 from funktionframe import FunktionFrame
-from tkinter import Label, Entry, BOTH, NW, TOP, END, Button
+from tkinter import Label, Entry, BOTH, NW, TOP, END, Button, messagebox
 import utils
 import numpy as np
 import matplotlib.pyplot as plt
@@ -54,14 +54,20 @@ class Integralrechnung(FunktionFrame):
 
     def integral_ausrechnen(self):
         # Hohle Werte
-        funktion_text = self.funktion_entry.get()
-        anfangx = float(self.anfangX_entry.get())
-        endex = float(self.endeX_entry.get())
-        y = int(self.y_entry.get())
+        try: 
+            funktion_text = self.funktion_entry.get()
+            anfangx = float(self.anfangX_entry.get())
+            endex = float(self.endeX_entry.get())
+            y = int(self.y_entry.get())
 
-         # checken ob werte floats sind
-        assert utils.entry_is_float(anfangx)
-        assert utils.entry_is_float(endex)
+            # checken ob werte floats sind
+            assert utils.entry_is_float(anfangx)
+            assert utils.entry_is_float(endex)
+            
+        except ValueError:
+            _ = messagebox.showerror(title="Inkorrekte eingabe", message="Sie müssen richtige Werte in die Textbox eingeben, bei hilfe einfach auf das ? klicken")
+            return
+
         # assert entry_is_float(x)
 
         # hier wird durch ein bischen numpy Magie das Integral einer Funktion berechnet
