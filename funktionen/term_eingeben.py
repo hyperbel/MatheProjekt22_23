@@ -1,4 +1,4 @@
-from math import sqrt
+from math import sqrt, ceil
 import re
 import utils
 import numpy as np
@@ -185,8 +185,10 @@ class TermEingeben(FunktionFrame):
             
         return ableitung
 
+
     def verlauf_appendieren(self, verlauf: Verlauf) -> None:
         verlauf.appendieren(self.basis_funktion())
+
 
     def funktionsgrad_bestimmen(self, funktion) -> int:
         """ gibt den funktionsgrad einer funktion zurück """
@@ -194,21 +196,80 @@ class TermEingeben(FunktionFrame):
         return max([int(x[1]) for x in basis_exponent_paare])
 
 
-    # TODO: implementieren
+    def nullterme_reinhauen(self, funktion) -> str:
+        """ fügt nullterme in eine funktion ein 
+            beispiel: 2x^4 + 3x^2 -5x + 2
+            wird zu:  2x^4 + 0x^3 + 3x^2 -5x + 0x + 2
+        """
+        funktionsgrad = self.funktionsgrad_bestimmen(funktion)
+        basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+        for i in range(funktionsgrad):
+            if i not in [x[1] for x in basis_exponent_paare]:
+                funktion += f"+0x^{i}"
+        return funktion
+
+    def teiler_bestimmen(self, funktion) -> int:
+        """ bestimmt den ersten teiler, dass die funktion 0 ergibt"""
+        basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+        lin_term = basis_exponent_paare[-1][0]
+        def alle_teiler_bestimmen():
+            teiler = []
+            for i in range(ceil(lin_term)):
+                if lin_term % i == 0:
+                    teiler.append(i)
+            return teiler
+
+        alle_teiler = alle_teiler_bestimmen()
+
+        for teiler in alle_teiler:
+            erg = self.einsetzen(funktion, teiler)
+            if erg == 0:
+                return teiler
+
+        raise Exception("kein teiler gefunden")
+
+
+    def einsetzen(self, funktion: str, wert: float) -> float:
+        """ gibt den wert einer funktion an einem bestimmten punkt zurück """
+        basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+        wert = 0
+        for basis, exponent in basis_exponent_paare:
+            wert += basis * (wert ** exponent)
+        return wert
+
+
+
     def nullstellen(self, funktion) -> list[float]:
 
         funktionsgrad = self.funktionsgrad_bestimmen(funktion)
 
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
 
-        # pq Formel
-        if funktionsgrad == 2:
-            normiert_p = basis_exponent_paare[1][0] / basis_exponent_paare[0][0]
-            normiert_q = basis_exponent_paare[2][0] / basis_exponent_paare[0][0]
-            x1, x2 = self.pq_formel(normiert_p, normiert_q)
-            return [x1, x2]
+        match funktionsgrad:
+            # term umformung (zb: 2x + 1)
+            # 0 = 2x + 1
+            # -1 = 2x
+            # -0.5 = x
+            # das aber in einer zeile
+            case 1:
+                return [-(basis_exponent_paare[1][0]) / basis_exponent_paare[0][0]]
+            # pq Formel (zb: x^2 + 2x + 1)
+            case 2:
+                normiert_p = basis_exponent_paare[1][0] / basis_exponent_paare[0][0]
+                normiert_q = basis_exponent_paare[2][0] / basis_exponent_paare[0][0]
+                x1, x2 = self.pq_formel(normiert_p, normiert_q)
+                return [x1, x2]
+            # sonst polynomdivision
+            case _:
+                gute_funktion = self.nullterme_reinhauen(funktion)
+                diese_basis_exponent_paare = self.basis_exponent_paare_holen(gute_funktion)
+                werte = [basis_exponent_paar[0] for basis_exponent_paar in diese_basis_exponent_paare]
 
-        return []
+                quo, rest = np.polydiv(werte, [1, self.teiler_bestimmen(funktion)])
+                if rest:
+                    raise Exception("rest nicht 0")
+
+                return quo.tolist()
 
     def pq_formel(self, p: float, q: float) -> tuple[float, float]:
         """ berechnet die nullstellen einer quadratischen funktion """
