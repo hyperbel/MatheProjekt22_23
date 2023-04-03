@@ -1,3 +1,4 @@
+from enum import Enum
 import re
 import utils
 import numpy as np
@@ -119,7 +120,7 @@ class TermEingeben(FunktionFrame):
         terme = [t for t in dirty_terme if t != '']
         return terme
 
-    def get_term(self, term: str) -> tuple:
+    def get_term(self, term: str) -> tuple[int,int]:
         """ gibt einen term als tuple zurück (koeffizient, exponent)
         :param term: term als string
         :type term: str
@@ -167,7 +168,7 @@ class TermEingeben(FunktionFrame):
         return float(von), float(bis)
 
 
-    def ableitung(self, inp: str) -> str:
+    def ableitung_ersteller(self, inp: str) -> str:
         """ berechnet die ableitung einer funktion """
         basis_exponent_paare = self.basis_exponent_paare_holen(inp)
         ableitung = ""
@@ -184,15 +185,30 @@ class TermEingeben(FunktionFrame):
     def verlauf_appendieren(self, verlauf: Verlauf) -> None:
         verlauf.appendieren(self.basis_funktion())
 
-    def nullstellen(self) -> list[float]:
-        basis_exponent_paare = self.basis_exponent_paare_holen(self.basis_funktion())
+    def funktionsgrad_bestimmen(self, funktion) -> int:
+        """ gibt den funktionsgrad einer funktion zurück """
+        basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+        return max([int(x[1]) for x in basis_exponent_paare])
+
+
+    # TODO: implementieren
+    def nullstellen(self, funktion) -> list[float]:
+        basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
         print(basis_exponent_paare)
 
-        return [0]
+        return [x[0] for x in basis_exponent_paare]
         
 
-    def kurvendiskussion(self):
+    def kurvendiskussion(self) -> None:
         # nullstellen (f(x) = 0)
-        nullstellen = self.nullstellen()
+        nullstellen = self.nullstellen(self.basis_funktion())
+        # ableitung
+        ableitung = self.ableitung_ersteller(self.basis_funktion())
+        zweite_ableitung = self.basis_exponent_paare_holen(ableitung)
 
-        pass
+        # extremstellen (f'(x) = 0)
+        # wendepunkte (f''(x) = 0)
+
+        print(nullstellen)
+        print(ableitung)
+        print(zweite_ableitung)
