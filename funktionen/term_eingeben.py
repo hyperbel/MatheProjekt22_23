@@ -180,7 +180,7 @@ class TermEingeben(FunktionFrame):
                 ableitung += f"-{term[1:]}"
             else:
                 ableitung += f"+{term}"
-        return ableitung[:-3]
+        return ableitung
 
     def verlauf_appendieren(self, verlauf: Verlauf) -> None:
         verlauf.appendieren(self.basis_funktion())
