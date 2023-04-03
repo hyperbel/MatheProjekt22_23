@@ -1,4 +1,4 @@
-from enum import Enum
+from math import sqrt
 import re
 import utils
 import numpy as np
@@ -196,13 +196,31 @@ class TermEingeben(FunktionFrame):
 
     # TODO: implementieren
     def nullstellen(self, funktion) -> list[float]:
-        basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
-        print(basis_exponent_paare)
 
-        return [x[0] for x in basis_exponent_paare]
-        
+        funktionsgrad = self.funktionsgrad_bestimmen(funktion)
+
+        basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+
+        # pq Formel
+        if funktionsgrad == 2:
+            normiert_p = basis_exponent_paare[1][0] / basis_exponent_paare[0][0]
+            normiert_q = basis_exponent_paare[2][0] / basis_exponent_paare[0][0]
+            x1, x2 = self.pq_formel(normiert_p, normiert_q)
+            return [x1, x2]
+
+        return []
+
+    def pq_formel(self, p: float, q: float) -> tuple[float, float]:
+        """ berechnet die nullstellen einer quadratischen funktion """
+        # -p/2 +- sqrt((p/2)^2 - q)
+        x1 = (-(p/2)) + sqrt((p/2)**2 - q)
+        x2 = (-(p/2)) - sqrt((p/2)**2 - q)
+
+        return x1, x2
+
 
     def kurvendiskussion(self) -> None:
+        # funktionsgrad
         # nullstellen (f(x) = 0)
         nullstellen = self.nullstellen(self.basis_funktion())
         # ableitung
@@ -211,7 +229,3 @@ class TermEingeben(FunktionFrame):
 
         # extremstellen (f'(x) = 0)
         # wendepunkte (f''(x) = 0)
-
-        print(nullstellen)
-        print(ableitung)
-        print(zweite_ableitung)
