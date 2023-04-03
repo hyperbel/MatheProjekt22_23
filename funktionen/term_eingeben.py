@@ -176,10 +176,13 @@ class TermEingeben(FunktionFrame):
             if exponent == 0:
                 continue
             term = f"{basis * exponent}x^{exponent - 1}"
+            if term[-1] == '0':
+                term = term[:-3]
             if term[0] == '-':
                 ableitung += f"-{term[1:]}"
             else:
                 ableitung += f"+{term}"
+            
         return ableitung
 
     def verlauf_appendieren(self, verlauf: Verlauf) -> None:
