@@ -1,7 +1,7 @@
 from functionframe import FunktionFrame
 import utils
 import numpy as np
-from tkinter import Label, Entry, BOTH, NW, TOP, Button, NE
+from tkinter import Label, Entry, BOTH, NW, TOP, Button, NE,ttk, messagebox,RIGHT,LEFT
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
@@ -28,20 +28,56 @@ class Exponential(FunktionFrame):
         # put canvas onto tk selfdow
         self.canvas = FigureCanvasTkAgg(fig, master=self)
 
+    def get_help(self) -> None:
+        """ ruft das hilfefenster auf """
+        _help = utils.base_tk(size="800x500", name="Hilfe - Funktionen")
+        Label(_help,
+        text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\n\
+                Also z.B.: 1x^3 + 2x^2 + 1x + 0\n\
+                Wenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!").pack()
+        Button(_help, text="Ok", command=_help.destroy).pack()
+
+    def zoom_in(self):
+        self.ax.set_xlim(self.ax.get_xlim()[0] * 0.9, self.ax.get_xlim()[1] * 0.9)
+        self.ax.set_ylim(self.ax.get_ylim()[0] * 0.9, self.ax.get_ylim()[1] * 0.9)
+        self.canvas.draw()
+
+    def zoom_out(self):
+        self.ax.set_xlim(self.ax.get_xlim()[0] * 1.1, self.ax.get_xlim()[1] * 1.1)
+        self.ax.set_ylim(self.ax.get_ylim()[0] * 1.1, self.ax.get_ylim()[1] * 1.1)
+        self.canvas.draw()
+    def set_zoom_percentage(self):
+        zoom_percentage = int(self.zoom_combobox.get().replace("%", ""))
+        current_xlim = self.ax.get_xlim()
+        current_ylim = self.ax.get_ylim()
+        new_range_x = (current_xlim[1] - current_xlim[0]) / zoom_percentage * 100
+        new_range_y = (current_ylim[1] - current_ylim[0]) / zoom_percentage * 100
+        mid_x = sum(current_xlim) / 2
+        mid_y = sum(current_ylim) / 2
+        self.ax.set_xlim(mid_x - new_range_x / 2, mid_x + new_range_x / 2)
+        self.ax.set_ylim(mid_y - new_range_y / 2, mid_y + new_range_y / 2)
+        self.canvas.draw()
+
+        self.zoom_combobox.bind("<<ComboboxSelected>>", lambda event: self.set_zoom_percentage())
+
     # function in function to be used on button click
     def exponential_ausrechnen(self) -> None:
         """ berechnet die funktion """
         # werte holen
-        von = float(self.von_entry.get())
-        bis = float(self.bis_entry.get())
-        a = float(self.a_entry.get())
-        # x = float(x_entry.get())
+        try:
+            von = float(self.von_entry.get())
+            bis = float(self.bis_entry.get())
+            a = float(self.a_entry.get())
+            # x = float(x_entry.get())
 
-        # checken ob werte floats sind
-        assert utils.entry_is_float(von)
-        assert utils.entry_is_float(bis)
-        assert utils.entry_is_float(a)
-        # assert entry_is_float(x)
+            # checken ob werte floats sind
+            assert utils.entry_is_float(von)
+            assert utils.entry_is_float(bis)
+            assert utils.entry_is_float(a)
+            # assert entry_is_float(x)
+        except ValueError:
+            fehler = messagebox.showerror(title="Inkorrekte eingabe", message="Sie müssen richtige Werte in die Textbox eingeben, bei hilfe einfach auf das ? klicken")
+            return
 
         # range mit von - bis
         self.x_werte = np.arange(von, bis, 0.2)
@@ -71,8 +107,15 @@ class Exponential(FunktionFrame):
         self.x_achse_entry.pack(side=TOP, anchor=NW)
         Label(self, text="y-Achsenbeschriftung:").pack(side=TOP, anchor=NW)
         self.y_achse_entry.pack(side=TOP, anchor=NW)
+        self.zoom_in_button = Button(self, text="+", command=self.zoom_in)
+        self.zoom_out_button = Button(self, text="-", command=self.zoom_out)
+        self.zoom_combobox = ttk.Combobox(self, values=["25%", "50%", "75%", "100%"], state="readonly", width=5)
+        self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
+        self.zoom_out_button.pack(side="right", padx=5, pady=5)
+        self.zoom_in_button.pack(side="right", padx=5, pady=5)
+        self.zoom_combobox.pack(side="right", padx=5, pady=5)
 
         # use function declared earlier to compute stuff
         Button(self, command=self.exponential_ausrechnen, text="Anzeigen").pack(side=TOP,
                                                                      anchor=NW)
-        Button(self, text="?", command=self.exponential_help).pack(side=TOP, anchor=NE)
+        Button(self, text="?", command=self.get_help).pack(side=TOP, anchor=NE)
