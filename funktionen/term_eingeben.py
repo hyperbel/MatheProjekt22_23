@@ -5,7 +5,7 @@ import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 from functionframe import FunktionFrame
-from tkinter import Label, NW, TOP, Entry, Button, NE, LEFT, BOTH
+from tkinter import Label, NW, TOP, Entry, Button, NE, LEFT, BOTH, Frame
 from verlauf import Verlauf
 from oop import MainWindow
 
@@ -30,6 +30,11 @@ class TermEingeben(FunktionFrame):
         Button(self, text="?", command=self.get_help).pack(side=TOP, anchor=NE)
 
         _b.pack(side=TOP, anchor=NW)
+
+        self.figure_frame = Frame(self)
+        # set frame size of frame
+        self.figure_frame.config(width=100, height=100)
+
 
         self.fig = plt.Figure(figsize=(10, 10), dpi=125)
 
@@ -92,14 +97,16 @@ class TermEingeben(FunktionFrame):
         self.ax.legend(loc="upper right")
 
         self.canvas.get_tk_widget().destroy() if hasattr(self, "canvas") else None
-        self.canvas = FigureCanvasTkAgg(self.fig, master=self)
+        self.canvas = FigureCanvasTkAgg(self.fig, master=self.figure_frame)
         self.canvas.draw()
 
         kurvendiskussion_button = Button(self,
                                          text="Kurvendiskussion",
                                          command=self.kurvendiskussion)
         kurvendiskussion_button.pack(side=TOP, anchor=NW)
-        self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+        self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=False)
+
+        self.figure_frame.pack(side=LEFT, fill=BOTH, expand=False)
 
     def basis_exponent_paare_holen(self, inp: str) -> list[tuple[float, float]]:
         input_str = self.array_von_leeren_strings_befreien(inp)
@@ -200,6 +207,8 @@ class TermEingeben(FunktionFrame):
         """ fügt nullterme in eine funktion ein 
             beispiel: 2x^4 + 3x^2 -5x + 2
             wird zu:  2x^4 + 0x^3 + 3x^2 -5x + 0x + 2
+
+            beispiel: 2x^4 + 0x^3 + 0x^2 - 5x + 0
         """
         funktionsgrad = self.funktionsgrad_bestimmen(funktion)
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
@@ -212,14 +221,19 @@ class TermEingeben(FunktionFrame):
         """ bestimmt den ersten teiler, dass die funktion 0 ergibt"""
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
         lin_term = basis_exponent_paare[-1][0]
+        print(lin_term)
         def alle_teiler_bestimmen():
             teiler = []
             for i in range(ceil(lin_term)):
+                print(i)
+                print(lin_term % i)
                 if lin_term % i == 0:
+                    print(teiler)
                     teiler.append(i)
             return teiler
 
         alle_teiler = alle_teiler_bestimmen()
+        print(alle_teiler)
 
         for teiler in alle_teiler:
             erg = self.einsetzen(funktion, teiler)
@@ -282,6 +296,7 @@ class TermEingeben(FunktionFrame):
 
     def kurvendiskussion(self) -> None:
         # funktionsgrad
+        funktionsgrad = self.funktionsgrad_bestimmen(self.basis_funktion())
         # nullstellen (f(x) = 0)
         nullstellen = self.nullstellen(self.basis_funktion())
         # ableitung
