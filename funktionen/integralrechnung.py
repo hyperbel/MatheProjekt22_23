@@ -20,6 +20,10 @@ class Integralrechnung(FunktionFrame):
                 Wenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
 
+    def clear_canvas(self):
+        self.ax.clear()
+        self.canvas.draw()
+
     def create_widgets(self):
         self.funktion_label =  Label(self, text="Funktion:")
         self.funktion_entry = Entry(self)
@@ -27,6 +31,7 @@ class Integralrechnung(FunktionFrame):
         self.anfangX_entry = Entry(self)
         self.endeX_label = Label(self, text="Ende von X:")
         self.endeX_entry = Entry(self)  
+        
 
         self.y_label = Label(self, text="Y:")
         self.y_entry = Entry(self)
@@ -37,6 +42,7 @@ class Integralrechnung(FunktionFrame):
         self.zoom_combobox = ttk.Combobox(self, values=["25%", "50%", "75%", "100%"], state="readonly", width=5)
         self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
         self.calculate_button = Button(self, text="anzeigen", command=self.integral_ausrechnen)
+        Button(self, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
 
         fig = plt.Figure(figsize=(10, 10), dpi=100)
 
@@ -128,7 +134,7 @@ class Integralrechnung(FunktionFrame):
         self.ax.clear()
         self.ax.plot(x, y)
         self.ax.fill_between(x, y, 0, alpha=0.2)
-        self.ax.set_xlabel('x')
-        self.ax.set_ylabel('y')
+        self.ax.set_xlabel(self.x_achse_entry.get())
+        self.ax.set_ylabel(self.y_achse_entry.get())
         self.ax.set_title("Integral")
         self.canvas.draw()

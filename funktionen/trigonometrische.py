@@ -21,6 +21,11 @@ class Trigonometrische(FunktionFrame):
                 Wenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
 
+    def clear_canvas(self):
+        self.ax.clear()
+        self.canvas.draw()
+
+
     def create_widgets(self):
         self.amplitude_label =  Label(self, text="Amplitude:")
         self.amplitude_entry = Entry(self)
@@ -33,6 +38,8 @@ class Trigonometrische(FunktionFrame):
         self.zoom_out_button = Button(self, text="-", command=self.zoom_out)
         self.zoom_combobox = ttk.Combobox(self, values=["25%", "50%", "75%", "100%"], state="readonly", width=5)
         self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
+        Button(self, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
+
 
 
         # figure for matplotlib to plot lines on
@@ -116,8 +123,8 @@ class Trigonometrische(FunktionFrame):
         
        self.ax.clear()
        self.ax.plot(self.x, self.y)
-       self.ax.set_xlabel('x')
-       self.ax.set_ylabel('y')
+       self.ax.set_xlabel(self.x_achse_entry.get())
+       self.ax.set_ylabel(self.y_achse_entry.get())
        self.ax.set_title(self.title)
        self.canvas.draw()
         # range mit von - bis

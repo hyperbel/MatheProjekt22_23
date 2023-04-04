@@ -36,6 +36,10 @@ class Exponential(FunktionFrame):
                 Also z.B.: 1x^3 + 2x^2 + 1x + 0\n\
                 Wenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
+    
+    def clear_canvas(self):
+        self.ax.clear()
+        self.canvas.draw()
 
     def zoom_in(self):
         self.ax.set_xlim(self.ax.get_xlim()[0] * 0.9, self.ax.get_xlim()[1] * 0.9)
@@ -114,6 +118,7 @@ class Exponential(FunktionFrame):
         self.zoom_out_button.pack(side="right", padx=5, pady=5)
         self.zoom_in_button.pack(side="right", padx=5, pady=5)
         self.zoom_combobox.pack(side="right", padx=5, pady=5)
+        Button(self, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
 
         # use function declared earlier to compute stuff
         Button(self, command=self.exponential_ausrechnen, text="Anzeigen").pack(side=TOP,
