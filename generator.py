@@ -4,6 +4,15 @@ import random
 con = sqlite3.connect('mathe.db')
 cur = con.cursor()
 
+def expo_generator():
+    a = random.randint(0, 100)
+    b = random.randint(0, 9)
+
+    if b == 0:
+        return a 
+    else:
+        return a + "." + b
+
 def insert_functions(num_functions):
     userid = 1
     

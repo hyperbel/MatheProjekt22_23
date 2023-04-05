@@ -1,4 +1,3 @@
-""" Erstellt Datenbank """
 import sqlite3
 
 def create_db():
@@ -14,6 +13,9 @@ def create_db():
           "passwort TEXT);"
     cur.execute(sql)
     con.commit()
+
+    # Tabelle funktionen erstellen
+
     sql = "CREATE TABLE funktionen (" \
           "funktion TEXT, "	\
           "zeit TEXT, "	\
