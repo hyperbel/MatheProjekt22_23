@@ -5,7 +5,7 @@ import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 from functionframe import FunktionFrame
-from tkinter import Label, NW, TOP, Entry, Button, NE, LEFT, BOTH, Frame
+from tkinter import Label, NW, TOP, Entry, Button, NE, LEFT, BOTH, Frame, ttk
 from verlauf import Verlauf
 from oop import MainWindow
 
@@ -26,6 +26,25 @@ class TermEingeben(FunktionFrame):
         self.y_von_bis_entry = Entry(self)
         self.y_von_bis_entry.pack(side=TOP, anchor=NW)
 
+        # Beschriftungszeug
+        self.xbeschriftung_label =  Label(self, text="X-Beschriftung:")
+        self.xbeschriftung_entry = Entry(self)
+        self.ybeschriftung_label = Label(self, text="Y-Beschriftung:")
+        self.ybeschriftung_entry = Entry(self)
+        self.xbeschriftung_label.pack(side="right", padx=5, pady=5)
+        self.xbeschriftung_entry.pack(side="right", padx=5, pady=5)
+        self.ybeschriftung_label.pack(side="right", padx=5, pady=5)
+        self.ybeschriftung_entry.pack(side="right", padx=5, pady=5)
+
+        # Zeug zum Zoomen und leeren
+        self.zoom_in_button = Button(self, text="+", command=self.zoom_in)
+        self.zoom_out_button = Button(self, text="-", command=self.zoom_out)
+        self.zoom_combobox = ttk.Combobox(self, values=["25%", "50%", "75%", "100%"], state="readonly", width=5)
+        self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
+        self.zoom_out_button.pack(side="right", padx=5, pady=5)
+        self.zoom_in_button.pack(side="right", padx=5, pady=5)
+        self.zoom_combobox.pack(side="right", padx=5, pady=5)
+
         _b = Button(self, text="Los gehts!", command=self.funktion_berechnen)
         Button(self, text="?", command=self.get_help).pack(side=TOP, anchor=NE)
 
@@ -39,6 +58,30 @@ class TermEingeben(FunktionFrame):
         self.fig = plt.Figure(figsize=(10, 10), dpi=125)
 
         self.pack(side=LEFT, fill=BOTH, expand=False)
+
+    def zoom_in(self):
+        self.ax.set_xlim(self.ax.get_xlim()[0] * 0.9, self.ax.get_xlim()[1] * 0.9)
+        self.ax.set_ylim(self.ax.get_ylim()[0] * 0.9, self.ax.get_ylim()[1] * 0.9)
+        self.canvas.draw()
+
+    def zoom_out(self):
+        self.ax.set_xlim(self.ax.get_xlim()[0] * 1.1, self.ax.get_xlim()[1] * 1.1)
+        self.ax.set_ylim(self.ax.get_ylim()[0] * 1.1, self.ax.get_ylim()[1] * 1.1)
+        self.canvas.draw()
+    def set_zoom_percentage(self):
+        zoom_percentage = int(self.zoom_combobox.get().replace("%", ""))
+        current_xlim = self.ax.get_xlim()
+        current_ylim = self.ax.get_ylim()
+        new_range_x = (current_xlim[1] - current_xlim[0]) / zoom_percentage * 100
+        new_range_y = (current_ylim[1] - current_ylim[0]) / zoom_percentage * 100
+        mid_x = sum(current_xlim) / 2
+        mid_y = sum(current_ylim) / 2
+        self.ax.set_xlim(mid_x - new_range_x / 2, mid_x + new_range_x / 2)
+        self.ax.set_ylim(mid_y - new_range_y / 2, mid_y + new_range_y / 2)
+        self.canvas.draw()
+
+        self.zoom_combobox.bind("<<ComboboxSelected>>", lambda event: self.set_zoom_percentage())
+
 
     def basis_funktion(self) -> str:
         return self.f_entry.get()
@@ -66,6 +109,10 @@ class TermEingeben(FunktionFrame):
 
         self.verlauf_appendieren(self.parent.get_verlauf())
 
+        # Beschreibung hohlen
+        xbeschr = self.xbeschriftung_entry.get()
+        ybeschr = self.ybeschriftung_entry.get()
+
         # holt input und bereinigt ihn
         self.basis_exponent_paare = self.basis_exponent_paare_holen(self.f_entry.get())
 
@@ -75,8 +122,8 @@ class TermEingeben(FunktionFrame):
 
         x_werte = np.arange(-100, 200, 0.1)
         self.ax = self.fig.add_subplot()
-        self.ax.set_xlabel("x")
-        self.ax.set_ylabel("y")
+        self.ax.set_xlabel(xbeschr)
+        self.ax.set_ylabel(ybeschr)
         self.ax.set_title("Funktionsgraph")
         x_von, x_bis = self.von_bis(self.x_von_bis_entry.get())
         self.ax.set_xlim(x_von, x_bis)
