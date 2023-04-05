@@ -33,12 +33,12 @@ class Integralrechnung(FunktionFrame):
     def create_widgets(self):
         self.funktion_label =  Label(self, text="Funktion:")
         self.funktion_entry = Entry(self)
-        self.anfangX_label = Label(self, text="Anfang von X:")
+        """self.anfangX_label = Label(self, text="Anfang von X:")
         self.anfangX_entry = Entry(self)
         self.endeX_label = Label(self, text="Ende von X:")
         self.endeX_entry = Entry(self)  
         self.y_label = Label(self, text="Y:")
-        self.y_entry = Entry(self)
+        self.y_entry = Entry(self)"""
         self.xbeschriftung_label =  Label(self, text="X-Beschriftung:")
         self.xbeschriftung_entry = Entry(self)
         self.ybeschriftung_label = Label(self, text="Y-Beschriftung:")
@@ -51,7 +51,6 @@ class Integralrechnung(FunktionFrame):
         self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
         self.calculate_button = Button(self, text="anzeigen", command=self.integral_ausrechnen)
         Button(self, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
-        Label(self, text="x-Achsenbeschriftung:").pack(side=TOP, anchor=NW)
        
 
         fig = plt.Figure(figsize=(10, 10), dpi=100)
@@ -92,16 +91,10 @@ class Integralrechnung(FunktionFrame):
     def pack_widgets(self) -> None:
         self.funktion_label.pack(side=TOP, anchor=NW)
         self.funktion_entry.pack(side=TOP, anchor=NW)
-        self.anfangX_label.pack(side=TOP, anchor=NW)
-        self.anfangX_entry.pack(side=TOP, anchor=NW)
         self.xbeschriftung_label.pack(side="right", padx=5, pady=5)
         self.xbeschriftung_entry.pack(side="right", padx=5, pady=5)
         self.ybeschriftung_label.pack(side="right", padx=5, pady=5)
         self.ybeschriftung_entry.pack(side="right", padx=5, pady=5)
-        self.endeX_label.pack(side=TOP, anchor=NW)
-        self.endeX_entry.pack(side=TOP, anchor=NW)
-        self.y_label.pack(side=TOP, anchor=NW)
-        self.y_entry.pack(side=TOP, anchor=NW)
         self.loesung_label.pack(side=TOP, anchor=NW)
         self.loesung_entry.pack(side=TOP, anchor=NW)
         self.calculate_button.pack(side=TOP, anchor=NW)
@@ -116,13 +109,6 @@ class Integralrechnung(FunktionFrame):
         # Hohle Werte
         try: 
             funktion_text = self.funktion_entry.get()
-            anfangx = float(self.anfangX_entry.get())
-            endex = float(self.endeX_entry.get())
-            y = int(self.y_entry.get())
-
-            # checken ob werte floats sind
-            assert utils.entry_is_float(anfangx)
-            assert utils.entry_is_float(endex)
             
         except ValueError:
             _ = messagebox.showerror(title="Inkorrekte eingabe", message="Sie müssen richtige Werte in die Textbox eingeben, bei hilfe einfach auf das ? klicken")
@@ -141,7 +127,7 @@ class Integralrechnung(FunktionFrame):
         # hier wird durch ein bischen numpy Magie das Integral einer Funktion berechne
         func = lambda x: eval(funktion_text)
 
-        x = np.linspace(anfangx, endex, y)
+        x = np.linspace(-100, 100, 100)
         y = func(x)
         integral = np.trapz(y, x)
 
