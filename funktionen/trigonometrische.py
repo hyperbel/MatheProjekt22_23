@@ -34,6 +34,10 @@ class Trigonometrische(FunktionFrame):
         self.phase_label = Label(self, text="Phase:")
         self.phase_entry = Entry(self)
         self.function_type_var = StringVar(value='sin')
+        self.xbeschriftung_label =  Label(self, text="X-Beschriftung:")
+        self.xbeschriftung_entry = Entry(self)
+        self.ybeschriftung_label = Label(self, text="Y-Beschriftung:")
+        self.ybeschriftung_entry = Entry(self)
         self.zoom_in_button = Button(self, text="+", command=self.zoom_in)
         self.zoom_out_button = Button(self, text="-", command=self.zoom_out)
         self.zoom_combobox = ttk.Combobox(self, values=["25%", "50%", "75%", "100%"], state="readonly", width=5)
@@ -95,7 +99,10 @@ class Trigonometrische(FunktionFrame):
         self.zoom_out_button.pack(side="right", padx=5, pady=5)
         self.zoom_in_button.pack(side="right", padx=5, pady=5)
         self.zoom_combobox.pack(side="right", padx=5, pady=5)
-
+        self.xbeschriftung_label.pack(side="right", padx=5, pady=5)
+        self.xbeschriftung_entry.pack(side="right", padx=5, pady=5)
+        self.ybeschriftung_label.pack(side="right", padx=5, pady=5)
+        self.ybeschriftung_entry.pack(side="right", padx=5, pady=5)
 
 
     def trigonometrische_ausrechnen(self):
@@ -108,7 +115,10 @@ class Trigonometrische(FunktionFrame):
             _ = messagebox.showerror(title="Inkorrekte eingabe", message="Sie müssen richtige Werte in die Textbox eingeben, bei hilfe einfach auf das ? klicken")
             return
         # x-Werte des Graphen berechnen
-        
+
+       xbeschr = self.xbeschriftung_entry.get()
+       ybeschr = self.ybeschriftung_entry.get()  
+
        self.x = np.linspace(0, 2*np.pi, 1000)
 
        if self.function_type_var.get() == 'sin':
@@ -122,9 +132,9 @@ class Trigonometrische(FunktionFrame):
            self.title = 'Tangensfunktion'
         
        self.ax.clear()
+       self.ax.set_xlabel(xbeschr)
+       self.ax.set_ylabel(ybeschr)
        self.ax.plot(self.x, self.y)
-       self.ax.set_xlabel(self.x_achse_entry.get())
-       self.ax.set_ylabel(self.y_achse_entry.get())
        self.ax.set_title(self.title)
        self.canvas.draw()
         # range mit von - bis

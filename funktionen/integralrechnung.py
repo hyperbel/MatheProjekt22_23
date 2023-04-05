@@ -126,10 +126,11 @@ class Integralrechnung(FunktionFrame):
 
         xbeschr = self.xbeschriftung_entry.get()
         ybeschr = self.ybeschriftung_entry.get()
+        """
         if xbeschr == None:
             xbeschr = "X"
         if ybeschr == None:
-            ybeschr = "Y"
+            ybeschr = "Y" """
 
         # hier wird durch ein bischen numpy Magie das Integral einer Funktion berechne
         func = lambda x: eval(funktion_text)
@@ -147,13 +148,10 @@ class Integralrechnung(FunktionFrame):
 
         self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
 
+        self.ax.clear()
         self.ax.set_xlabel(xbeschr)
         self.ax.set_ylabel(ybeschr)
-
-        self.ax.clear()
         self.ax.plot(x, y)
         self.ax.fill_between(x, y, 0, alpha=0.2)
-        self.ax.set_xlabel(self.x_achse_entry.get())
-        self.ax.set_ylabel(self.y_achse_entry.get())
         self.ax.set_title("Integral")
         self.canvas.draw()
