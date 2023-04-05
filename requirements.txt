@@ -1,11 +1,4 @@
 tkinter
 numpy
 matplotlib
-math
 sympy
-random
-time
-glob
-queue
-collections
-re
