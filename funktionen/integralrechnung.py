@@ -23,7 +23,7 @@ class Integralrechnung(FunktionFrame):
         canvas.pack()
         canvas.create_image(0, 0, anchor=NW, image=img)
         Button(_help, text="Ok", command=_help.destroy).pack()
-        
+
         _help.image = img
 
     def clear_canvas(self):
@@ -157,7 +157,8 @@ class Integralrechnung(FunktionFrame):
         self.ax.clear()
         self.ax.set_xlabel(xbeschr)
         self.ax.set_ylabel(ybeschr)
-        self.ax.plot(x, y)
+        self.ax.plot(x, y, label=funktion_text)
+        self.ax.legend(loc="upper right")
         self.ax.fill_between(x, y, 0, alpha=0.2)
         self.ax.set_title("Integral")
         self.canvas.draw()

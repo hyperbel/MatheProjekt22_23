@@ -134,7 +134,8 @@ class Trigonometrische(FunktionFrame):
        self.ax.clear()
        self.ax.set_xlabel(xbeschr)
        self.ax.set_ylabel(ybeschr)
-       self.ax.plot(self.x, self.y)
+       self.ax.plot(self.x, self.y, label= "Linie")
+       self.ax.legend(loc="upper right")
        self.ax.set_title(self.title)
        self.canvas.draw()
         # range mit von - bis

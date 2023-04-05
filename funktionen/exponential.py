@@ -91,8 +91,8 @@ class Exponential(FunktionFrame):
         self.ax.set_ylabel(self.y_achse_entry.get())
 
         # lineare funktion plotten
-        self.ax.plot(self.x_werte, a ** self.x_werte)
-
+        self.ax.plot(self.x_werte, a ** self.x_werte, label=a)
+        self.ax.legend(loc="upper right")
         self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
         self.canvas.draw()
 
