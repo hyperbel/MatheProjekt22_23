@@ -1,5 +1,5 @@
 from functionframe import FunktionFrame
-from tkinter import Label, Entry, BOTH, NW, TOP, END, Button, messagebox,ttk, NE, LEFT,RIGHT
+from tkinter import Label, Entry, BOTH, NW, TOP, END, Button, messagebox,ttk, NE, LEFT,RIGHT, PhotoImage, Canvas
 import utils
 import numpy as np
 import matplotlib.pyplot as plt
@@ -15,10 +15,16 @@ class Integralrechnung(FunktionFrame):
         """ ruft das hilfefenster auf """
         _help = utils.base_tk(size="800x500", name="Hilfe - Funktionen")
         Label(_help,
-        text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\n\
-                Also z.B.: 1x^3 + 2x^2 + 1x + 0\n\
-                Wenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!").pack()
+        text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ** notiert.\n\
+                Also z.B.: x**1\n\
+                ").pack()
+        img = PhotoImage(file="logo.png")
+        canvas = Canvas(self, width=700, height=300)
+        canvas.pack()
+        canvas.create_image(0, 0, anchor=NW, image=img)
         Button(_help, text="Ok", command=_help.destroy).pack()
+        
+        _help.image = img
 
     def clear_canvas(self):
         self.ax.clear()
