@@ -14,6 +14,8 @@ class TermEingeben(FunktionFrame):
         super().__init__(master)
         self.parent = parent
 
+       
+
         Label(self, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
 
         self.f_entry = Entry(self)
@@ -26,6 +28,8 @@ class TermEingeben(FunktionFrame):
         self.y_von_bis_entry = Entry(self)
         self.y_von_bis_entry.pack(side=TOP, anchor=NW)
 
+        Button(self, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
+        
         # Beschriftungszeug
         self.xbeschriftung_label =  Label(self, text="X-Beschriftung:")
         self.xbeschriftung_entry = Entry(self)
@@ -58,6 +62,10 @@ class TermEingeben(FunktionFrame):
         self.fig = plt.Figure(figsize=(10, 10), dpi=125)
 
         self.pack(side=LEFT, fill=BOTH, expand=False)
+
+    def clear_canvas(self):
+        self.ax.clear()
+        self.canvas.draw()
 
     def zoom_in(self):
         self.ax.set_xlim(self.ax.get_xlim()[0] * 0.9, self.ax.get_xlim()[1] * 0.9)
