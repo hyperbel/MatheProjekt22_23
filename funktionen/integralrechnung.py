@@ -31,10 +31,12 @@ class Integralrechnung(FunktionFrame):
         self.anfangX_entry = Entry(self)
         self.endeX_label = Label(self, text="Ende von X:")
         self.endeX_entry = Entry(self)  
-        
-
         self.y_label = Label(self, text="Y:")
         self.y_entry = Entry(self)
+        self.xbeschriftung_label =  Label(self, text="X-Beschriftung:")
+        self.xbeschriftung_entry = Entry(self)
+        self.ybeschriftung_label = Label(self, text="Y-Beschriftung:")
+        self.ybeschriftung_entry = Entry(self)
         self.loesung_label = Label(self, text="Lösung")
         self.loesung_entry = Entry(self)
         self.zoom_in_button = Button(self, text="+", command=self.zoom_in)
@@ -43,6 +45,8 @@ class Integralrechnung(FunktionFrame):
         self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
         self.calculate_button = Button(self, text="anzeigen", command=self.integral_ausrechnen)
         Button(self, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
+        Label(self, text="x-Achsenbeschriftung:").pack(side=TOP, anchor=NW)
+       
 
         fig = plt.Figure(figsize=(10, 10), dpi=100)
 
@@ -84,6 +88,10 @@ class Integralrechnung(FunktionFrame):
         self.funktion_entry.pack(side=TOP, anchor=NW)
         self.anfangX_label.pack(side=TOP, anchor=NW)
         self.anfangX_entry.pack(side=TOP, anchor=NW)
+        self.xbeschriftung_label.pack(side="right", padx=5, pady=5)
+        self.xbeschriftung_entry.pack(side="right", padx=5, pady=5)
+        self.ybeschriftung_label.pack(side="right", padx=5, pady=5)
+        self.ybeschriftung_entry.pack(side="right", padx=5, pady=5)
         self.endeX_label.pack(side=TOP, anchor=NW)
         self.endeX_entry.pack(side=TOP, anchor=NW)
         self.y_label.pack(side=TOP, anchor=NW)
@@ -116,7 +124,14 @@ class Integralrechnung(FunktionFrame):
 
         # assert entry_is_float(x)
 
-        # hier wird durch ein bischen numpy Magie das Integral einer Funktion berechnet
+        xbeschr = self.xbeschriftung_entry.get()
+        ybeschr = self.ybeschriftung_entry.get()
+        if xbeschr == None:
+            xbeschr = "X"
+        if ybeschr == None:
+            ybeschr = "Y"
+
+        # hier wird durch ein bischen numpy Magie das Integral einer Funktion berechne
         func = lambda x: eval(funktion_text)
 
         x = np.linspace(anfangx, endex, y)
@@ -127,9 +142,13 @@ class Integralrechnung(FunktionFrame):
         ergebnis = round(integral)
         self.loesung_entry.delete(0, END)
         self.loesung_entry.insert(0, str(ergebnis))
-
+        self.x_achse_entry = Entry(self)
+        self.y_achse_entry = Entry(self)
 
         self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
+
+        self.ax.set_xlabel(xbeschr)
+        self.ax.set_ylabel(ybeschr)
 
         self.ax.clear()
         self.ax.plot(x, y)
