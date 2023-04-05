@@ -22,7 +22,7 @@ class Verlauf(Frame):
     def get_verlauf(self, userid: int):
         sql = f"SELECT funktion from funktionen WHERE userid=\'{userid}\';"
         ergebnis = self.cur.execute(sql).fetchall()
-        print(ergebnis)
+        #print(ergebnis)
         return ergebnis
 
     def remove_verlauf (self, userid: int, zeit: str):
