@@ -14,18 +14,23 @@ def import_funktionen():
 
 
 
-
 class MainWindow(Tk):
     def __init__(self):
         super().__init__()
+        self.config(bg="green")
         self.title("Mathe Projekt 22/23")
         self.geometry("900x600")
 
         self.create_menu()
         self.config(menu=self.menu)
 
+        # set column height
+        self.grid_columnconfigure(1, weight=1)
+        self.grid_rowconfigure(0, weight=1)
+
         self.verlauf = Verlauf(self)
-        self.verlauf.pack(side=LEFT, fill=BOTH, expand=False)
+        self.verlauf.config(bg="red")
+        self.verlauf.grid(row=0, column=0, sticky="nsew")
 
         self.selected_frame = None
 
@@ -34,12 +39,14 @@ class MainWindow(Tk):
 
     def hide_all_frames(self):
         if self.selected_frame is not None:
-            self.selected_frame.pack_forget()
+            self.selected_frame.grid_forget()
 
     def select(self, frame: Frame) -> None:
         self.hide_all_frames()
         self.selected_frame = frame
-        self.selected_frame.pack(side=RIGHT, fill=BOTH, expand=True)
+        self.selected_frame.config(height=self.winfo_height())
+        self.selected_frame.config(bg="blue")
+        self.selected_frame.grid(row=0, column=1, sticky="nsew")
 
 
     # generiert main menu fuer das root win
@@ -134,6 +141,7 @@ class WelcomeWizard:
 
     def finish(self):
         self.master.destroy()
+
 
 class Splash(Tk):
     def __init__(self):

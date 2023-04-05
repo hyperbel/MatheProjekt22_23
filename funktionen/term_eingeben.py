@@ -14,8 +14,6 @@ class TermEingeben(FunktionFrame):
         super().__init__(master)
         self.parent = parent
 
-       
-
         Label(self, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
 
         self.f_entry = Entry(self)
@@ -58,10 +56,7 @@ class TermEingeben(FunktionFrame):
         # set frame size of frame
         self.figure_frame.config(width=100, height=100)
 
-
         self.fig = plt.Figure(figsize=(10, 10), dpi=125)
-
-        self.pack(side=LEFT, fill=BOTH, expand=False)
 
     def clear_canvas(self):
         self.ax.clear()
@@ -76,16 +71,17 @@ class TermEingeben(FunktionFrame):
         self.ax.set_xlim(self.ax.get_xlim()[0] * 1.1, self.ax.get_xlim()[1] * 1.1)
         self.ax.set_ylim(self.ax.get_ylim()[0] * 1.1, self.ax.get_ylim()[1] * 1.1)
         self.canvas.draw()
+
     def set_zoom_percentage(self):
         zoom_percentage = int(self.zoom_combobox.get().replace("%", ""))
         current_xlim = self.ax.get_xlim()
         current_ylim = self.ax.get_ylim()
         new_range_x = (current_xlim[1] - current_xlim[0]) / zoom_percentage * 100
         new_range_y = (current_ylim[1] - current_ylim[0]) / zoom_percentage * 100
-        mid_x = sum(current_xlim) / 2
-        mid_y = sum(current_ylim) / 2
-        self.ax.set_xlim(mid_x - new_range_x / 2, mid_x + new_range_x / 2)
-        self.ax.set_ylim(mid_y - new_range_y / 2, mid_y + new_range_y / 2)
+        mitte_x = sum(current_xlim) / 2
+        mitte_y = sum(current_ylim) / 2
+        self.ax.set_xlim(mitte_x - new_range_x / 2, mitte_x + new_range_x / 2)
+        self.ax.set_ylim(mitte_y - new_range_y / 2, mitte_y + new_range_y / 2)
         self.canvas.draw()
 
         self.zoom_combobox.bind("<<ComboboxSelected>>", lambda event: self.set_zoom_percentage())
