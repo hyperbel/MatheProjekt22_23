@@ -28,8 +28,6 @@ class TermEingeben(FunktionFrame):
         self.y_von_bis_entry.grid(row=2, column=1, sticky=NW)
 
 
-        
-
         _b = Button(self, text="Los gehts!", command=self.funktion_berechnen)
         Button(self, text="?", command=self.get_help).grid(row=0, column=3, sticky=NE)
 
@@ -176,7 +174,7 @@ class TermEingeben(FunktionFrame):
         kurvendiskussion_button = Button(self,
                                          text="Kurvendiskussion",
                                          command=self.kurvendiskussion)
-        kurvendiskussion_button.grid(row=7, column=0, sticky="nsew")
+        kurvendiskussion_button.grid(row=8, column=0, sticky="nsew")
         self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=False)
 
         self.figure_frame.grid(row=6, column=0, sticky="nsew")
@@ -284,7 +282,9 @@ class TermEingeben(FunktionFrame):
             beispiel: 2x^4 + 0x^3 + 0x^2 - 5x + 0
         """
         funktionsgrad = self.funktionsgrad_bestimmen(funktion)
+        print("funktionsgrad", funktionsgrad)
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+        print("basis_exponent_paare", basis_exponent_paare)
         for i in range(funktionsgrad):
             if i not in [x[1] for x in basis_exponent_paare]:
                 funktion += f"+0x^{i}"
@@ -294,33 +294,43 @@ class TermEingeben(FunktionFrame):
         """ bestimmt den ersten teiler, dass die funktion 0 ergibt"""
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
         lin_term = basis_exponent_paare[-1][0]
-        print(lin_term)
+        print("lin_term",lin_term)
         def alle_teiler_bestimmen():
             teiler = []
-            for i in range(ceil(lin_term)):
-                print(i)
-                print(lin_term % i)
+            teiler_range = range(ceil(abs(lin_term)+1))
+            print(teiler_range)
+            for i in teiler_range:
+                print("i",i)
+                if i == 0:
+                    continue
+                print("lin_term % i", lin_term % i)
                 if lin_term % i == 0:
-                    print(teiler)
+                    print("teiler", teiler)
                     teiler.append(i)
             return teiler
 
         alle_teiler = alle_teiler_bestimmen()
-        print(alle_teiler)
+        print("alle_teiler", alle_teiler)
 
         for teiler in alle_teiler:
+            print("teiler", teiler)
             erg = self.einsetzen(funktion, teiler)
+            print("erg", erg)
             if erg == 0:
                 return teiler
 
-        raise Exception("kein teiler gefunden")
+        return 0
 
 
     def einsetzen(self, funktion: str, wert: float) -> float:
         """ gibt den wert einer funktion an einem bestimmten punkt zurück """
+        from pdb import set_trace
+        set_trace()
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
         wert = 0
         for basis, exponent in basis_exponent_paare:
+            if exponent == 0:
+                wert += basis
             wert += basis * (wert ** exponent)
         return wert
 
@@ -329,8 +339,9 @@ class TermEingeben(FunktionFrame):
     def nullstellen(self, funktion) -> list[float]:
 
         funktionsgrad = self.funktionsgrad_bestimmen(funktion)
-
+        print("funktionsgrad", funktionsgrad) 
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+        print("basis_exponent_paare", basis_exponent_paare)
 
         match funktionsgrad:
             # term umformung (zb: 2x + 1)
@@ -352,6 +363,9 @@ class TermEingeben(FunktionFrame):
                 diese_basis_exponent_paare = self.basis_exponent_paare_holen(gute_funktion)
                 werte = [basis_exponent_paar[0] for basis_exponent_paar in diese_basis_exponent_paare]
 
+                teiler = self.teiler_bestimmen(funktion)
+                if teiler == 0:
+                    raise NotImplementedError("keine teiler, nullpunkt bei N(0,0)")
                 quo, rest = np.polydiv(werte, [1, self.teiler_bestimmen(funktion)])
                 if rest:
                     raise Exception("rest nicht 0")
