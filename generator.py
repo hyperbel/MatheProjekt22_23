@@ -13,10 +13,18 @@ def expo_generator():
     else:
         return a + "." + b
 
-def insert_functions(num_functions):
+def trigo_generator():
+    amplitude = random.randint(0, 100)
+    frequenz = random.randint(0, 100)
+    phase = random.randint(0, 100)
+
+def integral_generator():
+    a = random.randint(0, 100)
+
+def terme_generator():
     userid = 1
     
-    for _ in range(num_functions):
+    for _ in range(1):
         function = ""
         a = random.randint(-10, 10)
         b = random.randint(-10, 10)
@@ -45,6 +53,3 @@ def insert_functions(num_functions):
         yield function
     
     con.commit()
-
-for function in insert_functions(1500000):
-    print(function)

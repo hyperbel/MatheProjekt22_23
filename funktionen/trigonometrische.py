@@ -1,5 +1,6 @@
 from functionframe import FunktionFrame
 import utils
+from generator import trigo_generator
 from tkinter import Label, Entry, StringVar, TOP, NE, NW, messagebox, Button, BOTH, Radiobutton, ttk,LEFT,RIGHT
 import matplotlib.pyplot as plt
 import numpy as np

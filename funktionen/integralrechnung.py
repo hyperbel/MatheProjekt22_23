@@ -1,6 +1,7 @@
 from functionframe import FunktionFrame
 from tkinter import Label, Entry, BOTH, NW, TOP, END, Button, messagebox,ttk, NE, LEFT,RIGHT, PhotoImage, Canvas
 import utils
+from generator import integral_generator
 import numpy as np
 import matplotlib.pyplot as plt
 from verlauf import Verlauf

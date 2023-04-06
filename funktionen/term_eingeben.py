@@ -1,6 +1,7 @@
 from math import sqrt, ceil
 import re
 import utils
+from generator import terme_generator
 import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
