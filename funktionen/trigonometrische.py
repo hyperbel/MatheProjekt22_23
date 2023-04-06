@@ -13,6 +13,12 @@ class Trigonometrische(FunktionFrame):
 
         self.create_widgets()
 
+    def basis_funktion(self) -> str:
+        return self.amplitude_entry.get()
+
+    def verlauf_appendieren(self, verlauf: Verlauf) -> None:
+        verlauf.appendieren(self.basis_funktion())
+
     def get_help(self) -> None:
         """ ruft das hilfefenster auf """
         _help = utils.base_tk(size="1000x500", name="Hilfe - Funktionen")
@@ -115,6 +121,8 @@ class Trigonometrische(FunktionFrame):
             _ = messagebox.showerror(title="Inkorrekte eingabe", message="Sie müssen richtige Werte in die Textbox eingeben, bei hilfe einfach auf das ? klicken")
             return
         # x-Werte des Graphen berechnen
+
+       self.verlauf_appendieren(self.master.get_verlauf())
 
        xbeschr = self.xbeschriftung_entry.get()
        ybeschr = self.ybeschriftung_entry.get()  

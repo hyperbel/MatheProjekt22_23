@@ -5,12 +5,19 @@ from generator import integral_generator
 import numpy as np
 import matplotlib.pyplot as plt
 from verlauf import Verlauf
+import sqlite3
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 class Integralrechnung(FunktionFrame):
     def __init__(self, master):
         super().__init__(master)
         self.create_widgets()
+
+    def basis_funktion(self) -> str:
+        return self.funktion_entry.get()
+
+    def verlauf_appendieren(self, verlauf: Verlauf) -> None:
+        verlauf.appendieren(self.basis_funktion())
 
     def get_help(self) -> None:
         """ ruft das hilfefenster auf """
@@ -64,6 +71,7 @@ class Integralrechnung(FunktionFrame):
         self.canvas = FigureCanvasTkAgg(fig, master=self)
 
         self.pack_widgets()
+        
 
     def zoom_in(self):
         self.ax.set_xlim(self.ax.get_xlim()[0] * 0.9, self.ax.get_xlim()[1] * 0.9)
@@ -116,6 +124,8 @@ class Integralrechnung(FunktionFrame):
             return
 
         # assert entry_is_float(x)
+
+        self.verlauf_appendieren(self.master.get_verlauf())
 
         xbeschr = self.xbeschriftung_entry.get()
         ybeschr = self.ybeschriftung_entry.get()

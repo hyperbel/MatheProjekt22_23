@@ -1,6 +1,7 @@
 from functionframe import FunktionFrame
 import utils
 import numpy as np
+from verlauf import Verlauf
 from generator import expo_generator
 from tkinter import Label, Entry, BOTH, NW, TOP, Button, NE,ttk, messagebox,RIGHT,LEFT
 import matplotlib.pyplot as plt
@@ -28,6 +29,12 @@ class Exponential(FunktionFrame):
         # range of numhers, see numpy.org for doc on arange
         # put canvas onto tk selfdow
         self.canvas = FigureCanvasTkAgg(fig, master=self)
+
+    def basis_funktion(self) -> str:
+        return self.a_entry.get()
+
+    def verlauf_appendieren(self, verlauf: Verlauf) -> None:
+        verlauf.appendieren(self.basis_funktion())
 
     def get_help(self) -> None:
         """ ruft das hilfefenster auf """
@@ -83,6 +90,8 @@ class Exponential(FunktionFrame):
         except ValueError:
             fehler = messagebox.showerror(title="Inkorrekte eingabe", message="Sie müssen richtige Werte in die Textbox eingeben, bei hilfe einfach auf das ? klicken")
             return
+
+        self.verlauf_appendieren(self.master.get_verlauf())
 
         # range mit von - bis
         self.x_werte = np.arange(von, bis, 0.2)
