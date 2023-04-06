@@ -18,7 +18,7 @@ class MainWindow(Tk):
     def __init__(self):
         super().__init__()
         self.title("Mathe Projekt 22/23")
-        self.geometry("900x600")
+        self.geometry("1200x800")
 
         self.create_menu()
         self.config(menu=self.menu)
