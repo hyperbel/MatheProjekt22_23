@@ -17,7 +17,6 @@ def import_funktionen():
 class MainWindow(Tk):
     def __init__(self):
         super().__init__()
-        self.config(bg="green")
         self.title("Mathe Projekt 22/23")
         self.geometry("900x600")
 
@@ -29,7 +28,6 @@ class MainWindow(Tk):
         self.grid_rowconfigure(0, weight=1)
 
         self.verlauf = Verlauf(self)
-        self.verlauf.config(bg="red")
         self.verlauf.grid(row=0, column=0, sticky="nsew")
 
         self.selected_frame = None
@@ -45,7 +43,6 @@ class MainWindow(Tk):
         self.hide_all_frames()
         self.selected_frame = frame
         self.selected_frame.config(height=self.winfo_height())
-        self.selected_frame.config(bg="blue")
         self.selected_frame.grid(row=0, column=1, sticky="nsew")
 
 

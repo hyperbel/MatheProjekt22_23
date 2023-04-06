@@ -63,10 +63,9 @@ class TermEingeben(FunktionFrame):
         self.ybeschriftung_entry.grid(row=7, column=3, sticky=NE)
 
         self.figure_frame = Frame(self)
-        # set frame size of frame
-        self.figure_frame.config(width=100, height=100)
+        self.figure_frame.config(width=50, height=50)
 
-        self.fig = plt.Figure(figsize=(10, 10), dpi=125)
+        self.fig = plt.Figure(figsize=(5, 5), dpi=125)
 
 
     def clear_canvas(self):
