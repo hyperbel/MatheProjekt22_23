@@ -19,13 +19,13 @@ class Integralrechnung(FunktionFrame):
         text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ** notiert.\n\
                 Also z.B.: x**1\n\
                 Das Integralrechnen ist ein Zweig der Analysis, der sich mit der Berechnung von Flächen unter einer Kurve,\n dem Bestimmen von Volumina und Schwerpunkten von dreidimensionalen Objekten sowie der Lösung von Differentialgleichungen befasst,\n indem es die Umkehrung des Differenzierens darstellt.").pack()
-        img = PhotoImage(file="logo.png")
+        """img = PhotoImage(file="logo.png")
         canvas = Canvas(self, width=700, height=300)
         canvas.pack()
-        canvas.create_image(0, 0, anchor=NW, image=img)
+        canvas.create_image(0, 0, anchor=NW, image=img)"""
         Button(_help, text="Ok", command=_help.destroy).pack()
 
-        _help.image = img
+        #_help.image = img
 
     def clear_canvas(self):
         self.ax.clear()
