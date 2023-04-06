@@ -100,6 +100,17 @@ class TermEingeben(FunktionFrame):
                 Wenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
 
+        
+        #Quadratische, lineare und ganzrationale Funktionen sind drei wichtige Arten von Funktionen in der Mathematik.
+
+        #Eine quadratische Funktion ist eine Funktion, die durch eine Gleichung der Form f(x) = ax^2 + bx + c beschrieben wird. Hierbei sind a, b und c Konstanten und x ist die unabhängige Variable. Quadratische Funktionen sind bekannt für ihre charakteristische Parabel-Form und ihre Eigenschaften wie Scheitelpunkt, Achsensymmetrie und Nullstellen können aus der Funktionsgleichung abgeleitet werden.
+
+        #Eine lineare Funktion ist eine Funktion, die durch eine Gleichung der Form f(x) = mx + b beschrieben wird. Hierbei sind m und b Konstanten und x ist die unabhängige Variable. Lineare Funktionen sind durch eine Gerade in einem Koordinatensystem dargestellt und ihre Eigenschaften wie Steigung und y-Achsenabschnitt können direkt aus der Funktionsgleichung abgeleitet werden.
+
+        #Ganzrationale Funktionen sind Funktionen, die durch Polynome dargestellt werden, d.h. eine Summe von Potenzen der unabhängigen Variablen x. Eine ganzrationale Funktion kann allgemein durch eine Gleichung der Form f(x) = a_n*x^n + a_{n-1}x^{n-1} + ... + a_1x + a_0 beschrieben werden, wobei n eine natürliche Zahl und a_n, a_{n-1}, ..., a_1, a_0 Konstanten sind. Die graphische Darstellung einer ganzrationalen Funktion kann je nach dem Grad des Polynoms und den Koeffizienten sehr unterschiedlich aussehen, z.B. können sie Schlingen, Wendepunkte oder Asymptoten haben.
+
+        #Die Kenntnis dieser drei Funktionsarten ist wichtig, da sie häufig in vielen Bereichen der Mathematik, Physik und Ingenieurwissenschaften verwendet werden und ihre Eigenschaften dazu beitragen können, Probleme in diesen Gebieten zu lösen und Phänomene zu beschreiben.
+
     # berechnet das richtig dismal lol. ich bin so dumm
     def funktion(self, x_wert: float) -> float:
         """ berechnet die funktion """

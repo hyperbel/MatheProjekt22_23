@@ -15,11 +15,10 @@ class Trigonometrische(FunktionFrame):
 
     def get_help(self) -> None:
         """ ruft das hilfefenster auf """
-        _help = utils.base_tk(size="800x500", name="Hilfe - Funktionen")
+        _help = utils.base_tk(size="1000x500", name="Hilfe - Funktionen")
         Label(_help,
-        text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\n\
-                Also z.B.: 1x^3 + 2x^2 + 1x + 0\n\
-                Wenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!").pack()
+        text="Trage werte in alle Felder ein\n\
+                Trigonometrische Funktionen sind mathematische Funktionen,\n die Winkelmessungen in Verbindung mit geometrischen Beziehungen wie dem Einheitskreis oder Dreiecken verwenden,\n um periodische Schwingungen zu beschreiben, wie sie in Wellen, Schall und anderen Phänomenen auftreten können.").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
 
     def clear_canvas(self):

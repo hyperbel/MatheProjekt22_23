@@ -31,11 +31,11 @@ class Exponential(FunktionFrame):
 
     def get_help(self) -> None:
         """ ruft das hilfefenster auf """
-        _help = utils.base_tk(size="800x500", name="Hilfe - Funktionen")
+        _help = utils.base_tk(size="1000x500", name="Hilfe - Funktionen")
         Label(_help,
-        text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\n\
-                Also z.B.: 1x^3 + 2x^2 + 1x + 0\n\
-                Wenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!").pack()
+        text="In dem Feld a kommt der Wachstumsfaktor rein. Kommerta werden mit einem . gemacht!\n\
+                Also 1.9\n\
+                Exponentialfunktionen sind Funktionen, bei denen eine bestimmte Basiszahl (auch Wachstumsfaktor genannt)\n durch eine Potenzfunktion immer wieder mit sich selbst multipliziert wird,\n wodurch die Funktionswerte exponentiell steigen oder fallen können.").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
     
     def clear_canvas(self):
