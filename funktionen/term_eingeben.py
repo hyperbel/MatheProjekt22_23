@@ -6,7 +6,7 @@ import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 from functionframe import FunktionFrame
-from tkinter import Label, NW, TOP, Entry, Button, NE, LEFT, BOTH, Frame, ttk
+from tkinter import Label, NW, TOP, Entry, Button, NE, BOTH, Frame, ttk, NE
 from verlauf import Verlauf
 from oop import MainWindow
 
@@ -15,43 +15,52 @@ class TermEingeben(FunktionFrame):
         super().__init__(master)
         self.parent = parent
 
-        Label(self, text="hier Funktionsterm eingeben: ").pack(side=TOP, anchor=NW)
+        Label(self, text="hier Funktionsterm eingeben: ").grid(row=0, column=0, sticky=NW)
 
         self.f_entry = Entry(self)
-        self.f_entry.pack(side=TOP, anchor=NW)
+        self.f_entry.grid(row=0, column=1, sticky=NW)
         # labels & entries for bounds of x and y axis
-        Label(self, text="x von, bis: ").pack(side=TOP, anchor=NW)
+        Label(self, text="x von, bis: ").grid(row=1, column=0, sticky=NW)
         self.x_von_bis_entry = Entry(self)
-        self.x_von_bis_entry.pack(side=TOP, anchor=NW)
-        Label(self, text="y von, bis: ").pack(side=TOP, anchor=NW)
+        self.x_von_bis_entry.grid(row=1, column=1, sticky=NW)
+        Label(self, text="y von, bis: ").grid(row=2, column=0, sticky=NW)
         self.y_von_bis_entry = Entry(self)
-        self.y_von_bis_entry.pack(side=TOP, anchor=NW)
+        self.y_von_bis_entry.grid(row=2, column=1, sticky=NW)
 
-        Button(self, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
+
         
-        # Beschriftungszeug
-        self.xbeschriftung_label =  Label(self, text="X-Beschriftung:")
-        self.xbeschriftung_entry = Entry(self)
-        self.ybeschriftung_label = Label(self, text="Y-Beschriftung:")
-        self.ybeschriftung_entry = Entry(self)
-        self.xbeschriftung_label.pack(side="right", padx=5, pady=5)
-        self.xbeschriftung_entry.pack(side="right", padx=5, pady=5)
-        self.ybeschriftung_label.pack(side="right", padx=5, pady=5)
-        self.ybeschriftung_entry.pack(side="right", padx=5, pady=5)
+
+        _b = Button(self, text="Los gehts!", command=self.funktion_berechnen)
+        Button(self, text="?", command=self.get_help).grid(row=0, column=3, sticky=NE)
+
+        _b.grid(row=5, column=0, sticky=NW)
 
         # Zeug zum Zoomen und leeren
-        self.zoom_in_button = Button(self, text="+", command=self.zoom_in)
-        self.zoom_out_button = Button(self, text="-", command=self.zoom_out)
-        self.zoom_combobox = ttk.Combobox(self, values=["25%", "50%", "75%", "100%"], state="readonly", width=5)
+
+        self.zoom_control_frame = Frame(self)
+        self.zoom_control_frame.grid(row=6, column=0, sticky=NW)
+        Button(self.zoom_control_frame, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
+
+        self.zoom_in_button = Button(self.zoom_control_frame, text="+", command=self.zoom_in)
+        self.zoom_out_button = Button(self.zoom_control_frame, text="-", command=self.zoom_out)
+        self.zoom_combobox = ttk.Combobox(self.zoom_control_frame, values=["25%", "50%", "75%", "100%"], state="readonly", width=5)
         self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
         self.zoom_out_button.pack(side="right", padx=5, pady=5)
         self.zoom_in_button.pack(side="right", padx=5, pady=5)
         self.zoom_combobox.pack(side="right", padx=5, pady=5)
 
-        _b = Button(self, text="Los gehts!", command=self.funktion_berechnen)
-        Button(self, text="?", command=self.get_help).pack(side=TOP, anchor=NE)
+        self.beschriftung_frame = Frame(self)
 
-        _b.pack(side=TOP, anchor=NW)
+        # Beschriftungszeug
+        self.xbeschriftung_label =  Label(self.beschriftung_frame, text="X-Beschriftung:")
+        #self.xbeschriftung_label.pack(side="right", padx=5, pady=5)
+        self.xbeschriftung_label.grid(row=0, column=0, sticky=NE)
+        self.xbeschriftung_entry = Entry(self)
+        self.ybeschriftung_label = Label(self.beschriftung_frame, text="Y-Beschriftung:")
+        self.ybeschriftung_entry = Entry(self.beschriftung_frame)
+        self.xbeschriftung_entry.grid(row=7, column=1, sticky=NE)
+        self.ybeschriftung_label.grid(row=7, column=2, sticky=NE)
+        self.ybeschriftung_entry.grid(row=7, column=3, sticky=NE)
 
         self.figure_frame = Frame(self)
         # set frame size of frame
@@ -59,7 +68,9 @@ class TermEingeben(FunktionFrame):
 
         self.fig = plt.Figure(figsize=(10, 10), dpi=125)
 
+
     def clear_canvas(self):
+        # if self.ax exists
         self.ax.clear()
         self.canvas.draw()
 
@@ -166,10 +177,10 @@ class TermEingeben(FunktionFrame):
         kurvendiskussion_button = Button(self,
                                          text="Kurvendiskussion",
                                          command=self.kurvendiskussion)
-        kurvendiskussion_button.pack(side=TOP, anchor=NW)
+        kurvendiskussion_button.grid(row=7, column=0, sticky="nsew")
         self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=False)
 
-        self.figure_frame.pack(side=LEFT, fill=BOTH, expand=False)
+        self.figure_frame.grid(row=6, column=0, sticky="nsew")
 
     def basis_exponent_paare_holen(self, inp: str) -> list[tuple[float, float]]:
         input_str = self.array_von_leeren_strings_befreien(inp)
