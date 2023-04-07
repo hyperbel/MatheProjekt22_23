@@ -42,7 +42,7 @@ class Exponential(FunktionFrame):
         Label(_help,
         text="In dem Feld a kommt der Wachstumsfaktor rein. Kommerta werden mit einem . gemacht!\n\
                 Also 1.9\n\
-                Exponentialfunktionen sind Funktionen, bei denen eine bestimmte Basiszahl (auch Wachstumsfaktor genannt)\n durch eine Potenzfunktion immer wieder mit sich selbst multipliziert wird,\n wodurch die Funktionswerte exponentiell steigen oder fallen können.").pack()
+                \nExponentialfunktionen sind Funktionen, bei denen eine bestimmte Basiszahl (auch Wachstumsfaktor genannt)\n durch eine Potenzfunktion immer wieder mit sich selbst multipliziert wird,\n wodurch die Funktionswerte exponentiell steigen oder fallen können.").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
     
     def clear_canvas(self):
