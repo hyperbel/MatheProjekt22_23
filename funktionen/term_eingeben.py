@@ -105,19 +105,20 @@ class TermEingeben(FunktionFrame):
         Label(_help,
         text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\n\
                 Also z.B.: 1x^3 + 2x^2 + 1x + 0\n\
-                Wenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!").pack()
+                Wenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!\n\
+                    \n Quadratische, lineare und ganzrationale Funktionen sind drei wichtige Arten von Funktionen in der Mathematik.\n\
+                     Eine quadratische Funktion ist eine Funktion, die durch eine Gleichung der Form f(x) = ax^2 + bx + c beschrieben wird.\n Hierbei sind a, b und c Konstanten und x ist die unabhängige Variable. \nQuadratische Funktionen sind bekannt für ihre charakteristische Parabel-Form und ihre Eigenschaften wie Scheitelpunkt,\n Achsensymmetrie und Nullstellen können aus der Funktionsgleichung abgeleitet werden.\n\
+                     \nEine lineare Funktion ist eine Funktion, die durch eine Gleichung der Form f(x) = mx + b beschrieben wird. \nHierbei sind m und b Konstanten und x ist die unabhängige Variable. \nLineare Funktionen sind durch eine Gerade in einem Koordinatensystem dargestellt und ihre Eigenschaften wie Steigung\n und y-Achsenabschnitt können direkt aus der Funktionsgleichung abgeleitet werden.\n\
+                     \nGanzrationale Funktionen sind Funktionen, die durch Polynome dargestellt werden,\n d.h. eine Summe von Potenzen der unabhängigen Variablen x. Eine ganzrationale Funktion kann allgemein durch eine Gleichung\n der Form f(x) = a_n*x^n + a_{n-1}x^{n-1} + ... + a_1x + a_0 beschrieben werden,\n wobei n eine natürliche Zahl und a_n, a_{n-1}, ..., a_1, a_0 Konstanten sind.\n Die graphische Darstellung einer ganzrationalen Funktion kann je nach dem Grad des Polynoms\n und den Koeffizienten sehr unterschiedlich aussehen, z.B. \nkönnen sie Schlingen, Wendepunkte oder Asymptoten haben.\n\
+                     \n Die Kenntnis dieser drei Funktionsarten ist wichtig, da sie häufig in vielen Bereichen der Mathematik,\n Physik und Ingenieurwissenschaften verwendet werden und ihre Eigenschaften dazu beitragen können, Probleme in diesen Gebieten zu lösen \nund Phänomene zu beschreiben.").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
 
         
-        #Quadratische, lineare und ganzrationale Funktionen sind drei wichtige Arten von Funktionen in der Mathematik.
+       
 
-        #Eine quadratische Funktion ist eine Funktion, die durch eine Gleichung der Form f(x) = ax^2 + bx + c beschrieben wird. Hierbei sind a, b und c Konstanten und x ist die unabhängige Variable. Quadratische Funktionen sind bekannt für ihre charakteristische Parabel-Form und ihre Eigenschaften wie Scheitelpunkt, Achsensymmetrie und Nullstellen können aus der Funktionsgleichung abgeleitet werden.
+       
 
-        #Eine lineare Funktion ist eine Funktion, die durch eine Gleichung der Form f(x) = mx + b beschrieben wird. Hierbei sind m und b Konstanten und x ist die unabhängige Variable. Lineare Funktionen sind durch eine Gerade in einem Koordinatensystem dargestellt und ihre Eigenschaften wie Steigung und y-Achsenabschnitt können direkt aus der Funktionsgleichung abgeleitet werden.
-
-        #Ganzrationale Funktionen sind Funktionen, die durch Polynome dargestellt werden, d.h. eine Summe von Potenzen der unabhängigen Variablen x. Eine ganzrationale Funktion kann allgemein durch eine Gleichung der Form f(x) = a_n*x^n + a_{n-1}x^{n-1} + ... + a_1x + a_0 beschrieben werden, wobei n eine natürliche Zahl und a_n, a_{n-1}, ..., a_1, a_0 Konstanten sind. Die graphische Darstellung einer ganzrationalen Funktion kann je nach dem Grad des Polynoms und den Koeffizienten sehr unterschiedlich aussehen, z.B. können sie Schlingen, Wendepunkte oder Asymptoten haben.
-
-        #Die Kenntnis dieser drei Funktionsarten ist wichtig, da sie häufig in vielen Bereichen der Mathematik, Physik und Ingenieurwissenschaften verwendet werden und ihre Eigenschaften dazu beitragen können, Probleme in diesen Gebieten zu lösen und Phänomene zu beschreiben.
+    
 
     # berechnet das richtig dismal lol. ich bin so dumm
     def funktion(self, x_wert: float) -> float:
