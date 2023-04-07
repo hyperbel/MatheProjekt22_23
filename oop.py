@@ -161,6 +161,10 @@ class Splash(Tk):
         self.destroy()
 
 
+def start():
+    Splash().mainloop()
+    LoginWindow(MainWindow).mainloop()
+
 if __name__ == "__main__":
     Splash().mainloop()
     LoginWindow(MainWindow).mainloop()
