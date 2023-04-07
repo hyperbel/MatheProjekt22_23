@@ -40,7 +40,7 @@ class Exponential(FunktionFrame):
         """ ruft das hilfefenster auf """
         _help = utils.base_tk(size="1000x500", name="Hilfe - Funktionen")
         Label(_help,
-        text="In dem Feld a kommt der Wachstumsfaktor rein. Kommerta werden mit einem . gemacht!\n\
+        text="In dem Feld a kommt der Wachstumsfaktor rein. Komma werden mit einem . gemacht!\n\
                 Also 1.9\n\
                 \nExponentialfunktionen sind Funktionen, bei denen eine bestimmte Basiszahl (auch Wachstumsfaktor genannt)\n durch eine Potenzfunktion immer wieder mit sich selbst multipliziert wird,\n wodurch die Funktionswerte exponentiell steigen oder fallen können.").pack()
         Button(_help, text="Ok", command=_help.destroy).pack()
