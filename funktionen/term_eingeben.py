@@ -283,9 +283,7 @@ class TermEingeben(FunktionFrame):
             beispiel: 2x^4 + 0x^3 + 0x^2 - 5x + 0
         """
         funktionsgrad = self.funktionsgrad_bestimmen(funktion)
-        print("funktionsgrad", funktionsgrad)
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
-        print("basis_exponent_paare", basis_exponent_paare)
         for i in range(funktionsgrad):
             if i not in [x[1] for x in basis_exponent_paare]:
                 funktion += f"+0x^{i}"
@@ -295,28 +293,20 @@ class TermEingeben(FunktionFrame):
         """ bestimmt den ersten teiler, dass die funktion 0 ergibt"""
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
         lin_term = basis_exponent_paare[-1][0]
-        print("lin_term",lin_term)
         def alle_teiler_bestimmen():
             teiler = []
             teiler_range = range(ceil(abs(lin_term)+1))
-            print(teiler_range)
             for i in teiler_range:
-                print("i",i)
                 if i == 0:
                     continue
-                print("lin_term % i", lin_term % i)
                 if lin_term % i == 0:
-                    print("teiler", teiler)
                     teiler.append(i)
             return teiler
 
         alle_teiler = alle_teiler_bestimmen()
-        print("alle_teiler", alle_teiler)
 
         for teiler in alle_teiler:
-            print("teiler", teiler)
             erg = self.einsetzen(funktion, teiler)
-            print("erg", erg)
             if erg == 0:
                 return teiler
 
@@ -330,21 +320,14 @@ class TermEingeben(FunktionFrame):
         import pdb
         for basis, exponent in basis_exponent_paare:
             pdb.set_trace()
-            print("basis", basis)
             if exponent == 0:
-                print("exponent == 0")
                 end_wert += basis
-                print("wert", wert)
                 
             elif exponent == 1:
-                print("exponent == 1")
                 end_wert += basis * wert
-                print("wert", wert)
 
             else:
-                print("exponent", exponent)
                 end_wert += basis * (wert ** exponent)
-                print("wert", wert)
         return end_wert
 
 
@@ -352,9 +335,7 @@ class TermEingeben(FunktionFrame):
     def nullstellen(self, funktion) -> list[float]:
 
         funktionsgrad = self.funktionsgrad_bestimmen(funktion)
-        print("funktionsgrad", funktionsgrad) 
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
-        print("basis_exponent_paare", basis_exponent_paare)
 
         match funktionsgrad:
             # term umformung (zb: 2x + 1)
