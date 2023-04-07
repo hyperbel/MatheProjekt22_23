@@ -326,20 +326,26 @@ class TermEingeben(FunktionFrame):
     def einsetzen(self, funktion: str, wert: float) -> float:
         """ gibt den wert einer funktion an einem bestimmten punkt zurück """
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
-        wert = 0
+        end_wert = 0
+        import pdb
         for basis, exponent in basis_exponent_paare:
+            pdb.set_trace()
             print("basis", basis)
-            print("exponent", exponent)
             if exponent == 0:
                 print("exponent == 0")
-                wert += basis
+                end_wert += basis
+                print("wert", wert)
+                
             elif exponent == 1:
                 print("exponent == 1")
-                wert += basis * wert
+                end_wert += basis * wert
+                print("wert", wert)
+
             else:
-                print("exponent != 0 or 1")
-                wert += basis * (wert ** exponent)
-        return wert
+                print("exponent", exponent)
+                end_wert += basis * (wert ** exponent)
+                print("wert", wert)
+        return end_wert
 
 
 
