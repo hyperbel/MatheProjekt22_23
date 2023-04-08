@@ -139,7 +139,7 @@ class Exponential(FunktionFrame):
         self.zoom_in_button.pack(side=LEFT, padx=5, pady=5)
         self.zoom_combobox.pack(side=LEFT, padx=5, pady=5)
         Button(self, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
-        expo_button = ttk.Button(self, text="Generate Exponential", command=self.expo_button_clicked)
+        expo_button = ttk.Button(self, text="Beispiel", command=self.expo_button_clicked)
         expo_button.pack()
 
         # use function declared earlier to compute stuff

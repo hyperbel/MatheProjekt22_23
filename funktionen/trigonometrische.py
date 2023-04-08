@@ -63,7 +63,7 @@ class Trigonometrische(FunktionFrame):
         self.zoom_combobox = ttk.Combobox(self, values=["25%", "50%", "75%", "100%"], state="readonly", width=5)
         self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
         Button(self, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
-        expo_button = ttk.Button(self, text="Generate Exponential", command=self.trigo_button_clicked)
+        expo_button = ttk.Button(self, text="Beispiel", command=self.trigo_button_clicked)
         expo_button.pack()
 
 

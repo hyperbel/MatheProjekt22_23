@@ -67,7 +67,7 @@ class Integralrechnung(FunktionFrame):
         self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
         self.calculate_button = Button(self, text="anzeigen", command=self.integral_ausrechnen)
         Button(self, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
-        expo_button = ttk.Button(self, text="Generate Exponential", command=self.trigo_button_clicked)
+        expo_button = ttk.Button(self, text="Beispiel", command=self.trigo_button_clicked)
         expo_button.pack()
        
 
