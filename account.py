@@ -1,5 +1,5 @@
 import sqlite3
-from tkinter import Tk, Frame, Button, Label, Entry
+from tkinter import Tk, Frame, Button, Label, Entry, messagebox
 
 class LoginWindow(Tk):
     def __init__(self, _next):
@@ -52,6 +52,7 @@ class LoginFrame(Frame):
             self.parent.proceed()
         else:
             self.password_entry.delete(0, "end")
+            _ = messagebox.showwarning(title="Login Fehlgeschlagen", message="Bitte überprüfe die Anmelde Daten, solltest du noch kein Account haben, erstelle einen")
 
     def eval_logindata(self) -> bool:
         uname = self.username_entry.get()
@@ -107,7 +108,8 @@ class SignUpFrame(Frame):
         result = self.cursor.fetchall()
 
         if len(result) != 0:
-            raise NotImplementedError("Username already taken")
+             _ = messagebox.showwarning(title="Gibt es schon", message="Dieser Benutzer ist bereits da, solltest du das sein logge dich einfach an")
+            #raise NotImplementedError("Username already taken")
 
         query = f"INSERT INTO user VALUES (?, ?)"
         self.cursor.execute(query, (uname, passw))
