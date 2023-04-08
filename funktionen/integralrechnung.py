@@ -1,5 +1,5 @@
 from functionframe import FunktionFrame
-from tkinter import Label, Entry, BOTH, NW, TOP, END, Button, messagebox,ttk, NE, LEFT,RIGHT, PhotoImage, Canvas, Frame
+from tkinter import Label, Entry, BOTH, NW, TOP, END, Button, messagebox,ttk, NE, LEFT,RIGHT, PhotoImage, Canvas, Frame, END
 import tkinter.constants as tkc
 import utils
 from generator import integral_generator
@@ -39,6 +39,12 @@ class Integralrechnung(FunktionFrame):
     def clear_canvas(self):
         self.ax.clear()
         self.canvas.draw()
+    
+    def trigo_button_clicked(self):
+        value = integral_generator()
+        self.funktion_entry.delete(0, END)
+        self.funktion_entry.insert(0, value)
+
 
     def create_widgets(self):
         self.funktion_label =  Label(self, text="Funktion:")
@@ -61,6 +67,8 @@ class Integralrechnung(FunktionFrame):
         self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
         self.calculate_button = Button(self, text="anzeigen", command=self.integral_ausrechnen)
         Button(self, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
+        expo_button = ttk.Button(self, text="Generate Exponential", command=self.trigo_button_clicked)
+        expo_button.pack()
        
 
         fig = plt.Figure(figsize=(10, 10), dpi=100)

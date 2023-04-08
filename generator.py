@@ -11,15 +11,23 @@ def expo_generator():
     if b == 0:
         return a 
     else:
-        return a + "." + b
+        f = str(a) + "." + str(b)
+        return f
 
 def trigo_generator():
     amplitude = random.randint(0, 100)
     frequenz = random.randint(0, 100)
     phase = random.randint(0, 100)
+    felder = []
+    felder.append(str(amplitude))
+    felder.append(str(frequenz))
+    felder.append(str(phase))
+    return felder
 
 def integral_generator():
     a = random.randint(0, 100)
+    funktion = "x**" + str(a)
+    return funktion
 
 def terme_generator():
     userid = 1

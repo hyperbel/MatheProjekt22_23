@@ -1,7 +1,7 @@
 from functionframe import FunktionFrame
 import utils
 from generator import trigo_generator
-from tkinter import Label, Entry, StringVar, TOP, NE, NW, messagebox, Button, BOTH, Radiobutton, ttk,LEFT,RIGHT
+from tkinter import Label, Entry, StringVar, TOP, NE, NW, messagebox, Button, BOTH, Radiobutton, ttk,LEFT,RIGHT, END
 import matplotlib.pyplot as plt
 import numpy as np
 from verlauf import Verlauf
@@ -36,6 +36,16 @@ class Trigonometrische(FunktionFrame):
         self.canvas.draw()
 
 
+    def trigo_button_clicked(self):
+        amplitude, frequenz, phase = trigo_generator()
+
+        self.amplitude_entry.delete(0, END)
+        self.amplitude_entry.insert(0, amplitude)
+        self.frequenz_entry.delete(0, END)
+        self.frequenz_entry.insert(0, frequenz)
+        self.phase_entry.delete(0, END)
+        self.phase_entry.insert(0, phase)
+
     def create_widgets(self):
         self.amplitude_label =  Label(self, text="Amplitude:")
         self.amplitude_entry = Entry(self)
@@ -53,6 +63,8 @@ class Trigonometrische(FunktionFrame):
         self.zoom_combobox = ttk.Combobox(self, values=["25%", "50%", "75%", "100%"], state="readonly", width=5)
         self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
         Button(self, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
+        expo_button = ttk.Button(self, text="Generate Exponential", command=self.trigo_button_clicked)
+        expo_button.pack()
 
 
 

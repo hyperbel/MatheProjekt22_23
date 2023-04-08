@@ -3,7 +3,7 @@ import utils
 import numpy as np
 from verlauf import Verlauf
 from generator import expo_generator
-from tkinter import Label, Entry, BOTH, NW, TOP, Button, NE,ttk, messagebox,RIGHT,LEFT
+from tkinter import Label, Entry, BOTH, NW, TOP, Button, NE,ttk, messagebox,RIGHT,LEFT, END
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from oop import MainWindow
@@ -72,6 +72,15 @@ class Exponential(FunktionFrame):
         self.canvas.draw()
 
         self.zoom_combobox.bind("<<ComboboxSelected>>", lambda event: self.set_zoom_percentage())
+    
+    def expo_button_clicked(self):
+        value = expo_generator()
+        self.a_entry.delete(0, END)
+        self.a_entry.insert(0, value)
+        self.von_entry.delete(0, END)
+        self.von_entry.insert(0, 0)
+        self.bis_entry.delete(0, END)
+        self.bis_entry.insert(0, 10)
 
     # function in function to be used on button click
     def exponential_ausrechnen(self) -> None:
@@ -130,6 +139,8 @@ class Exponential(FunktionFrame):
         self.zoom_in_button.pack(side=LEFT, padx=5, pady=5)
         self.zoom_combobox.pack(side=LEFT, padx=5, pady=5)
         Button(self, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
+        expo_button = ttk.Button(self, text="Generate Exponential", command=self.expo_button_clicked)
+        expo_button.pack()
 
         # use function declared earlier to compute stuff
         Button(self, command=self.exponential_ausrechnen, text="Anzeigen").pack(side=TOP,
