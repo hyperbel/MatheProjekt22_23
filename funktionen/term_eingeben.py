@@ -1,4 +1,4 @@
-from math import sqrt, ceil
+from math import sqrt, ceil 
 import re
 import utils
 from generator import terme_generator
@@ -162,7 +162,9 @@ class TermEingeben(FunktionFrame):
         self.ax.yaxis.set_ticks_position('left')
         self.ax.xaxis.set_ticks_position('bottom')
 
-        self.ax.scatter(0, 0, color="purple", label="Nullpunkt")
+        # self.ax.scatter(0, 0, color="purple", label="Nullpunkt")
+        nullstellen = self.nullstellen(self.basis_funktion())
+        self.ax.scatter(nullstellen, [0 for x in nullstellen], color='red', label="Nullpunkte")
 
         self.ax.plot(x_werte, self.funktion(x_werte), label="linie")
         # setzt eine Legende in die obere rechte Ecke
@@ -295,7 +297,7 @@ class TermEingeben(FunktionFrame):
         lin_term = basis_exponent_paare[-1][0]
         def alle_teiler_bestimmen():
             teiler = []
-            teiler_range = range(ceil(abs(lin_term)+1))
+            teiler_range = range(-ceil(abs(lin_term)), ceil(abs(lin_term)+1))
             for i in teiler_range:
                 if i == 0:
                     continue
@@ -317,17 +319,14 @@ class TermEingeben(FunktionFrame):
         """ gibt den wert einer funktion an einem bestimmten punkt zurück """
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
         end_wert = 0
-        import pdb
         for basis, exponent in basis_exponent_paare:
-            pdb.set_trace()
-            if exponent == 0:
-                end_wert += basis
-                
-            elif exponent == 1:
-                end_wert += basis * wert
-
-            else:
-                end_wert += basis * (wert ** exponent)
+            match exponent:
+                case 0:
+                    end_wert += basis
+                case 1:
+                    end_wert += basis * wert
+                case _:
+                    end_wert += basis * (wert ** exponent)
         return end_wert
 
 
@@ -357,14 +356,8 @@ class TermEingeben(FunktionFrame):
                 diese_basis_exponent_paare = self.basis_exponent_paare_holen(gute_funktion)
                 werte = [basis_exponent_paar[0] for basis_exponent_paar in diese_basis_exponent_paare]
 
-                teiler = self.teiler_bestimmen(funktion)
-                if teiler == 0:
-                    raise NotImplementedError("keine teiler, nullpunkt bei N(0,0)")
-                quo, rest = np.polydiv(werte, [1, self.teiler_bestimmen(funktion)])
-                if rest:
-                    raise Exception("rest nicht 0")
+                return np.roots(werte)
 
-                return quo.tolist()
 
     def pq_formel(self, p: float, q: float) -> tuple[float, float]:
         """ berechnet die nullstellen einer quadratischen funktion """
@@ -380,6 +373,9 @@ class TermEingeben(FunktionFrame):
         funktionsgrad = self.funktionsgrad_bestimmen(self.basis_funktion())
         # nullstellen (f(x) = 0)
         nullstellen = self.nullstellen(self.basis_funktion())
+        self.ax.scatter(nullstellen, [0 for x in nullstellen], color='red')
+        # nullstellen in das graph plotten
+
         # ableitung
         ableitung = self.ableitung_ersteller(self.basis_funktion())
         zweite_ableitung = self.basis_exponent_paare_holen(ableitung)
