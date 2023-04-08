@@ -1,8 +1,8 @@
 from tkinter import Frame
 
 class FunktionFrame(Frame):
-    def __init__(self, master):
-        super().__init__(master)
+    def __init__(self, master, width=1000, height=800):
+        super().__init__(master, width=width, height=height)
         self.master = master
     
     def verlauf_appendieren(self) -> None:
