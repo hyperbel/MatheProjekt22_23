@@ -60,12 +60,17 @@ class LoginFrame(Frame):
         self.cursor.execute(query, (uname,))
         result = self.cursor.fetchall()
         correct = False
-        if len(result) == 0:
-            pass
-        if result[0][0] == uname:
-            if result[0][1] == self.password_entry.get():
-                correct = True
-        return correct
+        try:
+            if len(result) == 0:
+                pass
+            if result[0][0] == uname:
+                if result[0][1] == self.password_entry.get():
+                    correct = True
+            return correct
+        except:
+              _ = messagebox.showwarning(title="Login Fehlgeschlagen", message="Bitte überprüfe die Anmelde Daten, solltest du noch kein Account haben, erstelle einen")
+   
+
 
 
 class SignUpFrame(Frame):
