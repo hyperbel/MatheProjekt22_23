@@ -178,7 +178,7 @@ class TermEingeben(FunktionFrame):
         kurvendiskussion_button.grid(row=8, column=0, sticky="nsew")
         self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=False)
 
-        self.figure_frame.grid(row=6, column=0, sticky="nsew")
+        self.figure_frame.grid(row=9, column=0, sticky="nsew")
 
     def basis_exponent_paare_holen(self, inp: str) -> list[tuple[float, float]]:
         input_str = self.array_von_leeren_strings_befreien(inp)
