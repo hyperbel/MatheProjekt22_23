@@ -164,7 +164,21 @@ class TermEingeben(FunktionFrame):
 
         # self.ax.scatter(0, 0, color="purple", label="Nullpunkt")
         nullstellen = self.nullstellen(self.basis_funktion())
+
+        ableitung = self.ableitung_ersteller(self.basis_funktion())
+        print(ableitung)
+        
+        extremstellen = self.nullstellen(ableitung)
+
+        zweite_ableitung = self.ableitung_ersteller(ableitung)
+        print(zweite_ableitung)
+
+        wendepunkte = self.nullstellen(zweite_ableitung)
+        
+
         self.ax.scatter(nullstellen, [0 for x in nullstellen], color='red', label="Nullpunkte")
+        self.ax.scatter(extremstellen, [self.funktion(x) for x in extremstellen], color='green', label="Extremstellen")
+        self.ax.scatter(wendepunkte, [self.funktion(x) for x in wendepunkte], color='blue', label="Wendepunkte")
 
         self.ax.plot(x_werte, self.funktion(x_werte), label="linie")
         # setzt eine Legende in die obere rechte Ecke
