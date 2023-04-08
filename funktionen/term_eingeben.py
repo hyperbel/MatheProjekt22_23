@@ -188,10 +188,6 @@ class TermEingeben(FunktionFrame):
         self.canvas = FigureCanvasTkAgg(self.fig, master=self.figure_frame)
         self.canvas.draw()
 
-        kurvendiskussion_button = Button(self,
-                                         text="Kurvendiskussion",
-                                         command=self.kurvendiskussion)
-        kurvendiskussion_button.grid(row=8, column=0, sticky="nsew")
         self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=False)
 
         self.figure_frame.grid(row=9, column=0, sticky="nsew")
@@ -382,17 +378,3 @@ class TermEingeben(FunktionFrame):
         return x1, x2
 
 
-    def kurvendiskussion(self) -> None:
-        # funktionsgrad
-        funktionsgrad = self.funktionsgrad_bestimmen(self.basis_funktion())
-        # nullstellen (f(x) = 0)
-        nullstellen = self.nullstellen(self.basis_funktion())
-        self.ax.scatter(nullstellen, [0 for x in nullstellen], color='red')
-        # nullstellen in das graph plotten
-
-        # ableitung
-        ableitung = self.ableitung_ersteller(self.basis_funktion())
-        zweite_ableitung = self.basis_exponent_paare_holen(ableitung)
-
-        # extremstellen (f'(x) = 0)
-        # wendepunkte (f''(x) = 0)
