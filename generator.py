@@ -5,7 +5,7 @@ con = sqlite3.connect('mathe.db')
 cur = con.cursor()
 
 def expo_generator():
-    a = random.randint(0, 100)
+    a = random.randint(0, 20)
     b = random.randint(0, 9)
 
     if b == 0:
@@ -15,9 +15,9 @@ def expo_generator():
         return f
 
 def trigo_generator():
-    amplitude = random.randint(0, 100)
-    frequenz = random.randint(0, 100)
-    phase = random.randint(0, 100)
+    amplitude = random.randint(1, 30)
+    frequenz = random.randint(1, 30)
+    phase = random.randint(1, 30)
     felder = []
     felder.append(str(amplitude))
     felder.append(str(frequenz))
@@ -25,7 +25,7 @@ def trigo_generator():
     return felder
 
 def integral_generator():
-    a = random.randint(0, 100)
+    a = random.randint(0, 30)
     funktion = "x**" + str(a)
     return funktion
 
