@@ -37,6 +37,7 @@ class Integralrechnung(FunktionFrame):
         _help.image = img
 
     def clear_canvas(self):
+        self.loesung_entry.delete(0, END)
         self.ax.clear()
         self.canvas.draw()
     
