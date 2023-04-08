@@ -36,7 +36,7 @@ class TermEingeben(FunktionFrame):
         # Zeug zum Zoomen und leeren
 
         self.zoom_control_frame = Frame(self)
-        self.zoom_control_frame.grid(row=6, column=0, sticky=NW)
+        self.zoom_control_frame.grid(row=10, column=0, sticky=NW)
         Button(self.zoom_control_frame, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
 
         self.zoom_in_button = Button(self.zoom_control_frame, text="+", command=self.zoom_in)
