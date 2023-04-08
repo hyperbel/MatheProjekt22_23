@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from verlauf import Verlauf
 import sqlite3
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from oop import MainWindow
 
 class Integralrechnung(FunktionFrame):
     def __init__(self, master):

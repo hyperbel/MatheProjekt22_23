@@ -6,10 +6,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 from verlauf import Verlauf
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from oop import MainWindow
 
 class Trigonometrische(FunktionFrame):
+   # def __init__(self, master, parent: MainWindow):
     def __init__(self, master):
         super().__init__(master)
+        
+        #self.parent = parent
 
         self.create_widgets()
 
@@ -96,10 +100,25 @@ class Trigonometrische(FunktionFrame):
 
 
     def pack_items(self):
+
         self.amplitude_label.pack(side=TOP, anchor=NW)
         self.amplitude_entry.pack(side=TOP, anchor=NW)
         self.frequenz_label.pack(side=TOP, anchor=NW)
         self.frequenz_entry.pack(side=TOP, anchor=NW)
+        #self.phase_label.pack(side=TOP, anchor=NW)
+        #self.phase_entry.pack(side=TOP, anchor=NW)
+        #self.xbeschriftung_label.pack(side=TOP, anchor=NW)
+        #self.xbeschriftung_entry.pack(side=TOP, anchor=NW)
+        #self.ybeschriftung_label.pack(side=TOP, anchor=NW)
+        #self.ybeschriftung_entry.pack(side=TOP, anchor=NW)
+        #self.zoom_out_button.pack(side=LEFT, padx=5, pady=5)
+        #self.zoom_in_button.pack(side=LEFT, padx=5, pady=5)
+        #self.zoom_combobox.pack(side=LEFT, padx=5, pady=5)
+
+        #self.amplitude_label.grid(row=0, column=0, sticky=NW)
+        #self.amplitude_entry.grid(row=0, column=0, sticky=NW)
+        #self.frequenz_label.grid(row=0, column=0, sticky=NW)
+        #self.frequenz_entry.grid(row=0, column=0, sticky=NW)
         self.phase_label.pack(side=TOP, anchor=NW)
         self.phase_entry.pack(side=TOP, anchor=NW)
         self.xbeschriftung_label.pack(side=TOP, anchor=NW)

@@ -6,6 +6,7 @@ from generator import expo_generator
 from tkinter import Label, Entry, BOTH, NW, TOP, Button, NE,ttk, messagebox,RIGHT,LEFT
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from oop import MainWindow
 
 class Exponential(FunktionFrame):
     def __init__(self, master):
