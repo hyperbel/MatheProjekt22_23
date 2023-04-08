@@ -125,9 +125,9 @@ class Exponential(FunktionFrame):
         self.zoom_out_button = Button(self, text="-", command=self.zoom_out)
         self.zoom_combobox = ttk.Combobox(self, values=["25%", "50%", "75%", "100%"], state="readonly", width=5)
         self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
-        self.zoom_out_button.pack(side="right", padx=5, pady=5)
-        self.zoom_in_button.pack(side="right", padx=5, pady=5)
-        self.zoom_combobox.pack(side="right", padx=5, pady=5)
+        self.zoom_out_button.pack(side=LEFT, padx=5, pady=5)
+        self.zoom_in_button.pack(side=LEFT, padx=5, pady=5)
+        self.zoom_combobox.pack(side=LEFT, padx=5, pady=5)
         Button(self, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
 
         # use function declared earlier to compute stuff

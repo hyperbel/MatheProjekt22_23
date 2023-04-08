@@ -1,5 +1,6 @@
 from functionframe import FunktionFrame
-from tkinter import Label, Entry, BOTH, NW, TOP, END, Button, messagebox,ttk, NE, LEFT,RIGHT, PhotoImage, Canvas
+from tkinter import Label, Entry, BOTH, NW, TOP, END, Button, messagebox,ttk, NE, LEFT,RIGHT, PhotoImage, Canvas, Frame
+import tkinter.constants as tkc
 import utils
 from generator import integral_generator
 import numpy as np
@@ -98,19 +99,34 @@ class Integralrechnung(FunktionFrame):
 
 
     def pack_widgets(self) -> None:
+        # Anordnung der Eingabefelder und Beschriftungen oben links
         self.funktion_label.pack(side=TOP, anchor=NW)
         self.funktion_entry.pack(side=TOP, anchor=NW)
-        self.xbeschriftung_label.pack(side="right", padx=5, pady=5)
-        self.xbeschriftung_entry.pack(side="right", padx=5, pady=5)
-        self.ybeschriftung_label.pack(side="right", padx=5, pady=5)
-        self.ybeschriftung_entry.pack(side="right", padx=5, pady=5)
-        self.loesung_label.pack(side="right", padx=10,  anchor=NE)
-        self.loesung_entry.pack(side="right", padx=10,  anchor=NE)
+        self.xbeschriftung_label.pack(side=TOP, anchor=NW)
+        self.xbeschriftung_entry.pack(side=TOP, anchor=NW)
+        self.ybeschriftung_label.pack(side=TOP, anchor=NW)
+        self.ybeschriftung_entry.pack(side=TOP, anchor=NW)
+
+        # Anordnung des Anzeige-Buttons unter den Input-Feldern
         self.calculate_button.pack(side=TOP, anchor=NW)
-        self.zoom_out_button.pack(side="right", padx=5, pady=5)
-        self.zoom_in_button.pack(side="right", padx=5, pady=5)
-        self.zoom_combobox.pack(side="right", padx=5, pady=5)
+
+        # Anordnung der Lösungsfelder rechts von den Beschriftungen
+        self.loesung_label.pack(side=LEFT, padx=5, pady=5)
+        self.loesung_entry.pack(side=LEFT, padx=5, pady=5)
+
+        # Anordnung des Berechnen-Buttons unter den Lösungsfeldern
+        self.calculate_button.pack(side=LEFT, padx=5, pady=5)
+
+        # Anordnung der Zoom-Elemente unter den Lösungsfeldern
+        self.zoom_out_button.pack(side=LEFT, padx=5, pady=5)
+        self.zoom_in_button.pack(side=LEFT, padx=5, pady=5)
+        self.zoom_combobox.pack(side=LEFT, padx=5, pady=5)
+
+        # Hilfe-Button in der oberen rechten Ecke
         Button(self, text="?", command=self.get_help).pack(side=TOP, anchor=NE)
+
+
+
 
 
 

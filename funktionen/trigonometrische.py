@@ -102,13 +102,13 @@ class Trigonometrische(FunktionFrame):
         self.frequenz_entry.pack(side=TOP, anchor=NW)
         self.phase_label.pack(side=TOP, anchor=NW)
         self.phase_entry.pack(side=TOP, anchor=NW)
-        self.zoom_out_button.pack(side="right", padx=5, pady=5)
-        self.zoom_in_button.pack(side="right", padx=5, pady=5)
-        self.zoom_combobox.pack(side="right", padx=5, pady=5)
-        self.xbeschriftung_label.pack(side="right", padx=5, pady=5)
-        self.xbeschriftung_entry.pack(side="right", padx=5, pady=5)
-        self.ybeschriftung_label.pack(side="right", padx=5, pady=5)
-        self.ybeschriftung_entry.pack(side="right", padx=5, pady=5)
+        self.xbeschriftung_label.pack(side=TOP, anchor=NW)
+        self.xbeschriftung_entry.pack(side=TOP, anchor=NW)
+        self.ybeschriftung_label.pack(side=TOP, anchor=NW)
+        self.ybeschriftung_entry.pack(side=TOP, anchor=NW)
+        self.zoom_out_button.pack(side=LEFT, padx=5, pady=5)
+        self.zoom_in_button.pack(side=LEFT, padx=5, pady=5)
+        self.zoom_combobox.pack(side=LEFT, padx=5, pady=5)
 
 
     def trigonometrische_ausrechnen(self):
