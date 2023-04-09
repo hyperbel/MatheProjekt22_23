@@ -303,9 +303,20 @@ class TermEingeben(FunktionFrame):
         """
         funktionsgrad = self.funktionsgrad_bestimmen(funktion)
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
-        for i in range(funktionsgrad):
-            if i not in [x[1] for x in basis_exponent_paare]:
-                funktion += f"+0x^{i}"
+        # soll runter zählen, bis 0, deswegen -1 bei
+        for i in range(funktionsgrad, -1, -1):
+            if i in [x[1] for x in basis_exponent_paare]:
+                continue
+
+            match i:
+                case 0:
+                    funktion += f"+0"
+                case 1:
+                    funktion += f"+0x"
+                case _:
+                    funktion += f"+0x^{i}"
+        print(funktion)
+
         return funktion
 
     def teiler_bestimmen(self, funktion) -> int:
@@ -350,6 +361,7 @@ class TermEingeben(FunktionFrame):
 
     def nullstellen(self, funktion) -> list[float]:
 
+        funktion = self.nullterme_reinhauen(funktion)
         funktionsgrad = self.funktionsgrad_bestimmen(funktion)
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
 
@@ -363,9 +375,8 @@ class TermEingeben(FunktionFrame):
                 return [-(basis_exponent_paare[1][0]) / basis_exponent_paare[0][0]]
             # pq Formel (zb: x^2 + 2x + 1)
             case 2:
-                normiert_p = basis_exponent_paare[1][0] / basis_exponent_paare[0][0]
-                normiert_q = basis_exponent_paare[2][0] / basis_exponent_paare[0][0]
-                x1, x2 = self.pq_formel(normiert_p, normiert_q)
+
+                x1, x2 = self.pq_formel_von(funktion)
                 return [x1, x2]
             # sonst polynomdivision
             case _:
@@ -375,6 +386,16 @@ class TermEingeben(FunktionFrame):
 
                 return np.roots(werte)
 
+
+    def pq_formel_von(self, funktion: str) -> tuple[float,float]:
+        print("gute_funktion")
+        print("basis_exponent_paare")
+        gute_funktion = self.nullterme_reinhauen(funktion)
+        basis_exponent_paare = self.basis_exponent_paare_holen(gute_funktion)
+        normiert_p = basis_exponent_paare[1][0] / basis_exponent_paare[0][0]
+        normiert_q = basis_exponent_paare[2][0] / basis_exponent_paare[0][0]
+        x1, x2 = self.pq_formel(normiert_p, normiert_q)
+        return x1, x2
 
     def pq_formel(self, p: float, q: float) -> tuple[float, float]:
         """ berechnet die nullstellen einer quadratischen funktion """
