@@ -34,6 +34,9 @@ class Trigonometrische(FunktionFrame):
     def clear_canvas(self):
         self.ax.clear()
         self.canvas.draw()
+        self.amplitude_entry.delete(0, END)
+        self.frequenz_entry.delete(0, END)
+        self.phase_entry.delete(0, END)
 
 
     def trigo_button_clicked(self):

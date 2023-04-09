@@ -47,6 +47,9 @@ class Exponential(FunktionFrame):
         Button(_help, text="Ok", command=_help.destroy).pack()
     
     def clear_canvas(self):
+        self.bis_entry.delete(0, END)
+        self.von_entry.delete(0, END)
+        self.a_entry.delete(0, END)
         self.ax.clear()
         self.canvas.draw()
 
@@ -81,6 +84,8 @@ class Exponential(FunktionFrame):
         self.von_entry.insert(0, 0)
         self.bis_entry.delete(0, END)
         self.bis_entry.insert(0, 10)
+        self.x_achse_entry.insert(0, "X")
+        self.y_achse_entry.insert(0, "Y")
 
     # function in function to be used on button click
     def exponential_ausrechnen(self) -> None:
