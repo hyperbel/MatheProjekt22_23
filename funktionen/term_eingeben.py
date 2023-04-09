@@ -6,7 +6,7 @@ import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 from functionframe import FunktionFrame
-from tkinter import Label, NW, TOP, Entry, Button, NE, BOTH, Frame, ttk, NE
+from tkinter import Label, NW, TOP, Entry, Button, NE, BOTH, Frame, ttk, NE, END
 from verlauf import Verlauf
 from oop import MainWindow
 
@@ -64,6 +64,8 @@ class TermEingeben(FunktionFrame):
         self.figure_frame.config(width=50, height=50)
 
         self.fig = plt.Figure(figsize=(5, 5), dpi=125)
+        expo_button = ttk.Button(self, text="Beispiel", command=self.term_button_clicked)
+        expo_button.grid(row=0, column=4, sticky=NE)
 
 
     def clear_canvas(self):
@@ -94,6 +96,11 @@ class TermEingeben(FunktionFrame):
         self.canvas.draw()
 
         self.zoom_combobox.bind("<<ComboboxSelected>>", lambda event: self.set_zoom_percentage())
+    
+    def term_button_clicked(self):
+        value = terme_generator()
+        self.f_entry.delete(0, END)
+        self.f_entry.insert(0, value)
 
 
     def basis_funktion(self) -> str:

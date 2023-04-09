@@ -6,7 +6,7 @@ class LoginWindow(Tk):
         super().__init__()
         self.title("Login")
         self.next = _next
-        self.geometry("300x200")
+        self.geometry("200x160")
 
         self.create_widgets()
 
