@@ -48,6 +48,8 @@ class Trigonometrische(FunktionFrame):
         self.frequenz_entry.insert(0, frequenz)
         self.phase_entry.delete(0, END)
         self.phase_entry.insert(0, phase)
+        self.xbeschriftung_entry.insert(0, "x")
+        self.ybeschriftung_entry.insert(0, "y")
 
     def create_widgets(self):
         self.amplitude_label =  Label(self, text="Amplitude:")

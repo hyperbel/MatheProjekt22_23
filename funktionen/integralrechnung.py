@@ -46,7 +46,8 @@ class Integralrechnung(FunktionFrame):
         value = integral_generator()
         self.funktion_entry.delete(0, END)
         self.funktion_entry.insert(0, value)
-
+        self.xbeschriftung_entry.insert(0, "X")
+        self.ybeschriftung_entry.insert(0, "Y")
 
     def create_widgets(self):
         self.funktion_label =  Label(self, text="Funktion:")
