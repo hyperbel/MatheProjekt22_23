@@ -178,7 +178,13 @@ class TermEingeben(FunktionFrame):
         self.ax.xaxis.set_ticks_position('bottom')
 
         # self.ax.scatter(0, 0, color="purple", label="Nullpunkt")
-        nullstellen = self.nullstellen(self.basis_funktion())
+        _nullstellen = self.nullstellen(self.basis_funktion())
+        nullstellen = []
+
+        for n in _nullstellen:
+            if self.einsetzen(self.basis_funktion(), n) == 0:
+                nullstellen.append(n)
+
 
         ableitung = self.ableitung_ersteller(self.basis_funktion())
         print(ableitung)
