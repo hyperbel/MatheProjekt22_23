@@ -101,7 +101,15 @@ class TermEingeben(FunktionFrame):
         value = terme_generator()
         self.f_entry.delete(0, END)
         self.f_entry.insert(0, value)
-
+        self.ybeschriftung_entry.delete(0, END)
+        self.ybeschriftung_entry.insert(0, "Y")
+        self.xbeschriftung_entry.delete(0, END)
+        self.xbeschriftung_entry.insert(0, "X")
+        self.x_von_bis_entry.delete(0, END)
+        self.x_von_bis_entry.insert(0, "-100,100")
+        self.y_von_bis_entry.delete(0, END)
+        self.y_von_bis_entry.insert(0, "-100,100")
+        
 
     def basis_funktion(self) -> str:
         return self.f_entry.get()
