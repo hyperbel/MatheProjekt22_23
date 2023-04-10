@@ -1,6 +1,6 @@
 from account import LoginWindow
 from verlauf import Verlauf
-from tkinter import Tk, LEFT, BOTH, Menu, RIGHT, Frame, Label, Canvas, PhotoImage, NW, Button, Label
+from tkinter import Tk, LEFT, BOTH, Menu, RIGHT, Frame, Label, Canvas, PhotoImage, NW, Button, Label, messagebox
 
 
 def import_funktionen():
@@ -48,7 +48,8 @@ class MainWindow(Tk):
 
     def logout(self):
             """beendet das Programm"""
-            self.destroy()
+            if messagebox.askokcancel("Quit", "Wirklich beenden?"):
+                self.destroy()
 
     # generiert main menu fuer das root win
     def create_menu(self) -> None:
