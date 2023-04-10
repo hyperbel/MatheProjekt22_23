@@ -116,17 +116,17 @@ class Integralrechnung(FunktionFrame):
         # Anordnung der Eingabefelder und Beschriftungen oben links
         self.funktion_label.grid(row=0, column=0, sticky=NW)
         self.funktion_entry.grid(row=0, column=1, sticky=NW)
-        self.xbeschriftung_label.grid(row=2, column=0, sticky=NW)
-        self.xbeschriftung_entry.grid(row=2, column=1, sticky=NW)
-        self.ybeschriftung_label.grid(row=3, column=0, sticky=NW)
-        self.ybeschriftung_entry.grid(row=3, column=1, sticky=NW)
+        self.xbeschriftung_label.grid(row=1, column=0, sticky=NW)
+        self.xbeschriftung_entry.grid(row=1, column=1, sticky=NW)
+        self.ybeschriftung_label.grid(row=2, column=0, sticky=NW)
+        self.ybeschriftung_entry.grid(row=2, column=1, sticky=NW)
 
         # Anordnung des Anzeige-Buttons unter den Input-Feldern
-        self.calculate_button.grid(row=7, column=0, sticky=NW)
+        self.calculate_button.grid(row=4, column=0, sticky=NW)
 
         # Anordnung der Lösungsfelder rechts von den Beschriftungen
-        self.loesung_label.grid(row=4, column=0, padx=5, pady=5)
-        self.loesung_entry.grid(row=4, column=1, padx=5, pady=5)
+        self.loesung_label.grid(row=3, column=0, padx=5, pady=5)
+        self.loesung_entry.grid(row=3, column=1, padx=5, pady=5)
 
         # Anordnung des Berechnen-Buttons unter den Lösungsfeldern
         self.calculate_button.grid(row=5, column=0, padx=5, pady=5)
