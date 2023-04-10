@@ -6,7 +6,7 @@ import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 from functionframe import FunktionFrame
-from tkinter import Label, NW, TOP, Entry, Button, NE, BOTH, Frame, ttk, NE, END
+from tkinter import Label, NW, TOP, Entry, Button, NE, BOTH, Frame, ttk, NE, END, W, E, NSEW, N
 from verlauf import Verlauf
 from oop import MainWindow
 
