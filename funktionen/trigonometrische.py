@@ -1,7 +1,7 @@
 from functionframe import FunktionFrame
 import utils
 from generator import trigo_generator
-from tkinter import Label, Entry, StringVar, TOP, NE, NW, messagebox, Button, BOTH, Radiobutton, ttk,LEFT,RIGHT, END
+from tkinter import Label, Entry, StringVar, TOP, NE, NW, messagebox, Button, BOTH, Radiobutton, ttk,LEFT,RIGHT, END, W, E, NSEW, N
 import matplotlib.pyplot as plt
 import numpy as np
 from verlauf import Verlauf
@@ -69,9 +69,9 @@ class Trigonometrische(FunktionFrame):
         self.zoom_out_button = Button(self, text="-", command=self.zoom_out)
         self.zoom_combobox = ttk.Combobox(self, values=["25%", "50%", "75%", "100%"], state="readonly", width=5)
         self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
-        Button(self, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
+        Button(self, text="Leeren", command=self.clear_canvas).grid(row=10, column=3, padx=5, pady=5, sticky=E)
         expo_button = ttk.Button(self, text="Beispiel", command=self.trigo_button_clicked)
-        expo_button.pack()
+        expo_button.grid(row=0, column=3, sticky=NE)
 
 
 
@@ -83,15 +83,13 @@ class Trigonometrische(FunktionFrame):
 
         self.canvas = FigureCanvasTkAgg(self.fig, master=self)
 
-        Button(self, command=self.trigonometrische_ausrechnen, text="Anzeigen").pack(side=TOP,
-                                                                     anchor=NW)
-        Button(self, text="?", command=self.get_help).pack(side=TOP, anchor=NE)
+        Button(self, command=self.trigonometrische_ausrechnen, text="Anzeigen").grid(row=9, column=0, sticky=NW)
+        Button(self, text="?", command=self.get_help).grid(row=0, column=2, sticky=NE)
 
         # radio buttons for selecting function type
-        Radiobutton(self, text="Sinus", variable=self.function_type_var, value='sin').pack(side=TOP, anchor=NW)
-        Radiobutton(self, text="Cosinus", variable=self.function_type_var, value='cos').pack(side=TOP, anchor=NW)
-        Radiobutton(self, text="Tangens", variable=self.function_type_var, value='tan').pack(side=TOP, anchor=NW)
-
+        Radiobutton(self, text="Sinus", variable=self.function_type_var, value='sin').grid(row=0, column=0, sticky=NW)
+        Radiobutton(self, text="Cosinus", variable=self.function_type_var, value='cos').grid(row=1, column=0, sticky=NW)
+        Radiobutton(self, text="Tangens", variable=self.function_type_var, value='tan').grid(row=2, column=0, sticky=NW)
         self.pack_items()
     def zoom_in(self):
         self.ax.set_xlim(self.ax.get_xlim()[0] * 0.9, self.ax.get_xlim()[1] * 0.9)
@@ -119,34 +117,20 @@ class Trigonometrische(FunktionFrame):
 
 
     def pack_items(self):
+        self.amplitude_label.grid(row=4, column=0, sticky=NW)
+        self.amplitude_entry.grid(row=4, column=1, sticky=NW)
+        self.frequenz_label.grid(row=5, column=0, sticky=NW)
+        self.frequenz_entry.grid(row=5, column=1, sticky=NW)
+        self.phase_label.grid(row=6, column=0, sticky=NW)
+        self.phase_entry.grid(row=6, column=1, sticky=NW)
+        self.xbeschriftung_label.grid(row=7, column=0, sticky=NW)
+        self.xbeschriftung_entry.grid(row=7, column=1, sticky=NW)
+        self.ybeschriftung_label.grid(row=8, column=0, sticky=NW)
+        self.ybeschriftung_entry.grid(row=8, column=1, sticky=NW)
+        self.zoom_out_button.grid(row=10, column=1, padx=5, pady=5, sticky=W)
+        self.zoom_in_button.grid(row=10, column=0, padx=5, pady=5, sticky=E)
+        self.zoom_combobox.grid(row=10, column=2, padx=5, pady=5, sticky=N)
 
-        self.amplitude_label.pack(side=TOP, anchor=NW)
-        self.amplitude_entry.pack(side=TOP, anchor=NW)
-        self.frequenz_label.pack(side=TOP, anchor=NW)
-        self.frequenz_entry.pack(side=TOP, anchor=NW)
-        #self.phase_label.pack(side=TOP, anchor=NW)
-        #self.phase_entry.pack(side=TOP, anchor=NW)
-        #self.xbeschriftung_label.pack(side=TOP, anchor=NW)
-        #self.xbeschriftung_entry.pack(side=TOP, anchor=NW)
-        #self.ybeschriftung_label.pack(side=TOP, anchor=NW)
-        #self.ybeschriftung_entry.pack(side=TOP, anchor=NW)
-        #self.zoom_out_button.pack(side=LEFT, padx=5, pady=5)
-        #self.zoom_in_button.pack(side=LEFT, padx=5, pady=5)
-        #self.zoom_combobox.pack(side=LEFT, padx=5, pady=5)
-
-        #self.amplitude_label.grid(row=0, column=0, sticky=NW)
-        #self.amplitude_entry.grid(row=0, column=0, sticky=NW)
-        #self.frequenz_label.grid(row=0, column=0, sticky=NW)
-        #self.frequenz_entry.grid(row=0, column=0, sticky=NW)
-        self.phase_label.pack(side=TOP, anchor=NW)
-        self.phase_entry.pack(side=TOP, anchor=NW)
-        self.xbeschriftung_label.pack(side=TOP, anchor=NW)
-        self.xbeschriftung_entry.pack(side=TOP, anchor=NW)
-        self.ybeschriftung_label.pack(side=TOP, anchor=NW)
-        self.ybeschriftung_entry.pack(side=TOP, anchor=NW)
-        self.zoom_out_button.pack(side=LEFT, padx=5, pady=5)
-        self.zoom_in_button.pack(side=LEFT, padx=5, pady=5)
-        self.zoom_combobox.pack(side=LEFT, padx=5, pady=5)
 
 
     def trigonometrische_ausrechnen(self):
@@ -185,5 +169,5 @@ class Trigonometrische(FunktionFrame):
        self.ax.set_title(self.title)
        self.canvas.draw()
         # range mit von - bis
-       self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+       self.canvas.get_tk_widget().grid(row=6, column=0, padx=5, pady=5)
        self.canvas.draw()
