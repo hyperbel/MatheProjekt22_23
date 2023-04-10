@@ -28,8 +28,8 @@ class Trigonometrische(FunktionFrame):
         _help = utils.base_tk(size="1000x500", name="Hilfe - Funktionen")
         Label(_help,
         text="Trage werte in alle Felder ein\n\
-                \nTrigonometrische Funktionen sind mathematische Funktionen,\n die Winkelmessungen in Verbindung mit geometrischen Beziehungen wie dem Einheitskreis oder Dreiecken verwenden,\n um periodische Schwingungen zu beschreiben, wie sie in Wellen, Schall und anderen Phänomenen auftreten können.").pack()
-        Button(_help, text="Ok", command=_help.destroy).pack()
+                \nTrigonometrische Funktionen sind mathematische Funktionen,\n die Winkelmessungen in Verbindung mit geometrischen Beziehungen wie dem Einheitskreis oder Dreiecken verwenden,\n um periodische Schwingungen zu beschreiben, wie sie in Wellen, Schall und anderen Phänomenen auftreten können.").grid(row=1, column=0, padx=5, pady=5, sticky=E)
+        Button(_help, text="Ok", command=_help.destroy).grid(row=6, column=3, padx=5, pady=5, sticky=E)
 
     def clear_canvas(self):
         self.ax.clear()

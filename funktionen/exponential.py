@@ -43,8 +43,8 @@ class Exponential(FunktionFrame):
         Label(_help,
         text="In dem Feld a kommt der Wachstumsfaktor rein. Komma werden mit einem . gemacht!\n\
                 Also 1.9\n\
-                \nExponentialfunktionen sind Funktionen, bei denen eine bestimmte Basiszahl (auch Wachstumsfaktor genannt)\n durch eine Potenzfunktion immer wieder mit sich selbst multipliziert wird,\n wodurch die Funktionswerte exponentiell steigen oder fallen können.").pack()
-        Button(_help, text="Ok", command=_help.destroy).pack()
+                \nExponentialfunktionen sind Funktionen, bei denen eine bestimmte Basiszahl (auch Wachstumsfaktor genannt)\n durch eine Potenzfunktion immer wieder mit sich selbst multipliziert wird,\n wodurch die Funktionswerte exponentiell steigen oder fallen können.").grid(row=1, column=0, padx=5, pady=5, sticky=E)
+        Button(_help, text="Ok", command=_help.destroy).grid(row=6, column=3, padx=5, pady=5, sticky=E)
     
     def clear_canvas(self):
         self.bis_entry.delete(0, END)

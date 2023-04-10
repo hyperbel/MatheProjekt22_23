@@ -27,12 +27,8 @@ class Integralrechnung(FunktionFrame):
         Label(_help,
         text="In das Input feld die Funktion eingeben, die exponenten werden mit einem ** notiert.\n\
                 Also z.B.: x**1\n\
-                \nDas Integralrechnen ist ein Zweig der Analysis, der sich mit der Berechnung von Flächen unter einer Kurve,\n dem Bestimmen von Volumina und Schwerpunkten von dreidimensionalen Objekten sowie der Lösung von Differentialgleichungen befasst,\n indem es die Umkehrung des Differenzierens darstellt.").pack()
-        img = PhotoImage(file="logo.png")
-        canvas = Canvas(self, width=700, height=300)
-        canvas.pack()
-        canvas.create_image(0, 0, anchor=NW, image=img)
-        Button(_help, text="Ok", command=_help.destroy).pack()
+                \nDas Integralrechnen ist ein Zweig der Analysis, der sich mit der Berechnung von Flächen unter einer Kurve,\n dem Bestimmen von Volumina und Schwerpunkten von dreidimensionalen Objekten sowie der Lösung von Differentialgleichungen befasst,\n indem es die Umkehrung des Differenzierens darstellt.").grid(row=1, column=0, padx=5, pady=5, sticky=E)
+        Button(_help, text="Ok", command=_help.destroy).grid(row=6, column=3, padx=5, pady=5, sticky=E)
 
         _help.image = img
 
