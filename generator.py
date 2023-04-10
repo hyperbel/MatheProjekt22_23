@@ -53,6 +53,9 @@ def terme_generator():
         function = funktion
         return function
     else:
-        function = f"{a}x + {b}"
+        if b > 0:
+            function = f"{a}x+{b}"
+        else:
+            function = f"{a}x{b}"
         return function
     
