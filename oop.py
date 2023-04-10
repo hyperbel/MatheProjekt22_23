@@ -1,6 +1,6 @@
 from account import LoginWindow
 from verlauf import Verlauf
-from tkinter import Tk, LEFT, BOTH, Menu, RIGHT, Frame, Label, Canvas, PhotoImage, NW, Button, Label
+from tkinter import Tk, LEFT, BOTH, Menu, RIGHT, Frame, Label, Canvas, PhotoImage, NW, Button, Label, messagebox
 
 
 def import_funktionen():
@@ -46,12 +46,18 @@ class MainWindow(Tk):
         self.selected_frame.config(height=self.winfo_height())
         self.selected_frame.grid(row=0, column=1, sticky="nsew")
 
+    def logout(self):
+            """beendet das Programm"""
+            if messagebox.askokcancel("Quit", "Wirklich beenden?"):
+                self.destroy()
 
     # generiert main menu fuer das root win
     def create_menu(self) -> None:
+
         """ generiert main menu für das root win """
         self.menu = Menu(self, tearoff=0)
         funktionen_menu = Menu(self.menu, tearoff=0)
+        account_menu = Menu(self.menu, tearoff=0)
         # account_menu = Menu(_menu, tearoff=0)
         # hilfe_menu = Menu(_menu, tearoff=0)
 
@@ -65,6 +71,11 @@ class MainWindow(Tk):
 
 
         self.menu.add_cascade(label="Funktionen", menu=funktionen_menu)
+
+        account_menu.add_command(label="Logout", command=self.logout)
+        self.menu.add_cascade(label="Account", menu=account_menu)
+
+        
 
         # funktionen_menu.add_command(label="Trigonometrische", command=open_trigonometrische_window)
         # # Differenzial Rechnen = Ableitungen, deshalb wir dies in dem anderen Fenster sein
