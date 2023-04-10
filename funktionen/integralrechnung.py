@@ -46,6 +46,8 @@ class Integralrechnung(FunktionFrame):
         value = integral_generator()
         self.funktion_entry.delete(0, END)
         self.funktion_entry.insert(0, value)
+        self.ybeschriftung_entry.delete(0, END)
+        self.xbeschriftung_entry.delete(0, END)
         self.xbeschriftung_entry.insert(0, "X")
         self.ybeschriftung_entry.insert(0, "Y")
 

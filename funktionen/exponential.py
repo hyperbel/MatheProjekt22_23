@@ -84,6 +84,8 @@ class Exponential(FunktionFrame):
         self.von_entry.insert(0, 0)
         self.bis_entry.delete(0, END)
         self.bis_entry.insert(0, 10)
+        self.x_achse_entry.delete(0, END)
+        self.y_achse_entry.delete(0, END)
         self.x_achse_entry.insert(0, "X")
         self.y_achse_entry.insert(0, "Y")
 
