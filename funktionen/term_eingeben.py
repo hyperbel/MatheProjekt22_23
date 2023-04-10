@@ -183,6 +183,10 @@ class TermEingeben(FunktionFrame):
         self.ax.yaxis.set_ticks_position('left')
         self.ax.xaxis.set_ticks_position('bottom')
 
+
+        self.ax.plot(x_werte, self.funktion(x_werte), label="linie")
+        
+
         # self.ax.scatter(0, 0, color="purple", label="Nullpunkt")
         nullstellen = self.nullstellen(self.basis_funktion())
         for n in nullstellen:
@@ -190,23 +194,24 @@ class TermEingeben(FunktionFrame):
 
         ableitung = self.ableitung_ersteller(self.basis_funktion())
         print("1 ableitung: ", ableitung)
+        self.ax.plot(x_werte, self.funktion_von(x_werte, ableitung), label="1. Ableitung")
         
         extremstellen = self.nullstellen(ableitung)
 
-        zweite_ableitung = self.ableitung_ersteller(ableitung)
-        print("zweite_ableitung: ", zweite_ableitung)
+        if self.funktionsgrad_bestimmen(self.basis_funktion()) > 1:
+            zweite_ableitung = self.ableitung_ersteller(ableitung)
+            print("zweite_ableitung: ", zweite_ableitung)
 
-        wendepunkte = self.nullstellen(zweite_ableitung)
+        if self.funktionsgrad_bestimmen(self.basis_funktion()) > 2:
+            wendepunkte = self.nullstellen(zweite_ableitung)
+            self.ax.scatter(extremstellen, [self.funktion(x) for x in extremstellen], color='green', label="Extremstellen")
+            self.ax.scatter(wendepunkte, [self.funktion(x) for x in wendepunkte], color='blue', label="Wendepunkte")
+            self.ax.plot(x_werte, self.funktion_von(x_werte, zweite_ableitung), label="2. Ableitung")
         
 
         self.ax.scatter(nullstellen, [0 for _ in nullstellen], color='red', label="Nullpunkte")
-        self.ax.scatter(extremstellen, [self.funktion(x) for x in extremstellen], color='green', label="Extremstellen")
-        self.ax.scatter(wendepunkte, [self.funktion(x) for x in wendepunkte], color='blue', label="Wendepunkte")
 
-        self.ax.plot(x_werte, self.funktion_von(x_werte, ableitung), label="1. Ableitung")
-        self.ax.plot(x_werte, self.funktion_von(x_werte, zweite_ableitung), label="2. Ableitung")
 
-        self.ax.plot(x_werte, self.funktion(x_werte), label="linie")
         # setzt eine Legende in die obere rechte Ecke
         self.ax.legend(loc="upper right")
 
@@ -310,6 +315,8 @@ class TermEingeben(FunktionFrame):
     def funktionsgrad_bestimmen(self, funktion) -> int:
         """ gibt den funktionsgrad einer funktion zurück """
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+        if len(basis_exponent_paare) == 0:
+            return 1
         return max([int(x[1]) for x in basis_exponent_paare])
 
 
@@ -390,6 +397,8 @@ class TermEingeben(FunktionFrame):
             # -0.5 = x
             # das aber in einer zeile
             case 1:
+                if basis_exponent_paare[1][0] == 0 or basis_exponent_paare[0][0] == 0:
+                    return []
                 return [-(basis_exponent_paare[1][0]) / basis_exponent_paare[0][0]]
             # pq Formel (zb: x^2 + 2x + 1)
             case 2:
