@@ -1,5 +1,5 @@
 from functionframe import FunktionFrame
-from tkinter import Label, Entry, BOTH, NW, TOP, END, Button, messagebox,ttk, NE, LEFT,RIGHT, PhotoImage, Canvas, Frame, END
+from tkinter import Label, Entry, BOTH, NW, TOP, END, Button, messagebox,ttk, NE, LEFT,RIGHT, PhotoImage, Canvas, Frame, END, W, E, NSEW
 import tkinter.constants as tkc
 import utils
 from generator import integral_generator
@@ -71,9 +71,9 @@ class Integralrechnung(FunktionFrame):
         self.zoom_combobox = ttk.Combobox(self, values=["25%", "50%", "75%", "100%"], state="readonly", width=5)
         self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
         self.calculate_button = Button(self, text="anzeigen", command=self.integral_ausrechnen)
-        Button(self, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
+        Button(self, text="Leeren", command=self.clear_canvas).grid(row=6, column=3, padx=5, pady=5, sticky=E)
         expo_button = ttk.Button(self, text="Beispiel", command=self.trigo_button_clicked)
-        expo_button.pack()
+        expo_button.grid(row=0, column=3, sticky=NE)
        
 
         fig = plt.Figure(figsize=(10, 10), dpi=100)
@@ -114,30 +114,30 @@ class Integralrechnung(FunktionFrame):
 
     def pack_widgets(self) -> None:
         # Anordnung der Eingabefelder und Beschriftungen oben links
-        self.funktion_label.pack(side=TOP, anchor=NW)
-        self.funktion_entry.pack(side=TOP, anchor=NW)
-        self.xbeschriftung_label.pack(side=TOP, anchor=NW)
-        self.xbeschriftung_entry.pack(side=TOP, anchor=NW)
-        self.ybeschriftung_label.pack(side=TOP, anchor=NW)
-        self.ybeschriftung_entry.pack(side=TOP, anchor=NW)
+        self.funktion_label.grid(row=0, column=0, sticky=NW)
+        self.funktion_entry.grid(row=0, column=1, sticky=NW)
+        self.xbeschriftung_label.grid(row=2, column=0, sticky=NW)
+        self.xbeschriftung_entry.grid(row=2, column=1, sticky=NW)
+        self.ybeschriftung_label.grid(row=3, column=0, sticky=NW)
+        self.ybeschriftung_entry.grid(row=3, column=1, sticky=NW)
 
         # Anordnung des Anzeige-Buttons unter den Input-Feldern
-        self.calculate_button.pack(side=TOP, anchor=NW)
+        self.calculate_button.grid(row=7, column=0, sticky=NW)
 
         # Anordnung der Lösungsfelder rechts von den Beschriftungen
-        self.loesung_label.pack(side=LEFT, padx=5, pady=5)
-        self.loesung_entry.pack(side=LEFT, padx=5, pady=5)
+        self.loesung_label.grid(row=4, column=0, padx=5, pady=5)
+        self.loesung_entry.grid(row=4, column=1, padx=5, pady=5)
 
         # Anordnung des Berechnen-Buttons unter den Lösungsfeldern
-        self.calculate_button.pack(side=LEFT, padx=5, pady=5)
+        self.calculate_button.grid(row=5, column=0, padx=5, pady=5)
 
         # Anordnung der Zoom-Elemente unter den Lösungsfeldern
-        self.zoom_out_button.pack(side=LEFT, padx=5, pady=5)
-        self.zoom_in_button.pack(side=LEFT, padx=5, pady=5)
-        self.zoom_combobox.pack(side=LEFT, padx=5, pady=5)
+        self.zoom_out_button.grid(row=6, column=0, padx=5, pady=5)
+        self.zoom_in_button.grid(row=6, column=1, padx=5, pady=5)
+        self.zoom_combobox.grid(row=6, column=2, padx=5, pady=5)
 
         # Hilfe-Button in der oberen rechten Ecke
-        Button(self, text="?", command=self.get_help).pack(side=TOP, anchor=NE)
+        Button(self, text="?", command=self.get_help).grid(row=0, column=2, sticky=NE)
 
 
 
@@ -179,7 +179,7 @@ class Integralrechnung(FunktionFrame):
         self.x_achse_entry = Entry(self)
         self.y_achse_entry = Entry(self)
 
-        self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
+        self.canvas.get_tk_widget().grid(row=6, column=0, padx=5, pady=5)
 
         self.ax.clear()
         self.ax.set_xlabel(xbeschr)
