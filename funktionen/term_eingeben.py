@@ -106,9 +106,9 @@ class TermEingeben(FunktionFrame):
         self.xbeschriftung_entry.delete(0, END)
         self.xbeschriftung_entry.insert(0, "X")
         self.x_von_bis_entry.delete(0, END)
-        self.x_von_bis_entry.insert(0, "-100,100")
+        self.x_von_bis_entry.insert(0, "-10,10")
         self.y_von_bis_entry.delete(0, END)
-        self.y_von_bis_entry.insert(0, "-100,100")
+        self.y_von_bis_entry.insert(0, "-10,10")
         
 
     def basis_funktion(self) -> str:
