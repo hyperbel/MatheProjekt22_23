@@ -76,7 +76,7 @@ class Integralrechnung(FunktionFrame):
         expo_button.grid(row=0, column=3, sticky=NE)
        
 
-        fig = plt.Figure(figsize=(10, 10), dpi=100)
+        fig = plt.Figure(figsize=(5, 5), dpi=100)
 
         # canvas-like thing for actually drawing
         self.ax = fig.add_subplot()

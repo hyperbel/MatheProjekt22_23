@@ -76,7 +76,7 @@ class Trigonometrische(FunktionFrame):
 
 
         # figure for matplotlib to plot lines on
-        self.fig = plt.Figure(figsize=(10, 10), dpi=100)
+        self.fig = plt.Figure(figsize=(5, 5), dpi=100)
 
         # canvas-like thing for actually draselfg
         self.ax = self.fig.add_subplot()
