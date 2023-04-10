@@ -20,7 +20,7 @@ class Exponential(FunktionFrame):
         self.y_achse_entry = Entry(self)
 
         # figure for matplotlib to plot lines on
-        fig = plt.Figure(figsize=(10, 10), dpi=100)
+        fig = plt.Figure(figsize=(5, 5), dpi=100)
 
         # canvas-like thing for actually draselfg
         self.ax = fig.add_subplot()
