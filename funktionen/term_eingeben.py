@@ -200,6 +200,10 @@ class TermEingeben(FunktionFrame):
             if n < y_von or n > y_bis:
                 nullstellen.remove(n)
 
+
+            if self.funktion(n) != 0j:
+                nullstellen.remove(n)
+            print(n, "\t", self.funktion(n))
             print(n, "\t", self.einsetzen(self.basis_funktion(), n))
 
 
