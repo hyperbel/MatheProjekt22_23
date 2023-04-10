@@ -3,7 +3,7 @@ import utils
 import numpy as np
 from verlauf import Verlauf
 from generator import expo_generator
-from tkinter import Label, Entry, BOTH, NW, TOP, Button, NE,ttk, messagebox,RIGHT,LEFT, END
+from tkinter import Label, Entry, BOTH, NW, TOP, Button, NE,ttk, messagebox,RIGHT,LEFT, END, W, E, NSEW
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from oop import MainWindow
@@ -118,7 +118,7 @@ class Exponential(FunktionFrame):
         # lineare funktion plotten
         self.ax.plot(self.x_werte, a ** self.x_werte, label=a)
         self.ax.legend(loc="upper right")
-        self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=True)
+        self.canvas.get_tk_widget().grid(row=6, column=0, padx=5, pady=5)
         self.canvas.draw()
 
     def exponential_help(self) -> None:
@@ -126,28 +126,28 @@ class Exponential(FunktionFrame):
 
     def create_widgets(self):
         # display everything
-        Label(self, text="anfang: ").pack(side=TOP, anchor=NW)
-        self.von_entry.pack(side=TOP, anchor=NW)
-        Label(self, text="ende: ").pack(side=TOP, anchor=NW)
-        self.bis_entry.pack(side=TOP, anchor=NW)
-        Label(self, text="a: ").pack(side=TOP, anchor=NW)
-        self.a_entry.pack(side=TOP, anchor=NW)
-        Label(self, text="x-Achsenbeschriftung:").pack(side=TOP, anchor=NW)
-        self.x_achse_entry.pack(side=TOP, anchor=NW)
-        Label(self, text="y-Achsenbeschriftung:").pack(side=TOP, anchor=NW)
-        self.y_achse_entry.pack(side=TOP, anchor=NW)
+        Label(self, text="anfang: ").grid(row=0, column=0, sticky=NW)
+        self.von_entry.grid(row=0, column=1, sticky=NW)
+        Label(self, text="ende: ").grid(row=1, column=0, sticky=NW)
+        self.bis_entry.grid(row=1, column=1, sticky=NW)
+        Label(self, text="a: ").grid(row=2, column=0, sticky=NW)
+        self.a_entry.grid(row=2, column=1, sticky=NW)
+        Label(self, text="x-Achsenbeschriftung:").grid(row=3, column=0, sticky=NW)
+        self.x_achse_entry.grid(row=3, column=1, sticky=NW)
+        Label(self, text="y-Achsenbeschriftung:").grid(row=4, column=0, sticky=NW)
+        self.y_achse_entry.grid(row=4, column=1, sticky=NW)
         self.zoom_in_button = Button(self, text="+", command=self.zoom_in)
         self.zoom_out_button = Button(self, text="-", command=self.zoom_out)
         self.zoom_combobox = ttk.Combobox(self, values=["25%", "50%", "75%", "100%"], state="readonly", width=5)
         self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
-        self.zoom_out_button.pack(side=LEFT, padx=5, pady=5)
-        self.zoom_in_button.pack(side=LEFT, padx=5, pady=5)
-        self.zoom_combobox.pack(side=LEFT, padx=5, pady=5)
-        Button(self, text="Leeren", command=self.clear_canvas).pack(side="right", padx=5, pady=5)
+        self.zoom_out_button.grid(row=7, column=2, padx=5, pady=5)
+        self.zoom_in_button.grid(row=7, column=1, padx=5, pady=5)
+        self.zoom_combobox.grid(row=7, column=0, padx=5, pady=5)
+        Button(self, text="Leeren", command=self.clear_canvas).grid(row=7, column=3, padx=5, pady=5, sticky=E)
         expo_button = ttk.Button(self, text="Beispiel", command=self.expo_button_clicked)
-        expo_button.pack()
+        expo_button.grid(row=0, column=4, sticky=NE)
 
         # use function declared earlier to compute stuff
-        Button(self, command=self.exponential_ausrechnen, text="Anzeigen").pack(side=TOP,
-                                                                     anchor=NW)
-        Button(self, text="?", command=self.get_help).pack(side=TOP, anchor=NE)
+        Button(self, command=self.exponential_ausrechnen, text="Anzeigen").grid(row=5, column=0, sticky=NW)
+        Button(self, text="?", command=self.get_help).grid(row=0, column=3, sticky=NE)
+
