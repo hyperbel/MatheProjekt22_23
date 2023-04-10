@@ -395,6 +395,8 @@ class TermEingeben(FunktionFrame):
             case 2:
 
                 x1, x2 = self.pq_formel_von(funktion)
+                if x1 == None or x2 == None:
+                    return []
                 return [x1, x2]
             # sonst polynomdivision
             case _:
@@ -418,9 +420,10 @@ class TermEingeben(FunktionFrame):
     def pq_formel(self, p: float, q: float) -> tuple[float, float]:
         """ berechnet die nullstellen einer quadratischen funktion """
         # -p/2 +- sqrt((p/2)^2 - q)
-        x1 = (-(p/2)) + sqrt((p/2)**2 - q)
-        x2 = (-(p/2)) - sqrt((p/2)**2 - q)
+        try:
+            x1 = (-(p/2)) + sqrt((p/2)**2 - q)
+            x2 = (-(p/2)) - sqrt((p/2)**2 - q)
+        except:
+            return None, None
 
         return x1, x2
-
-
