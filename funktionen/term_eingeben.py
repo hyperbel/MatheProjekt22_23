@@ -143,6 +143,12 @@ class TermEingeben(FunktionFrame):
             y_wert += basis * (x_wert ** exponent)
         return y_wert
 
+    def funktion_von(self, x_wert: float, funktion: str) -> float:
+        """ berechnet die funktion """
+        y_wert = 0
+        for basis, exponent in self.basis_exponent_paare_holen(funktion):
+            y_wert += basis * (x_wert ** exponent)
+        return y_wert
 
     def funktion_berechnen(self) -> None:
         """ holt werte und berechnet die funktion """
@@ -178,16 +184,9 @@ class TermEingeben(FunktionFrame):
         self.ax.xaxis.set_ticks_position('bottom')
 
         # self.ax.scatter(0, 0, color="purple", label="Nullpunkt")
-        _nullstellen = self.nullstellen(self.basis_funktion())
-        nullstellen = []
-
-        for n in _nullstellen:
-            if self.einsetzen(self.basis_funktion(), n) == 0:
-                print(n)
-                nullstellen.append(n)
-
-
-
+        nullstellen = self.nullstellen(self.basis_funktion())
+        for n in nullstellen:
+            print(n)
 
         ableitung = self.ableitung_ersteller(self.basis_funktion())
         print(ableitung)
@@ -200,9 +199,12 @@ class TermEingeben(FunktionFrame):
         wendepunkte = self.nullstellen(zweite_ableitung)
         
 
-        self.ax.scatter(nullstellen, [0 for x in nullstellen], color='red', label="Nullpunkte")
+        self.ax.scatter(nullstellen, [0 for _ in nullstellen], color='red', label="Nullpunkte")
         self.ax.scatter(extremstellen, [self.funktion(x) for x in extremstellen], color='green', label="Extremstellen")
         self.ax.scatter(wendepunkte, [self.funktion(x) for x in wendepunkte], color='blue', label="Wendepunkte")
+
+        self.ax.plot(x_werte, self.funktion_von(x_werte, ableitung), label="1. Ableitung")
+        self.ax.plot(x_werte, self.funktion_von(x_werte, zweite_ableitung), label="2. Ableitung")
 
         self.ax.plot(x_werte, self.funktion(x_werte), label="linie")
         # setzt eine Legende in die obere rechte Ecke
