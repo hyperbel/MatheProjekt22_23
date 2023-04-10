@@ -6,7 +6,7 @@ import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 from functionframe import FunktionFrame
-from tkinter import Label, NW, TOP, Entry, Button, NE, BOTH, Frame, ttk, NE, END,W, E, NSEW
+from tkinter import Label, NW, TOP, Entry, Button, NE, BOTH, Frame, ttk, NE, END,E
 from verlauf import Verlauf
 from oop import MainWindow
 
@@ -188,36 +188,37 @@ class TermEingeben(FunktionFrame):
         
 
         # self.ax.scatter(0, 0, color="purple", label="Nullpunkt")
-        nullstellen = self.nullstellen(self.basis_funktion())
+        __nullstellen = self.nullstellen(self.basis_funktion())
 
         # duplikate entfernen
-        nullstellen = list(dict.fromkeys(nullstellen))
+        _nullstellen = list(dict.fromkeys(__nullstellen))
+
+        nullstellen = []
+        for n in _nullstellen:
+            nullstellen.append(n.real)
+
+
+        richtige = []
         for n in nullstellen:
-            print("nst: ", n)
-            if n < x_von or n > x_bis:
-                nullstellen.remove(n)
+            print(n)
+            if self.funktion(n) == 0:
+                richtige.append(n)
 
-            if n < y_von or n > y_bis:
-                nullstellen.remove(n)
-
-
-            if self.funktion(n) != 0j:
-                nullstellen.remove(n)
-            print(n, "\t", self.funktion(n))
-            print(n, "\t", self.einsetzen(self.basis_funktion(), n))
+        print("nullstellen------------------")
+        print(nullstellen)
+        print("richtige---------------------")
+        print(richtige)
 
 
-        self.ax.scatter(nullstellen, [0 for _ in nullstellen], color='red', label="Nullpunkte")
+        self.ax.scatter(richtige, [0 for _ in richtige], color='red', label="Nullpunkte")
 
         ableitung = self.ableitung_ersteller(self.basis_funktion())
-        print("1 ableitung: ", ableitung)
         self.ax.plot(x_werte, self.funktion_von(x_werte, ableitung), label="1. Ableitung")
         
         extremstellen = self.nullstellen(ableitung)
 
         if self.funktionsgrad_bestimmen(self.basis_funktion()) > 1:
             zweite_ableitung = self.ableitung_ersteller(ableitung)
-            print("zweite_ableitung: ", zweite_ableitung)
 
             if self.funktionsgrad_bestimmen(self.basis_funktion()) > 2:
                 wendepunkte = self.nullstellen(zweite_ableitung)
@@ -366,7 +367,6 @@ class TermEingeben(FunktionFrame):
                         funktion += f"+{b}x^{i}"
                     else:
                         funktion += f"{b}x^{i}"
-        print("funktion: ", funktion)
 
         return funktion
 
@@ -445,8 +445,6 @@ class TermEingeben(FunktionFrame):
     def pq_formel_von(self, funktion: str) -> tuple[float,float]:
         gute_funktion = self.nullterme_reinhauen(funktion)
         basis_exponent_paare = self.basis_exponent_paare_holen(gute_funktion)
-        print("gute_funktion: ", gute_funktion)
-        print("basis_exponent_paare")
         normiert_p = basis_exponent_paare[1][0] / basis_exponent_paare[0][0]
         normiert_q = basis_exponent_paare[2][0] / basis_exponent_paare[0][0]
         x1, x2 = self.pq_formel(normiert_p, normiert_q)
