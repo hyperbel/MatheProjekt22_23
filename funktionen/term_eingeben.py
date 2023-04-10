@@ -186,15 +186,15 @@ class TermEingeben(FunktionFrame):
         # self.ax.scatter(0, 0, color="purple", label="Nullpunkt")
         nullstellen = self.nullstellen(self.basis_funktion())
         for n in nullstellen:
-            print(n)
+            print("nst: ", n)
 
         ableitung = self.ableitung_ersteller(self.basis_funktion())
-        print(ableitung)
+        print("1 ableitung: ", ableitung)
         
         extremstellen = self.nullstellen(ableitung)
 
         zweite_ableitung = self.ableitung_ersteller(ableitung)
-        print(zweite_ableitung)
+        print("zweite_ableitung: ", zweite_ableitung)
 
         wendepunkte = self.nullstellen(zweite_ableitung)
         
@@ -326,7 +326,6 @@ class TermEingeben(FunktionFrame):
         for i in range(funktionsgrad, -1, -1):
             if i in [x[1] for x in basis_exponent_paare]:
                 continue
-
             match i:
                 case 0:
                     funktion += f"+0"
@@ -334,7 +333,7 @@ class TermEingeben(FunktionFrame):
                     funktion += f"+0x"
                 case _:
                     funktion += f"+0x^{i}"
-        print(funktion)
+        print("funktion: ", funktion)
 
         return funktion
 
@@ -378,9 +377,9 @@ class TermEingeben(FunktionFrame):
 
 
 
-    def nullstellen(self, funktion) -> list[float]:
+    def nullstellen(self, _funktion) -> list[float]:
 
-        funktion = self.nullterme_reinhauen(funktion)
+        funktion = self.nullterme_reinhauen(_funktion)
         funktionsgrad = self.funktionsgrad_bestimmen(funktion)
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
 
@@ -407,10 +406,10 @@ class TermEingeben(FunktionFrame):
 
 
     def pq_formel_von(self, funktion: str) -> tuple[float,float]:
-        print("gute_funktion")
-        print("basis_exponent_paare")
         gute_funktion = self.nullterme_reinhauen(funktion)
         basis_exponent_paare = self.basis_exponent_paare_holen(gute_funktion)
+        print("gute_funktion: ", gute_funktion)
+        print("basis_exponent_paare")
         normiert_p = basis_exponent_paare[1][0] / basis_exponent_paare[0][0]
         normiert_q = basis_exponent_paare[2][0] / basis_exponent_paare[0][0]
         x1, x2 = self.pq_formel(normiert_p, normiert_q)
