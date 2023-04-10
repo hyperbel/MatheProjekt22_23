@@ -183,7 +183,10 @@ class TermEingeben(FunktionFrame):
 
         for n in _nullstellen:
             if self.einsetzen(self.basis_funktion(), n) == 0:
+                print(n)
                 nullstellen.append(n)
+
+
 
 
         ableitung = self.ableitung_ersteller(self.basis_funktion())

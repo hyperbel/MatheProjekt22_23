@@ -49,6 +49,8 @@ class Verlauf(Frame):
         selection = self.combobox.get()
         if selection == 'alles löschen':
             self.listbox.delete(0, END)
+            self.cur.execute("DELETE FROM funktionen;")
+            self.con.commit()
         else:
             # MM-DD-YYYY HH:MM
             self.remove_verlauf(1, "03.30.2023 09:30")
