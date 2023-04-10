@@ -104,7 +104,6 @@ class SignUpFrame(Frame):
         passw = self.password_entry.get()
         confi = self.confirm_entry.get()
 
-
         if passw != confi:
             pass
 
