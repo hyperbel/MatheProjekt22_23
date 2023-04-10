@@ -28,7 +28,7 @@ class TermEingeben(FunktionFrame):
         self.y_von_bis_entry.grid(row=2, column=1, sticky=NW)
 
 
-        _b = Button(self, text="Los gehts!", command=self.funktion_berechnen)
+        _b = Button(self, text="anzeigen", command=self.funktion_berechnen)
         Button(self, text="?", command=self.get_help).grid(row=0, column=3, sticky=NE)
 
         _b.grid(row=5, column=0, sticky=NW)
