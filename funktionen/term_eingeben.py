@@ -189,8 +189,21 @@ class TermEingeben(FunktionFrame):
 
         # self.ax.scatter(0, 0, color="purple", label="Nullpunkt")
         nullstellen = self.nullstellen(self.basis_funktion())
+
+        # duplikate entfernen
+        nullstellen = list(dict.fromkeys(nullstellen))
         for n in nullstellen:
             print("nst: ", n)
+            if n < x_von or n > x_bis:
+                nullstellen.remove(n)
+
+            if n < y_von or n > y_bis:
+                nullstellen.remove(n)
+
+            print(n, "\t", self.einsetzen(self.basis_funktion(), n))
+
+
+        self.ax.scatter(nullstellen, [0 for _ in nullstellen], color='red', label="Nullpunkte")
 
         ableitung = self.ableitung_ersteller(self.basis_funktion())
         print("1 ableitung: ", ableitung)
@@ -202,16 +215,13 @@ class TermEingeben(FunktionFrame):
             zweite_ableitung = self.ableitung_ersteller(ableitung)
             print("zweite_ableitung: ", zweite_ableitung)
 
-        if self.funktionsgrad_bestimmen(self.basis_funktion()) > 2:
-            wendepunkte = self.nullstellen(zweite_ableitung)
-            self.ax.scatter(extremstellen, [self.funktion(x) for x in extremstellen], color='green', label="Extremstellen")
-            self.ax.scatter(wendepunkte, [self.funktion(x) for x in wendepunkte], color='blue', label="Wendepunkte")
-            self.ax.plot(x_werte, self.funktion_von(x_werte, zweite_ableitung), label="2. Ableitung")
+            if self.funktionsgrad_bestimmen(self.basis_funktion()) > 2:
+                wendepunkte = self.nullstellen(zweite_ableitung)
+                self.ax.scatter(extremstellen, [self.funktion(x) for x in extremstellen], color='green', label="Extremstellen")
+                self.ax.scatter(wendepunkte, [self.funktion(x) for x in wendepunkte], color='blue', label="Wendepunkte")
+                self.ax.plot(x_werte, self.funktion_von(x_werte, zweite_ableitung), label="2. Ableitung")
+
         
-
-        self.ax.scatter(nullstellen, [0 for _ in nullstellen], color='red', label="Nullpunkte")
-
-
         # setzt eine Legende in die obere rechte Ecke
         self.ax.legend(loc="upper right")
 
@@ -320,26 +330,38 @@ class TermEingeben(FunktionFrame):
         return max([int(x[1]) for x in basis_exponent_paare])
 
 
-    def nullterme_reinhauen(self, funktion) -> str:
+    def nullterme_reinhauen(self, _funktion) -> str:
         """ fügt nullterme in eine funktion ein 
             beispiel: 2x^4 + 3x^2 -5x + 2
             wird zu:  2x^4 + 0x^3 + 3x^2 -5x + 0x + 2
 
             beispiel: 2x^4 + 0x^3 + 0x^2 - 5x + 0
         """
-        funktionsgrad = self.funktionsgrad_bestimmen(funktion)
-        basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+        funktionsgrad = self.funktionsgrad_bestimmen(_funktion)
+        basis_exponent_paare = self.basis_exponent_paare_holen(_funktion)
+        funktion = ""
         # soll runter zählen, bis 0, deswegen -1 bei
         for i in range(funktionsgrad, -1, -1):
-            if i in [x[1] for x in basis_exponent_paare]:
-                continue
+            b = 0
+            for x in basis_exponent_paare:
+                if i == x[1]:
+                    b = x[0]
             match i:
                 case 0:
-                    funktion += f"+0"
+                    if b > -1:
+                        funktion += f"+{b}"
+                    else:
+                        funktion += f"{b}"
                 case 1:
-                    funktion += f"+0x"
+                    if b > -1:
+                        funktion += f"+{b}x"
+                    else:
+                        funktion += f"{b}x"
                 case _:
-                    funktion += f"+0x^{i}"
+                    if b > -1:
+                        funktion += f"+{b}x^{i}"
+                    else:
+                        funktion += f"{b}x^{i}"
         print("funktion: ", funktion)
 
         return funktion
