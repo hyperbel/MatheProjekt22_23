@@ -1,5 +1,6 @@
 import sqlite3
 import time
+import re
 from tkinter import Frame, Listbox, Scrollbar, END, BOTH, LEFT, RIGHT, ttk, BOTTOM, messagebox
 
 
@@ -36,8 +37,13 @@ class Verlauf(Frame):
         if selection:
             index = selection[0]
             funktion = self.listbox.get(index)
-            print(funktion)
-
+            if re.search("x", funktion):
+                if re.search("\*", funktion):
+                    print("Integral")
+                else:
+                    print("terme eingeben")
+            else:
+                print("string ohne x")
     def get_verlauf(self, userid: int):
         sql = f"SELECT funktion from funktionen WHERE userid=\'{userid}\';"
         ergebnis = self.cur.execute(sql).fetchall()
