@@ -20,10 +20,14 @@ Die Schule plant die Erstellung einer Python-Software als Unterstützung für de
 ## Programm benutzen
 ### Windows
 * Repo runterladen
-![Screenshot.](https://github.com/hyperbel/MatheProjekt22_23/blob/main/Bilder/wo1.png)
-![Screenshot.](https://github.com/hyperbel/MatheProjekt22_23/blob/main/Bilder/wo2.png)
 * Ordner mit einer IDE öffnen 
 * Main.py ausführen
+
+### Hier ist der Downnload
+![Screenshot.](https://github.com/hyperbel/MatheProjekt22_23/blob/main/Bilder/wo1.png)
+</br>
+![Screenshot.](https://github.com/hyperbel/MatheProjekt22_23/blob/main/Bilder/wo2.png)
+
 
 ### Linux
 * `git clone https://github.com/hyperbel/MatheProjekt22_23`
