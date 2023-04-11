@@ -43,18 +43,18 @@ class Verlauf(Frame):
             if re.search("x", funktion):
                 if re.search("\*", funktion):
                     self.parent.select_by_name("integralrechnung", funktion=funktion)
-                    print("integralrechnung")
+                    #print("integralrechnung")
                 else:
                     self.parent.select_by_name("term_eingeben", funktion=funktion)
-                    print("term_eingeben")
+                    #print("term_eingeben")
             else:
                 num_commas = funktion.count(",")
                 if num_commas == 2:
                     self.parent.select_by_name("trigonometrische", funktion=funktion)
-                    print("trigonometrische")
+                    #print("trigonometrische")
                 else:
                     self.parent.select_by_name("exponential", funktion=funktion)
-                    print("exponential")
+                    #print("exponential")
 
 
     def get_verlauf(self, userid: int):
