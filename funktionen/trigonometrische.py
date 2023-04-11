@@ -18,7 +18,13 @@ class Trigonometrische(FunktionFrame):
         self.create_widgets()
 
         if funktion != None:
-            self.amplitude_entry.insert(END, funktion)
+            zahlen = funktion.split(",")
+            zahl1 = zahlen[0]
+            zahl2 = zahlen[1]
+            zahl3 = zahlen[2]
+            self.amplitude_entry.insert(END, zahl1)
+            self.frequenz_entry.insert(END, zahl2)
+            self.phase_entry.insert(END, zahl3)
 
     def basis_funktion(self) -> str:
         ganzes = self.amplitude_entry.get() + "," + self.frequenz_entry.get() + "," + self.phase_entry.get()
