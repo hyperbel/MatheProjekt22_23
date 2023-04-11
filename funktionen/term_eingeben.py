@@ -41,11 +41,8 @@ class TermEingeben(FunktionFrame):
 
         self.zoom_in_button = Button(self.zoom_control_frame, text="+", command=self.zoom_in)
         self.zoom_out_button = Button(self.zoom_control_frame, text="-", command=self.zoom_out)
-        self.zoom_combobox = ttk.Combobox(self.zoom_control_frame, values=["25%", "50%", "75%", "100%"], state="readonly", width=5)
-        self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
         self.zoom_out_button.pack(side="right", padx=5, pady=5)
         self.zoom_in_button.pack(side="right", padx=5, pady=5)
-        self.zoom_combobox.pack(side="right", padx=5, pady=5)
 
         self.beschriftung_frame = Frame(self)
 
@@ -83,19 +80,6 @@ class TermEingeben(FunktionFrame):
         self.ax.set_ylim(self.ax.get_ylim()[0] * 1.1, self.ax.get_ylim()[1] * 1.1)
         self.canvas.draw()
 
-    def set_zoom_percentage(self):
-        zoom_percentage = int(self.zoom_combobox.get().replace("%", ""))
-        current_xlim = self.ax.get_xlim()
-        current_ylim = self.ax.get_ylim()
-        new_range_x = (current_xlim[1] - current_xlim[0]) / zoom_percentage * 100
-        new_range_y = (current_ylim[1] - current_ylim[0]) / zoom_percentage * 100
-        mitte_x = sum(current_xlim) / 2
-        mitte_y = sum(current_ylim) / 2
-        self.ax.set_xlim(mitte_x - new_range_x / 2, mitte_x + new_range_x / 2)
-        self.ax.set_ylim(mitte_y - new_range_y / 2, mitte_y + new_range_y / 2)
-        self.canvas.draw()
-
-        self.zoom_combobox.bind("<<ComboboxSelected>>", lambda event: self.set_zoom_percentage())
     
     def term_button_clicked(self):
         value = terme_generator()

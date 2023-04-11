@@ -18,7 +18,8 @@ class Trigonometrische(FunktionFrame):
         self.create_widgets()
 
     def basis_funktion(self) -> str:
-        return self.amplitude_entry.get()
+        ganzes = self.amplitude_entry.get() + "," + self.frequenz_entry.get() + "," + self.phase_entry.get()
+        return ganzes
 
     def verlauf_appendieren(self, verlauf: Verlauf) -> None:
         verlauf.appendieren(self.basis_funktion())
@@ -67,8 +68,6 @@ class Trigonometrische(FunktionFrame):
         self.ybeschriftung_entry = Entry(self)
         self.zoom_in_button = Button(self, text="+", command=self.zoom_in)
         self.zoom_out_button = Button(self, text="-", command=self.zoom_out)
-        self.zoom_combobox = ttk.Combobox(self, values=["25%", "50%", "75%", "100%"], state="readonly", width=5)
-        self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
         Button(self, text="Leeren", command=self.clear_canvas).grid(row=10, column=3, padx=5, pady=5, sticky=E)
         expo_button = ttk.Button(self, text="Beispiel", command=self.trigo_button_clicked)
         expo_button.grid(row=0, column=3, sticky=NE)
@@ -100,21 +99,6 @@ class Trigonometrische(FunktionFrame):
         self.ax.set_xlim(self.ax.get_xlim()[0] * 1.1, self.ax.get_xlim()[1] * 1.1)
         self.ax.set_ylim(self.ax.get_ylim()[0] * 1.1, self.ax.get_ylim()[1] * 1.1)
         self.canvas.draw()
-    def set_zoom_percentage(self):
-        zoom_percentage = int(self.zoom_combobox.get().replace("%", ""))
-        current_xlim = self.ax.get_xlim()
-        current_ylim = self.ax.get_ylim()
-        new_range_x = (current_xlim[1] - current_xlim[0]) / zoom_percentage * 100
-        new_range_y = (current_ylim[1] - current_ylim[0]) / zoom_percentage * 100
-        mid_x = sum(current_xlim) / 2
-        mid_y = sum(current_ylim) / 2
-        self.ax.set_xlim(mid_x - new_range_x / 2, mid_x + new_range_x / 2)
-        self.ax.set_ylim(mid_y - new_range_y / 2, mid_y + new_range_y / 2)
-        self.canvas.draw()
-
-        self.zoom_combobox.bind("<<ComboboxSelected>>", lambda event: self.set_zoom_percentage())
-
-
 
     def pack_items(self):
         self.amplitude_label.grid(row=4, column=0, sticky=NW)
@@ -129,8 +113,6 @@ class Trigonometrische(FunktionFrame):
         self.ybeschriftung_entry.grid(row=8, column=1, sticky=NW)
         self.zoom_out_button.grid(row=10, column=1, padx=5, pady=5, sticky=W)
         self.zoom_in_button.grid(row=10, column=0, padx=5, pady=5, sticky=E)
-        self.zoom_combobox.grid(row=10, column=2, padx=5, pady=5, sticky=N)
-
 
 
     def trigonometrische_ausrechnen(self):

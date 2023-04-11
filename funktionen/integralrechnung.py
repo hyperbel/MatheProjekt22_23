@@ -64,10 +64,8 @@ class Integralrechnung(FunktionFrame):
         self.loesung_entry = Entry(self)
         self.zoom_in_button = Button(self, text="+", command=self.zoom_in)
         self.zoom_out_button = Button(self, text="-", command=self.zoom_out)
-        self.zoom_combobox = ttk.Combobox(self, values=["25%", "50%", "75%", "100%"], state="readonly", width=5)
-        self.zoom_combobox.current(3)  # standardmäßig 100% auswählen
         self.calculate_button = Button(self, text="anzeigen", command=self.integral_ausrechnen)
-        Button(self, text="Leeren", command=self.clear_canvas).grid(row=6, column=3, padx=5, pady=5, sticky=E)
+        Button(self, text="Leeren", command=self.clear_canvas).grid(row=6, column=2, padx=5, pady=5, sticky=E)
         expo_button = ttk.Button(self, text="Beispiel", command=self.trigo_button_clicked)
         expo_button.grid(row=0, column=3, sticky=NE)
        
@@ -93,19 +91,6 @@ class Integralrechnung(FunktionFrame):
         self.ax.set_xlim(self.ax.get_xlim()[0] * 1.1, self.ax.get_xlim()[1] * 1.1)
         self.ax.set_ylim(self.ax.get_ylim()[0] * 1.1, self.ax.get_ylim()[1] * 1.1)
         self.canvas.draw()
-    def set_zoom_percentage(self):
-        zoom_percentage = int(self.zoom_combobox.get().replace("%", ""))
-        current_xlim = self.ax.get_xlim()
-        current_ylim = self.ax.get_ylim()
-        new_range_x = (current_xlim[1] - current_xlim[0]) / zoom_percentage * 100
-        new_range_y = (current_ylim[1] - current_ylim[0]) / zoom_percentage * 100
-        mid_x = sum(current_xlim) / 2
-        mid_y = sum(current_ylim) / 2
-        self.ax.set_xlim(mid_x - new_range_x / 2, mid_x + new_range_x / 2)
-        self.ax.set_ylim(mid_y - new_range_y / 2, mid_y + new_range_y / 2)
-        self.canvas.draw()
-
-        self.zoom_combobox.bind("<<ComboboxSelected>>", lambda event: self.set_zoom_percentage())
 
 
     def pack_widgets(self) -> None:
@@ -121,16 +106,15 @@ class Integralrechnung(FunktionFrame):
         self.calculate_button.grid(row=4, column=0, sticky=NW)
 
         # Anordnung der Lösungsfelder rechts von den Beschriftungen
-        self.loesung_label.grid(row=3, column=0, padx=5, pady=5)
         self.loesung_entry.grid(row=3, column=1, padx=5, pady=5)
-
+        self.loesung_label.grid(row=3, column=0, padx=5, pady=5)
+       
         # Anordnung des Berechnen-Buttons unter den Lösungsfeldern
         self.calculate_button.grid(row=5, column=0, padx=5, pady=5)
 
         # Anordnung der Zoom-Elemente unter den Lösungsfeldern
         self.zoom_out_button.grid(row=6, column=0, padx=5, pady=5)
         self.zoom_in_button.grid(row=6, column=1, padx=5, pady=5)
-        self.zoom_combobox.grid(row=6, column=2, padx=5, pady=5)
 
         # Hilfe-Button in der oberen rechten Ecke
         Button(self, text="?", command=self.get_help).grid(row=0, column=2, sticky=NE)
