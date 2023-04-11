@@ -414,11 +414,8 @@ class TermEingeben(FunktionFrame):
             # sonst polynomdivision
             case _:
                 gute_funktion = self.nullterme_reinhauen(funktion)
-                print("gute funktion:\t\t\t", gute_funktion)
                 diese_basis_exponent_paare = self.basis_exponent_paare_holen(gute_funktion)
-                print("diese basis exponent paare:\t", diese_basis_exponent_paare)
                 werte = [basis_exponent_paar[0] for basis_exponent_paar in diese_basis_exponent_paare]
-                print("werte:\t\t\t\t", werte)
 
                 roots = np.roots(werte)
 
