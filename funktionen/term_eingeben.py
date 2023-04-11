@@ -202,12 +202,11 @@ class TermEingeben(FunktionFrame):
         for n in nullstellen:
             print(n)
             if self.funktion(n) == 0:
-                richtige.append(n)
+                pass
+            richtige.append(n)
 
         print("nullstellen------------------")
         print(nullstellen)
-        print("richtige---------------------")
-        print(richtige)
 
 
         self.ax.scatter(richtige, [0 for _ in richtige], color='red', label="Nullpunkte")
@@ -368,6 +367,7 @@ class TermEingeben(FunktionFrame):
                     else:
                         funktion += f"{b}x^{i}"
 
+        print(funktion)
         return funktion
 
     def teiler_bestimmen(self, funktion) -> int:
@@ -412,6 +412,7 @@ class TermEingeben(FunktionFrame):
 
     def nullstellen(self, _funktion) -> list[float]:
 
+        """
         funktion = self.nullterme_reinhauen(_funktion)
         funktionsgrad = self.funktionsgrad_bestimmen(funktion)
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
@@ -440,6 +441,15 @@ class TermEingeben(FunktionFrame):
                 werte = [basis_exponent_paar[0] for basis_exponent_paar in diese_basis_exponent_paare]
 
                 return np.roots(werte)
+                """
+        import sympy
+
+
+        f = sympy.sympify(self.basis_funktion())
+
+        roots = sympy.solve(f)
+        return roots
+
 
 
     def pq_formel_von(self, funktion: str) -> tuple[float,float]:
