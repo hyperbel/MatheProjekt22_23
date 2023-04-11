@@ -184,18 +184,11 @@ class TermEingeben(FunktionFrame):
 
         nullstellen = []
         for n in _nullstellen:
-            nullstellen.append(n.real)
+            if complex(self.funktion(n)).imag == 0:
+                nullstellen.append(n.real)
 
 
-        richtige = []
-        for n in nullstellen:
-            if self.funktion(n) == 0:
-                pass
-            richtige.append(n)
-
-
-
-        self.ax.scatter(richtige, [0 for _ in richtige], color='red', label="Nullpunkte")
+        self.ax.scatter(nullstellen, [0 for _ in nullstellen], color='red', label="Nullpunkte")
 
         ableitung = self.ableitung_ersteller(self.basis_funktion())
         self.ax.plot(x_werte, self.funktion_von(x_werte, ableitung), label="1. Ableitung")
