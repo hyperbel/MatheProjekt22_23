@@ -128,10 +128,6 @@ class Integralrechnung(FunktionFrame):
         Button(self, text="?", command=self.get_help).grid(row=0, column=2, sticky=NE)
 
 
-
-
-
-
     def integral_ausrechnen(self):
         # Hohle Werte
         try: 

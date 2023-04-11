@@ -149,4 +149,3 @@ class Exponential(FunktionFrame):
         # use function declared earlier to compute stuff
         Button(self, command=self.exponential_ausrechnen, text="Anzeigen").grid(row=5, column=0, sticky=NW)
         Button(self, text="?", command=self.get_help).grid(row=0, column=3, sticky=NE)
-
