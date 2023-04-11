@@ -18,7 +18,8 @@ class Trigonometrische(FunktionFrame):
         self.create_widgets()
 
     def basis_funktion(self) -> str:
-        return self.amplitude_entry.get()
+        ganzes = self.amplitude_entry.get() + "," + self.frequenz_entry.get() + "," + self.phase_entry.get()
+        return ganzes
 
     def verlauf_appendieren(self, verlauf: Verlauf) -> None:
         verlauf.appendieren(self.basis_funktion())
