@@ -68,6 +68,7 @@ class TermEingeben(FunktionFrame):
 
         self.figure_frame = Frame(self)
         self.figure_frame.config(width=50, height=50)
+        
 
         self.fig = plt.Figure(figsize=(5, 5), dpi=125)
         expo_button = ttk.Button(self, text="Beispiel", command=self.term_button_clicked)
@@ -159,7 +160,7 @@ class TermEingeben(FunktionFrame):
 
         self.fig.clear()
 
-        x_werte = np.arange(-100, 200, 0.1)
+        x_werte = np.arange(-50, 50, 0.005)
         self.ax = self.fig.add_subplot()
         self.ax.set_xlabel(xbeschr)
         self.ax.set_ylabel(ybeschr)
@@ -177,7 +178,7 @@ class TermEingeben(FunktionFrame):
         self.ax.xaxis.set_ticks_position('bottom')
 
 
-        self.ax.plot(x_werte, self.funktion(x_werte), label="linie")
+        self.ax.plot(x_werte, self.funktion(x_werte), label=self.f_entry.get())
         
 
         # self.ax.scatter(0, 0, color="purple", label="Nullpunkt")
@@ -195,7 +196,7 @@ class TermEingeben(FunktionFrame):
         self.ax.scatter(nullstellen, [0 for _ in nullstellen], color='red', label="Nullpunkte")
 
         ableitung = self.ableitung_ersteller(self.basis_funktion())
-        self.ax.plot(x_werte, self.funktion_von(x_werte, ableitung), label="1. Ableitung")
+        self.ax.plot(x_werte, self.funktion_von(x_werte, ableitung), label=ableitung)
         
         extrempunkte = self.nullstellen(ableitung)
 
@@ -206,7 +207,7 @@ class TermEingeben(FunktionFrame):
                 wendepunkte = self.nullstellen(zweite_ableitung)
                 self.ax.scatter(extrempunkte, [self.funktion(x) for x in extrempunkte], color='green', label="Extrempunkte")
                 self.ax.scatter(wendepunkte, [self.funktion(x) for x in wendepunkte], color='blue', label="Wendepunkte")
-                self.ax.plot(x_werte, self.funktion_von(x_werte, zweite_ableitung), label="2. Ableitung")
+                self.ax.plot(x_werte, self.funktion_von(x_werte, zweite_ableitung), label=zweite_ableitung)
 
         
         # setzt eine Legende in die obere rechte Ecke
