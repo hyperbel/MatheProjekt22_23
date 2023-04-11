@@ -10,12 +10,15 @@ from oop import MainWindow
 
 class Trigonometrische(FunktionFrame):
    # def __init__(self, master, parent: MainWindow):
-    def __init__(self, master):
+    def __init__(self, master, funktion = None):
         super().__init__(master)
         
         #self.parent = parent
 
         self.create_widgets()
+
+        if funktion != None:
+            self.amplitude_entry.insert(END, funktion)
 
     def basis_funktion(self) -> str:
         ganzes = self.amplitude_entry.get() + "," + self.frequenz_entry.get() + "," + self.phase_entry.get()

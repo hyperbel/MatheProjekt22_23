@@ -9,7 +9,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from oop import MainWindow
 
 class Exponential(FunktionFrame):
-    def __init__(self, master):
+    def __init__(self, master, funktion = None):
         super().__init__(master)
         self.von_entry = Entry(self)
         self.bis_entry = Entry(self)
@@ -30,6 +30,9 @@ class Exponential(FunktionFrame):
         # range of numhers, see numpy.org for doc on arange
         # put canvas onto tk selfdow
         self.canvas = FigureCanvasTkAgg(fig, master=self)
+
+        if funktion != None:
+            self.a_entry.insert(END, funktion)
 
     def basis_funktion(self) -> str:
         return self.a_entry.get()

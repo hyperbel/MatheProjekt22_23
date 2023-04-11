@@ -11,9 +11,12 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from oop import MainWindow
 
 class Integralrechnung(FunktionFrame):
-    def __init__(self, master):
+    def __init__(self, master, funktion = None):
         super().__init__(master)
         self.create_widgets()
+
+        if funktion != None:
+            self.funktion_entry.insert(END, funktion)
 
     def basis_funktion(self) -> str:
         return self.funktion_entry.get()

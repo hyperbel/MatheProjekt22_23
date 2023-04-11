@@ -42,7 +42,7 @@ class Verlauf(Frame):
             funktion = self.listbox.get(index)
             if re.search("x", funktion):
                 if re.search("\*", funktion):
-                    self.parent.select_by_name("integralrechnung")
+                    self.parent.select_by_name("integralrechnung", funktion=funktion)
                     print("integralrechnung")
                 else:
                     self.parent.select_by_name("term_eingeben", funktion=funktion)
@@ -50,10 +50,10 @@ class Verlauf(Frame):
             else:
                 num_commas = funktion.count(",")
                 if num_commas == 2:
-                    self.parent.select_by_name("trigonometrische")
+                    self.parent.select_by_name("trigonometrische", funktion=funktion)
                     print("trigonometrische")
                 else:
-                    self.parent.select_by_name("exponential")
+                    self.parent.select_by_name("exponential", funktion=funktion)
                     print("exponential")
 
 

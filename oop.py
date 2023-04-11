@@ -51,11 +51,11 @@ class MainWindow(BaseWindow):
             case "term_eingeben":
                 self.selected_frame = f.term_eingeben.TermEingeben(self, self, funktion)
             case "exponential":
-                self.selected_frame = f.exponential.Exponential(self)
+                self.selected_frame = f.exponential.Exponential(self,funktion)
             case "trigonometrische":
-                self.selected_frame = f.trigonometrische.Trigonometrische(self)
+                self.selected_frame = f.trigonometrische.Trigonometrische(self, funktion)
             case "integralrechnung":
-                self.selected_frame = f.integralrechnung.Integralrechnung(self)
+                self.selected_frame = f.integralrechnung.Integralrechnung(self, funktion)
             case _:
                 raise ValueError("Frame not found")
 
