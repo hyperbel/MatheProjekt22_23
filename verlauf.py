@@ -2,11 +2,14 @@ import sqlite3
 import time
 import re
 from tkinter import Frame, Listbox, Scrollbar, END, BOTH, LEFT, RIGHT, ttk, BOTTOM, messagebox
+from mainwindowbase import BaseWindow 
 
 
 class Verlauf(Frame):
-    def __init__(self, master):
+    def __init__(self, master, parent: BaseWindow):
         super().__init__(master, width=30)
+
+        self.parent = parent
 
         self.con = sqlite3.connect("mathe.db")
         self.cur = self.con.cursor()
@@ -39,15 +42,19 @@ class Verlauf(Frame):
             funktion = self.listbox.get(index)
             if re.search("x", funktion):
                 if re.search("\*", funktion):
-                    print("Integral")
+                    self.parent.select_by_name("integralrechnung")
+                    print("integralrechnung")
                 else:
-                    print("terme eingeben")
+                    self.parent.select_by_name("term_eingeben")
+                    print("term_eingeben")
             else:
                 num_commas = funktion.count(",")
                 if num_commas == 2:
-                    print("trigo")
+                    self.parent.select_by_name("trigonometrische")
+                    print("trigonometrische")
                 else:
-                    print("Expo")
+                    self.parent.select_by_name("exponential")
+                    print("exponential")
 
 
     def get_verlauf(self, userid: int):

@@ -1,6 +1,7 @@
 from account import LoginWindow
 from verlauf import Verlauf
 from tkinter import Tk, LEFT, BOTH, Menu, RIGHT, Frame, Label, Canvas, PhotoImage, NW, Button, Label, messagebox
+from mainwindowbase import BaseWindow
 
 
 def import_funktionen():
@@ -14,7 +15,7 @@ def import_funktionen():
 
 
 
-class MainWindow(Tk):
+class MainWindow(BaseWindow):
     def __init__(self):
         super().__init__()
         self.title("Mathe Projekt 22/23")
@@ -28,7 +29,7 @@ class MainWindow(Tk):
         self.grid_columnconfigure(1, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
-        self.verlauf = Verlauf(self)
+        self.verlauf = Verlauf(self, self)
         self.verlauf.grid(row=0, column=0, sticky="nsew")
 
         self.selected_frame = None
@@ -43,6 +44,24 @@ class MainWindow(Tk):
     def select(self, frame: Frame) -> None:
         self.hide_all_frames()
         self.selected_frame = frame
+        self.selected_frame.config(height=self.winfo_height())
+        self.selected_frame.grid(row=0, column=1, sticky="nsew")
+
+    def select_by_name(self, frame: str) -> None:
+        self.hide_all_frames()
+
+        match frame:
+            case "term_eingeben":
+                self.selected_frame = f.term_eingeben.TermEingeben(self, self)
+            case "exponential":
+                self.selected_frame = f.exponential.Exponential(self)
+            case "trigonometrische":
+                self.selected_frame = f.trigonometrische.Trigonometrische(self)
+            case "integralrechnung":
+                self.selected_frame = f.integralrechnung.Integralrechnung(self)
+            case _:
+                raise ValueError("Frame not found")
+
         self.selected_frame.config(height=self.winfo_height())
         self.selected_frame.grid(row=0, column=1, sticky="nsew")
 
