@@ -39,6 +39,7 @@ class Verlauf(Frame):
     def combobox_init(self, parent):
         self.combobox_values = ['5 min', '10 min', '15 min', '30 min', '1 std', '2 std', '8 std', '24 std', 'alles löschen']
         self.combobox = ttk.Combobox(parent, values=self.combobox_values)
+        self.combobox.current(0)
         self.combobox.pack(side=LEFT, padx=5, pady=5)
 
     def button_init(self, parent):
