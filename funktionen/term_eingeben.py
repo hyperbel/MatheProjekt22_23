@@ -190,7 +190,8 @@ class TermEingeben(FunktionFrame):
 
         nullstellen = []
         for n in _nullstellen:
-            if complex(self.funktion(n)).imag == 0:
+            #if complex(self.funktion(n)).imag == 0:
+            if complex(self.einsetzen(self.basis_funktion(), n)).imag == 0:
                 nullstellen.append(n.real)
 
 
@@ -199,13 +200,24 @@ class TermEingeben(FunktionFrame):
         ableitung = self.ableitung_ersteller(self.basis_funktion())
         self.ax.plot(x_werte, self.funktion_von(x_werte, ableitung), label=ableitung)
         
-        extrempunkte = self.nullstellen(ableitung)
+        _extrempunkte = self.nullstellen(ableitung)
+        extrempunkte = []
+        for n in _extrempunkte:
+            if complex(self.einsetzen(ableitung, n)).imag == 0:
+                extrempunkte.append(n.real)
+        
 
         if self.funktionsgrad_bestimmen(self.basis_funktion()) > 1:
             zweite_ableitung = self.ableitung_ersteller(ableitung)
 
             if self.funktionsgrad_bestimmen(self.basis_funktion()) > 2:
-                wendepunkte = self.nullstellen(zweite_ableitung)
+                _wendepunkte = self.nullstellen(zweite_ableitung)
+
+                wendepunkte = []
+                for n in _wendepunkte:
+                    if complex(self.einsetzen(zweite_ableitung, n)).imag == 0:
+                        wendepunkte.append(n.real)
+
                 self.ax.scatter(extrempunkte, [self.funktion(x) for x in extrempunkte], color='green', label="Extrempunkte")
                 self.ax.scatter(wendepunkte, [self.funktion(x) for x in wendepunkte], color='blue', label="Wendepunkte")
                 self.ax.plot(x_werte, self.funktion_von(x_werte, zweite_ableitung), label=zweite_ableitung)
