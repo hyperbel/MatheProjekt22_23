@@ -65,7 +65,7 @@ class Integralrechnung(FunktionFrame):
         self.zoom_in_button = Button(self, text="+", command=self.zoom_in)
         self.zoom_out_button = Button(self, text="-", command=self.zoom_out)
         self.calculate_button = Button(self, text="anzeigen", command=self.integral_ausrechnen)
-        Button(self, text="Leeren", command=self.clear_canvas).grid(row=6, column=3, padx=5, pady=5, sticky=E)
+        Button(self, text="Leeren", command=self.clear_canvas).grid(row=6, column=2, padx=5, pady=5, sticky=E)
         expo_button = ttk.Button(self, text="Beispiel", command=self.trigo_button_clicked)
         expo_button.grid(row=0, column=3, sticky=NE)
        
@@ -106,9 +106,9 @@ class Integralrechnung(FunktionFrame):
         self.calculate_button.grid(row=4, column=0, sticky=NW)
 
         # Anordnung der Lösungsfelder rechts von den Beschriftungen
-        self.loesung_label.grid(row=3, column=0, padx=5, pady=5)
         self.loesung_entry.grid(row=3, column=1, padx=5, pady=5)
-
+        self.loesung_label.grid(row=3, column=0, padx=5, pady=5)
+       
         # Anordnung des Berechnen-Buttons unter den Lösungsfeldern
         self.calculate_button.grid(row=5, column=0, padx=5, pady=5)
 
