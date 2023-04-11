@@ -21,13 +21,6 @@ class TermEingeben(FunktionFrame):
         self.f_entry = Entry(self)
         self.f_entry.grid(row=0, column=1, sticky=NW)
 
-        if funktion != None:
-            self.f_entry.insert(END, funktion)
-            self.x_von_bis_entry.delete(0, END)
-            self.x_von_bis_entry.insert(0, "-10,10")
-            self.y_von_bis_entry.delete(0, END)
-            self.y_von_bis_entry.insert(0, "-10,10")
-
         # labels & entries for bounds of x and y axis
         Label(self, text="x von, bis: ").grid(row=1, column=0, sticky=NW)
         self.x_von_bis_entry = Entry(self)
@@ -35,6 +28,14 @@ class TermEingeben(FunktionFrame):
         Label(self, text="y von, bis: ").grid(row=2, column=0, sticky=NW)
         self.y_von_bis_entry = Entry(self)
         self.y_von_bis_entry.grid(row=2, column=1, sticky=NW)
+
+        if funktion != None:
+            self.f_entry.insert(END, funktion)
+            self.x_von_bis_entry.delete(0, END)
+            self.x_von_bis_entry.insert(0, "-10,10")
+            self.y_von_bis_entry.delete(0, END)
+            self.y_von_bis_entry.insert(0, "-10,10")
+
 
 
         _b = Button(self, text="anzeigen", command=self.funktion_berechnen)
