@@ -1,6 +1,22 @@
 # MatheProjekt22_23
 Mathe Abschluss schulprojekt in Python, zur Berechnung von Mathe Formeln 
 
+## Auftrag
+Die Schule plant die Erstellung einer Python-Software als Unterstützung für den Mathematikunterricht. Die Software soll verschiedene Funktionen und Themenbereiche abdecken, einschließlich linearer, quadratischer, trigonometrischer und Exponentialfunktionen, Ableitungs- und Integralrechnung sowie Kurvendiskussion. Die Benutzer müssen sich mit einem Benutzernamen und Passwort anmelden und das Koordinatensystem muss zoombar sein. Die Programmierung muss im Unterricht durchgeführt werden und es sind nur bestimmte Python-Module erlaubt. Der Quellcode muss zu 100% selbst erstellt werden.
+* numpy
+* matplotlib
+* math
+* sympy
+* random
+* time
+* glob
+* queue
+* collections
+* threading
+* re
+* winsound 
+* tkinter
+
 ## Programm benutzen
 ### Windows
 * Repo runterladen
