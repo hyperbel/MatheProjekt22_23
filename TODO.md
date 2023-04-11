@@ -1,3 +1,0 @@
-# Todo
-* Gantt Diagramm
-* Grund
