@@ -189,13 +189,10 @@ class TermEingeben(FunktionFrame):
 
         richtige = []
         for n in nullstellen:
-            print(n)
             if self.funktion(n) == 0:
                 pass
             richtige.append(n)
 
-        print("nullstellen------------------")
-        print(nullstellen)
 
 
         self.ax.scatter(richtige, [0 for _ in richtige], color='red', label="Nullpunkte")
@@ -203,14 +200,14 @@ class TermEingeben(FunktionFrame):
         ableitung = self.ableitung_ersteller(self.basis_funktion())
         self.ax.plot(x_werte, self.funktion_von(x_werte, ableitung), label="1. Ableitung")
         
-        extremstellen = self.nullstellen(ableitung)
+        extrempunkte = self.nullstellen(ableitung)
 
         if self.funktionsgrad_bestimmen(self.basis_funktion()) > 1:
             zweite_ableitung = self.ableitung_ersteller(ableitung)
 
             if self.funktionsgrad_bestimmen(self.basis_funktion()) > 2:
                 wendepunkte = self.nullstellen(zweite_ableitung)
-                self.ax.scatter(extremstellen, [self.funktion(x) for x in extremstellen], color='green', label="Extremstellen")
+                self.ax.scatter(extrempunkte, [self.funktion(x) for x in extrempunkte], color='green', label="Extrempunkte")
                 self.ax.scatter(wendepunkte, [self.funktion(x) for x in wendepunkte], color='blue', label="Wendepunkte")
                 self.ax.plot(x_werte, self.funktion_von(x_werte, zweite_ableitung), label="2. Ableitung")
 
@@ -356,7 +353,6 @@ class TermEingeben(FunktionFrame):
                     else:
                         funktion += f"{b}x^{i}"
 
-        print(funktion)
         return funktion
 
     def teiler_bestimmen(self, funktion) -> int:
@@ -401,10 +397,12 @@ class TermEingeben(FunktionFrame):
 
     def nullstellen(self, _funktion) -> list[float]:
 
-        """
+
         funktion = self.nullterme_reinhauen(_funktion)
         funktionsgrad = self.funktionsgrad_bestimmen(funktion)
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+
+        roots = []
 
         match funktionsgrad:
             # term umformung (zb: 2x + 1)
@@ -413,30 +411,25 @@ class TermEingeben(FunktionFrame):
             # -0.5 = x
             # das aber in einer zeile
             case 1:
-                if basis_exponent_paare[1][0] == 0 or basis_exponent_paare[0][0] == 0:
-                    return []
-                return [-(basis_exponent_paare[1][0]) / basis_exponent_paare[0][0]]
+                if basis_exponent_paare[1][0] != 0 and basis_exponent_paare[0][0] != 0:
+                    roots = [-(basis_exponent_paare[1][0]) / basis_exponent_paare[0][0]]
             # pq Formel (zb: x^2 + 2x + 1)
             case 2:
-
                 x1, x2 = self.pq_formel_von(funktion)
-                if x1 == None or x2 == None:
-                    return []
-                return [x1, x2]
+                if x1 != None and x2 != None:
+                    roots = [x1, x2]
             # sonst polynomdivision
             case _:
                 gute_funktion = self.nullterme_reinhauen(funktion)
+                print("gute funktion:\t\t\t", gute_funktion)
                 diese_basis_exponent_paare = self.basis_exponent_paare_holen(gute_funktion)
+                print("diese basis exponent paare:\t", diese_basis_exponent_paare)
                 werte = [basis_exponent_paar[0] for basis_exponent_paar in diese_basis_exponent_paare]
+                print("werte:\t\t\t\t", werte)
 
-                return np.roots(werte)
-                """
-        import sympy
+                roots = np.roots(werte)
 
 
-        f = sympy.sympify(self.basis_funktion())
-
-        roots = sympy.solve(f)
         return roots
 
 
