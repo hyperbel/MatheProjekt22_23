@@ -25,6 +25,10 @@ class Trigonometrische(FunktionFrame):
             self.amplitude_entry.insert(END, zahl1)
             self.frequenz_entry.insert(END, zahl2)
             self.phase_entry.insert(END, zahl3)
+            self.xbeschriftung_entry.delete(0, END)
+            self.ybeschriftung_entry.delete(0, END)
+            self.xbeschriftung_entry.insert(0, "x")
+            self.ybeschriftung_entry.insert(0, "y")
 
     def basis_funktion(self) -> str:
         ganzes = self.amplitude_entry.get() + "," + self.frequenz_entry.get() + "," + self.phase_entry.get()

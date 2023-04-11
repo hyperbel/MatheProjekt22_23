@@ -17,6 +17,11 @@ class Integralrechnung(FunktionFrame):
 
         if funktion != None:
             self.funktion_entry.insert(END, funktion)
+            self.ybeschriftung_entry.delete(0, END)
+            self.xbeschriftung_entry.delete(0, END)
+            self.xbeschriftung_entry.insert(0, "X")
+            self.ybeschriftung_entry.insert(0, "Y")
+
 
     def basis_funktion(self) -> str:
         return self.funktion_entry.get()
