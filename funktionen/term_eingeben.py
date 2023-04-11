@@ -23,14 +23,6 @@ class TermEingeben(FunktionFrame):
 
         if funktion != None:
             self.f_entry.insert(END, funktion)
-            self.ybeschriftung_entry.delete(0, END)
-            self.ybeschriftung_entry.insert(0, "Y")
-            self.xbeschriftung_entry.delete(0, END)
-            self.xbeschriftung_entry.insert(0, "X")
-            self.x_von_bis_entry.delete(0, END)
-            self.x_von_bis_entry.insert(0, "-10,10")
-            self.y_von_bis_entry.delete(0, END)
-            self.y_von_bis_entry.insert(0, "-10,10")
 
         # labels & entries for bounds of x and y axis
         Label(self, text="x von, bis: ").grid(row=1, column=0, sticky=NW)
