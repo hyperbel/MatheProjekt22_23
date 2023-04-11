@@ -121,8 +121,8 @@ class Integralrechnung(FunktionFrame):
         self.calculate_button.grid(row=5, column=0, padx=5, pady=5)
 
         # Anordnung der Zoom-Elemente unter den Lösungsfeldern
-        self.zoom_out_button.grid(row=6, column=0, padx=5, pady=5)
-        self.zoom_in_button.grid(row=6, column=1, padx=5, pady=5)
+        self.zoom_out_button.grid(row=6, column=3, padx=5, pady=5)
+        self.zoom_in_button.grid(row=6, column=4, padx=5, pady=5)
 
         # Hilfe-Button in der oberen rechten Ecke
         Button(self, text="?", command=self.get_help).grid(row=0, column=2, sticky=NE)
