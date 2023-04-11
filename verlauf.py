@@ -43,7 +43,13 @@ class Verlauf(Frame):
                 else:
                     print("terme eingeben")
             else:
-                print("string ohne x")
+                num_commas = funktion.count(",")
+                if num_commas == 2:
+                    print("trigo")
+                else:
+                    print("Expo")
+
+
     def get_verlauf(self, userid: int):
         sql = f"SELECT funktion from funktionen WHERE userid=\'{userid}\';"
         ergebnis = self.cur.execute(sql).fetchall()
