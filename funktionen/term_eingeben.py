@@ -11,14 +11,19 @@ from verlauf import Verlauf
 from oop import MainWindow
 
 class TermEingeben(FunktionFrame):
-    def __init__(self, master, parent: MainWindow):
+    def __init__(self, master, parent: MainWindow, funktion = None):
         super().__init__(master)
         self.parent = parent
 
         Label(self, text="hier Funktionsterm eingeben: ").grid(row=0, column=0, sticky=NW)
 
+
         self.f_entry = Entry(self)
         self.f_entry.grid(row=0, column=1, sticky=NW)
+
+        if funktion != None:
+            self.f_entry.insert(END, funktion)
+
         # labels & entries for bounds of x and y axis
         Label(self, text="x von, bis: ").grid(row=1, column=0, sticky=NW)
         self.x_von_bis_entry = Entry(self)

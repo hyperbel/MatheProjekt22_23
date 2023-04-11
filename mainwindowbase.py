@@ -7,7 +7,7 @@ class BaseWindow(Tk):
         self.minsize(1200, 850)
         self.maxsize(1200, 850)
 
-    def select_by_name(self, name: str):
+    def select_by_name(self, name: str, funktion: str = None):
         pass
 
     

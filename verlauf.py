@@ -45,7 +45,7 @@ class Verlauf(Frame):
                     self.parent.select_by_name("integralrechnung")
                     print("integralrechnung")
                 else:
-                    self.parent.select_by_name("term_eingeben")
+                    self.parent.select_by_name("term_eingeben", funktion=funktion)
                     print("term_eingeben")
             else:
                 num_commas = funktion.count(",")

@@ -44,12 +44,12 @@ class MainWindow(BaseWindow):
         self.selected_frame.config(height=self.winfo_height())
         self.selected_frame.grid(row=0, column=1, sticky="nsew")
 
-    def select_by_name(self, frame: str) -> None:
+    def select_by_name(self, frame: str, funktion: str) -> None:
         self.hide_all_frames()
 
         match frame:
             case "term_eingeben":
-                self.selected_frame = f.term_eingeben.TermEingeben(self, self)
+                self.selected_frame = f.term_eingeben.TermEingeben(self, self, funktion)
             case "exponential":
                 self.selected_frame = f.exponential.Exponential(self)
             case "trigonometrische":
