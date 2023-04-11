@@ -1,5 +1,6 @@
 from account import LoginWindow
 from verlauf import Verlauf
+import sqlite3
 from tkinter import Tk, LEFT, BOTH, Menu, RIGHT, Frame, Label, Canvas, PhotoImage, NW, Button, Label, messagebox
 from mainwindowbase import BaseWindow
 
@@ -66,6 +67,15 @@ class MainWindow(BaseWindow):
             """beendet das Programm"""
             if messagebox.askokcancel("Quit", "Wirklich beenden?"):
                 self.destroy()
+    
+    def loeschen(self):
+        """löscht einen Account"""
+        if messagebox.askokcancel("Löschen", "Willst du wirklich deinen Account und alle Funktionen LÖSCHEN?"):
+            con = sqlite3.connect("mathe.db")
+            cur = con.cursor()
+            #cur.execute("DELETE FROM user;")
+            #con.commit()
+            _ = messagebox.showwarning(title="In entwicklung", message="dieses Feature ist noch in der Entwicklung, und wird es nicht in Version 1 schaffen")
 
     # generiert main menu fuer das root win
     def create_menu(self) -> None:
@@ -89,6 +99,7 @@ class MainWindow(BaseWindow):
         self.menu.add_cascade(label="Funktionen", menu=funktionen_menu)
 
         account_menu.add_command(label="Logout", command=self.logout)
+        account_menu.add_command(label="Löschen", command=self.loeschen)
         self.menu.add_cascade(label="Account", menu=account_menu)
 
         
