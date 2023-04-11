@@ -15,10 +15,28 @@ class Verlauf(Frame):
         for i in self.verlauf:
             self.listbox.insert(END, i[0])
 
+        self.listbox.bind('<Double-Button-1>', self.on_double_click)
+
         self.scrollbar_init()
         self.delete_frame_init()
         self.listbox.pack(side=LEFT, fill=BOTH, expand=True)
         self.userid=1
+
+    def on_double_click(self, event):
+        widget = event.widget
+        selection = widget.curselection()
+        if selection:
+            index = selection[0]
+            item = widget.get(index)
+            if item:
+                self.open_funktion_aus_verlauf(item)
+
+    def open_funktion_aus_verlauf(self, event):
+        selection = self.listbox.curselection()
+        if selection:
+            index = selection[0]
+            funktion = self.listbox.get(index)
+            print(funktion)
 
     def get_verlauf(self, userid: int):
         sql = f"SELECT funktion from funktionen WHERE userid=\'{userid}\';"
