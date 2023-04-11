@@ -1,4 +1,4 @@
-# MatheProjekt22_23
+# MatheProjekt22/23
 Mathe Abschluss schulprojekt in Python, zur Berechnung von Mathe Formeln 
 
 ## Auftrag
@@ -23,7 +23,7 @@ Die Schule plant die Erstellung einer Python-Software als Unterstützung für de
 * Ordner mit einer IDE öffnen 
 * Main.py ausführen
 
-### Hier ist der Downnload
+### Hier ist der Download
 ![Screenshot.](https://github.com/hyperbel/MatheProjekt22_23/blob/main/Bilder/wo1.png)
 </br>
 ![Screenshot.](https://github.com/hyperbel/MatheProjekt22_23/blob/main/Bilder/wo2.png)
