@@ -17,6 +17,8 @@ def import_funktionen():
 class MainWindow(BaseWindow):
     def __init__(self):
         super().__init__()
+      
+
 
         self.create_menu()
         self.config(menu=self.menu)
