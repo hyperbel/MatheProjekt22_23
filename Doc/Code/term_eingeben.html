@@ -1,0 +1,2002 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>term_eingeben API documentation</title>
+<meta name="description" content="Frame für die Eingabe einer Funktion, egal welcher Grad" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>term_eingeben</code></h1>
+</header>
+<section id="section-intro">
+<p>Frame für die Eingabe einer Funktion, egal welcher Grad</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34; Frame für die Eingabe einer Funktion, egal welcher Grad  &#34;&#34;&#34;
+from math import sqrt, ceil 
+import re
+import utils
+from generator import terme_generator
+import numpy as np
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import matplotlib.pyplot as plt
+from functionframe import FunktionFrame
+from tkinter import Label, NW, TOP, Entry, Button, NE, BOTH, Frame, ttk, NE, END,E
+from verlauf import Verlauf
+from oop import MainWindow
+
+class TermEingeben(FunktionFrame):
+    &#34;&#34;&#34;Frame für die Eingabe des Funktionsausdrucks&#34;&#34;&#34;
+    def __init__(self, master, parent: MainWindow, funktion = None):
+        &#34;&#34;&#34;Konstruktor
+        :param master: Master-Widget
+        :type master: tkinter.Widget
+        :param parent: MainWindow
+        :type parent: MainWindow
+        :param funktion: Funktion, die angezeigt werden soll
+        :type funktion: str
+        &#34;&#34;&#34;
+        super().__init__(master)
+        self.parent = parent
+
+        Label(self, text=&#34;hier Funktionsterm eingeben: &#34;).grid(row=0, column=0, sticky=NW)
+
+
+        self.f_entry = Entry(self)
+        self.f_entry.grid(row=0, column=1, sticky=NW)
+
+        # labels &amp; entries for bounds of x and y axis
+        Label(self, text=&#34;x von, bis: &#34;).grid(row=1, column=0, sticky=NW)
+        self.x_von_bis_entry = Entry(self)
+        self.x_von_bis_entry.grid(row=1, column=1, sticky=NW)
+        Label(self, text=&#34;y von, bis: &#34;).grid(row=2, column=0, sticky=NW)
+        self.y_von_bis_entry = Entry(self)
+        self.y_von_bis_entry.grid(row=2, column=1, sticky=NW)
+
+        if funktion != None:
+            self.f_entry.insert(END, funktion)
+            self.x_von_bis_entry.delete(0, END)
+            self.x_von_bis_entry.insert(0, &#34;-10,10&#34;)
+            self.y_von_bis_entry.delete(0, END)
+            self.y_von_bis_entry.insert(0, &#34;-10,10&#34;)
+
+
+
+        _b = Button(self, text=&#34;anzeigen&#34;, command=self.funktion_berechnen)
+        Button(self, text=&#34;?&#34;, command=self.get_help).grid(row=0, column=3, sticky=NE)
+
+        _b.grid(row=5, column=0, sticky=NW)
+
+        # Zeug zum Zoomen und leeren
+
+        self.zoom_control_frame = Frame(self)
+        self.zoom_control_frame.grid(row=10, column=0, sticky=NW)
+        Button(self.zoom_control_frame, text=&#34;Leeren&#34;, command=self.clear_canvas).pack(side=&#34;right&#34;, padx=5, pady=5)
+
+        self.zoom_in_button = Button(self.zoom_control_frame, text=&#34;+&#34;, command=self.zoom_in)
+        self.zoom_out_button = Button(self.zoom_control_frame, text=&#34;-&#34;, command=self.zoom_out)
+        self.zoom_out_button.pack(side=&#34;right&#34;, padx=5, pady=5)
+        self.zoom_in_button.pack(side=&#34;right&#34;, padx=5, pady=5)
+
+        self.beschriftung_frame = Frame(self)
+
+        # Beschriftungszeug
+        self.xbeschriftung_label =  Label(self.beschriftung_frame, text=&#34;X-Beschriftung:&#34;)
+        #self.xbeschriftung_label.pack(side=&#34;right&#34;, padx=5, pady=5)
+        self.xbeschriftung_label.grid(row=0, column=0, sticky=NE)
+        self.xbeschriftung_entry = Entry(self)
+        self.ybeschriftung_label = Label(self.beschriftung_frame, text=&#34;Y-Beschriftung:&#34;)
+        self.ybeschriftung_entry = Entry(self.beschriftung_frame)
+        self.xbeschriftung_entry.grid(row=7, column=1, sticky=NE)
+        self.ybeschriftung_label.grid(row=7, column=2, sticky=NE)
+        self.ybeschriftung_entry.grid(row=7, column=3, sticky=NE)
+
+        self.figure_frame = Frame(self)
+        self.figure_frame.config(width=50, height=50)
+        
+
+        self.fig = plt.Figure(figsize=(5, 5), dpi=125)
+        expo_button = ttk.Button(self, text=&#34;Beispiel&#34;, command=self.term_button_clicked)
+        expo_button.grid(row=0, column=4, sticky=NE)
+
+
+    def clear_canvas(self):
+        &#34;&#34;&#34;Leert das Canvas&#34;&#34;&#34;
+        # if self.ax exists
+        self.ax.clear()
+        self.canvas.draw()
+
+    def zoom_in(self):
+        &#34;&#34;&#34;Zoomt rein&#34;&#34;&#34;
+        self.ax.set_xlim(self.ax.get_xlim()[0] * 0.9, self.ax.get_xlim()[1] * 0.9)
+        self.ax.set_ylim(self.ax.get_ylim()[0] * 0.9, self.ax.get_ylim()[1] * 0.9)
+        self.canvas.draw()
+
+    def zoom_out(self):
+        &#34;&#34;&#34;Zoomt raus&#34;&#34;&#34;
+        self.ax.set_xlim(self.ax.get_xlim()[0] * 1.1, self.ax.get_xlim()[1] * 1.1)
+        self.ax.set_ylim(self.ax.get_ylim()[0] * 1.1, self.ax.get_ylim()[1] * 1.1)
+        self.canvas.draw()
+
+    
+    def term_button_clicked(self):
+        &#34;&#34;&#34;Füllt die Felder mit einem Beispielterm&#34;&#34;&#34;
+        value = terme_generator()
+        self.f_entry.delete(0, END)
+        self.f_entry.insert(0, value)
+        self.ybeschriftung_entry.delete(0, END)
+        self.ybeschriftung_entry.insert(0, &#34;Y&#34;)
+        self.xbeschriftung_entry.delete(0, END)
+        self.xbeschriftung_entry.insert(0, &#34;X&#34;)
+        self.x_von_bis_entry.delete(0, END)
+        self.x_von_bis_entry.insert(0, &#34;-10,10&#34;)
+        self.y_von_bis_entry.delete(0, END)
+        self.y_von_bis_entry.insert(0, &#34;-10,10&#34;)
+        
+
+    def basis_funktion(self) -&gt; str:
+        &#34;&#34;&#34; gibt die basisfunktion zurück 
+        :return basisfunktion
+        :rtype str
+        &#34;&#34;&#34;
+        return self.f_entry.get()
+
+    def get_help(self) -&gt; None:
+        &#34;&#34;&#34; ruft das hilfefenster auf &#34;&#34;&#34;
+        _help = utils.base_tk(size=&#34;1000x500&#34;, name=&#34;Hilfe - Funktionen&#34;)
+        Label(_help,
+        text=&#34;In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\n\
+                Also z.B.: 1x^3 + 2x^2 + 1x + 0\n\
+                Wenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!\n\
+                    \n Quadratische, lineare und ganzrationale Funktionen sind drei wichtige Arten von Funktionen in der Mathematik.\n\
+                     Eine quadratische Funktion ist eine Funktion, die durch eine Gleichung der Form f(x) = ax^2 + bx + c beschrieben wird.\n Hierbei sind a, b und c Konstanten und x ist die unabhängige Variable. \nQuadratische Funktionen sind bekannt für ihre charakteristische Parabel-Form und ihre Eigenschaften wie Scheitelpunkt,\n Achsensymmetrie und Nullstellen können aus der Funktionsgleichung abgeleitet werden.\n\
+                     \nEine lineare Funktion ist eine Funktion, die durch eine Gleichung der Form f(x) = mx + b beschrieben wird. \nHierbei sind m und b Konstanten und x ist die unabhängige Variable. \nLineare Funktionen sind durch eine Gerade in einem Koordinatensystem dargestellt und ihre Eigenschaften wie Steigung\n und y-Achsenabschnitt können direkt aus der Funktionsgleichung abgeleitet werden.\n\
+                     \nGanzrationale Funktionen sind Funktionen, die durch Polynome dargestellt werden,\n d.h. eine Summe von Potenzen der unabhängigen Variablen x. Eine ganzrationale Funktion kann allgemein durch eine Gleichung\n der Form f(x) = a_n*x^n + a_{n-1}x^{n-1} + ... + a_1x + a_0 beschrieben werden,\n wobei n eine natürliche Zahl und a_n, a_{n-1}, ..., a_1, a_0 Konstanten sind.\n Die graphische Darstellung einer ganzrationalen Funktion kann je nach dem Grad des Polynoms\n und den Koeffizienten sehr unterschiedlich aussehen, z.B. \nkönnen sie Schlingen, Wendepunkte oder Asymptoten haben.\n\
+                     \n Die Kenntnis dieser drei Funktionsarten ist wichtig, da sie häufig in vielen Bereichen der Mathematik,\n Physik und Ingenieurwissenschaften verwendet werden und ihre Eigenschaften dazu beitragen können, Probleme in diesen Gebieten zu lösen \nund Phänomene zu beschreiben.&#34;).grid(row=1, column=0, padx=5, pady=5, sticky=E)
+        Button(_help, text=&#34;Ok&#34;, command=_help.destroy).grid(row=6, column=3, padx=5, pady=5, sticky=E)
+
+    
+
+    # berechnet das richtig dismal lol. ich bin so dumm
+    def funktion(self, x_wert: float) -&gt; float:
+        &#34;&#34;&#34; berechnet die funktion
+        :param x_wert: x wert
+        :type x_wert: float
+
+        :return: y wert
+        :rtype: float
+        &#34;&#34;&#34;
+        y_wert = 0
+        for basis, exponent in self.basis_exponent_paare:
+            y_wert += basis * (x_wert ** exponent)
+        return y_wert
+
+    def funktion_von(self, x_wert: float, funktion: str) -&gt; float:
+        &#34;&#34;&#34; berechnet die funktion basierend auf einem funktions-string
+        :param x_wert: x wert
+        :type x_wert: float
+        :param funktion: funktion
+        :type funktion: str
+
+        :return: y wert
+        :rtype: float
+        &#34;&#34;&#34;
+
+        y_wert = 0
+        for basis, exponent in self.basis_exponent_paare_holen(funktion):
+            y_wert += basis * (x_wert ** exponent)
+        return y_wert
+
+    def funktion_berechnen(self) -&gt; None:
+        &#34;&#34;&#34; holt werte und berechnet die funktion &#34;&#34;&#34;
+
+        self.verlauf_appendieren(self.parent.get_verlauf())
+
+        # Beschreibung hohlen
+        xbeschr = self.xbeschriftung_entry.get()
+        ybeschr = self.ybeschriftung_entry.get()
+
+        # holt input und bereinigt ihn
+        self.basis_exponent_paare = self.basis_exponent_paare_holen(self.f_entry.get())
+
+        # erstellt plot
+
+        self.fig.clear()
+
+        x_werte = np.arange(-50, 50, 0.005)
+        self.ax = self.fig.add_subplot()
+        self.ax.set_xlabel(xbeschr)
+        self.ax.set_ylabel(ybeschr)
+        self.ax.set_title(&#34;Funktionsgraph&#34;)
+        x_von, x_bis = self.von_bis(self.x_von_bis_entry.get())
+        self.ax.set_xlim(x_von, x_bis)
+        y_von, y_bis = self.von_bis(self.y_von_bis_entry.get())
+        self.ax.set_ylim(y_von, y_bis)
+        self.ax.grid()
+        self.ax.spines.left.set_position(&#39;zero&#39;)
+        self.ax.spines.right.set_color(&#39;none&#39;)
+        self.ax.spines.bottom.set_position(&#39;zero&#39;)
+        self.ax.spines.top.set_color(&#39;none&#39;)
+        self.ax.yaxis.set_ticks_position(&#39;left&#39;)
+        self.ax.xaxis.set_ticks_position(&#39;bottom&#39;)
+
+
+        self.ax.plot(x_werte, self.funktion(x_werte), label=self.f_entry.get())
+        
+
+        # self.ax.scatter(0, 0, color=&#34;purple&#34;, label=&#34;Nullpunkt&#34;)
+        __nullstellen = self.nullstellen(self.basis_funktion())
+
+        # duplikate entfernen
+        _nullstellen = list(dict.fromkeys(__nullstellen))
+
+        nullstellen = []
+        for n in _nullstellen:
+            #if complex(self.funktion(n)).imag == 0:
+            if complex(self.einsetzen(self.basis_funktion(), n)).imag == 0:
+                nullstellen.append(n.real)
+
+
+        self.ax.scatter(nullstellen, [0 for _ in nullstellen], color=&#39;red&#39;, label=&#34;Nullpunkte&#34;)
+
+        ableitung = self.ableitung_ersteller(self.basis_funktion())
+        self.ax.plot(x_werte, self.funktion_von(x_werte, ableitung), label=ableitung)
+        
+        _extrempunkte = self.nullstellen(ableitung)
+        extrempunkte = []
+        for n in _extrempunkte:
+            if complex(self.einsetzen(ableitung, n)).imag == 0:
+                extrempunkte.append(n.real)
+        
+
+        if self.funktionsgrad_bestimmen(self.basis_funktion()) &gt; 1:
+            zweite_ableitung = self.ableitung_ersteller(ableitung)
+
+            if self.funktionsgrad_bestimmen(self.basis_funktion()) &gt; 2:
+                _wendepunkte = self.nullstellen(zweite_ableitung)
+
+                wendepunkte = []
+                for n in _wendepunkte:
+                    if complex(self.einsetzen(zweite_ableitung, n)).imag == 0:
+                        wendepunkte.append(n.real)
+
+                self.ax.scatter(extrempunkte, [self.funktion(x) for x in extrempunkte], color=&#39;green&#39;, label=&#34;Extrempunkte&#34;)
+                self.ax.scatter(wendepunkte, [self.funktion(x) for x in wendepunkte], color=&#39;blue&#39;, label=&#34;Wendepunkte&#34;)
+                self.ax.plot(x_werte, self.funktion_von(x_werte, zweite_ableitung), label=zweite_ableitung)
+
+        
+        # setzt eine Legende in die obere rechte Ecke
+        self.ax.legend(loc=&#34;upper right&#34;)
+
+        self.canvas.get_tk_widget().destroy() if hasattr(self, &#34;canvas&#34;) else None
+        self.canvas = FigureCanvasTkAgg(self.fig, master=self.figure_frame)
+        self.canvas.draw()
+
+        self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=False)
+
+        self.figure_frame.grid(row=9, column=0, sticky=&#34;nsew&#34;)
+
+    def basis_exponent_paare_holen(self, inp: str) -&gt; list[tuple[float, float]]:
+        &#34;&#34;&#34; holt alle basis exponent paare aus dem string
+        :param inp: string mit allen basis exponent paaren
+        :type inp: str
+
+        :return: liste mit allen basis exponent paaren
+        :rtype: list[tuple[float, float]]
+        &#34;&#34;&#34;
+        input_str = self.array_von_leeren_strings_befreien(inp)
+        terme = self.get_zahlen(input_str)
+        return [self.get_term(t) for t in terme]
+
+    def get_zahlen(self, inp: str) -&gt; list:
+        &#34;&#34;&#34; holt wichtige zahlen aus dem string
+        :param inp: string mit allen zahlen
+        :type inp: str
+
+        :return: liste mit allen zahlen
+        :rtype: list
+        &#34;&#34;&#34;
+        # regex magie um alle zahlen zu finden
+        dirty_terme = re.findall(r&#34;[+-]?\d*x?\^?\d*&#34;, inp)
+
+        # entfernt alle leeren strings
+        terme = [t for t in dirty_terme if t != &#39;&#39;]
+        return terme
+
+    def get_term(self, term: str) -&gt; tuple[int,int]:
+        &#34;&#34;&#34; gibt einen term als tuple zurück (koeffizient, exponent)
+        :param term: term als string
+        :type term: str
+        :return: tuple mit koeffizient und exponent
+        :rtype: tuple
+        &#34;&#34;&#34;
+
+        # wenn kein x vorhanden ist, dann ist es ein konstanter term
+        if &#39;x&#39; not in term:
+            return int(term), 0
+        # wenn kein exponent vorhanden ist, dann ist es ein linearer term
+        if &#39;^&#39; not in term:
+            return int(term[:-1]), 1
+        # sonst ist es ein term mit exponent
+        return int(term[:term.index(&#39;x&#39;)]), int(term[term.index(&#39;^&#39;)+1:])
+
+    def array_von_leeren_strings_befreien(self, arr: str) -&gt; str:
+        &#34;&#34;&#34;entfernt alle leeren strings aus einem array
+        :param arr: array mit allen strings
+        :type arr: str
+
+        :return: string ohne leere strings
+        :rtype: str
+        &#34;&#34;&#34;
+        output_string = &#34;&#34;
+        # schaut durch alle items im array und filtert alle leeren strings raus
+        for a in arr:
+            if a != &#39;&#39;:
+                output_string += a
+        return output_string
+
+    def leerzeichen_raus_machen(self, inp: str) -&gt; str:
+        &#34;&#34;&#34; entfernt alle leerzeichen aus einem string
+        :param inp: string mit allen leerzeichen
+        :type inp: str
+
+        :return: string ohne leerzeichen
+        :rtype: str
+        &#34;&#34;&#34;
+        outp = &#34;&#34;
+        # enumeriert über input mit (index, wert)
+        for _, character in enumerate(inp):
+            if character != &#34; &#34;:
+                outp += character
+        return outp
+
+    def von_bis(self, get_from: str) -&gt; tuple[float, float]:
+        &#34;&#34;&#34;
+        Holt von und bis werde aus einem string (von, bis)
+        :param get_from: der string, aus dem die limits geholt werden sollen
+        :type get_from: str
+
+        :return: die Werte aus dem String
+        :rtype: tuple[float, float]
+        &#34;&#34;&#34;
+        input_bereinigt = self.leerzeichen_raus_machen(get_from)
+        von, bis = input_bereinigt.split(&#34;,&#34;)
+        return float(von), float(bis)
+
+
+    def ableitung_ersteller(self, inp: str) -&gt; str:
+        &#34;&#34;&#34; berechnet die ableitung einer funktion
+        :param inp: string mit der funktion
+        :type inp: str
+
+        :return: string mit der ableitung
+        :rtype: str
+        &#34;&#34;&#34;
+        basis_exponent_paare = self.basis_exponent_paare_holen(inp)
+        ableitung = &#34;&#34;
+        for basis, exponent in basis_exponent_paare:
+            if exponent == 0:
+                continue
+            term = f&#34;{basis * exponent}x^{exponent - 1}&#34;
+            if term[-1] == &#39;0&#39;:
+                term = term[:-3]
+            if term[0] == &#39;-&#39;:
+                ableitung += f&#34;-{term[1:]}&#34;
+            else:
+                ableitung += f&#34;+{term}&#34;
+            
+        return ableitung
+
+
+    def verlauf_appendieren(self, verlauf: Verlauf) -&gt; None:
+        &#34;&#34;&#34; fügt einen verlauf in die liste der verläufe ein
+        :param verlauf: verlauf der hinzugefügt werden soll
+        :type verlauf: Verlauf
+        &#34;&#34;&#34;
+        verlauf.appendieren(self.basis_funktion())
+
+
+    def funktionsgrad_bestimmen(self, funktion) -&gt; int:
+        &#34;&#34;&#34; gibt den funktionsgrad einer funktion zurück
+        :param funktion: funktion als string
+        :type funktion: str
+
+        :return: funktionsgrad
+        :rtype: int
+        &#34;&#34;&#34;
+        basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+        if len(basis_exponent_paare) == 0:
+            return 1
+        return max([int(x[1]) for x in basis_exponent_paare])
+
+
+    def nullterme_reinhauen(self, _funktion) -&gt; str:
+        &#34;&#34;&#34; fügt nullterme in eine funktion ein 
+            beispiel: 2x^4 + 3x^2 -5x + 2
+            wird zu:  2x^4 + 0x^3 + 3x^2 -5x + 0x + 2
+
+            beispiel: 2x^4 + 0x^3 + 0x^2 - 5x + 0
+        &#34;&#34;&#34;
+        funktionsgrad = self.funktionsgrad_bestimmen(_funktion)
+        basis_exponent_paare = self.basis_exponent_paare_holen(_funktion)
+        funktion = &#34;&#34;
+        # soll runter zählen, bis 0, deswegen -1 bei
+        for i in range(funktionsgrad, -1, -1):
+            b = 0
+            for x in basis_exponent_paare:
+                if i == x[1]:
+                    b = x[0]
+            match i:
+                case 0:
+                    if b &gt; -1:
+                        funktion += f&#34;+{b}&#34;
+                    else:
+                        funktion += f&#34;{b}&#34;
+                case 1:
+                    if b &gt; -1:
+                        funktion += f&#34;+{b}x&#34;
+                    else:
+                        funktion += f&#34;{b}x&#34;
+                case _:
+                    if b &gt; -1:
+                        funktion += f&#34;+{b}x^{i}&#34;
+                    else:
+                        funktion += f&#34;{b}x^{i}&#34;
+
+        return funktion
+
+    def teiler_bestimmen(self, funktion) -&gt; int:
+        &#34;&#34;&#34; bestimmt den ersten teiler, dass die funktion 0 ergibt
+        :param funktion: die funktion, die geteilt werden soll
+        :type funktion: str
+
+        :return: der erste teiler, der die funktion 0 ergibt
+        :rtype: int
+        &#34;&#34;&#34;
+        basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+        lin_term = basis_exponent_paare[-1][0]
+        def alle_teiler_bestimmen():
+            teiler = []
+            teiler_range = range(-ceil(abs(lin_term)), ceil(abs(lin_term)+1))
+            for i in teiler_range:
+                if i == 0:
+                    continue
+                if lin_term % i == 0:
+                    teiler.append(i)
+            return teiler
+
+        alle_teiler = alle_teiler_bestimmen()
+
+        for teiler in alle_teiler:
+            erg = self.einsetzen(funktion, teiler)
+            if erg == 0:
+                return teiler
+
+        return 0
+
+
+    def einsetzen(self, funktion: str, wert: float) -&gt; float:
+        &#34;&#34;&#34; gibt den wert einer funktion an einem bestimmten punkt zurück
+        :param funktion: die funktion, die eingesetzt werden soll
+        :type funktion: str
+        :param wert: der wert, an dem die funktion eingesetzt werden soll
+        :type wert: float
+        :return: der wert der funktion an dem punkt
+        :rtype: float
+        &#34;&#34;&#34;
+        basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+        end_wert = 0
+        for basis, exponent in basis_exponent_paare:
+            match exponent:
+                case 0:
+                    end_wert += basis
+                case 1:
+                    end_wert += basis * wert
+                case _:
+                    end_wert += basis * (wert ** exponent)
+        return end_wert
+
+
+
+    def nullstellen(self, _funktion) -&gt; list[float]:
+        &#34;&#34;&#34;krasser nullstellen berechner
+        :param _funktion: die funktion, deren nullstellen berechnet werden sollen
+        :type _funktion: str
+        :return: die nullstellen
+        :rtype: list[float]
+        &#34;&#34;&#34;
+        funktion = self.nullterme_reinhauen(_funktion)
+        funktionsgrad = self.funktionsgrad_bestimmen(funktion)
+        basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+
+        roots = []
+
+        match funktionsgrad:
+            # term umformung (zb: 2x + 1)
+            # 0 = 2x + 1
+            # -1 = 2x
+            # -0.5 = x
+            # das aber in einer zeile
+            case 1:
+                if basis_exponent_paare[1][0] != 0 and basis_exponent_paare[0][0] != 0:
+                    roots = [-(basis_exponent_paare[1][0]) / basis_exponent_paare[0][0]]
+            # pq Formel (zb: x^2 + 2x + 1)
+            case 2:
+                x1, x2 = self.pq_formel_von(funktion)
+                if x1 != None and x2 != None:
+                    roots = [x1, x2]
+            # sonst polynomdivision
+            case _:
+                gute_funktion = self.nullterme_reinhauen(funktion)
+                diese_basis_exponent_paare = self.basis_exponent_paare_holen(gute_funktion)
+                werte = [basis_exponent_paar[0] for basis_exponent_paar in diese_basis_exponent_paare]
+
+                roots = np.roots(werte)
+
+        return list[float](roots)
+
+
+
+    def pq_formel_von(self, funktion: str) -&gt; tuple[float,float]:
+        &#34;&#34;&#34; berechnet die nullstellen einer quadratischen funktion basierend auf einem string
+        :param funktion: die funktion
+        :type funktion: str
+        :return: die nullstellen
+        :rtype: tuple[float,float]
+        &#34;&#34;&#34;
+        gute_funktion = self.nullterme_reinhauen(funktion)
+        basis_exponent_paare = self.basis_exponent_paare_holen(gute_funktion)
+        normiert_p = basis_exponent_paare[1][0] / basis_exponent_paare[0][0]
+        normiert_q = basis_exponent_paare[2][0] / basis_exponent_paare[0][0]
+        x1, x2 = self.pq_formel(normiert_p, normiert_q)
+        return x1, x2
+
+    def pq_formel(self, p: float, q: float) -&gt; tuple[float, float]:
+        &#34;&#34;&#34; berechnet die nullstellen einer quadratischen funktion 
+        :param p: der koeffizient vor x
+        :type p: float
+        :param q: der konstante term
+        :type q: float
+        :return: die nullstellen
+        :rtype: tuple[float, float]
+        &#34;&#34;&#34;
+
+        # -p/2 +- sqrt((p/2)^2 - q)
+        try:
+            x1 = (-(p/2)) + sqrt((p/2)**2 - q)
+            x2 = (-(p/2)) - sqrt((p/2)**2 - q)
+        except:
+            return None, None
+
+        return x1, x2</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="term_eingeben.TermEingeben"><code class="flex name class">
+<span>class <span class="ident">TermEingeben</span></span>
+<span>(</span><span>master, parent: <a title="oop.MainWindow" href="oop.html#oop.MainWindow">MainWindow</a>, funktion=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Frame für die Eingabe des Funktionsausdrucks</p>
+<p>Konstruktor
+:param master: Master-Widget
+:type master: tkinter.Widget
+:param parent: MainWindow
+:type parent: MainWindow
+:param funktion: Funktion, die angezeigt werden soll
+:type funktion: str</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class TermEingeben(FunktionFrame):
+    &#34;&#34;&#34;Frame für die Eingabe des Funktionsausdrucks&#34;&#34;&#34;
+    def __init__(self, master, parent: MainWindow, funktion = None):
+        &#34;&#34;&#34;Konstruktor
+        :param master: Master-Widget
+        :type master: tkinter.Widget
+        :param parent: MainWindow
+        :type parent: MainWindow
+        :param funktion: Funktion, die angezeigt werden soll
+        :type funktion: str
+        &#34;&#34;&#34;
+        super().__init__(master)
+        self.parent = parent
+
+        Label(self, text=&#34;hier Funktionsterm eingeben: &#34;).grid(row=0, column=0, sticky=NW)
+
+
+        self.f_entry = Entry(self)
+        self.f_entry.grid(row=0, column=1, sticky=NW)
+
+        # labels &amp; entries for bounds of x and y axis
+        Label(self, text=&#34;x von, bis: &#34;).grid(row=1, column=0, sticky=NW)
+        self.x_von_bis_entry = Entry(self)
+        self.x_von_bis_entry.grid(row=1, column=1, sticky=NW)
+        Label(self, text=&#34;y von, bis: &#34;).grid(row=2, column=0, sticky=NW)
+        self.y_von_bis_entry = Entry(self)
+        self.y_von_bis_entry.grid(row=2, column=1, sticky=NW)
+
+        if funktion != None:
+            self.f_entry.insert(END, funktion)
+            self.x_von_bis_entry.delete(0, END)
+            self.x_von_bis_entry.insert(0, &#34;-10,10&#34;)
+            self.y_von_bis_entry.delete(0, END)
+            self.y_von_bis_entry.insert(0, &#34;-10,10&#34;)
+
+
+
+        _b = Button(self, text=&#34;anzeigen&#34;, command=self.funktion_berechnen)
+        Button(self, text=&#34;?&#34;, command=self.get_help).grid(row=0, column=3, sticky=NE)
+
+        _b.grid(row=5, column=0, sticky=NW)
+
+        # Zeug zum Zoomen und leeren
+
+        self.zoom_control_frame = Frame(self)
+        self.zoom_control_frame.grid(row=10, column=0, sticky=NW)
+        Button(self.zoom_control_frame, text=&#34;Leeren&#34;, command=self.clear_canvas).pack(side=&#34;right&#34;, padx=5, pady=5)
+
+        self.zoom_in_button = Button(self.zoom_control_frame, text=&#34;+&#34;, command=self.zoom_in)
+        self.zoom_out_button = Button(self.zoom_control_frame, text=&#34;-&#34;, command=self.zoom_out)
+        self.zoom_out_button.pack(side=&#34;right&#34;, padx=5, pady=5)
+        self.zoom_in_button.pack(side=&#34;right&#34;, padx=5, pady=5)
+
+        self.beschriftung_frame = Frame(self)
+
+        # Beschriftungszeug
+        self.xbeschriftung_label =  Label(self.beschriftung_frame, text=&#34;X-Beschriftung:&#34;)
+        #self.xbeschriftung_label.pack(side=&#34;right&#34;, padx=5, pady=5)
+        self.xbeschriftung_label.grid(row=0, column=0, sticky=NE)
+        self.xbeschriftung_entry = Entry(self)
+        self.ybeschriftung_label = Label(self.beschriftung_frame, text=&#34;Y-Beschriftung:&#34;)
+        self.ybeschriftung_entry = Entry(self.beschriftung_frame)
+        self.xbeschriftung_entry.grid(row=7, column=1, sticky=NE)
+        self.ybeschriftung_label.grid(row=7, column=2, sticky=NE)
+        self.ybeschriftung_entry.grid(row=7, column=3, sticky=NE)
+
+        self.figure_frame = Frame(self)
+        self.figure_frame.config(width=50, height=50)
+        
+
+        self.fig = plt.Figure(figsize=(5, 5), dpi=125)
+        expo_button = ttk.Button(self, text=&#34;Beispiel&#34;, command=self.term_button_clicked)
+        expo_button.grid(row=0, column=4, sticky=NE)
+
+
+    def clear_canvas(self):
+        &#34;&#34;&#34;Leert das Canvas&#34;&#34;&#34;
+        # if self.ax exists
+        self.ax.clear()
+        self.canvas.draw()
+
+    def zoom_in(self):
+        &#34;&#34;&#34;Zoomt rein&#34;&#34;&#34;
+        self.ax.set_xlim(self.ax.get_xlim()[0] * 0.9, self.ax.get_xlim()[1] * 0.9)
+        self.ax.set_ylim(self.ax.get_ylim()[0] * 0.9, self.ax.get_ylim()[1] * 0.9)
+        self.canvas.draw()
+
+    def zoom_out(self):
+        &#34;&#34;&#34;Zoomt raus&#34;&#34;&#34;
+        self.ax.set_xlim(self.ax.get_xlim()[0] * 1.1, self.ax.get_xlim()[1] * 1.1)
+        self.ax.set_ylim(self.ax.get_ylim()[0] * 1.1, self.ax.get_ylim()[1] * 1.1)
+        self.canvas.draw()
+
+    
+    def term_button_clicked(self):
+        &#34;&#34;&#34;Füllt die Felder mit einem Beispielterm&#34;&#34;&#34;
+        value = terme_generator()
+        self.f_entry.delete(0, END)
+        self.f_entry.insert(0, value)
+        self.ybeschriftung_entry.delete(0, END)
+        self.ybeschriftung_entry.insert(0, &#34;Y&#34;)
+        self.xbeschriftung_entry.delete(0, END)
+        self.xbeschriftung_entry.insert(0, &#34;X&#34;)
+        self.x_von_bis_entry.delete(0, END)
+        self.x_von_bis_entry.insert(0, &#34;-10,10&#34;)
+        self.y_von_bis_entry.delete(0, END)
+        self.y_von_bis_entry.insert(0, &#34;-10,10&#34;)
+        
+
+    def basis_funktion(self) -&gt; str:
+        &#34;&#34;&#34; gibt die basisfunktion zurück 
+        :return basisfunktion
+        :rtype str
+        &#34;&#34;&#34;
+        return self.f_entry.get()
+
+    def get_help(self) -&gt; None:
+        &#34;&#34;&#34; ruft das hilfefenster auf &#34;&#34;&#34;
+        _help = utils.base_tk(size=&#34;1000x500&#34;, name=&#34;Hilfe - Funktionen&#34;)
+        Label(_help,
+        text=&#34;In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\n\
+                Also z.B.: 1x^3 + 2x^2 + 1x + 0\n\
+                Wenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!\n\
+                    \n Quadratische, lineare und ganzrationale Funktionen sind drei wichtige Arten von Funktionen in der Mathematik.\n\
+                     Eine quadratische Funktion ist eine Funktion, die durch eine Gleichung der Form f(x) = ax^2 + bx + c beschrieben wird.\n Hierbei sind a, b und c Konstanten und x ist die unabhängige Variable. \nQuadratische Funktionen sind bekannt für ihre charakteristische Parabel-Form und ihre Eigenschaften wie Scheitelpunkt,\n Achsensymmetrie und Nullstellen können aus der Funktionsgleichung abgeleitet werden.\n\
+                     \nEine lineare Funktion ist eine Funktion, die durch eine Gleichung der Form f(x) = mx + b beschrieben wird. \nHierbei sind m und b Konstanten und x ist die unabhängige Variable. \nLineare Funktionen sind durch eine Gerade in einem Koordinatensystem dargestellt und ihre Eigenschaften wie Steigung\n und y-Achsenabschnitt können direkt aus der Funktionsgleichung abgeleitet werden.\n\
+                     \nGanzrationale Funktionen sind Funktionen, die durch Polynome dargestellt werden,\n d.h. eine Summe von Potenzen der unabhängigen Variablen x. Eine ganzrationale Funktion kann allgemein durch eine Gleichung\n der Form f(x) = a_n*x^n + a_{n-1}x^{n-1} + ... + a_1x + a_0 beschrieben werden,\n wobei n eine natürliche Zahl und a_n, a_{n-1}, ..., a_1, a_0 Konstanten sind.\n Die graphische Darstellung einer ganzrationalen Funktion kann je nach dem Grad des Polynoms\n und den Koeffizienten sehr unterschiedlich aussehen, z.B. \nkönnen sie Schlingen, Wendepunkte oder Asymptoten haben.\n\
+                     \n Die Kenntnis dieser drei Funktionsarten ist wichtig, da sie häufig in vielen Bereichen der Mathematik,\n Physik und Ingenieurwissenschaften verwendet werden und ihre Eigenschaften dazu beitragen können, Probleme in diesen Gebieten zu lösen \nund Phänomene zu beschreiben.&#34;).grid(row=1, column=0, padx=5, pady=5, sticky=E)
+        Button(_help, text=&#34;Ok&#34;, command=_help.destroy).grid(row=6, column=3, padx=5, pady=5, sticky=E)
+
+    
+
+    # berechnet das richtig dismal lol. ich bin so dumm
+    def funktion(self, x_wert: float) -&gt; float:
+        &#34;&#34;&#34; berechnet die funktion
+        :param x_wert: x wert
+        :type x_wert: float
+
+        :return: y wert
+        :rtype: float
+        &#34;&#34;&#34;
+        y_wert = 0
+        for basis, exponent in self.basis_exponent_paare:
+            y_wert += basis * (x_wert ** exponent)
+        return y_wert
+
+    def funktion_von(self, x_wert: float, funktion: str) -&gt; float:
+        &#34;&#34;&#34; berechnet die funktion basierend auf einem funktions-string
+        :param x_wert: x wert
+        :type x_wert: float
+        :param funktion: funktion
+        :type funktion: str
+
+        :return: y wert
+        :rtype: float
+        &#34;&#34;&#34;
+
+        y_wert = 0
+        for basis, exponent in self.basis_exponent_paare_holen(funktion):
+            y_wert += basis * (x_wert ** exponent)
+        return y_wert
+
+    def funktion_berechnen(self) -&gt; None:
+        &#34;&#34;&#34; holt werte und berechnet die funktion &#34;&#34;&#34;
+
+        self.verlauf_appendieren(self.parent.get_verlauf())
+
+        # Beschreibung hohlen
+        xbeschr = self.xbeschriftung_entry.get()
+        ybeschr = self.ybeschriftung_entry.get()
+
+        # holt input und bereinigt ihn
+        self.basis_exponent_paare = self.basis_exponent_paare_holen(self.f_entry.get())
+
+        # erstellt plot
+
+        self.fig.clear()
+
+        x_werte = np.arange(-50, 50, 0.005)
+        self.ax = self.fig.add_subplot()
+        self.ax.set_xlabel(xbeschr)
+        self.ax.set_ylabel(ybeschr)
+        self.ax.set_title(&#34;Funktionsgraph&#34;)
+        x_von, x_bis = self.von_bis(self.x_von_bis_entry.get())
+        self.ax.set_xlim(x_von, x_bis)
+        y_von, y_bis = self.von_bis(self.y_von_bis_entry.get())
+        self.ax.set_ylim(y_von, y_bis)
+        self.ax.grid()
+        self.ax.spines.left.set_position(&#39;zero&#39;)
+        self.ax.spines.right.set_color(&#39;none&#39;)
+        self.ax.spines.bottom.set_position(&#39;zero&#39;)
+        self.ax.spines.top.set_color(&#39;none&#39;)
+        self.ax.yaxis.set_ticks_position(&#39;left&#39;)
+        self.ax.xaxis.set_ticks_position(&#39;bottom&#39;)
+
+
+        self.ax.plot(x_werte, self.funktion(x_werte), label=self.f_entry.get())
+        
+
+        # self.ax.scatter(0, 0, color=&#34;purple&#34;, label=&#34;Nullpunkt&#34;)
+        __nullstellen = self.nullstellen(self.basis_funktion())
+
+        # duplikate entfernen
+        _nullstellen = list(dict.fromkeys(__nullstellen))
+
+        nullstellen = []
+        for n in _nullstellen:
+            #if complex(self.funktion(n)).imag == 0:
+            if complex(self.einsetzen(self.basis_funktion(), n)).imag == 0:
+                nullstellen.append(n.real)
+
+
+        self.ax.scatter(nullstellen, [0 for _ in nullstellen], color=&#39;red&#39;, label=&#34;Nullpunkte&#34;)
+
+        ableitung = self.ableitung_ersteller(self.basis_funktion())
+        self.ax.plot(x_werte, self.funktion_von(x_werte, ableitung), label=ableitung)
+        
+        _extrempunkte = self.nullstellen(ableitung)
+        extrempunkte = []
+        for n in _extrempunkte:
+            if complex(self.einsetzen(ableitung, n)).imag == 0:
+                extrempunkte.append(n.real)
+        
+
+        if self.funktionsgrad_bestimmen(self.basis_funktion()) &gt; 1:
+            zweite_ableitung = self.ableitung_ersteller(ableitung)
+
+            if self.funktionsgrad_bestimmen(self.basis_funktion()) &gt; 2:
+                _wendepunkte = self.nullstellen(zweite_ableitung)
+
+                wendepunkte = []
+                for n in _wendepunkte:
+                    if complex(self.einsetzen(zweite_ableitung, n)).imag == 0:
+                        wendepunkte.append(n.real)
+
+                self.ax.scatter(extrempunkte, [self.funktion(x) for x in extrempunkte], color=&#39;green&#39;, label=&#34;Extrempunkte&#34;)
+                self.ax.scatter(wendepunkte, [self.funktion(x) for x in wendepunkte], color=&#39;blue&#39;, label=&#34;Wendepunkte&#34;)
+                self.ax.plot(x_werte, self.funktion_von(x_werte, zweite_ableitung), label=zweite_ableitung)
+
+        
+        # setzt eine Legende in die obere rechte Ecke
+        self.ax.legend(loc=&#34;upper right&#34;)
+
+        self.canvas.get_tk_widget().destroy() if hasattr(self, &#34;canvas&#34;) else None
+        self.canvas = FigureCanvasTkAgg(self.fig, master=self.figure_frame)
+        self.canvas.draw()
+
+        self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=False)
+
+        self.figure_frame.grid(row=9, column=0, sticky=&#34;nsew&#34;)
+
+    def basis_exponent_paare_holen(self, inp: str) -&gt; list[tuple[float, float]]:
+        &#34;&#34;&#34; holt alle basis exponent paare aus dem string
+        :param inp: string mit allen basis exponent paaren
+        :type inp: str
+
+        :return: liste mit allen basis exponent paaren
+        :rtype: list[tuple[float, float]]
+        &#34;&#34;&#34;
+        input_str = self.array_von_leeren_strings_befreien(inp)
+        terme = self.get_zahlen(input_str)
+        return [self.get_term(t) for t in terme]
+
+    def get_zahlen(self, inp: str) -&gt; list:
+        &#34;&#34;&#34; holt wichtige zahlen aus dem string
+        :param inp: string mit allen zahlen
+        :type inp: str
+
+        :return: liste mit allen zahlen
+        :rtype: list
+        &#34;&#34;&#34;
+        # regex magie um alle zahlen zu finden
+        dirty_terme = re.findall(r&#34;[+-]?\d*x?\^?\d*&#34;, inp)
+
+        # entfernt alle leeren strings
+        terme = [t for t in dirty_terme if t != &#39;&#39;]
+        return terme
+
+    def get_term(self, term: str) -&gt; tuple[int,int]:
+        &#34;&#34;&#34; gibt einen term als tuple zurück (koeffizient, exponent)
+        :param term: term als string
+        :type term: str
+        :return: tuple mit koeffizient und exponent
+        :rtype: tuple
+        &#34;&#34;&#34;
+
+        # wenn kein x vorhanden ist, dann ist es ein konstanter term
+        if &#39;x&#39; not in term:
+            return int(term), 0
+        # wenn kein exponent vorhanden ist, dann ist es ein linearer term
+        if &#39;^&#39; not in term:
+            return int(term[:-1]), 1
+        # sonst ist es ein term mit exponent
+        return int(term[:term.index(&#39;x&#39;)]), int(term[term.index(&#39;^&#39;)+1:])
+
+    def array_von_leeren_strings_befreien(self, arr: str) -&gt; str:
+        &#34;&#34;&#34;entfernt alle leeren strings aus einem array
+        :param arr: array mit allen strings
+        :type arr: str
+
+        :return: string ohne leere strings
+        :rtype: str
+        &#34;&#34;&#34;
+        output_string = &#34;&#34;
+        # schaut durch alle items im array und filtert alle leeren strings raus
+        for a in arr:
+            if a != &#39;&#39;:
+                output_string += a
+        return output_string
+
+    def leerzeichen_raus_machen(self, inp: str) -&gt; str:
+        &#34;&#34;&#34; entfernt alle leerzeichen aus einem string
+        :param inp: string mit allen leerzeichen
+        :type inp: str
+
+        :return: string ohne leerzeichen
+        :rtype: str
+        &#34;&#34;&#34;
+        outp = &#34;&#34;
+        # enumeriert über input mit (index, wert)
+        for _, character in enumerate(inp):
+            if character != &#34; &#34;:
+                outp += character
+        return outp
+
+    def von_bis(self, get_from: str) -&gt; tuple[float, float]:
+        &#34;&#34;&#34;
+        Holt von und bis werde aus einem string (von, bis)
+        :param get_from: der string, aus dem die limits geholt werden sollen
+        :type get_from: str
+
+        :return: die Werte aus dem String
+        :rtype: tuple[float, float]
+        &#34;&#34;&#34;
+        input_bereinigt = self.leerzeichen_raus_machen(get_from)
+        von, bis = input_bereinigt.split(&#34;,&#34;)
+        return float(von), float(bis)
+
+
+    def ableitung_ersteller(self, inp: str) -&gt; str:
+        &#34;&#34;&#34; berechnet die ableitung einer funktion
+        :param inp: string mit der funktion
+        :type inp: str
+
+        :return: string mit der ableitung
+        :rtype: str
+        &#34;&#34;&#34;
+        basis_exponent_paare = self.basis_exponent_paare_holen(inp)
+        ableitung = &#34;&#34;
+        for basis, exponent in basis_exponent_paare:
+            if exponent == 0:
+                continue
+            term = f&#34;{basis * exponent}x^{exponent - 1}&#34;
+            if term[-1] == &#39;0&#39;:
+                term = term[:-3]
+            if term[0] == &#39;-&#39;:
+                ableitung += f&#34;-{term[1:]}&#34;
+            else:
+                ableitung += f&#34;+{term}&#34;
+            
+        return ableitung
+
+
+    def verlauf_appendieren(self, verlauf: Verlauf) -&gt; None:
+        &#34;&#34;&#34; fügt einen verlauf in die liste der verläufe ein
+        :param verlauf: verlauf der hinzugefügt werden soll
+        :type verlauf: Verlauf
+        &#34;&#34;&#34;
+        verlauf.appendieren(self.basis_funktion())
+
+
+    def funktionsgrad_bestimmen(self, funktion) -&gt; int:
+        &#34;&#34;&#34; gibt den funktionsgrad einer funktion zurück
+        :param funktion: funktion als string
+        :type funktion: str
+
+        :return: funktionsgrad
+        :rtype: int
+        &#34;&#34;&#34;
+        basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+        if len(basis_exponent_paare) == 0:
+            return 1
+        return max([int(x[1]) for x in basis_exponent_paare])
+
+
+    def nullterme_reinhauen(self, _funktion) -&gt; str:
+        &#34;&#34;&#34; fügt nullterme in eine funktion ein 
+            beispiel: 2x^4 + 3x^2 -5x + 2
+            wird zu:  2x^4 + 0x^3 + 3x^2 -5x + 0x + 2
+
+            beispiel: 2x^4 + 0x^3 + 0x^2 - 5x + 0
+        &#34;&#34;&#34;
+        funktionsgrad = self.funktionsgrad_bestimmen(_funktion)
+        basis_exponent_paare = self.basis_exponent_paare_holen(_funktion)
+        funktion = &#34;&#34;
+        # soll runter zählen, bis 0, deswegen -1 bei
+        for i in range(funktionsgrad, -1, -1):
+            b = 0
+            for x in basis_exponent_paare:
+                if i == x[1]:
+                    b = x[0]
+            match i:
+                case 0:
+                    if b &gt; -1:
+                        funktion += f&#34;+{b}&#34;
+                    else:
+                        funktion += f&#34;{b}&#34;
+                case 1:
+                    if b &gt; -1:
+                        funktion += f&#34;+{b}x&#34;
+                    else:
+                        funktion += f&#34;{b}x&#34;
+                case _:
+                    if b &gt; -1:
+                        funktion += f&#34;+{b}x^{i}&#34;
+                    else:
+                        funktion += f&#34;{b}x^{i}&#34;
+
+        return funktion
+
+    def teiler_bestimmen(self, funktion) -&gt; int:
+        &#34;&#34;&#34; bestimmt den ersten teiler, dass die funktion 0 ergibt
+        :param funktion: die funktion, die geteilt werden soll
+        :type funktion: str
+
+        :return: der erste teiler, der die funktion 0 ergibt
+        :rtype: int
+        &#34;&#34;&#34;
+        basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+        lin_term = basis_exponent_paare[-1][0]
+        def alle_teiler_bestimmen():
+            teiler = []
+            teiler_range = range(-ceil(abs(lin_term)), ceil(abs(lin_term)+1))
+            for i in teiler_range:
+                if i == 0:
+                    continue
+                if lin_term % i == 0:
+                    teiler.append(i)
+            return teiler
+
+        alle_teiler = alle_teiler_bestimmen()
+
+        for teiler in alle_teiler:
+            erg = self.einsetzen(funktion, teiler)
+            if erg == 0:
+                return teiler
+
+        return 0
+
+
+    def einsetzen(self, funktion: str, wert: float) -&gt; float:
+        &#34;&#34;&#34; gibt den wert einer funktion an einem bestimmten punkt zurück
+        :param funktion: die funktion, die eingesetzt werden soll
+        :type funktion: str
+        :param wert: der wert, an dem die funktion eingesetzt werden soll
+        :type wert: float
+        :return: der wert der funktion an dem punkt
+        :rtype: float
+        &#34;&#34;&#34;
+        basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+        end_wert = 0
+        for basis, exponent in basis_exponent_paare:
+            match exponent:
+                case 0:
+                    end_wert += basis
+                case 1:
+                    end_wert += basis * wert
+                case _:
+                    end_wert += basis * (wert ** exponent)
+        return end_wert
+
+
+
+    def nullstellen(self, _funktion) -&gt; list[float]:
+        &#34;&#34;&#34;krasser nullstellen berechner
+        :param _funktion: die funktion, deren nullstellen berechnet werden sollen
+        :type _funktion: str
+        :return: die nullstellen
+        :rtype: list[float]
+        &#34;&#34;&#34;
+        funktion = self.nullterme_reinhauen(_funktion)
+        funktionsgrad = self.funktionsgrad_bestimmen(funktion)
+        basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+
+        roots = []
+
+        match funktionsgrad:
+            # term umformung (zb: 2x + 1)
+            # 0 = 2x + 1
+            # -1 = 2x
+            # -0.5 = x
+            # das aber in einer zeile
+            case 1:
+                if basis_exponent_paare[1][0] != 0 and basis_exponent_paare[0][0] != 0:
+                    roots = [-(basis_exponent_paare[1][0]) / basis_exponent_paare[0][0]]
+            # pq Formel (zb: x^2 + 2x + 1)
+            case 2:
+                x1, x2 = self.pq_formel_von(funktion)
+                if x1 != None and x2 != None:
+                    roots = [x1, x2]
+            # sonst polynomdivision
+            case _:
+                gute_funktion = self.nullterme_reinhauen(funktion)
+                diese_basis_exponent_paare = self.basis_exponent_paare_holen(gute_funktion)
+                werte = [basis_exponent_paar[0] for basis_exponent_paar in diese_basis_exponent_paare]
+
+                roots = np.roots(werte)
+
+        return list[float](roots)
+
+
+
+    def pq_formel_von(self, funktion: str) -&gt; tuple[float,float]:
+        &#34;&#34;&#34; berechnet die nullstellen einer quadratischen funktion basierend auf einem string
+        :param funktion: die funktion
+        :type funktion: str
+        :return: die nullstellen
+        :rtype: tuple[float,float]
+        &#34;&#34;&#34;
+        gute_funktion = self.nullterme_reinhauen(funktion)
+        basis_exponent_paare = self.basis_exponent_paare_holen(gute_funktion)
+        normiert_p = basis_exponent_paare[1][0] / basis_exponent_paare[0][0]
+        normiert_q = basis_exponent_paare[2][0] / basis_exponent_paare[0][0]
+        x1, x2 = self.pq_formel(normiert_p, normiert_q)
+        return x1, x2
+
+    def pq_formel(self, p: float, q: float) -&gt; tuple[float, float]:
+        &#34;&#34;&#34; berechnet die nullstellen einer quadratischen funktion 
+        :param p: der koeffizient vor x
+        :type p: float
+        :param q: der konstante term
+        :type q: float
+        :return: die nullstellen
+        :rtype: tuple[float, float]
+        &#34;&#34;&#34;
+
+        # -p/2 +- sqrt((p/2)^2 - q)
+        try:
+            x1 = (-(p/2)) + sqrt((p/2)**2 - q)
+            x2 = (-(p/2)) - sqrt((p/2)**2 - q)
+        except:
+            return None, None
+
+        return x1, x2</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="functionframe.FunktionFrame" href="functionframe.html#functionframe.FunktionFrame">FunktionFrame</a></li>
+<li>tkinter.Frame</li>
+<li>tkinter.Widget</li>
+<li>tkinter.BaseWidget</li>
+<li>tkinter.Misc</li>
+<li>tkinter.Pack</li>
+<li>tkinter.Place</li>
+<li>tkinter.Grid</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="term_eingeben.TermEingeben.ableitung_ersteller"><code class="name flex">
+<span>def <span class="ident">ableitung_ersteller</span></span>(<span>self, inp: str) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>berechnet die ableitung einer funktion
+:param inp: string mit der funktion
+:type inp: str</p>
+<p>:return: string mit der ableitung
+:rtype: str</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ableitung_ersteller(self, inp: str) -&gt; str:
+    &#34;&#34;&#34; berechnet die ableitung einer funktion
+    :param inp: string mit der funktion
+    :type inp: str
+
+    :return: string mit der ableitung
+    :rtype: str
+    &#34;&#34;&#34;
+    basis_exponent_paare = self.basis_exponent_paare_holen(inp)
+    ableitung = &#34;&#34;
+    for basis, exponent in basis_exponent_paare:
+        if exponent == 0:
+            continue
+        term = f&#34;{basis * exponent}x^{exponent - 1}&#34;
+        if term[-1] == &#39;0&#39;:
+            term = term[:-3]
+        if term[0] == &#39;-&#39;:
+            ableitung += f&#34;-{term[1:]}&#34;
+        else:
+            ableitung += f&#34;+{term}&#34;
+        
+    return ableitung</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.array_von_leeren_strings_befreien"><code class="name flex">
+<span>def <span class="ident">array_von_leeren_strings_befreien</span></span>(<span>self, arr: str) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>entfernt alle leeren strings aus einem array
+:param arr: array mit allen strings
+:type arr: str</p>
+<p>:return: string ohne leere strings
+:rtype: str</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def array_von_leeren_strings_befreien(self, arr: str) -&gt; str:
+    &#34;&#34;&#34;entfernt alle leeren strings aus einem array
+    :param arr: array mit allen strings
+    :type arr: str
+
+    :return: string ohne leere strings
+    :rtype: str
+    &#34;&#34;&#34;
+    output_string = &#34;&#34;
+    # schaut durch alle items im array und filtert alle leeren strings raus
+    for a in arr:
+        if a != &#39;&#39;:
+            output_string += a
+    return output_string</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.basis_exponent_paare_holen"><code class="name flex">
+<span>def <span class="ident">basis_exponent_paare_holen</span></span>(<span>self, inp: str) ‑> list[tuple[float, float]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>holt alle basis exponent paare aus dem string
+:param inp: string mit allen basis exponent paaren
+:type inp: str</p>
+<p>:return: liste mit allen basis exponent paaren
+:rtype: list[tuple[float, float]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def basis_exponent_paare_holen(self, inp: str) -&gt; list[tuple[float, float]]:
+    &#34;&#34;&#34; holt alle basis exponent paare aus dem string
+    :param inp: string mit allen basis exponent paaren
+    :type inp: str
+
+    :return: liste mit allen basis exponent paaren
+    :rtype: list[tuple[float, float]]
+    &#34;&#34;&#34;
+    input_str = self.array_von_leeren_strings_befreien(inp)
+    terme = self.get_zahlen(input_str)
+    return [self.get_term(t) for t in terme]</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.basis_funktion"><code class="name flex">
+<span>def <span class="ident">basis_funktion</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>gibt die basisfunktion zurück
+:return basisfunktion
+:rtype str</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def basis_funktion(self) -&gt; str:
+    &#34;&#34;&#34; gibt die basisfunktion zurück 
+    :return basisfunktion
+    :rtype str
+    &#34;&#34;&#34;
+    return self.f_entry.get()</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.clear_canvas"><code class="name flex">
+<span>def <span class="ident">clear_canvas</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Leert das Canvas</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def clear_canvas(self):
+    &#34;&#34;&#34;Leert das Canvas&#34;&#34;&#34;
+    # if self.ax exists
+    self.ax.clear()
+    self.canvas.draw()</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.einsetzen"><code class="name flex">
+<span>def <span class="ident">einsetzen</span></span>(<span>self, funktion: str, wert: float) ‑> float</span>
+</code></dt>
+<dd>
+<div class="desc"><p>gibt den wert einer funktion an einem bestimmten punkt zurück
+:param funktion: die funktion, die eingesetzt werden soll
+:type funktion: str
+:param wert: der wert, an dem die funktion eingesetzt werden soll
+:type wert: float
+:return: der wert der funktion an dem punkt
+:rtype: float</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def einsetzen(self, funktion: str, wert: float) -&gt; float:
+    &#34;&#34;&#34; gibt den wert einer funktion an einem bestimmten punkt zurück
+    :param funktion: die funktion, die eingesetzt werden soll
+    :type funktion: str
+    :param wert: der wert, an dem die funktion eingesetzt werden soll
+    :type wert: float
+    :return: der wert der funktion an dem punkt
+    :rtype: float
+    &#34;&#34;&#34;
+    basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+    end_wert = 0
+    for basis, exponent in basis_exponent_paare:
+        match exponent:
+            case 0:
+                end_wert += basis
+            case 1:
+                end_wert += basis * wert
+            case _:
+                end_wert += basis * (wert ** exponent)
+    return end_wert</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.funktion"><code class="name flex">
+<span>def <span class="ident">funktion</span></span>(<span>self, x_wert: float) ‑> float</span>
+</code></dt>
+<dd>
+<div class="desc"><p>berechnet die funktion
+:param x_wert: x wert
+:type x_wert: float</p>
+<p>:return: y wert
+:rtype: float</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def funktion(self, x_wert: float) -&gt; float:
+    &#34;&#34;&#34; berechnet die funktion
+    :param x_wert: x wert
+    :type x_wert: float
+
+    :return: y wert
+    :rtype: float
+    &#34;&#34;&#34;
+    y_wert = 0
+    for basis, exponent in self.basis_exponent_paare:
+        y_wert += basis * (x_wert ** exponent)
+    return y_wert</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.funktion_berechnen"><code class="name flex">
+<span>def <span class="ident">funktion_berechnen</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>holt werte und berechnet die funktion</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def funktion_berechnen(self) -&gt; None:
+    &#34;&#34;&#34; holt werte und berechnet die funktion &#34;&#34;&#34;
+
+    self.verlauf_appendieren(self.parent.get_verlauf())
+
+    # Beschreibung hohlen
+    xbeschr = self.xbeschriftung_entry.get()
+    ybeschr = self.ybeschriftung_entry.get()
+
+    # holt input und bereinigt ihn
+    self.basis_exponent_paare = self.basis_exponent_paare_holen(self.f_entry.get())
+
+    # erstellt plot
+
+    self.fig.clear()
+
+    x_werte = np.arange(-50, 50, 0.005)
+    self.ax = self.fig.add_subplot()
+    self.ax.set_xlabel(xbeschr)
+    self.ax.set_ylabel(ybeschr)
+    self.ax.set_title(&#34;Funktionsgraph&#34;)
+    x_von, x_bis = self.von_bis(self.x_von_bis_entry.get())
+    self.ax.set_xlim(x_von, x_bis)
+    y_von, y_bis = self.von_bis(self.y_von_bis_entry.get())
+    self.ax.set_ylim(y_von, y_bis)
+    self.ax.grid()
+    self.ax.spines.left.set_position(&#39;zero&#39;)
+    self.ax.spines.right.set_color(&#39;none&#39;)
+    self.ax.spines.bottom.set_position(&#39;zero&#39;)
+    self.ax.spines.top.set_color(&#39;none&#39;)
+    self.ax.yaxis.set_ticks_position(&#39;left&#39;)
+    self.ax.xaxis.set_ticks_position(&#39;bottom&#39;)
+
+
+    self.ax.plot(x_werte, self.funktion(x_werte), label=self.f_entry.get())
+    
+
+    # self.ax.scatter(0, 0, color=&#34;purple&#34;, label=&#34;Nullpunkt&#34;)
+    __nullstellen = self.nullstellen(self.basis_funktion())
+
+    # duplikate entfernen
+    _nullstellen = list(dict.fromkeys(__nullstellen))
+
+    nullstellen = []
+    for n in _nullstellen:
+        #if complex(self.funktion(n)).imag == 0:
+        if complex(self.einsetzen(self.basis_funktion(), n)).imag == 0:
+            nullstellen.append(n.real)
+
+
+    self.ax.scatter(nullstellen, [0 for _ in nullstellen], color=&#39;red&#39;, label=&#34;Nullpunkte&#34;)
+
+    ableitung = self.ableitung_ersteller(self.basis_funktion())
+    self.ax.plot(x_werte, self.funktion_von(x_werte, ableitung), label=ableitung)
+    
+    _extrempunkte = self.nullstellen(ableitung)
+    extrempunkte = []
+    for n in _extrempunkte:
+        if complex(self.einsetzen(ableitung, n)).imag == 0:
+            extrempunkte.append(n.real)
+    
+
+    if self.funktionsgrad_bestimmen(self.basis_funktion()) &gt; 1:
+        zweite_ableitung = self.ableitung_ersteller(ableitung)
+
+        if self.funktionsgrad_bestimmen(self.basis_funktion()) &gt; 2:
+            _wendepunkte = self.nullstellen(zweite_ableitung)
+
+            wendepunkte = []
+            for n in _wendepunkte:
+                if complex(self.einsetzen(zweite_ableitung, n)).imag == 0:
+                    wendepunkte.append(n.real)
+
+            self.ax.scatter(extrempunkte, [self.funktion(x) for x in extrempunkte], color=&#39;green&#39;, label=&#34;Extrempunkte&#34;)
+            self.ax.scatter(wendepunkte, [self.funktion(x) for x in wendepunkte], color=&#39;blue&#39;, label=&#34;Wendepunkte&#34;)
+            self.ax.plot(x_werte, self.funktion_von(x_werte, zweite_ableitung), label=zweite_ableitung)
+
+    
+    # setzt eine Legende in die obere rechte Ecke
+    self.ax.legend(loc=&#34;upper right&#34;)
+
+    self.canvas.get_tk_widget().destroy() if hasattr(self, &#34;canvas&#34;) else None
+    self.canvas = FigureCanvasTkAgg(self.fig, master=self.figure_frame)
+    self.canvas.draw()
+
+    self.canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=False)
+
+    self.figure_frame.grid(row=9, column=0, sticky=&#34;nsew&#34;)</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.funktion_von"><code class="name flex">
+<span>def <span class="ident">funktion_von</span></span>(<span>self, x_wert: float, funktion: str) ‑> float</span>
+</code></dt>
+<dd>
+<div class="desc"><p>berechnet die funktion basierend auf einem funktions-string
+:param x_wert: x wert
+:type x_wert: float
+:param funktion: funktion
+:type funktion: str</p>
+<p>:return: y wert
+:rtype: float</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def funktion_von(self, x_wert: float, funktion: str) -&gt; float:
+    &#34;&#34;&#34; berechnet die funktion basierend auf einem funktions-string
+    :param x_wert: x wert
+    :type x_wert: float
+    :param funktion: funktion
+    :type funktion: str
+
+    :return: y wert
+    :rtype: float
+    &#34;&#34;&#34;
+
+    y_wert = 0
+    for basis, exponent in self.basis_exponent_paare_holen(funktion):
+        y_wert += basis * (x_wert ** exponent)
+    return y_wert</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.funktionsgrad_bestimmen"><code class="name flex">
+<span>def <span class="ident">funktionsgrad_bestimmen</span></span>(<span>self, funktion) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><p>gibt den funktionsgrad einer funktion zurück
+:param funktion: funktion als string
+:type funktion: str</p>
+<p>:return: funktionsgrad
+:rtype: int</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def funktionsgrad_bestimmen(self, funktion) -&gt; int:
+    &#34;&#34;&#34; gibt den funktionsgrad einer funktion zurück
+    :param funktion: funktion als string
+    :type funktion: str
+
+    :return: funktionsgrad
+    :rtype: int
+    &#34;&#34;&#34;
+    basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+    if len(basis_exponent_paare) == 0:
+        return 1
+    return max([int(x[1]) for x in basis_exponent_paare])</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.get_help"><code class="name flex">
+<span>def <span class="ident">get_help</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>ruft das hilfefenster auf</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_help(self) -&gt; None:
+    &#34;&#34;&#34; ruft das hilfefenster auf &#34;&#34;&#34;
+    _help = utils.base_tk(size=&#34;1000x500&#34;, name=&#34;Hilfe - Funktionen&#34;)
+    Label(_help,
+    text=&#34;In das Input feld die Funktion eingeben, die exponenten werden mit einem ^ notiert.\n\
+            Also z.B.: 1x^3 + 2x^2 + 1x + 0\n\
+            Wenn der erste term ein x vorne hat, muss eine 1 davor geschrieben werden!\n\
+                \n Quadratische, lineare und ganzrationale Funktionen sind drei wichtige Arten von Funktionen in der Mathematik.\n\
+                 Eine quadratische Funktion ist eine Funktion, die durch eine Gleichung der Form f(x) = ax^2 + bx + c beschrieben wird.\n Hierbei sind a, b und c Konstanten und x ist die unabhängige Variable. \nQuadratische Funktionen sind bekannt für ihre charakteristische Parabel-Form und ihre Eigenschaften wie Scheitelpunkt,\n Achsensymmetrie und Nullstellen können aus der Funktionsgleichung abgeleitet werden.\n\
+                 \nEine lineare Funktion ist eine Funktion, die durch eine Gleichung der Form f(x) = mx + b beschrieben wird. \nHierbei sind m und b Konstanten und x ist die unabhängige Variable. \nLineare Funktionen sind durch eine Gerade in einem Koordinatensystem dargestellt und ihre Eigenschaften wie Steigung\n und y-Achsenabschnitt können direkt aus der Funktionsgleichung abgeleitet werden.\n\
+                 \nGanzrationale Funktionen sind Funktionen, die durch Polynome dargestellt werden,\n d.h. eine Summe von Potenzen der unabhängigen Variablen x. Eine ganzrationale Funktion kann allgemein durch eine Gleichung\n der Form f(x) = a_n*x^n + a_{n-1}x^{n-1} + ... + a_1x + a_0 beschrieben werden,\n wobei n eine natürliche Zahl und a_n, a_{n-1}, ..., a_1, a_0 Konstanten sind.\n Die graphische Darstellung einer ganzrationalen Funktion kann je nach dem Grad des Polynoms\n und den Koeffizienten sehr unterschiedlich aussehen, z.B. \nkönnen sie Schlingen, Wendepunkte oder Asymptoten haben.\n\
+                 \n Die Kenntnis dieser drei Funktionsarten ist wichtig, da sie häufig in vielen Bereichen der Mathematik,\n Physik und Ingenieurwissenschaften verwendet werden und ihre Eigenschaften dazu beitragen können, Probleme in diesen Gebieten zu lösen \nund Phänomene zu beschreiben.&#34;).grid(row=1, column=0, padx=5, pady=5, sticky=E)
+    Button(_help, text=&#34;Ok&#34;, command=_help.destroy).grid(row=6, column=3, padx=5, pady=5, sticky=E)</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.get_term"><code class="name flex">
+<span>def <span class="ident">get_term</span></span>(<span>self, term: str) ‑> tuple[int, int]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>gibt einen term als tuple zurück (koeffizient, exponent)
+:param term: term als string
+:type term: str
+:return: tuple mit koeffizient und exponent
+:rtype: tuple</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_term(self, term: str) -&gt; tuple[int,int]:
+    &#34;&#34;&#34; gibt einen term als tuple zurück (koeffizient, exponent)
+    :param term: term als string
+    :type term: str
+    :return: tuple mit koeffizient und exponent
+    :rtype: tuple
+    &#34;&#34;&#34;
+
+    # wenn kein x vorhanden ist, dann ist es ein konstanter term
+    if &#39;x&#39; not in term:
+        return int(term), 0
+    # wenn kein exponent vorhanden ist, dann ist es ein linearer term
+    if &#39;^&#39; not in term:
+        return int(term[:-1]), 1
+    # sonst ist es ein term mit exponent
+    return int(term[:term.index(&#39;x&#39;)]), int(term[term.index(&#39;^&#39;)+1:])</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.get_zahlen"><code class="name flex">
+<span>def <span class="ident">get_zahlen</span></span>(<span>self, inp: str) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>holt wichtige zahlen aus dem string
+:param inp: string mit allen zahlen
+:type inp: str</p>
+<p>:return: liste mit allen zahlen
+:rtype: list</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_zahlen(self, inp: str) -&gt; list:
+    &#34;&#34;&#34; holt wichtige zahlen aus dem string
+    :param inp: string mit allen zahlen
+    :type inp: str
+
+    :return: liste mit allen zahlen
+    :rtype: list
+    &#34;&#34;&#34;
+    # regex magie um alle zahlen zu finden
+    dirty_terme = re.findall(r&#34;[+-]?\d*x?\^?\d*&#34;, inp)
+
+    # entfernt alle leeren strings
+    terme = [t for t in dirty_terme if t != &#39;&#39;]
+    return terme</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.leerzeichen_raus_machen"><code class="name flex">
+<span>def <span class="ident">leerzeichen_raus_machen</span></span>(<span>self, inp: str) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>entfernt alle leerzeichen aus einem string
+:param inp: string mit allen leerzeichen
+:type inp: str</p>
+<p>:return: string ohne leerzeichen
+:rtype: str</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def leerzeichen_raus_machen(self, inp: str) -&gt; str:
+    &#34;&#34;&#34; entfernt alle leerzeichen aus einem string
+    :param inp: string mit allen leerzeichen
+    :type inp: str
+
+    :return: string ohne leerzeichen
+    :rtype: str
+    &#34;&#34;&#34;
+    outp = &#34;&#34;
+    # enumeriert über input mit (index, wert)
+    for _, character in enumerate(inp):
+        if character != &#34; &#34;:
+            outp += character
+    return outp</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.nullstellen"><code class="name flex">
+<span>def <span class="ident">nullstellen</span></span>(<span>self, _funktion) ‑> list[float]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>krasser nullstellen berechner
+:param _funktion: die funktion, deren nullstellen berechnet werden sollen
+:type _funktion: str
+:return: die nullstellen
+:rtype: list[float]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def nullstellen(self, _funktion) -&gt; list[float]:
+    &#34;&#34;&#34;krasser nullstellen berechner
+    :param _funktion: die funktion, deren nullstellen berechnet werden sollen
+    :type _funktion: str
+    :return: die nullstellen
+    :rtype: list[float]
+    &#34;&#34;&#34;
+    funktion = self.nullterme_reinhauen(_funktion)
+    funktionsgrad = self.funktionsgrad_bestimmen(funktion)
+    basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+
+    roots = []
+
+    match funktionsgrad:
+        # term umformung (zb: 2x + 1)
+        # 0 = 2x + 1
+        # -1 = 2x
+        # -0.5 = x
+        # das aber in einer zeile
+        case 1:
+            if basis_exponent_paare[1][0] != 0 and basis_exponent_paare[0][0] != 0:
+                roots = [-(basis_exponent_paare[1][0]) / basis_exponent_paare[0][0]]
+        # pq Formel (zb: x^2 + 2x + 1)
+        case 2:
+            x1, x2 = self.pq_formel_von(funktion)
+            if x1 != None and x2 != None:
+                roots = [x1, x2]
+        # sonst polynomdivision
+        case _:
+            gute_funktion = self.nullterme_reinhauen(funktion)
+            diese_basis_exponent_paare = self.basis_exponent_paare_holen(gute_funktion)
+            werte = [basis_exponent_paar[0] for basis_exponent_paar in diese_basis_exponent_paare]
+
+            roots = np.roots(werte)
+
+    return list[float](roots)</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.nullterme_reinhauen"><code class="name flex">
+<span>def <span class="ident">nullterme_reinhauen</span></span>(<span>self, _funktion) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>fügt nullterme in eine funktion ein
+beispiel: 2x^4 + 3x^2 -5x + 2
+wird zu:
+2x^4 + 0x^3 + 3x^2 -5x + 0x + 2</p>
+<p>beispiel: 2x^4 + 0x^3 + 0x^2 - 5x + 0</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def nullterme_reinhauen(self, _funktion) -&gt; str:
+    &#34;&#34;&#34; fügt nullterme in eine funktion ein 
+        beispiel: 2x^4 + 3x^2 -5x + 2
+        wird zu:  2x^4 + 0x^3 + 3x^2 -5x + 0x + 2
+
+        beispiel: 2x^4 + 0x^3 + 0x^2 - 5x + 0
+    &#34;&#34;&#34;
+    funktionsgrad = self.funktionsgrad_bestimmen(_funktion)
+    basis_exponent_paare = self.basis_exponent_paare_holen(_funktion)
+    funktion = &#34;&#34;
+    # soll runter zählen, bis 0, deswegen -1 bei
+    for i in range(funktionsgrad, -1, -1):
+        b = 0
+        for x in basis_exponent_paare:
+            if i == x[1]:
+                b = x[0]
+        match i:
+            case 0:
+                if b &gt; -1:
+                    funktion += f&#34;+{b}&#34;
+                else:
+                    funktion += f&#34;{b}&#34;
+            case 1:
+                if b &gt; -1:
+                    funktion += f&#34;+{b}x&#34;
+                else:
+                    funktion += f&#34;{b}x&#34;
+            case _:
+                if b &gt; -1:
+                    funktion += f&#34;+{b}x^{i}&#34;
+                else:
+                    funktion += f&#34;{b}x^{i}&#34;
+
+    return funktion</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.pq_formel"><code class="name flex">
+<span>def <span class="ident">pq_formel</span></span>(<span>self, p: float, q: float) ‑> tuple[float, float]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>berechnet die nullstellen einer quadratischen funktion
+:param p: der koeffizient vor x
+:type p: float
+:param q: der konstante term
+:type q: float
+:return: die nullstellen
+:rtype: tuple[float, float]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def pq_formel(self, p: float, q: float) -&gt; tuple[float, float]:
+    &#34;&#34;&#34; berechnet die nullstellen einer quadratischen funktion 
+    :param p: der koeffizient vor x
+    :type p: float
+    :param q: der konstante term
+    :type q: float
+    :return: die nullstellen
+    :rtype: tuple[float, float]
+    &#34;&#34;&#34;
+
+    # -p/2 +- sqrt((p/2)^2 - q)
+    try:
+        x1 = (-(p/2)) + sqrt((p/2)**2 - q)
+        x2 = (-(p/2)) - sqrt((p/2)**2 - q)
+    except:
+        return None, None
+
+    return x1, x2</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.pq_formel_von"><code class="name flex">
+<span>def <span class="ident">pq_formel_von</span></span>(<span>self, funktion: str) ‑> tuple[float, float]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>berechnet die nullstellen einer quadratischen funktion basierend auf einem string
+:param funktion: die funktion
+:type funktion: str
+:return: die nullstellen
+:rtype: tuple[float,float]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def pq_formel_von(self, funktion: str) -&gt; tuple[float,float]:
+    &#34;&#34;&#34; berechnet die nullstellen einer quadratischen funktion basierend auf einem string
+    :param funktion: die funktion
+    :type funktion: str
+    :return: die nullstellen
+    :rtype: tuple[float,float]
+    &#34;&#34;&#34;
+    gute_funktion = self.nullterme_reinhauen(funktion)
+    basis_exponent_paare = self.basis_exponent_paare_holen(gute_funktion)
+    normiert_p = basis_exponent_paare[1][0] / basis_exponent_paare[0][0]
+    normiert_q = basis_exponent_paare[2][0] / basis_exponent_paare[0][0]
+    x1, x2 = self.pq_formel(normiert_p, normiert_q)
+    return x1, x2</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.teiler_bestimmen"><code class="name flex">
+<span>def <span class="ident">teiler_bestimmen</span></span>(<span>self, funktion) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><p>bestimmt den ersten teiler, dass die funktion 0 ergibt
+:param funktion: die funktion, die geteilt werden soll
+:type funktion: str</p>
+<p>:return: der erste teiler, der die funktion 0 ergibt
+:rtype: int</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def teiler_bestimmen(self, funktion) -&gt; int:
+    &#34;&#34;&#34; bestimmt den ersten teiler, dass die funktion 0 ergibt
+    :param funktion: die funktion, die geteilt werden soll
+    :type funktion: str
+
+    :return: der erste teiler, der die funktion 0 ergibt
+    :rtype: int
+    &#34;&#34;&#34;
+    basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
+    lin_term = basis_exponent_paare[-1][0]
+    def alle_teiler_bestimmen():
+        teiler = []
+        teiler_range = range(-ceil(abs(lin_term)), ceil(abs(lin_term)+1))
+        for i in teiler_range:
+            if i == 0:
+                continue
+            if lin_term % i == 0:
+                teiler.append(i)
+        return teiler
+
+    alle_teiler = alle_teiler_bestimmen()
+
+    for teiler in alle_teiler:
+        erg = self.einsetzen(funktion, teiler)
+        if erg == 0:
+            return teiler
+
+    return 0</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.term_button_clicked"><code class="name flex">
+<span>def <span class="ident">term_button_clicked</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Füllt die Felder mit einem Beispielterm</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def term_button_clicked(self):
+    &#34;&#34;&#34;Füllt die Felder mit einem Beispielterm&#34;&#34;&#34;
+    value = terme_generator()
+    self.f_entry.delete(0, END)
+    self.f_entry.insert(0, value)
+    self.ybeschriftung_entry.delete(0, END)
+    self.ybeschriftung_entry.insert(0, &#34;Y&#34;)
+    self.xbeschriftung_entry.delete(0, END)
+    self.xbeschriftung_entry.insert(0, &#34;X&#34;)
+    self.x_von_bis_entry.delete(0, END)
+    self.x_von_bis_entry.insert(0, &#34;-10,10&#34;)
+    self.y_von_bis_entry.delete(0, END)
+    self.y_von_bis_entry.insert(0, &#34;-10,10&#34;)</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.verlauf_appendieren"><code class="name flex">
+<span>def <span class="ident">verlauf_appendieren</span></span>(<span>self, verlauf: <a title="verlauf.Verlauf" href="verlauf.html#verlauf.Verlauf">Verlauf</a>) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>fügt einen verlauf in die liste der verläufe ein
+:param verlauf: verlauf der hinzugefügt werden soll
+:type verlauf: Verlauf</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def verlauf_appendieren(self, verlauf: Verlauf) -&gt; None:
+    &#34;&#34;&#34; fügt einen verlauf in die liste der verläufe ein
+    :param verlauf: verlauf der hinzugefügt werden soll
+    :type verlauf: Verlauf
+    &#34;&#34;&#34;
+    verlauf.appendieren(self.basis_funktion())</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.von_bis"><code class="name flex">
+<span>def <span class="ident">von_bis</span></span>(<span>self, get_from: str) ‑> tuple[float, float]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Holt von und bis werde aus einem string (von, bis)
+:param get_from: der string, aus dem die limits geholt werden sollen
+:type get_from: str</p>
+<p>:return: die Werte aus dem String
+:rtype: tuple[float, float]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def von_bis(self, get_from: str) -&gt; tuple[float, float]:
+    &#34;&#34;&#34;
+    Holt von und bis werde aus einem string (von, bis)
+    :param get_from: der string, aus dem die limits geholt werden sollen
+    :type get_from: str
+
+    :return: die Werte aus dem String
+    :rtype: tuple[float, float]
+    &#34;&#34;&#34;
+    input_bereinigt = self.leerzeichen_raus_machen(get_from)
+    von, bis = input_bereinigt.split(&#34;,&#34;)
+    return float(von), float(bis)</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.zoom_in"><code class="name flex">
+<span>def <span class="ident">zoom_in</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Zoomt rein</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def zoom_in(self):
+    &#34;&#34;&#34;Zoomt rein&#34;&#34;&#34;
+    self.ax.set_xlim(self.ax.get_xlim()[0] * 0.9, self.ax.get_xlim()[1] * 0.9)
+    self.ax.set_ylim(self.ax.get_ylim()[0] * 0.9, self.ax.get_ylim()[1] * 0.9)
+    self.canvas.draw()</code></pre>
+</details>
+</dd>
+<dt id="term_eingeben.TermEingeben.zoom_out"><code class="name flex">
+<span>def <span class="ident">zoom_out</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Zoomt raus</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def zoom_out(self):
+    &#34;&#34;&#34;Zoomt raus&#34;&#34;&#34;
+    self.ax.set_xlim(self.ax.get_xlim()[0] * 1.1, self.ax.get_xlim()[1] * 1.1)
+    self.ax.set_ylim(self.ax.get_ylim()[0] * 1.1, self.ax.get_ylim()[1] * 1.1)
+    self.canvas.draw()</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="functionframe.FunktionFrame" href="functionframe.html#functionframe.FunktionFrame">FunktionFrame</a></b></code>:
+<ul class="hlist">
+<li><code><a title="functionframe.FunktionFrame.plot" href="functionframe.html#functionframe.FunktionFrame.plot">plot</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="term_eingeben.TermEingeben" href="#term_eingeben.TermEingeben">TermEingeben</a></code></h4>
+<ul class="">
+<li><code><a title="term_eingeben.TermEingeben.ableitung_ersteller" href="#term_eingeben.TermEingeben.ableitung_ersteller">ableitung_ersteller</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.array_von_leeren_strings_befreien" href="#term_eingeben.TermEingeben.array_von_leeren_strings_befreien">array_von_leeren_strings_befreien</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.basis_exponent_paare_holen" href="#term_eingeben.TermEingeben.basis_exponent_paare_holen">basis_exponent_paare_holen</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.basis_funktion" href="#term_eingeben.TermEingeben.basis_funktion">basis_funktion</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.clear_canvas" href="#term_eingeben.TermEingeben.clear_canvas">clear_canvas</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.einsetzen" href="#term_eingeben.TermEingeben.einsetzen">einsetzen</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.funktion" href="#term_eingeben.TermEingeben.funktion">funktion</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.funktion_berechnen" href="#term_eingeben.TermEingeben.funktion_berechnen">funktion_berechnen</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.funktion_von" href="#term_eingeben.TermEingeben.funktion_von">funktion_von</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.funktionsgrad_bestimmen" href="#term_eingeben.TermEingeben.funktionsgrad_bestimmen">funktionsgrad_bestimmen</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.get_help" href="#term_eingeben.TermEingeben.get_help">get_help</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.get_term" href="#term_eingeben.TermEingeben.get_term">get_term</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.get_zahlen" href="#term_eingeben.TermEingeben.get_zahlen">get_zahlen</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.leerzeichen_raus_machen" href="#term_eingeben.TermEingeben.leerzeichen_raus_machen">leerzeichen_raus_machen</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.nullstellen" href="#term_eingeben.TermEingeben.nullstellen">nullstellen</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.nullterme_reinhauen" href="#term_eingeben.TermEingeben.nullterme_reinhauen">nullterme_reinhauen</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.pq_formel" href="#term_eingeben.TermEingeben.pq_formel">pq_formel</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.pq_formel_von" href="#term_eingeben.TermEingeben.pq_formel_von">pq_formel_von</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.teiler_bestimmen" href="#term_eingeben.TermEingeben.teiler_bestimmen">teiler_bestimmen</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.term_button_clicked" href="#term_eingeben.TermEingeben.term_button_clicked">term_button_clicked</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.verlauf_appendieren" href="#term_eingeben.TermEingeben.verlauf_appendieren">verlauf_appendieren</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.von_bis" href="#term_eingeben.TermEingeben.von_bis">von_bis</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.zoom_in" href="#term_eingeben.TermEingeben.zoom_in">zoom_in</a></code></li>
+<li><code><a title="term_eingeben.TermEingeben.zoom_out" href="#term_eingeben.TermEingeben.zoom_out">zoom_out</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

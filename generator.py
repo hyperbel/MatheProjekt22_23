@@ -35,7 +35,6 @@ def integral_generator():
 
 def terme_generator():
     """ generiert eine funktion mit mehreren termen
-
     :return: Funktionsterm
     :rtype: str
     """
