@@ -1,11 +1,11 @@
 import oop
-import database
+from database import create_db
 
 def main():
      try:
         create_db()
-     except:
-        print("Datenbank sollte schon da sein")
+     except Exception as e:
+        print(e)
 
 if __name__ == "__main__":
     main()
