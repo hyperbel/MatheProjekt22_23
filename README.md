@@ -45,3 +45,4 @@ Die Schule plant die Erstellung einer Python-Software als Unterstützung für de
 
 ### Dokumentation und Verlauf
 Es befindet sich in dem Order Doc eine Dokumentation zu diesem Projekt, sowie einen Verlauf des Projektes in Form 2er Gantt Diagramme
+Im Unterordner Code befindet sich die komplette Code-Dokumentation als HTML-Dateien
