@@ -42,3 +42,6 @@ Die Schule plant die Erstellung einer Python-Software als Unterstützung für de
 * `export NIXPKGS_ALLOW_INSECURE=1` for xpdf
 * `nix-shell`
 * `python main.py`
+
+### Dokumentation und Verlauf
+Es befindet sich in dem Order Doc eine Dokumentation zu diesem Projekt, sowie einen Verlauf des Projektes in Form 2er Gantt Diagramme
