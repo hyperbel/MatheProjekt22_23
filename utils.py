@@ -1,3 +1,4 @@
+""" utilities die man einfach gebrauchen kann"""
 from tkinter import Tk
 import re
 # basic window config

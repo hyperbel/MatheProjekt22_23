@@ -1,7 +1,9 @@
+""" Datenbank skript und Funktion """
 import sqlite3
 
 def create_db():
-    """ Erstellt Datenbank """
+    """ Erstellt Datenbank
+    """
     try:
         con = sqlite3.connect("mathe.db")
         cur = con.cursor()

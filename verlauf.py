@@ -1,3 +1,4 @@
+""" Verlauf Logik """
 import sqlite3
 import time
 import re
@@ -6,6 +7,7 @@ from mainwindowbase import BaseWindow
 
 
 class Verlauf(Frame):
+    """ Verlauf Klasse """
     def __init__(self, master, parent: BaseWindow):
         super().__init__(master, width=30)
 
@@ -27,6 +29,10 @@ class Verlauf(Frame):
         self.userid=1
 
     def on_double_click(self, event):
+        """ Öffnet die Funktion aus dem Verlauf
+        :param event: Eventdaten
+        """
+
         widget = event.widget
         selection = widget.curselection()
         if selection:
@@ -35,7 +41,10 @@ class Verlauf(Frame):
             if item:
                 self.open_funktion_aus_verlauf(item)
 
-    def open_funktion_aus_verlauf(self, event):
+    def open_funktion_aus_verlauf(self, _):
+        """ Öffnet die Funktion aus dem Verlauf
+        :param _: Eventdaten, brauchen wir hier nicht
+        """
         selection = self.listbox.curselection()
         if selection:
             index = selection[0]
@@ -57,7 +66,12 @@ class Verlauf(Frame):
                     #print("exponential")
 
 
-    def get_verlauf(self, userid: int):
+    def get_verlauf(self, userid: int) -> list:
+        """ Holt den Verlauf aus der Datenbank
+        :param userid: User ID, immer 1 loool
+        :return: Verlauf
+        :rtype: list
+        """
         sql = f"SELECT funktion from funktionen WHERE userid=\'{userid}\';"
         ergebnis = self.cur.execute(sql).fetchall()
         #print(ergebnis)
@@ -65,6 +79,11 @@ class Verlauf(Frame):
 
     
     def remove_verlauf(self, userid: int, minu: str, std: str):
+        """ Löscht den Verlauf aus der Datenbank
+        :param userid: User ID, immer 1 loool
+        :return: Verlauf
+        :rtype: list
+        """
         try:
             aktuelle_zeit = time.strftime("%H:%M:%S")
             zeit = time.strftime("%H:%M:%S", time.strptime(f"{std}:{minu}:00", "%H:%M:%S"))
@@ -77,6 +96,7 @@ class Verlauf(Frame):
             _ = messagebox.showwarning(title="Fehler", message="Fehler beim Löschen")
 
     def scrollbar_init(self):
+        """ Scrollbar wird erstellt"""
         self.scrollbar = Scrollbar(self, width=10)
 
         self.listbox.config(yscrollcommand=self.scrollbar.set)
@@ -85,16 +105,24 @@ class Verlauf(Frame):
         self.scrollbar.pack(side=RIGHT, fill=BOTH)
 
     def combobox_init(self, parent):
+        """ Lösch Auswahl wird erstellt
+        :param parent: Parent Widget
+        """
         self.combobox_values = ['5 min', '10 min', '15 min', '30 min', '1 std', '2 std', '8 std', '24 std', 'alles löschen']
         self.combobox = ttk.Combobox(parent, values=self.combobox_values)
         self.combobox.current(0)
         self.combobox.pack(side=LEFT, padx=5, pady=5)
 
     def button_init(self, parent):
+        """ Löschen Button wird erstellt
+        :param parent: Parent Widget
+        """
         self.button = ttk.Button(parent, text='Löschen', command=self.delete_selection)
         self.button.pack(side=LEFT, padx=5, pady=5)
 
     def delete_selection(self):
+        """ Löscht die Auswahl aus dem Verlauf
+        """
         selection = self.combobox.get()
         if selection == 'alles löschen':
             self.listbox.delete(0, END)
@@ -120,12 +148,18 @@ class Verlauf(Frame):
            _ = messagebox.showinfo(title="Auswahl ungültig", message="Sie müssen in der Combobox etwas auswählen")
 
     def delete_frame_init(self):
+        """ Löschen Frame wird erstellt
+        """
         self.delete_frame = Frame(self)
         self.combobox_init(self.delete_frame)
         self.button_init(self.delete_frame)
         self.delete_frame.pack(side=BOTTOM, fill=BOTH)
 
     def appendieren(self, funktion):
+        """ Fügt die Funktion in den Verlauf ein
+        :param funktion: Funktion die hinzugefügt werden soll
+        :type funktion: str
+        """
         self.listbox.insert(END, funktion)
         sql = "INSERT INTO funktionen (userid, funktion) VALUES (?, ?);"
         self.cur.execute(sql, (self.userid, funktion))

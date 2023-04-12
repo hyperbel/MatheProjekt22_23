@@ -1,3 +1,4 @@
+""" Haupt-Datei für das Programm """
 from account import LoginWindow
 from verlauf import Verlauf
 import sqlite3
@@ -15,7 +16,9 @@ def import_funktionen():
     f = _f
 
 class WelcomeFrame(Frame):
-    def __inít__(self, master):
+    """ Willkommens Frame (funktioniert nicht) """
+    def __init__(self, master):
+        """ init """
         super().__init__()
 
         self.grid_columnconfigure(1, weight=1)
@@ -29,7 +32,8 @@ class WelcomeFrame(Frame):
 
         self.show_labels()
 
-    def show_labels():
+    def show_labels(self):
+        """ Zeigt die Labels """
         self.verlauf_hilfe.grid(row=0, column=0)
         self.terme_eingeben_hilfe.grid(row=1, column=0)
         self.exponential_hilfe.grid(row=2, column=0)
@@ -38,7 +42,9 @@ class WelcomeFrame(Frame):
 
 
 class MainWindow(BaseWindow):
+    """ Haupt Fenster in dem alles passiert """
     def __init__(self):
+        """ init """
         super().__init__()
 
         self.create_menu()
@@ -51,26 +57,47 @@ class MainWindow(BaseWindow):
         self.verlauf = Verlauf(self, self)
         self.verlauf.grid(row=0, column=0, sticky="nsew")
 
+        """
         self.selected_frame = WelcomeFrame(self)
 
         self.selected_frame.config(height=self.winfo_height())
         self.selected_frame.grid(row=0, column=1, sticky="nsew")
+        """
+        self.selected_frame = None
 
 
     def get_verlauf(self) -> Verlauf:
+        """ gibt den verlauf zurück 
+        :return: verlauf
+        :rtype: Verlauf
+        """
         return self.verlauf
 
     def hide_all_frames(self):
+        """ versteckt alle frames """
         if self.selected_frame is not None:
             self.selected_frame.grid_forget()
 
     def select(self, frame: Frame) -> None:
+        """ wählt ein frame aus
+        :param frame: frame zum auswählen
+        :type frame: Frame
+        """
         self.hide_all_frames()
         self.selected_frame = frame
         self.selected_frame.config(height=self.winfo_height())
         self.selected_frame.grid(row=0, column=1, sticky="nsew")
 
     def select_by_name(self, frame: str, funktion: str) -> None:
+        """ wählt ein frame aus nach dem namen, für den Verlauf
+        :param frame: frame zum auswählen
+        :type frame: str
+        :param funktion: funktion die ausgewählt werden soll
+        :type funktion: str
+
+        :raises ValueError: wenn es keinen Frame mit dem angegebenen Namen gibt, wird nicht passieren
+        """
+
         self.hide_all_frames()
 
         match frame:
@@ -105,7 +132,7 @@ class MainWindow(BaseWindow):
     # generiert main menu fuer das root win
     def create_menu(self) -> None:
 
-        """ generiert main menu für das root win """
+        """ generiert main menu für sich selber """
         self.menu = Menu(self, tearoff=0)
         funktionen_menu = Menu(self.menu, tearoff=0)
         account_menu = Menu(self.menu, tearoff=0)
@@ -128,7 +155,9 @@ class MainWindow(BaseWindow):
         self.menu.add_cascade(label="Account", menu=account_menu)
 
 class Splash(Tk):
+    """ Splash Fenster, welches am Anfang gezeigt wird, während es alle Module lädt """
     def __init__(self):
+        """ init """
         super().__init__()
         img = PhotoImage(file="bild3.png")
         canvas = Canvas(self, width=700, height=300)
@@ -149,9 +178,11 @@ class Splash(Tk):
 
 
 def start():
+    """ startet das Programm """
     Splash().mainloop()
     LoginWindow(MainWindow).mainloop()
 
+# wird gebraucht, wenn man oop.py aufruft und nicht main.py
 if __name__ == "__main__":
     Splash().mainloop()
     LoginWindow(MainWindow).mainloop()

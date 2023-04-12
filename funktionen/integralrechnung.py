@@ -6,13 +6,13 @@ from generator import integral_generator
 import numpy as np
 import matplotlib.pyplot as plt
 from verlauf import Verlauf
-import sqlite3
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from oop import MainWindow
 
 class Integralrechnung(FunktionFrame):
-    def __init__(self, master, funktion = None):
+    def __init__(self, master, parent: MainWindow, funktion = None):
         super().__init__(master)
+        self.parent = parent
         self.create_widgets()
 
         if funktion != None:
@@ -24,9 +24,11 @@ class Integralrechnung(FunktionFrame):
 
 
     def basis_funktion(self) -> str:
+        """ gibt die basisfunktion zurück """
         return self.funktion_entry.get()
 
     def verlauf_appendieren(self, verlauf: Verlauf) -> None:
+        """ fügt den verlauf der liste hinzu """
         verlauf.appendieren(self.basis_funktion())
 
     def get_help(self) -> None:
@@ -38,15 +40,17 @@ class Integralrechnung(FunktionFrame):
                 \nDas Integralrechnen ist ein Zweig der Analysis, der sich mit der Berechnung von Flächen unter einer Kurve,\n dem Bestimmen von Volumina und Schwerpunkten von dreidimensionalen Objekten sowie der Lösung von Differentialgleichungen befasst,\n indem es die Umkehrung des Differenzierens darstellt.").grid(row=1, column=0, padx=5, pady=5, sticky=E)
         Button(_help, text="Ok", command=_help.destroy).grid(row=6, column=3, padx=5, pady=5, sticky=E)
 
-        _help.image = img
+        #_help.image = img
 
     def clear_canvas(self):
+        """ cleart das canvas """
         self.loesung_entry.delete(0, END)
         self.funktion_entry.delete(0, END)
         self.ax.clear()
         self.canvas.draw()
     
     def trigo_button_clicked(self):
+        """ zeigt ein Beispiel an """
         value = integral_generator()
         self.funktion_entry.delete(0, END)
         self.funktion_entry.insert(0, value)
@@ -56,6 +60,7 @@ class Integralrechnung(FunktionFrame):
         self.ybeschriftung_entry.insert(0, "Y")
 
     def create_widgets(self):
+        """ erstellt die widgets """
         self.funktion_label =  Label(self, text="Funktion:")
         self.funktion_entry = Entry(self)
         """self.anfangX_label = Label(self, text="Anfang von X:")
@@ -91,17 +96,20 @@ class Integralrechnung(FunktionFrame):
         
 
     def zoom_in(self):
+        """ zoomt rein"""
         self.ax.set_xlim(self.ax.get_xlim()[0] * 0.9, self.ax.get_xlim()[1] * 0.9)
         self.ax.set_ylim(self.ax.get_ylim()[0] * 0.9, self.ax.get_ylim()[1] * 0.9)
         self.canvas.draw()
 
     def zoom_out(self):
+        """ zoomt raus"""
         self.ax.set_xlim(self.ax.get_xlim()[0] * 1.1, self.ax.get_xlim()[1] * 1.1)
         self.ax.set_ylim(self.ax.get_ylim()[0] * 1.1, self.ax.get_ylim()[1] * 1.1)
         self.canvas.draw()
 
 
     def pack_widgets(self) -> None:
+        """ packt die widgets """
         # Anordnung der Eingabefelder und Beschriftungen oben links
         self.funktion_label.grid(row=0, column=0, sticky=NW)
         self.funktion_entry.grid(row=0, column=1, sticky=NW)
@@ -129,6 +137,7 @@ class Integralrechnung(FunktionFrame):
 
 
     def integral_ausrechnen(self):
+        """ berechnet das Integral einer Funktion """
         # Hohle Werte
         try: 
             funktion_text = self.funktion_entry.get()
@@ -139,7 +148,7 @@ class Integralrechnung(FunktionFrame):
 
         # assert entry_is_float(x)
 
-        self.verlauf_appendieren(self.master.get_verlauf())
+        self.verlauf_appendieren(self.parent.get_verlauf())
 
         xbeschr = self.xbeschriftung_entry.get()
         ybeschr = self.ybeschriftung_entry.get()

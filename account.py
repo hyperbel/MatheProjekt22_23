@@ -1,7 +1,9 @@
+""" Account management sachen"""
 import sqlite3
 from tkinter import Tk, Frame, Button, Label, Entry, messagebox
 
 class LoginWindow(Tk):
+    """ Login fenster nach dem splash screen"""
     def __init__(self, _next):
         super().__init__()
         self.title("Login")
@@ -11,18 +13,22 @@ class LoginWindow(Tk):
         self.create_widgets()
 
     def create_widgets(self) -> None:
+        """ erstellt widgets"""
         self.login_frame = LoginFrame(master=self, parent=self)
         self.login_frame.pack()
 
     def proceed(self) -> None:
+        """ macht weiter wenn der login erfolgreich war"""
         self.destroy()
         self.next().mainloop()
 
     def open_signup(self) -> None:
+        """ öffnet das signup fenster"""
         self.login_frame.pack_forget()
         SignUpFrame(master=self, parent=self).pack()
 
 class LoginFrame(Frame):
+    """ frame für login logik"""
     def __init__(self, master, parent: LoginWindow):
         super().__init__(master)
         self.master = master
@@ -33,6 +39,7 @@ class LoginFrame(Frame):
         self.cursor = self.connection.cursor()
 
     def create_widgets(self):
+        """ holt widgets für die user experience"""
         self.username_label = Label(self, text="Username")
         self.username_label.pack()
         self.username_entry = Entry(self)
@@ -48,6 +55,7 @@ class LoginFrame(Frame):
 
 
     def login(self) -> None:
+        """ loggt den user ein"""
         if self.eval_logindata():
             self.parent.proceed()
         else:
@@ -55,6 +63,10 @@ class LoginFrame(Frame):
             _ = messagebox.showwarning(title="Login Fehlgeschlagen", message="Bitte überprüfe die Anmelde Daten, solltest du noch kein Account haben, erstelle einen")
 
     def eval_logindata(self) -> bool:
+        """ evaluiert Logindaten
+        :return: Ob die daten richtig sind
+        :rtype: bool
+        """
         uname = self.username_entry.get()
         query = f"SELECT * FROM user WHERE username = ?"
         self.cursor.execute(query, (uname,))
@@ -68,12 +80,13 @@ class LoginFrame(Frame):
                     correct = True
             return correct
         except:
-              _ = messagebox.showwarning(title="Login Fehlgeschlagen", message="Bitte überprüfe die Anmelde Daten, solltest du noch kein Account haben, erstelle einen")
+              _ = messagebox.showwarning(title="Login Fehlgeschlagen",
+                                         message="Bitte überprüfe die Anmelde Daten, solltest du noch kein Account haben, erstelle einen")
+              return False
    
 
-
-
 class SignUpFrame(Frame):
+    """ frame für signup logik"""
     def __init__(self, master, parent: LoginWindow):
         super().__init__(master)
         self.master = master
@@ -84,6 +97,7 @@ class SignUpFrame(Frame):
         self.cursor = self.connection.cursor()
 
     def create_widgets(self):
+        """ holt widgets für die user experience"""
         self.username_label = Label(self, text="Username")
         self.username_label.pack()
         self.username_entry = Entry(self)
@@ -100,6 +114,7 @@ class SignUpFrame(Frame):
         self.signup_button.pack()
 
     def eval_signupdata(self) -> None:
+        """ evaluiert signup daten"""
         uname = self.username_entry.get()
         passw = self.password_entry.get()
         confi = self.confirm_entry.get()
@@ -120,5 +135,6 @@ class SignUpFrame(Frame):
         self.connection.commit()
 
     def signup(self):
+        """ erstellt einen account"""
         self.eval_signupdata()
         self.parent.proceed()

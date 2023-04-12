@@ -1,3 +1,4 @@
+""" Dieses Modul enthält die Klasse Trigonometrische, die die Funktionen Sinus, Cosinus und Tangens berechnet und darstellt. """
 from functionframe import FunktionFrame
 import utils
 from generator import trigo_generator
@@ -9,11 +10,11 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from oop import MainWindow
 
 class Trigonometrische(FunktionFrame):
-   # def __init__(self, master, parent: MainWindow):
-    def __init__(self, master, funktion = None):
+    """ Dieses Frame ist für Funktionen Sinus, Cosinus und Tangens gedacht. """
+    def __init__(self, master, parent: MainWindow, funktion = None):
         super().__init__(master)
         
-        #self.parent = parent
+        self.parent = parent
 
         self.create_widgets()
 
@@ -31,10 +32,19 @@ class Trigonometrische(FunktionFrame):
             self.ybeschriftung_entry.insert(0, "y")
 
     def basis_funktion(self) -> str:
+        """ gibt die Basisfunktion zurück
+        :return: Basisfunktion
+        :rtype: str
+        """
+
         ganzes = self.amplitude_entry.get() + "," + self.frequenz_entry.get() + "," + self.phase_entry.get()
         return ganzes
 
     def verlauf_appendieren(self, verlauf: Verlauf) -> None:
+        """ fügt den Verlauf hinzu
+        :param verlauf: Verlauf
+        :type verlauf: Verlauf
+        """
         verlauf.appendieren(self.basis_funktion())
 
     def get_help(self) -> None:
@@ -46,6 +56,7 @@ class Trigonometrische(FunktionFrame):
         Button(_help, text="Ok", command=_help.destroy).grid(row=6, column=3, padx=5, pady=5, sticky=E)
 
     def clear_canvas(self):
+        """ leert das canvas """
         self.ax.clear()
         self.canvas.draw()
         self.amplitude_entry.delete(0, END)
@@ -54,6 +65,7 @@ class Trigonometrische(FunktionFrame):
 
 
     def trigo_button_clicked(self):
+        """ ruft die trigo_generator() auf und füllt die Felder mit den Werten """
         amplitude, frequenz, phase = trigo_generator()
 
         self.amplitude_entry.delete(0, END)
@@ -68,6 +80,7 @@ class Trigonometrische(FunktionFrame):
         self.ybeschriftung_entry.insert(0, "y")
 
     def create_widgets(self):
+        """ erstellt die widgets """
         self.amplitude_label =  Label(self, text="Amplitude:")
         self.amplitude_entry = Entry(self)
         self.frequenz_label = Label(self, text="Frequenz:")
@@ -103,17 +116,21 @@ class Trigonometrische(FunktionFrame):
         Radiobutton(self, text="Cosinus", variable=self.function_type_var, value='cos').grid(row=1, column=0, sticky=NW)
         Radiobutton(self, text="Tangens", variable=self.function_type_var, value='tan').grid(row=2, column=0, sticky=NW)
         self.pack_items()
+
     def zoom_in(self):
+        """ zoomt rein """
         self.ax.set_xlim(self.ax.get_xlim()[0] * 0.9, self.ax.get_xlim()[1] * 0.9)
         self.ax.set_ylim(self.ax.get_ylim()[0] * 0.9, self.ax.get_ylim()[1] * 0.9)
         self.canvas.draw()
 
     def zoom_out(self):
+        """ zoomt raus"""
         self.ax.set_xlim(self.ax.get_xlim()[0] * 1.1, self.ax.get_xlim()[1] * 1.1)
         self.ax.set_ylim(self.ax.get_ylim()[0] * 1.1, self.ax.get_ylim()[1] * 1.1)
         self.canvas.draw()
 
     def pack_items(self):
+        """ packt (oder eher gridded) die widgets """
         self.amplitude_label.grid(row=4, column=0, sticky=NW)
         self.amplitude_entry.grid(row=4, column=1, sticky=NW)
         self.frequenz_label.grid(row=5, column=0, sticky=NW)
@@ -129,40 +146,41 @@ class Trigonometrische(FunktionFrame):
 
 
     def trigonometrische_ausrechnen(self):
-       try:
-            self.amp = float(self.amplitude_entry.get())
-            self.freq = float(self.frequenz_entry.get())
-            self.phase = float(self.phase_entry.get())
-
-       except ValueError:
-            _ = messagebox.showerror(title="Inkorrekte eingabe", message="Sie müssen richtige Werte in die Textbox eingeben, bei hilfe einfach auf das ? klicken")
-            return
-        # x-Werte des Graphen berechnen
-
-       self.verlauf_appendieren(self.master.get_verlauf())
-
-       xbeschr = self.xbeschriftung_entry.get()
-       ybeschr = self.ybeschriftung_entry.get()  
-
-       self.x = np.linspace(0, 2*np.pi, 1000)
-
-       if self.function_type_var.get() == 'sin':
-           self.y = self.amp * np.sin(self.freq * self.x + self.phase)
-           self.title = 'Sinusfunktion'
-       elif self.function_type_var.get() == 'cos':
-           self.y = self.amp * np.cos(self.freq * self.x + self.phase)
-           self.title = 'Cosinusfunktion'
-       elif self.function_type_var.get() == 'tan':
-           self.y = self.amp * np.tan(self.freq * self.x + self.phase)
-           self.title = 'Tangensfunktion'
-        
-       self.ax.clear()
-       self.ax.set_xlabel(xbeschr)
-       self.ax.set_ylabel(ybeschr)
-       self.ax.plot(self.x, self.y, label= "Linie")
-       self.ax.legend(loc="upper right")
-       self.ax.set_title(self.title)
-       self.canvas.draw()
-        # range mit von - bis
-       self.canvas.get_tk_widget().grid(row=6, column=0, padx=5, pady=5)
-       self.canvas.draw()
+        """ berechnet die Werte für die Funktion und zeichnet den Graphen """
+        try:
+             self.amp = float(self.amplitude_entry.get())
+             self.freq = float(self.frequenz_entry.get())
+             self.phase = float(self.phase_entry.get())
+  
+        except ValueError:
+             _ = messagebox.showerror(title="Inkorrekte eingabe", message="Sie müssen richtige Werte in die Textbox eingeben, bei hilfe einfach auf das ? klicken")
+             return
+         # x-Werte des Graphen berechnen
+  
+        self.verlauf_appendieren(self.parent.get_verlauf())
+  
+        xbeschr = self.xbeschriftung_entry.get()
+        ybeschr = self.ybeschriftung_entry.get()  
+  
+        self.x = np.linspace(0, 2*np.pi, 1000)
+  
+        if self.function_type_var.get() == 'sin':
+            self.y = self.amp * np.sin(self.freq * self.x + self.phase)
+            self.title = 'Sinusfunktion'
+        elif self.function_type_var.get() == 'cos':
+            self.y = self.amp * np.cos(self.freq * self.x + self.phase)
+            self.title = 'Cosinusfunktion'
+        elif self.function_type_var.get() == 'tan':
+            self.y = self.amp * np.tan(self.freq * self.x + self.phase)
+            self.title = 'Tangensfunktion'
+         
+        self.ax.clear()
+        self.ax.set_xlabel(xbeschr)
+        self.ax.set_ylabel(ybeschr)
+        self.ax.plot(self.x, self.y, label= "Linie")
+        self.ax.legend(loc="upper right")
+        self.ax.set_title(self.title)
+        self.canvas.draw()
+         # range mit von - bis
+        self.canvas.get_tk_widget().grid(row=6, column=0, padx=5, pady=5)
+        self.canvas.draw()

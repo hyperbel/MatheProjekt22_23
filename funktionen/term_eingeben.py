@@ -1,3 +1,4 @@
+""" Frame für die Eingabe einer Funktion, egal welcher Grad  """
 from math import sqrt, ceil 
 import re
 import utils
@@ -11,7 +12,16 @@ from verlauf import Verlauf
 from oop import MainWindow
 
 class TermEingeben(FunktionFrame):
+    """Frame für die Eingabe des Funktionsausdrucks"""
     def __init__(self, master, parent: MainWindow, funktion = None):
+        """Konstruktor
+        :param master: Master-Widget
+        :type master: tkinter.Widget
+        :param parent: MainWindow
+        :type parent: MainWindow
+        :param funktion: Funktion, die angezeigt werden soll
+        :type funktion: str
+        """
         super().__init__(master)
         self.parent = parent
 
@@ -77,22 +87,26 @@ class TermEingeben(FunktionFrame):
 
 
     def clear_canvas(self):
+        """Leert das Canvas"""
         # if self.ax exists
         self.ax.clear()
         self.canvas.draw()
 
     def zoom_in(self):
+        """Zoomt rein"""
         self.ax.set_xlim(self.ax.get_xlim()[0] * 0.9, self.ax.get_xlim()[1] * 0.9)
         self.ax.set_ylim(self.ax.get_ylim()[0] * 0.9, self.ax.get_ylim()[1] * 0.9)
         self.canvas.draw()
 
     def zoom_out(self):
+        """Zoomt raus"""
         self.ax.set_xlim(self.ax.get_xlim()[0] * 1.1, self.ax.get_xlim()[1] * 1.1)
         self.ax.set_ylim(self.ax.get_ylim()[0] * 1.1, self.ax.get_ylim()[1] * 1.1)
         self.canvas.draw()
 
     
     def term_button_clicked(self):
+        """Füllt die Felder mit einem Beispielterm"""
         value = terme_generator()
         self.f_entry.delete(0, END)
         self.f_entry.insert(0, value)
@@ -107,6 +121,10 @@ class TermEingeben(FunktionFrame):
         
 
     def basis_funktion(self) -> str:
+        """ gibt die basisfunktion zurück 
+        :return basisfunktion
+        :rtype str
+        """
         return self.f_entry.get()
 
     def get_help(self) -> None:
@@ -123,23 +141,33 @@ class TermEingeben(FunktionFrame):
                      \n Die Kenntnis dieser drei Funktionsarten ist wichtig, da sie häufig in vielen Bereichen der Mathematik,\n Physik und Ingenieurwissenschaften verwendet werden und ihre Eigenschaften dazu beitragen können, Probleme in diesen Gebieten zu lösen \nund Phänomene zu beschreiben.").grid(row=1, column=0, padx=5, pady=5, sticky=E)
         Button(_help, text="Ok", command=_help.destroy).grid(row=6, column=3, padx=5, pady=5, sticky=E)
 
-        
-       
-
-       
-
     
 
     # berechnet das richtig dismal lol. ich bin so dumm
     def funktion(self, x_wert: float) -> float:
-        """ berechnet die funktion """
+        """ berechnet die funktion
+        :param x_wert: x wert
+        :type x_wert: float
+
+        :return: y wert
+        :rtype: float
+        """
         y_wert = 0
         for basis, exponent in self.basis_exponent_paare:
             y_wert += basis * (x_wert ** exponent)
         return y_wert
 
     def funktion_von(self, x_wert: float, funktion: str) -> float:
-        """ berechnet die funktion """
+        """ berechnet die funktion basierend auf einem funktions-string
+        :param x_wert: x wert
+        :type x_wert: float
+        :param funktion: funktion
+        :type funktion: str
+
+        :return: y wert
+        :rtype: float
+        """
+
         y_wert = 0
         for basis, exponent in self.basis_exponent_paare_holen(funktion):
             y_wert += basis * (x_wert ** exponent)
@@ -235,6 +263,13 @@ class TermEingeben(FunktionFrame):
         self.figure_frame.grid(row=9, column=0, sticky="nsew")
 
     def basis_exponent_paare_holen(self, inp: str) -> list[tuple[float, float]]:
+        """ holt alle basis exponent paare aus dem string
+        :param inp: string mit allen basis exponent paaren
+        :type inp: str
+
+        :return: liste mit allen basis exponent paaren
+        :rtype: list[tuple[float, float]]
+        """
         input_str = self.array_von_leeren_strings_befreien(inp)
         terme = self.get_zahlen(input_str)
         return [self.get_term(t) for t in terme]
@@ -243,6 +278,7 @@ class TermEingeben(FunktionFrame):
         """ holt wichtige zahlen aus dem string
         :param inp: string mit allen zahlen
         :type inp: str
+
         :return: liste mit allen zahlen
         :rtype: list
         """
@@ -271,7 +307,13 @@ class TermEingeben(FunktionFrame):
         return int(term[:term.index('x')]), int(term[term.index('^')+1:])
 
     def array_von_leeren_strings_befreien(self, arr: str) -> str:
-        """entfernt alle leeren strings aus einem array """
+        """entfernt alle leeren strings aus einem array
+        :param arr: array mit allen strings
+        :type arr: str
+
+        :return: string ohne leere strings
+        :rtype: str
+        """
         output_string = ""
         # schaut durch alle items im array und filtert alle leeren strings raus
         for a in arr:
@@ -280,7 +322,13 @@ class TermEingeben(FunktionFrame):
         return output_string
 
     def leerzeichen_raus_machen(self, inp: str) -> str:
-        """ entfernt alle leerzeichen aus einem string """
+        """ entfernt alle leerzeichen aus einem string
+        :param inp: string mit allen leerzeichen
+        :type inp: str
+
+        :return: string ohne leerzeichen
+        :rtype: str
+        """
         outp = ""
         # enumeriert über input mit (index, wert)
         for _, character in enumerate(inp):
@@ -293,6 +341,7 @@ class TermEingeben(FunktionFrame):
         Holt von und bis werde aus einem string (von, bis)
         :param get_from: der string, aus dem die limits geholt werden sollen
         :type get_from: str
+
         :return: die Werte aus dem String
         :rtype: tuple[float, float]
         """
@@ -302,7 +351,13 @@ class TermEingeben(FunktionFrame):
 
 
     def ableitung_ersteller(self, inp: str) -> str:
-        """ berechnet die ableitung einer funktion """
+        """ berechnet die ableitung einer funktion
+        :param inp: string mit der funktion
+        :type inp: str
+
+        :return: string mit der ableitung
+        :rtype: str
+        """
         basis_exponent_paare = self.basis_exponent_paare_holen(inp)
         ableitung = ""
         for basis, exponent in basis_exponent_paare:
@@ -320,11 +375,21 @@ class TermEingeben(FunktionFrame):
 
 
     def verlauf_appendieren(self, verlauf: Verlauf) -> None:
+        """ fügt einen verlauf in die liste der verläufe ein
+        :param verlauf: verlauf der hinzugefügt werden soll
+        :type verlauf: Verlauf
+        """
         verlauf.appendieren(self.basis_funktion())
 
 
     def funktionsgrad_bestimmen(self, funktion) -> int:
-        """ gibt den funktionsgrad einer funktion zurück """
+        """ gibt den funktionsgrad einer funktion zurück
+        :param funktion: funktion als string
+        :type funktion: str
+
+        :return: funktionsgrad
+        :rtype: int
+        """
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
         if len(basis_exponent_paare) == 0:
             return 1
@@ -367,7 +432,13 @@ class TermEingeben(FunktionFrame):
         return funktion
 
     def teiler_bestimmen(self, funktion) -> int:
-        """ bestimmt den ersten teiler, dass die funktion 0 ergibt"""
+        """ bestimmt den ersten teiler, dass die funktion 0 ergibt
+        :param funktion: die funktion, die geteilt werden soll
+        :type funktion: str
+
+        :return: der erste teiler, der die funktion 0 ergibt
+        :rtype: int
+        """
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
         lin_term = basis_exponent_paare[-1][0]
         def alle_teiler_bestimmen():
@@ -391,7 +462,14 @@ class TermEingeben(FunktionFrame):
 
 
     def einsetzen(self, funktion: str, wert: float) -> float:
-        """ gibt den wert einer funktion an einem bestimmten punkt zurück """
+        """ gibt den wert einer funktion an einem bestimmten punkt zurück
+        :param funktion: die funktion, die eingesetzt werden soll
+        :type funktion: str
+        :param wert: der wert, an dem die funktion eingesetzt werden soll
+        :type wert: float
+        :return: der wert der funktion an dem punkt
+        :rtype: float
+        """
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
         end_wert = 0
         for basis, exponent in basis_exponent_paare:
@@ -407,8 +485,12 @@ class TermEingeben(FunktionFrame):
 
 
     def nullstellen(self, _funktion) -> list[float]:
-
-
+        """krasser nullstellen berechner
+        :param _funktion: die funktion, deren nullstellen berechnet werden sollen
+        :type _funktion: str
+        :return: die nullstellen
+        :rtype: list[float]
+        """
         funktion = self.nullterme_reinhauen(_funktion)
         funktionsgrad = self.funktionsgrad_bestimmen(funktion)
         basis_exponent_paare = self.basis_exponent_paare_holen(funktion)
@@ -437,12 +519,17 @@ class TermEingeben(FunktionFrame):
 
                 roots = np.roots(werte)
 
-
-        return roots
+        return list[float](roots)
 
 
 
     def pq_formel_von(self, funktion: str) -> tuple[float,float]:
+        """ berechnet die nullstellen einer quadratischen funktion basierend auf einem string
+        :param funktion: die funktion
+        :type funktion: str
+        :return: die nullstellen
+        :rtype: tuple[float,float]
+        """
         gute_funktion = self.nullterme_reinhauen(funktion)
         basis_exponent_paare = self.basis_exponent_paare_holen(gute_funktion)
         normiert_p = basis_exponent_paare[1][0] / basis_exponent_paare[0][0]
@@ -451,7 +538,15 @@ class TermEingeben(FunktionFrame):
         return x1, x2
 
     def pq_formel(self, p: float, q: float) -> tuple[float, float]:
-        """ berechnet die nullstellen einer quadratischen funktion """
+        """ berechnet die nullstellen einer quadratischen funktion 
+        :param p: der koeffizient vor x
+        :type p: float
+        :param q: der konstante term
+        :type q: float
+        :return: die nullstellen
+        :rtype: tuple[float, float]
+        """
+
         # -p/2 +- sqrt((p/2)^2 - q)
         try:
             x1 = (-(p/2)) + sqrt((p/2)**2 - q)

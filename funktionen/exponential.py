@@ -1,16 +1,19 @@
+""" exponentialfunktionen """
 from functionframe import FunktionFrame
 import utils
 import numpy as np
 from verlauf import Verlauf
 from generator import expo_generator
-from tkinter import Label, Entry, BOTH, NW, TOP, Button, NE,ttk, messagebox,RIGHT,LEFT, END, W, E, NSEW
+from tkinter import Label, Entry, Button, NE,ttk, messagebox, END, E
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from oop import MainWindow
 
 class Exponential(FunktionFrame):
-    def __init__(self, master, funktion = None):
+    """ Exponential Frame """
+    def __init__(self, master, parent: MainWindow, funktion = None,):
         super().__init__(master)
+        self.parent = parent
         self.von_entry = Entry(self)
         self.bis_entry = Entry(self)
         self.a_entry = Entry(self)
@@ -43,9 +46,15 @@ class Exponential(FunktionFrame):
             self.y_achse_entry.insert(0, "Y")
 
     def basis_funktion(self) -> str:
+        """ gibt die basisfunktion zurück """
         return self.a_entry.get()
 
     def verlauf_appendieren(self, verlauf: Verlauf) -> None:
+        """ fügt die funktion zum verlauf hinzu
+        :param verlauf: verlauf
+        :type verlauf: Verlauf
+        """
+
         verlauf.appendieren(self.basis_funktion())
 
     def get_help(self) -> None:
@@ -58,6 +67,7 @@ class Exponential(FunktionFrame):
         Button(_help, text="Ok", command=_help.destroy).grid(row=6, column=3, padx=5, pady=5, sticky=E)
     
     def clear_canvas(self):
+        """ clear canvas """
         self.bis_entry.delete(0, END)
         self.von_entry.delete(0, END)
         self.a_entry.delete(0, END)
@@ -65,16 +75,19 @@ class Exponential(FunktionFrame):
         self.canvas.draw()
 
     def zoom_in(self):
+        """ zoomt rein """
         self.ax.set_xlim(self.ax.get_xlim()[0] * 0.9, self.ax.get_xlim()[1] * 0.9)
         self.ax.set_ylim(self.ax.get_ylim()[0] * 0.9, self.ax.get_ylim()[1] * 0.9)
         self.canvas.draw()
 
     def zoom_out(self):
+        """ zoomt raus """
         self.ax.set_xlim(self.ax.get_xlim()[0] * 1.1, self.ax.get_xlim()[1] * 1.1)
         self.ax.set_ylim(self.ax.get_ylim()[0] * 1.1, self.ax.get_ylim()[1] * 1.1)
         self.canvas.draw()
     
     def expo_button_clicked(self):
+        """ button im verlauf clicked """
         value = expo_generator()
         self.a_entry.delete(0, END)
         self.a_entry.insert(0, value)
@@ -103,10 +116,10 @@ class Exponential(FunktionFrame):
             assert utils.entry_is_float(a)
             # assert entry_is_float(x)
         except ValueError:
-            fehler = messagebox.showerror(title="Inkorrekte eingabe", message="Sie müssen richtige Werte in die Textbox eingeben, bei hilfe einfach auf das ? klicken")
+            _ = messagebox.showerror(title="Inkorrekte eingabe", message="Sie müssen richtige Werte in die Textbox eingeben, bei hilfe einfach auf das ? klicken")
             return
 
-        self.verlauf_appendieren(self.master.get_verlauf())
+        self.verlauf_appendieren(self.parent.get_verlauf())
 
         # range mit von - bis
         self.x_werte = np.arange(von, bis, 0.2)
@@ -122,9 +135,11 @@ class Exponential(FunktionFrame):
         self.canvas.draw()
 
     def exponential_help(self) -> None:
+        """ hilfe macht nichts"""
         pass
 
     def create_widgets(self):
+        """ erstellt die widgets """
         # display everything
         Label(self, text="anfang: ").grid(row=0, column=0, sticky=NW)
         self.von_entry.grid(row=0, column=1, sticky=NW)

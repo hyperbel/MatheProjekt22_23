@@ -1,3 +1,4 @@
+""" generiert beispiele für die Features"""
 import sqlite3
 import random
 
@@ -5,6 +6,7 @@ con = sqlite3.connect('mathe.db')
 cur = con.cursor()
 
 def expo_generator():
+    """ generiert eine exponentielle funktion"""
     a = random.randint(0, 20)
     b = random.randint(0, 9)
 
@@ -15,6 +17,7 @@ def expo_generator():
         return f
 
 def trigo_generator():
+    """ generiert eine trigonometrische funktion"""
     amplitude = random.randint(1, 30)
     frequenz = random.randint(1, 30)
     phase = random.randint(1, 30)
@@ -25,16 +28,24 @@ def trigo_generator():
     return felder
 
 def integral_generator():
+    """ generiert ein integral"""
     a = random.randint(0, 30)
     funktion = "x**" + str(a)
     return funktion
 
 def terme_generator():
+    """ generiert eine funktion mit mehreren termen
+
+    :return: Funktionsterm
+    :rtype: str
+    """
+
     function = ""
     a = random.randint(-10, 10)
     b = random.randint(-10, 10)
     c = random.randint(-10, 10)
     d = random.randint(-10, 10)
+
     hoch = random.randint(1, 7)
     if hoch > 1:
         # der 2. exponent ist 1 kleiner als der erste. wird nur bei hoch > 3 gebraucht
@@ -58,4 +69,3 @@ def terme_generator():
         else:
             function = f"{a}x{b}"
         return function
-    
